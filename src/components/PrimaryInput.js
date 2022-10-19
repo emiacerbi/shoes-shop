@@ -14,7 +14,7 @@ const PrimaryInput = ({ label, placeholder }) => {
         {label} <span style={{ color: '#FE645E' }} >*</span>
       </h3>
       <TextField
-        style={{
+        sx={{
           width: '436px',
           height: '48px',
           marginTop: '.5rem'
