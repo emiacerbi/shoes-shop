@@ -1,6 +1,6 @@
-import Form from '../components/Form'
-import PrimaryButton from '../components/PrimaryButton'
-import PrimaryInput from '../components/PrimaryInput'
+import Form from '../src/components/Form'
+import PrimaryButton from '../src/components/PrimaryButton'
+import PrimaryInput from '../src/components/PrimaryInput'
 
 export default function Home () {
   return (

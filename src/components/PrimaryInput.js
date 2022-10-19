@@ -16,7 +16,8 @@ const PrimaryInput = ({ label, placeholder }) => {
       <TextField
         style={{
           width: '436px',
-          height: '48px'
+          height: '48px',
+          marginTop: '.5rem'
         }}
         placeholder={placeholder}
         className='inputRounded'
