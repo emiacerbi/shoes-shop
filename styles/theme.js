@@ -12,6 +12,10 @@ export const theme = createTheme({
       main: '#141E7A',
       dark: '#0A1047'
     }
-
+  },
+  typography: {
+    fontFamily: "'Work Sans', sans-serif",
+    fontWeightMedium: '500',
+    fontWeightBold: '600'
   }
 })
