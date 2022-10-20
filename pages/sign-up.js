@@ -30,6 +30,7 @@ const SignUp = () => {
 
           <PrimaryButton>
             Sign In
+
           </PrimaryButton>
 
           <p className={styles.text}>
