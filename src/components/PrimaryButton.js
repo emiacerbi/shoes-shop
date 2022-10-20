@@ -13,7 +13,8 @@ const PrimaryButton = ({ children }) => {
         width: '436px',
         display: 'block',
         height: '48px',
-        borderRadius: '8px'
+        borderRadius: '8px',
+        color: '#fff',
       }}
     >
       {children}

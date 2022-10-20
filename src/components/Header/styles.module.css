@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #eaecf0;
+  padding: 20px;
+}
+
+.header__logo {
+  width: 35px;
+  height: 25px;
+}
+
+@media (min-width: 360px) {
+  .header {
+    border-bottom: none;
+  }
+  .header__logo {
+    width: 40px;
+    height: 35px;
+  }
+}
