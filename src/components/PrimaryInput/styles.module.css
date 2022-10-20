@@ -1,0 +1,35 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.heading {
+  color: #494949;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.input {
+  width: 100%;
+  max-width: 436px;
+  border-radius: 5px;
+  height: 32px;
+  padding-block: 1rem;
+  padding-inline: .5rem;
+  border: 1px solid lightgray;
+  font-family: 'Work Sans', sans-serif;  
+}
+
+.input::placeholder {
+  color: #5C5C5C;
+}
+
+.input:focus {
+  outline: 1px solid var(--primary);
+}
+
+.span {
+  color: var(--primary)
+}
+

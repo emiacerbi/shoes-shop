@@ -1,0 +1,25 @@
+.checkbox {
+  font-size: 10px;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+
+.text {
+  font-size: 10px;
+}
+
+.span {
+  color: var(--primary);
+  margin-left: .25rem;
+}
+
+@media (min-width: 600px) {
+  .checkbox {
+    font-size: 16px;
+  }
+
+  .text {
+    font-size: 15px;
+  }
+}
