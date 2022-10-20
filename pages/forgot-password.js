@@ -17,7 +17,7 @@ export default function ForgotPassword () {
 
         <StyledText text='Don’t worry, we’ll send you reset instructions.' />
 
-        <Form onSubmit={(e) => e.preventDefault()}>
+        <Form onSubmit={(e) => console.log('form submitted') || e.preventDefault()} className={ styles.form} > { /* change onSubmit later */}
           <PrimaryInput
             type='email'
             label='Email'
@@ -26,18 +26,16 @@ export default function ForgotPassword () {
           <PrimaryButton type='submit'>Reset password</PrimaryButton>
         </Form>
 
-        <Link href='/index.js'>
+        <Link href='/'>
           <a className={styles['forgot-password__go-back']}>Back to log in</a>
         </Link>
       </main>
       <aside className={styles['forgot-password-aside']}>
-        <div>
-          <img
-            src='/shoes.png'
-            alt='shoe pic'
-            className={styles['forgot-password-aside__image']}
-          />
-        </div>
+        <img
+          src='/shoes.png'
+          alt='shoe pic'
+          className={styles['forgot-password-aside__image']}
+        />
       </aside>
     </div>
   )
