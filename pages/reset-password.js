@@ -6,35 +6,40 @@ import StyledText from '../src/components/StyledText/StyledText'
 import Header from '../src/components/Header/Header'
 import Link from 'next/link'
 
-import styles from '../styles/ForgotPassword.module.css'
+import styles from '../styles/ResetPassword.module.css'
 
-export default function ForgotPassword () {
+export default function ResetPassword () {
   return (
-    <div className={styles['forgot-password-page']}>
-      <Header className={styles['forgot-password-header']} />
-      <main className={styles['forgot-password-main']}>
-        <Heading headingText='Forgot Password?' />
+    <div className={styles['reset-password-page']}>
+      <Header className={styles['reset-password-header']} />
+      <main className={styles['reset-password-main']}>
+        <Heading headingText='Reset password' />
 
-        <StyledText text='Don’t worry, we’ll send you reset instructions.' />
+        <StyledText text='Please create new password here.' />
 
         <Form onSubmit={(e) => console.log('form submitted') || e.preventDefault()} className={ styles.form} > { /* change onSubmit later */}
           <PrimaryInput
-            type='email'
-            label='Email'
-            placeholder='example@mail.com'
+            type='password'
+            label='Password'
+            placeholder='at least 8 characters'
+          />
+          <PrimaryInput
+            type='password'
+            label='Confirm password'
+            placeholder='at least 8 characters'
           />
           <PrimaryButton type='submit'>Reset password</PrimaryButton>
         </Form>
 
         <Link href='/'>
-          <a className={styles['forgot-password__go-back']}>Back to log in</a>
+          <a className={styles['reset-password__go-back']}>Back to log in</a>
         </Link>
       </main>
-      <aside className={styles['forgot-password-aside']}>
+      <aside className={styles['reset-password-aside']}>
         <img
           src='/shoes.png'
           alt='shoe pic'
-          className={styles['forgot-password-aside__image']}
+          className={styles['reset-password-aside__image']}
         />
       </aside>
     </div>
