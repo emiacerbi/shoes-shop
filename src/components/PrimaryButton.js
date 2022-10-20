@@ -10,7 +10,8 @@ const PrimaryButton = ({ children }) => {
       variant='contained'
       sx={{
         fontWeight: 'medium',
-        width: '436px',
+        maxWidth: '436px',
+        width: '100%',
         display: 'block',
         height: '48px',
         borderRadius: '8px',

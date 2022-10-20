@@ -5,16 +5,16 @@ import Heading from "../src/components/Heading/heading";
 import StyledText from "../src/components/StyledText/StyledText";
 import Header from "../src/components/Header/Header";
 import Link from "next/link";
-import Image from "next/image";
+
 import styles from "../styles/forgotpassword.module.css";
 
 export default function ForgotPassword() {
   return (
-    <div className="forgot-password-page">
+    <div className={styles["forgot-password-page"]}>
       <Header />
-
-      <main className="forgot-password-main">
+      <main className={styles["forgot-password-main"]}>
         <Heading headingText="Forgot Password?" />
+
         <StyledText text="Don’t worry, we’ll send you reset instructions." />
 
         <Form onSubmit={(e) => e.preventDefault()}>
@@ -28,12 +28,13 @@ export default function ForgotPassword() {
             children="Reset password"
           ></PrimaryButton>
         </Form>
-        <Link href="/index" className="forgot-password-main__go-back-button">
-           <a>Back to log in</a>
+
+        <Link href="/index.js" >
+          <a className={styles['forgot-password__go-back']} >Back to log in</a>
         </Link>
       </main>
-      <aside className={styles.aside}>
-        <img src="/shoes.png"  alt="shoe pic" className={styles.aside__image}/>
+      <aside className={styles["forgot-password-aside"]}>
+        <img src="/shoes.png" alt="shoe pic" />
       </aside>
     </div>
   );

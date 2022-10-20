@@ -15,7 +15,8 @@ const PrimaryInput = ({ label, placeholder }) => {
       </h3>
       <TextField
         sx={{
-          width: '436px',
+          maxWidth: '436px',
+          width : '100%',
           height: '48px',
           marginTop: '.5rem'
         }}
