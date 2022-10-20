@@ -1,0 +1,35 @@
+:root {
+    /* Colors */
+    --primary: #FE645E;
+    --secondary: #6E314A;
+    --neutral-700: #141E7A;
+    --neutral-900: #0A1047;
+  
+    /* Breakpoints */
+    /* --mobile: 360px;
+    --tablet: 600px;
+    --desktop: 1200px; */
+  }
+  
+  * {
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    font-family: 'Work Sans', sans-serif;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  
+  
