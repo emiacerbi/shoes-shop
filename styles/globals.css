@@ -1,6 +1,11 @@
+:root {
+  --primary: #FE645E
+}
+
 * {
   margin: 0;
   padding: 0; 
+  box-sizing: border-box;
 }
 
 html,
@@ -19,6 +24,4 @@ a {
   box-sizing: border-box;
 }
 
-.inputRounded .MuiOutlinedInput-root {
-  border-radius: 8px;
-}
+
