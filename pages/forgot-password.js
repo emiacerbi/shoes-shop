@@ -11,7 +11,7 @@ import styles from "../styles/forgotpassword.module.css";
 export default function ForgotPassword() {
   return (
     <div className={styles["forgot-password-page"]}>
-      <Header />
+      <Header className={styles['forgot-password-header']}/>
       <main className={styles["forgot-password-main"]}>
         <Heading headingText="Forgot Password?" />
 
@@ -34,7 +34,7 @@ export default function ForgotPassword() {
         </Link>
       </main>
       <aside className={styles["forgot-password-aside"]}>
-        <img src="/shoes.png" alt="shoe pic" />
+        <img src="/shoes.png" alt="shoe pic" className={styles["forgot-password-aside__image"]}/>
       </aside>
     </div>
   );
