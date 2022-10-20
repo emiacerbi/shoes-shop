@@ -8,6 +8,18 @@
 
 @media (min-width: 360px) {
   .heading {
+    font-size: 35px;
+  }
+}
+
+@media (min-width: 600px) {
+  .heading {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .heading {
     font-size: 45px;
   }
 }
