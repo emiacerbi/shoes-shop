@@ -1,5 +1,14 @@
 :root {
-  --primary: #FE645E
+  /* Colors */
+  --primary: #FE645E;
+  --secondary: #6E314A;
+  --neutral-700: #141E7A;
+  --neutral-900: #0A1047;
+
+  /* Breakpoints */
+  /* --mobile: 360px;
+  --tablet: 600px;
+  --desktop: 1200px; */
 }
 
 * {
