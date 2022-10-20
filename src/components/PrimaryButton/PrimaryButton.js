@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import React from 'react'
+import styles from './styles.module.css'
 
 // Children: Button text content
 
@@ -8,13 +8,7 @@ const PrimaryButton = ({ children }) => {
     <Button
       type='submit'
       variant='contained'
-      sx={{
-        fontWeight: 'medium',
-        width: '436px',
-        display: 'block',
-        height: '48px',
-        borderRadius: '8px'
-      }}
+      className={styles.button}
     >
       {children}
     </Button>
