@@ -1,21 +1,18 @@
 import { Container } from '@mui/system'
 import Image from 'next/image'
-import React from 'react'
+
+import styles from './style.module.css'
 
 const Layout = ({ children }) => {
   return (
     <Container
-      sx={{
-        paddingTop: '0',
-        paddingInline: '0'
-      }}
+      className={styles.container}
     >
-      <div style={{ padding: '1.5rem' }}>
+      <div className={styles.logo_wrapper}>
         <Image src='/logo.png' alt='asd' width={40} height={30} />
       </div>
 
-      <div style={{ width: '100%', height: '1px', backgroundColor: 'lightgray' }}></div>
-
+      <div className={styles.divider}></div>
       {children}
     </Container>
   )
