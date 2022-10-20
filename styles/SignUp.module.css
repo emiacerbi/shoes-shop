@@ -1,3 +1,7 @@
+.container {
+  position: relative;
+}
+
 .checkbox {
   font-size: 10px;
   display: flex;

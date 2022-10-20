@@ -1,17 +1,18 @@
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
+import React, { useState } from 'react'
 import Form from '../src/components/Form/Form'
-import Layout from '../src/components/Layout/Layout'
 import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
 import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 
 import styles from '../styles/SignUp.module.css'
+import SignUpOverlay from '../src/components/SignUpOverlay/SignUpOverlay'
 
 const SignUp = () => {
+  const [isOverlayVisible, setIsOverlayVisible] = useState(true)
   return (
 
-    <Layout>
+    <div className={styles.container}>
       <Box sx={{ paddingInline: '1.25rem', paddingBlock: '2rem' }}>
         <Typography variant="h1">Create an account</Typography>
         <Typography variant='p'>Create an account to get an easy access to your dream shopping</Typography>
@@ -28,7 +29,7 @@ const SignUp = () => {
           </label>
 
           <PrimaryButton>
-            Sign Up
+            Sign In
           </PrimaryButton>
 
           <p className={styles.text}>
@@ -39,7 +40,15 @@ const SignUp = () => {
           </p>
         </Form>
       </Box>
-    </Layout>
+
+      {
+        isOverlayVisible && (
+          <SignUpOverlay setIsOverlayVisible={setIsOverlayVisible} />
+        )
+      }
+    </div>
+
+  // </Layout>
   )
 }
 
