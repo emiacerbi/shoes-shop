@@ -1,0 +1,10 @@
+.button {
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  max-width: 432px;
+  width: 100%;
+  border-radius: 5px;
+  font-family: "Work Sans", sans-serif;
+  color: var(--primary);
+  font-weight: 500;
+}
