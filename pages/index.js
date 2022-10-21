@@ -11,6 +11,10 @@ export default function Home () {
       <Link href="/reset-password">
         <a style={{ color: 'black' }}>Reset Password</a>
       </Link>
+      <br/>
+      <Link href="/update-profile">
+        <a style={{ color: 'black' }}>Update Profile</a>
+      </Link>
 
     </>
   )
