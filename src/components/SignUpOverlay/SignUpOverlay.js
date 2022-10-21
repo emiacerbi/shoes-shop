@@ -1,3 +1,4 @@
+import ColoredDash from '../ColoredDash/ColoredDash'
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
 import SecondaryButton from '../SecondaryButton.js/SecondaryButton'
 import styles from './styles.module.css'
@@ -6,8 +7,13 @@ const SignUpOverlay = ({ setIsOverlayVisible }) => {
   return (
     <div className={styles.overlay}>
       <div className={styles.imageContainer}>
-        <img src='/sign-up-shoes.png' className={styles.image} />
         <h1 className={styles.heading}>Welcome to Wellrun</h1>
+        <div style={{ display: 'flex', gap: '.5rem' }}>
+          <ColoredDash />
+          <ColoredDash opacity='.3' />
+          <ColoredDash opacity='.3' />
+          <ColoredDash opacity='.3' />
+        </div>
       </div>
       <div className={styles.background}></div>
 

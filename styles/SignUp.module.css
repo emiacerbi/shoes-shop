@@ -1,5 +1,16 @@
 .container {
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.leftContainer {
+  padding-inline: 1.25rem;
+  padding-block: 2rem;
+  display: grid;
+  place-content: center;
+  flex: 1
 }
 
 .checkbox {
@@ -18,12 +29,132 @@
   margin-left: .25rem;
 }
 
+.imageContainer {
+  display: none;
+  background-color: lightblue;
+  width: 50%;
+  height: 100vh;
+  background-image: url(../public/sign-up-shoes-desktop.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.arrowLeft {
+  width: 38px;
+  height: 38px;
+  background-color: transparent;
+  position: absolute;
+  bottom: -20px;
+  right: 75px;
+  border-radius: 50%;
+  border: 2px solid white;
+  font-size: 1.5rem;
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
+  cursor: pointer;
+}
+
+.arrowRight {
+  width: 38px;
+  height: 38px;
+  background-color: transparent;
+  position: absolute;
+  bottom: -20px;
+  right: 15px;
+  border-radius: 50%;
+  border: 2px solid white;
+  font-size: 1.5rem;
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
+  cursor: pointer;
+  transform: rotate(180deg);
+  z-index: 3;
+}
+
+.blockquote {
+  font-size: 20px;
+  color: #0D0D0D;
+  max-width: 400px;
+  position: relative;
+}
+
 @media (min-width: 600px) {
   .checkbox {
     font-size: 16px;
   }
-
+  
   .text {
     font-size: 15px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+  }
+  .leftContainer {
+    width: 50%;
+  }
+
+  .imageContainer {
+    display: grid;
+    place-content: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 0;
+  }
+
+  .blockquoteContainer {
+    background: radial-gradient(55.99% 112.1% at 69.71% 44.01%, rgba(253, 253, 253, 0.074) 0%, rgba(0, 0, 0, 0) 100%), radial-gradient(64.9% 185.04% at 19.81% 27.89%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.06) 100%);
+    backdrop-filter: blur(12px);
+    width: 90%;
+    max-width: 756px;
+    height: 317px;
+    border-radius: 32px;
+    padding: 4rem;
+    display: flex;
+    align-items: center;
+    border: 2px solid white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .quoteAuthor {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  .quoteLocation {
+    color: #797979;
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1550px) {
+
+  .blockquote {
+    font-size: 25px;
+    max-width: 550px;
+  }
+
+  .arrowLeft {
+    top: 0px;
+    right: 0px;
+  }
+    
+  .arrowRight {
+    top: 0px;
+    right: -65px;
   }
 }
