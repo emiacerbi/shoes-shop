@@ -3,7 +3,7 @@ import Link from 'next/link'
 export default function Home () {
   return (
 
-    <Link href="/forgot-password">
+    <Link href="/sign-up">
       <a style={{ color: 'black' }}>Forgot Password</a>
     </Link>
 
