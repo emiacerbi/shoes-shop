@@ -1,0 +1,30 @@
+.product-card-container {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    height: 180px;
+}
+
+
+.product-card-description{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-size: .4rem;   
+}
+
+.product-card-description__titles {
+    flex-grow: 0;
+    line-height: 15px;
+}
+.product-card-description__price {
+    margin-left: auto;
+}
+
+.p{
+    color: #5C5C5C;
+}
+
+
+
+
