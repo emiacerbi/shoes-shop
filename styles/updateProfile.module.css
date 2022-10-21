@@ -1,15 +1,16 @@
 .container{
     max-width: 324px;
     width: 100%;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
 }
 
 .button_outlined{
     color: #FE645E;
     font-family: Work Sans;
-    font-size: 12px;
-    width: 144px;
+    font-size: 11px;
+    width: 120px;
     border-radius: 6px;
     height: 35px;
     margin-bottom: 16px;
@@ -18,11 +19,20 @@
 .button_contained{
     color: #FFFFFF;
     font-family: Work Sans;
-    font-size: 12px;
-    width: 144px;
+    font-size: 11px;
+    width: 120px;
     border-radius: 6px;
     height: 30px;
 }
 
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 1.5rem;
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 20px;
+  }
 
 
