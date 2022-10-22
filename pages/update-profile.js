@@ -7,37 +7,53 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined'
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined'
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined'
+import { useState } from 'react'
 export default function UpdateProfile () {
+  const [settings, setSettings] = useState(true)
+
+  function handleSettings () {
+    return setSettings(!settings)
+  }
   return (
     <>
       <Header/>
-      <Box sx={{ display: 'flex', alignItems: 'baseline' }} >
+      <Box sx={{ display: 'flex', alignItems: 'baseline', mt: 12.5 }} >
         <div className={styles.container_settings}>
-          <Box >
-            <img src="/vector.png" alt="vector icon" className={styles.vector}/>
-            <Typography className={styles.settings_text}>Settings</Typography>
-          </Box>
+          {settings
+            ? (
+              <Box >
+                <img src="/vector.png" alt="vector icon" className={styles.vector} onClick={handleSettings}/>
+                <Typography className={styles.settings_text}>Settings</Typography>
+              </Box>
+            )
+            : (
+              <>
+                <Box >
+                  <img src="/vector.png" alt="vector icon" className={styles.vector} onClick={handleSettings}/>
+                  <Typography className={styles.settings_text}>Settings</Typography>
+                </Box>
+                <div className={styles.line}></div>
+                <Box className={styles.myProfile}>
+                  <AccountCircleOutlinedIcon sx={{ color: '#6E7278' }}/>
+                  <Typography className={styles.myProfile_text}>My Profile</Typography>
+                </Box>
 
-          <div className={styles.line}></div>
-          <Box className={styles.myProfile}>
-            <AccountCircleOutlinedIcon sx={{ color: '#6E7278' }}/>
-            <Typography className={styles.myProfile_text}>My Profile</Typography>
-          </Box>
+                <Box className={styles.myProfile}>
+                  <DashboardCustomizeOutlinedIcon sx={{ color: '#6E7278' }}/>
+                  <Typography className={styles.preferences_text}>Preferences</Typography>
+                </Box>
 
-          <Box className={styles.myProfile}>
-            <DashboardCustomizeOutlinedIcon sx={{ color: '#6E7278' }}/>
-            <Typography className={styles.preferences_text}>Preferences</Typography>
-          </Box>
+                <Box className={styles.myProfile}>
+                  <GppGoodOutlinedIcon sx={{ color: '#6E7278' }}/>
+                  <Typography className={styles.security_text}>Security</Typography>
+                </Box>
 
-          <Box className={styles.myProfile}>
-            <GppGoodOutlinedIcon sx={{ color: '#6E7278' }}/>
-            <Typography className={styles.security_text}>Security</Typography>
-          </Box>
-
-          <Box className={styles.myProfile}>
-            <AccountBalanceWalletOutlinedIcon sx={{ color: '#6E7278' }}/>
-            <Typography className={styles.myWallet_text}>My Wallet</Typography>
-          </Box>
+                <Box className={styles.myProfile}>
+                  <AccountBalanceWalletOutlinedIcon sx={{ color: '#6E7278' }}/>
+                  <Typography className={styles.myWallet_text}>My Wallet</Typography>
+                </Box>
+              </>
+            )}
         </div>
 
         <div className={styles.container_profile}>
