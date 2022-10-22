@@ -11,7 +11,7 @@ export default function UpdateProfile () {
   return (
     <>
       <Header/>
-      <Box >
+      <Box sx={{ display: 'flex', alignItems: 'baseline' }} >
         <div className={styles.container_settings}>
           <Box >
             <img src="/vector.png" alt="vector icon" className={styles.vector}/>
@@ -39,13 +39,14 @@ export default function UpdateProfile () {
             <Typography className={styles.myWallet_text}>My Wallet</Typography>
           </Box>
         </div>
-        <div className={styles.container}>
+
+        <div className={styles.container_profile}>
           <p className={styles.heading}> My Profile</p>
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            mt: 2
+            mt: 4
           }} >
             <Avatar src="/profile_img.png" sx={{ width: 100, height: 100 }}/>
             <Box sx={{ ml: 4 }} >
@@ -57,7 +58,7 @@ export default function UpdateProfile () {
               </Button>
             </Box>
           </Box>
-          <Typography sx={{ width: 314, height: 28, color: '#5C5C5C', fontSize: 12, fontWeight: 300, mt: 2, ml: 0.5 }}>
+          <Typography className={styles.welcomeBack_text} >
             Welcome back! Please enter your details to log into your account.
           </Typography>
 
