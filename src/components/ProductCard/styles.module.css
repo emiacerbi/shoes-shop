@@ -2,29 +2,28 @@
     display: flex;
     flex-direction: column;
     width: 150px;
-    height: 180px;
 }
 
 
 .product-card-description{
     display: flex;
     flex-direction: row;
-    width: 100%;
-    font-size: .4rem;   
+    justify-content: space-between;
+    margin-top: 2px;
 }
 
-.product-card-description__titles {
-    flex-grow: 0;
-    line-height: 15px;
-}
-.product-card-description__price {
-    margin-left: auto;
+.h3{
+    font-weight: 500;
+    line-height: 12px;  
+    font-size: 10px;
 }
 
 .p{
     color: #5C5C5C;
+    font-weight: 500;
+    line-height: 10px;  
+    font-size: 9px;
 }
-
 
 
 
