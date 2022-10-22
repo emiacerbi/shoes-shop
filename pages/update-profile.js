@@ -19,19 +19,14 @@ export default function UpdateProfile () {
       <Header/>
       <Box sx={{ display: 'flex', alignItems: 'baseline', mt: 12.5 }} >
         <div className={styles.container_settings}>
+
+          <Box >
+            <img src="/vector.png" alt="vector icon" className={styles.vector} onClick={handleSettings}/>
+            <Typography className={styles.settings_text}>Settings</Typography>
+          </Box>
           {settings
             ? (
-              <Box >
-                <img src="/vector.png" alt="vector icon" className={styles.vector} onClick={handleSettings}/>
-                <Typography className={styles.settings_text}>Settings</Typography>
-              </Box>
-            )
-            : (
               <>
-                <Box >
-                  <img src="/vector.png" alt="vector icon" className={styles.vector} onClick={handleSettings}/>
-                  <Typography className={styles.settings_text}>Settings</Typography>
-                </Box>
                 <div className={styles.line}></div>
                 <Box className={styles.myProfile}>
                   <AccountCircleOutlinedIcon sx={{ color: '#6E7278' }}/>
@@ -53,7 +48,9 @@ export default function UpdateProfile () {
                   <Typography className={styles.myWallet_text}>My Wallet</Typography>
                 </Box>
               </>
-            )}
+            )
+            : (null)}
+
         </div>
 
         <div className={styles.container_profile}>
@@ -82,7 +79,7 @@ export default function UpdateProfile () {
             <PrimaryInput label='Name' placeholder={'Jane'} ></PrimaryInput>
             <PrimaryInput label='Surname'placeholder={'Meldrum'}></PrimaryInput>
             <PrimaryInput label= "Email" placeholder={'example@mail.com'}></PrimaryInput>
-            <PrimaryInput label='Phone Number' placeholder={'(949 354-2574)'}></PrimaryInput>
+            <PrimaryInput label='Phone Number' placeholder={'(949) 354-2574)'}></PrimaryInput>
           </form>
         </div>
       </Box>
