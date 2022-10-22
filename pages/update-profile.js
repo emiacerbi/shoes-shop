@@ -1,7 +1,5 @@
 import { Avatar, Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-// import Header from '../src/components/Header/Header'
-import Heading from '../src/components/Heading/heading'
 import styles from '../styles/updateProfile.module.css'
 import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
 
@@ -9,7 +7,7 @@ export default function UpdateProfile () {
   return (
     <>
       <div className={styles.container}>
-        <Heading headingText={'My Profile'}/>
+        <p className={styles.heading}> My Profile</p>
         <Box sx={{
           display: 'flex',
           alignItems: 'center',
