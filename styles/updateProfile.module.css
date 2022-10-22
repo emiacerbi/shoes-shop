@@ -7,6 +7,10 @@
     line-height: 35px;
 }
 
+.container_settings{
+    display: none;
+}
+
 .container{
     max-width: 324px;
     width: 100%;
@@ -44,4 +48,103 @@
     margin-top: 20px;
   }
 
+  @media (min-width: 600px){
+    .container_settings{
+        display: block;
+        position: absolute;
+        max-height: 459px;
+        height: 100%;
+    }
+
+    .vector{
+        position: absolute;
+        margin-left: 46px;
+        margin-top: 2px;
+        transition: all 0.5s ease;
+    }
+
+    .vector:hover{
+        transform: rotate(270deg);
+        cursor: pointer;
+    }
+
+    .settings_text{
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 23px;
+        margin-left: 80px;
+        cursor: pointer;
+    }
+
+    .line{
+        width: 320px;
+        color: #EAECF0;
+        border: 1px solid;
+        margin-top: 40px;
+    }
+
+    .myProfile{
+        display: flex;
+        margin-top: 30px;
+        margin-left: 46px;
+    }
+
+    .myProfile_text{
+        margin-left: 15px;
+        color: #000000;
+        transition: all 0.5s ease;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+    }
+    
+    .myProfile_text:hover{
+        color: #FE645E;
+        cursor: pointer;
+    }
+
+    .preferences_text{
+        margin-left: 15px;
+        color: #000000;
+        transition: all 0.5s ease;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    .preferences_text:hover{
+        color: #FE645E;
+        cursor: pointer;
+    }
+
+    .security_text{
+        margin-left: 15px;
+        color: #000000;
+        transition: all 0.5s ease;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    .security_text:hover{
+        color: #FE645E;
+        cursor: pointer;
+    }
+
+    .myWallet_text{
+        margin-left: 15px;
+        color: #000000;
+        transition: all 0.5s ease;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+
+    }
+
+    .myWallet_text:hover{
+        color: #FE645E;
+        cursor: pointer;
+
+    }
+}
 
