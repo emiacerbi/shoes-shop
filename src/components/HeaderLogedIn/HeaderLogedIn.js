@@ -110,13 +110,14 @@ function HeaderLogedIn () {
             <img src="/logo.png" alt="logo" className={styles.logo} />
           </Link>
 
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ maxWidth: '150px', width: '100%', mr: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
             <Link href={'/cart'}>
-              <LocalMallOutlinedIcon sx={{ mr: 2, color: '#292D32' }}/>
+              <LocalMallOutlinedIcon sx={{ color: '#292D32' }}/>
             </Link>
             <SearchOutlinedIcon sx={{ color: '#494949', width: '23px', height: '23px' }}/>
 
             <IconButton
+              sx={{ padding: 0 }}
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
