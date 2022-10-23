@@ -40,7 +40,6 @@ function HeaderLogedIn () {
 
   return (
     <AppBar position="static" sx={{ background: 'none', boxShadow: 'none' }}>
-      {/* <Container maxWidth="xl"> */}
       <Toolbar disableGutters >
         {/* Desktop */}
         <Box sx={{ display: { xs: 'none', sm: 'flex' }, ml: '30px' }} className={styles.box}>
@@ -48,50 +47,23 @@ function HeaderLogedIn () {
             <img src="/logo.png" alt="logo" className={styles.logo} />
           </Link>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1900px', width: '100%' }}>
-
             <Box sx={{ display: 'flex', ml: '50px', mt: '50px' }} className={styles.menuItems}>
-              <Link href={'/'} sx={{ textDecoration: 'none' }}>
-                <Typography variant="h6"
-                  sx={{
-                    display: { xs: 'none', sm: 'flex' },
-                    color: '#000000',
-                    lineHeight: '19px',
-                    mr: '36px'
-                  }}>  Home  </Typography>
-              </Link>
-              <Link href={'/for-women'} sx={{ textDecoration: 'none' }}>
-                <Typography variant="h6" sx={{
-                  display: { xs: 'none', sm: 'flex' },
-                  color: '#000000',
-                  lineHeight: '19px',
-                  mr: '36px',
-                  textAlign: 'center'
-                }}> For women </Typography>
-              </Link>
-              <Link href={'/form-men'} sx={{ textDecoration: 'none' }}>
-                <Typography variant="h6" sx={{
-                  display: { xs: 'none', sm: 'flex' },
-                  color: '#000000',
-                  lineHeight: '19px',
-                  mr: '36px',
-                  textAlign: 'center'
-                }}> For men </Typography>
-              </Link>
-              <Link href={'/accesories'} sx={{ textDecoration: 'none' }}>
-                <Typography variant="h6" sx={{
-                  display: { xs: 'none', sm: 'flex' },
-                  color: '#000000',
-                  lineHeight: '19px',
-                  mr: '36px'
-                }}> Accesories </Typography>
-              </Link>
-              <Link href={'/sale'} sx={{ textDecoration: 'none' }}>
-                <Typography variant="h6" sx={{
-                  display: { xs: 'none', sm: 'flex' },
-                  color: '#000000',
-                  lineHeight: '19px'
-                }}> Sale </Typography>
-              </Link>
+              {pages.map((page, index) => (
+                <>
+                  <Link sx={{ textDecoration: 'none', color: '#000000' }} href={`${links[index]}`}>
+                    <Typography
+                      sx={{
+                        color: '#000000',
+                        lineHeight: '19px',
+                        mr: '36px',
+                        fontWeight: 500,
+                        fontSize: '16px'
+                      }}
+                      textAlign="center">{page}</Typography>
+                  </Link>
+                </>
+              )
+              )}
             </Box>
             <Box className={styles.searchBox} >
               <SearchOutlinedIcon sx={{ color: '#494949', position: 'absolute', ml: '16px', width: '18px', height: '18px' }}/>
