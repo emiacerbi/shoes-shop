@@ -1,4 +1,4 @@
-import { AppBar, Link } from '@mui/material'
+import { AppBar, Link, Button } from '@mui/material'
 import * as React from 'react'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -15,6 +15,8 @@ const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
 
 function HeaderLogedIn () {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
+  const [searchInput, setSearchInput] = React.useState(false) // Hook to show/hide the search input
+  const [value, setValue] = React.useState('') // Value to handle search input
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -22,6 +24,10 @@ function HeaderLogedIn () {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
+  }
+
+  const handleSearchInput = () => {
+    setSearchInput(!searchInput)
   }
 
   return (
@@ -70,7 +76,20 @@ function HeaderLogedIn () {
             <Link href={'/cart'}>
               <LocalMallOutlinedIcon sx={{ color: '#292D32' }}/>
             </Link>
-            <SearchOutlinedIcon sx={{ color: '#494949', width: '23px', height: '23px' }}/>
+            <SearchOutlinedIcon sx={{ color: '#494949', width: '23px', height: '23px', cursor: 'pointer' }} onClick={handleSearchInput}/>
+            {searchInput && (
+              <>
+                <input type="text" placeholder='Search' className={styles.searchInput} value={value} onChange={(e) => setValue(e.target.value)} />
+                <form onSubmit={(e) => console.log(value) || e.preventDefault()}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    sx={{ borderRadius: '10px', color: '#ffffff', minWidth: '30px', padding: 0, margin: '0 5px' }}
+                  > OK </Button>
+                </form>
+              </>
+            )}
 
             <IconButton
               sx={{ padding: 0 }}
