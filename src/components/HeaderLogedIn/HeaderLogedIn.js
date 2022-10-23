@@ -12,78 +12,97 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import AdbIcon from '@mui/icons-material/Adb'
+import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined'
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import styles from './styles.module.css'
-
-const pages = ['Products', 'Pricing', 'Blog']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+// const pages = ['Products', 'Pricing', 'Blog']
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function HeaderLogedIn () {
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  // const [anchorElNav, setAnchorElNav] = React.useState(null)
+  // const [anchorElUser, setAnchorElUser] = React.useState(null)
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget)
-  }
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget)
-  }
+  // const handleOpenNavMenu = (event) => {
+  //   setAnchorElNav(event.currentTarget)
+  // }
+  // const handleOpenUserMenu = (event) => {
+  //   setAnchorElUser(event.currentTarget)
+  // }
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
+  // const handleCloseNavMenu = () => {
+  //   setAnchorElNav(null)
+  // }
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
+  // const handleCloseUserMenu = () => {
+  //   setAnchorElUser(null)
+  // }
 
   return (
     <AppBar position="static" sx={{ background: 'none', boxShadow: 'none' }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters >
-          <img src="/logo.png" alt="logo" className={styles.logo} />
-          <Box sx={{ display: 'flex', ml: '49px', mt: '60px' }}>
-            <Link href={'/'} sx={{ textDecoration: 'none' }}>
-              <Typography variant="h6"
-                sx={{
-                  display: { xs: 'none', sm: 'flex' },
+      {/* <Container maxWidth="xl"> */}
+      <Toolbar disableGutters >
+        <Box sx={{ display: { xs: 'none', sm: 'flex' }, ml: '30px' }} className={styles.box}>
+          <Link href={'/'}>
+            <img src="/logo.png" alt="logo" className={styles.logo} />
+          </Link>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1900px', width: '100%' }}>
+
+            <Box sx={{ display: 'flex', ml: '50px', mt: '50px' }} className={styles.menuItems}>
+              <Link href={'/'} sx={{ textDecoration: 'none' }}>
+                <Typography variant="h6"
+                  sx={{
+                    // display: { xs: 'none', sm: 'flex' },
+                    color: '#000000',
+                    lineHeight: '19px',
+                    mr: '36px'
+                  }}>  Home  </Typography>
+              </Link>
+              <Link href={'/for-women'} sx={{ textDecoration: 'none' }}>
+                <Typography variant="h6" sx={{
+                  // display: { xs: 'none', sm: 'flex' },
+                  color: '#000000',
+                  lineHeight: '19px',
+                  mr: '36px',
+                  textAlign: 'center'
+                }}> For women </Typography>
+              </Link>
+              <Link href={'/form-men'} sx={{ textDecoration: 'none' }}>
+                <Typography variant="h6" sx={{
+                  // display: { xs: 'none', sm: 'flex' },
+                  color: '#000000',
+                  lineHeight: '19px',
+                  mr: '36px',
+                  textAlign: 'center'
+                }}> For men </Typography>
+              </Link>
+              <Link href={'/accesories'} sx={{ textDecoration: 'none' }}>
+                <Typography variant="h6" sx={{
+                  // display: { xs: 'none', sm: 'flex' },
                   color: '#000000',
                   lineHeight: '19px',
                   mr: '36px'
-                }}>  Home  </Typography>
-            </Link>
-            <Link href={'/for-women'} sx={{ textDecoration: 'none' }}>
-              <Typography variant="h6" sx={{
-                display: { xs: 'none', sm: 'flex' },
-                color: '#000000',
-                lineHeight: '19px',
-                mr: '36px'
-              }}> For women </Typography>
-            </Link>
-            <Link href={'/form-men'} sx={{ textDecoration: 'none' }}>
-              <Typography variant="h6" sx={{
-                display: { xs: 'none', sm: 'flex' },
-                color: '#000000',
-                lineHeight: '19px',
-                mr: '36px'
-              }}> For men </Typography>
-            </Link>
-            <Link href={'/accesories'} sx={{ textDecoration: 'none' }}>
-              <Typography variant="h6" sx={{
-                display: { xs: 'none', sm: 'flex' },
-                color: '#000000',
-                lineHeight: '19px',
-                mr: '36px'
-              }}> Accesories </Typography>
-            </Link>
-            <Link href={'/sale'} sx={{ textDecoration: 'none' }}>
-              <Typography variant="h6" sx={{
-                display: { xs: 'none', sm: 'flex' },
-                color: '#000000',
-                lineHeight: '19px'
-              }}> Sale </Typography>
-            </Link>
+                }}> Accesories </Typography>
+              </Link>
+              <Link href={'/sale'} sx={{ textDecoration: 'none' }}>
+                <Typography variant="h6" sx={{
+                  // display: { xs: 'none', sm: 'flex' },
+                  color: '#000000',
+                  lineHeight: '19px'
+                }}> Sale </Typography>
+              </Link>
+            </Box>
+
+            <Box className={styles.searchBox}>
+              <SearchOutlinedIcon sx={{ color: '#494949', position: 'absolute', ml: '16px', width: '18px', height: '18px' }}/>
+              <input type="text" placeholder='Search' className={styles.searchInput} />
+              <Link href={'/cart'}>
+                <LocalMallOutlinedIcon sx={{ mr: 2, color: '#292D32' }}/>
+              </Link>
+            </Box>
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'none' } }}>
+        </Box>
+
+        {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -179,9 +198,9 @@ function HeaderLogedIn () {
               ))}
             </Menu>
 
-          </Box>
-        </Toolbar>
-      </Container>
+          </Box> */}
+      </Toolbar>
+      {/* </Container> */}
       <div className={styles.separationLine}></div>
     </AppBar>
   )
