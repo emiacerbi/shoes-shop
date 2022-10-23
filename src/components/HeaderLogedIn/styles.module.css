@@ -16,6 +16,12 @@
     height: 48px;
 }
 
+.searchInput[type="text"]{
+    padding-left: 40px;
+    font-size: 1.25rem;
+    color: #494949;
+}
+
 .searchBox{
     display: flex;
     max-width: 350px;
@@ -26,9 +32,6 @@
     margin-left: 30px;
 }
 
-.searchInput::placeholder{
-  padding-left: 40px;
-}
 
 .box{
     max-width: 1920px;
