@@ -5,10 +5,10 @@ import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
 import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 
 import styles from '../styles/SignIn.module.css'
-import SignUpOverlay from '../src/components/SignUpOverlay/SignUpOverlay'
 import Link from 'next/link'
+import SignInOverlay from '../src/components/SignInOverlay/SignInOverlay'
 
-const SignUp = () => {
+const SignIn = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(true)
   const [mobileWidth, setMobileWidth] = useState()
 
@@ -54,15 +54,15 @@ const SignUp = () => {
       </div>
 
       <div className={styles.imageContainer}></div>
-
       {
         isOverlayVisible && mobileWidth < 380 && (
-          <SignUpOverlay setIsOverlayVisible={setIsOverlayVisible} />
+          <SignInOverlay setIsOverlayVisible={setIsOverlayVisible} />
         )
       }
+
     </div>
 
   )
 }
 
-export default SignUp
+export default SignIn
