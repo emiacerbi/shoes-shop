@@ -20,8 +20,33 @@
   .error__description__message {
     font-weight: 500;
     font-size: 20px;
-
+    line-height: 28px;
     color: #5c5c5c;
+  }
+  .error__btns{
+    
+    width: 400px;
+  }
+  .error__btn{
+    border-radius: 8px;
+    height: 40px;
+    margin:30px 20px 0 0;
+    width: 152px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: Work Sans, sans-serif;
+    line-height: 18px;
+    border: none;
+  }
+  .error__btn__colored{
+    background-color: #FE645E;
+    color: #FFF;
+  }
+  .error__btn__notColored{
+    background-color: #FFF;
+    color: #FE645E;
+    border: 1px solid #FE645E;
+
   }
   .error__img {
     width: 50%; 

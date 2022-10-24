@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './styles.module.css'
 // import Image from 'next/image'
 
-const ErrorPage = ({ title, description, image }) => {
+const ErrorPage = ({ title, description, image, btnLeft, btnRight }) => {
   return (
     <div className={styles.error}>
 
@@ -11,7 +11,14 @@ const ErrorPage = ({ title, description, image }) => {
 
           <h1 className={styles.error__description__title}>{title}</h1>
           <p className={styles.error__description__message}>{description}</p>
+
+          <div className={styles.error__btns}>
+            <button className={`${styles.error__btn} ${styles.error__btn__notColored}`}>{btnLeft}</button>
+            <button className={`${styles.error__btn} ${styles.error__btn__colored}`}>{btnRight}</button>
+          </div>
+
         </div>
+
       </div>
 
       <div className={styles.error__img}>
