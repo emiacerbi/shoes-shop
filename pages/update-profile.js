@@ -2,7 +2,6 @@ import { Avatar, Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import styles from '../styles/updateProfile.module.css'
 import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
-import Header from '../src/components/Header/Header'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined'
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined'
@@ -16,7 +15,6 @@ export default function UpdateProfile () {
   }
   return (
     <>
-      <Header/>
       <Box sx={{ display: 'flex', alignItems: 'baseline', mt: 12.5 }} >
         <div className={styles.container_settings}>
 
