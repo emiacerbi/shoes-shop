@@ -13,7 +13,7 @@ import styles from './styles.module.css'
 const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
 const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
 
-function HeaderLogedIn () {
+function HeaderLoggedIn () {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [searchInput, setSearchInput] = React.useState(false) // Hook to show/hide the search input
   const [value, setValue] = React.useState('') // Value to handle search input
@@ -139,4 +139,4 @@ function HeaderLogedIn () {
   )
 }
 
-export default HeaderLogedIn
+export default HeaderLoggedIn
