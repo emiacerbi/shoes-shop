@@ -1,21 +1,27 @@
 import { fetchWrapper } from '../fetchWrapper'
 
 const BASE_URL = process.env.BASE_URL
-const ENDPOINT = `${BASE_URL}/api/auth/local/register`
+const ENDPOINT = `${BASE_URL}/api/auth/forgot-password`
 
-export const registerUser = async (username, email, password) => {
+export const postForgotPassword = async (email) => {
   const config = {
     method: 'POST',
     headers: {
       'Content-type': 'application/json; charset=UTF-8'
     },
     body: JSON.stringify({
-      username,
-      email,
-      password
+      email
     })
   }
 
   const response = await fetchWrapper(ENDPOINT, config)
   return response
 }
+
+/*
+
+{
+  "ok": true
+}
+
+*/
