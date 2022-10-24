@@ -24,32 +24,30 @@ export default function UpdateProfile () {
             <img src="/vector.png" alt="vector icon" className={styles.vector} onClick={handleSettings}/>
             <Typography className={styles.settings_text}>Settings</Typography>
           </Box>
-          {settings
-            ? (
-              <>
-                <div className={styles.line}></div>
-                <Box className={styles.myProfile}>
-                  <AccountCircleOutlinedIcon sx={{ color: '#6E7278' }}/>
-                  <Typography className={styles.myProfile_text}>My Profile</Typography>
-                </Box>
+          {settings && (
+            <>
+              <div className={styles.line}></div>
+              <Box className={styles.myProfile}>
+                <AccountCircleOutlinedIcon sx={{ color: '#6E7278' }}/>
+                <Typography className={styles.myProfile_text}>My Profile</Typography>
+              </Box>
 
-                <Box className={styles.myProfile}>
-                  <DashboardCustomizeOutlinedIcon sx={{ color: '#6E7278' }}/>
-                  <Typography className={styles.preferences_text}>Preferences</Typography>
-                </Box>
+              <Box className={styles.myProfile}>
+                <DashboardCustomizeOutlinedIcon sx={{ color: '#6E7278' }}/>
+                <Typography className={styles.preferences_text}>Preferences</Typography>
+              </Box>
 
-                <Box className={styles.myProfile}>
-                  <GppGoodOutlinedIcon sx={{ color: '#6E7278' }}/>
-                  <Typography className={styles.security_text}>Security</Typography>
-                </Box>
+              <Box className={styles.myProfile}>
+                <GppGoodOutlinedIcon sx={{ color: '#6E7278' }}/>
+                <Typography className={styles.security_text}>Security</Typography>
+              </Box>
 
-                <Box className={styles.myProfile}>
-                  <AccountBalanceWalletOutlinedIcon sx={{ color: '#6E7278' }}/>
-                  <Typography className={styles.myWallet_text}>My Wallet</Typography>
-                </Box>
-              </>
-            )
-            : (null)}
+              <Box className={styles.myProfile}>
+                <AccountBalanceWalletOutlinedIcon sx={{ color: '#6E7278' }}/>
+                <Typography className={styles.myWallet_text}>My Wallet</Typography>
+              </Box>
+            </>
+          )}
 
         </div>
 
