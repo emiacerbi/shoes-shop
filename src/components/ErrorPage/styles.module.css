@@ -1,0 +1,33 @@
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 81vh;
+  }
+  .error__description {
+    width: 50%;
+    font-family: Work Sans, "sans-serif";
+  }
+  .error__description__wrapper{
+    width: 540px;
+    margin: 0 auto;
+  }
+  .error__description__title {
+    font-weight: 500;
+    font-size: 45px;
+    color: #000;
+  }
+  .error__description__message {
+    font-weight: 500;
+    font-size: 20px;
+
+    color: #5c5c5c;
+  }
+  .error__img {
+    width: 50%; 
+  }
+  .error_img{
+    height: 690px;
+    width: 100%;
+  }
+  
