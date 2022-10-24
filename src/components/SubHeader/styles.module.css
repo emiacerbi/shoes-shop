@@ -1,0 +1,24 @@
+.sub-header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 180px;
+    height: 60px;
+}
+
+.sub-header-info{
+    margin-left: auto;
+}
+
+.h2 {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.p {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+    color: #5C5C5C;
+}
