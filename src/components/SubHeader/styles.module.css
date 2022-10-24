@@ -3,7 +3,8 @@
     flex-direction: row;
     align-items: flex-end;
     width: 180px;
-    height: 60px;
+    height: 40px;
+    padding-bottom: 20px;
 }
 
 .sub-header-info{
