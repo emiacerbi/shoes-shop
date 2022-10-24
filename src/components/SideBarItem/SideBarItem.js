@@ -6,7 +6,9 @@ export default function SideBarItem ({ name, notifNumber, icon }) {
     <div className={styles['side-bar-item']}>
       <img src={icon} className={styles['side-bar-item__icon']} alt = ''/>
       <p className={styles['side-bar-item__name']}>{name}</p>
-      {notifNumber ? <p className={styles['side-bar-item__notif-num']}>{notifNumber}</p> : null}
+      <div className={styles['side-bar-item__notif-num']}>
+        {notifNumber ? <p>{notifNumber}</p> : null}
+      </div>
     </div>
   )
 }

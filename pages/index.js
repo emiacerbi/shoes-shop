@@ -16,7 +16,7 @@ export default function Home () {
       <Link href='/home'>
         <a style={{ color: 'black' }}>Home</a>
       </Link>
-      <SideBarItem name='Wishlist' notifNumber={4} icon='./element-plus.svg'/>
+      <SideBarItem name='Wishlist' notifNumber={41} icon='./element-plus.svg'/>
     </>
   )
 }
