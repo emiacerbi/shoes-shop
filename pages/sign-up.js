@@ -8,6 +8,8 @@ import styles from '../styles/SignUp.module.css'
 import SignUpOverlay from '../src/components/SignUpOverlay/SignUpOverlay'
 import Star from '../src/components/Star/Star'
 import Wedge from '../src/components/Wedge/Wedge'
+import Link from 'next/link'
+import useSignUpForm from '../src/hooks/useSignUpForm'
 
 const SignUp = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(true)
@@ -19,6 +21,8 @@ const SignUp = () => {
     }
   }, [mobileWidth])
 
+  const { handleSubmit, handleInputChange } = useSignUpForm()
+
   return (
 
     <div className={styles.container}>
@@ -26,11 +30,11 @@ const SignUp = () => {
         <Typography variant="h1">Create an account</Typography>
         <Typography variant='p'>Create an account to get an easy access to your dream shopping</Typography>
 
-        <Form onSubmit={console.log('onSubmit')}>
-          <PrimaryInput label='Name' placeholder='Hayman Andres' />
-          <PrimaryInput label='Email' placeholder='example@gmail.com' />
-          <PrimaryInput label='Password' placeholder='at least 8 characters' />
-          <PrimaryInput label='Repeat password' placeholder='at least 8 characters' />
+        <Form onSubmit={handleSubmit}>
+          <PrimaryInput label='Name' placeholder='Hayman Andres' name='name' onChange={handleInputChange} />
+          <PrimaryInput label='Email' placeholder='example@gmail.com' name='email' onChange={handleInputChange} />
+          <PrimaryInput label='Password' placeholder='at least 8 characters' name='password' onChange={handleInputChange} />
+          <PrimaryInput label='Repeat password' placeholder='at least 8 characters' name='repeatedPassword' onChange={handleInputChange} />
 
           <label className={styles.checkbox}>
             <input type='checkbox'/>
@@ -44,7 +48,11 @@ const SignUp = () => {
           <p className={styles.text}>
             Already have an account?
             <span className={styles.span}>
-              Log in
+              <Link href='/' className={styles.span}>
+                <a>
+                  Log in
+                </a>
+              </Link>
             </span>
           </p>
         </Form>
