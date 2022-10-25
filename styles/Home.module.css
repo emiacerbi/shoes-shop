@@ -43,6 +43,7 @@
  .panel-container{
   background-image: url(../public/bgHomeImgDesktop.png);
   height: 260px;
+  margin: 0px;
  }
  .home-page-container {
   display: flex;
