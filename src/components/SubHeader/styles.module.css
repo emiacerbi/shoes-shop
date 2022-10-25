@@ -4,7 +4,7 @@
     align-items: flex-end;
     width: 180px;
     height: 40px;
-    padding-bottom: 20px;
+    margin: 20px 0px;
 }
 
 .sub-header-info{
@@ -23,3 +23,26 @@
     line-height: 14px;
     color: #5C5C5C;
 }
+
+@media (min-width: 600px) {
+    .sub-header-container{
+        width: 280px;
+        height: 80px;
+        margin-left: 20px;
+        margin-top: -20px;
+    }
+    .h2 {
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .p{
+        font-size: 15px;
+        line-height: 18px;
+    }
+
+    .avatar {
+        width: 120px !important;
+        height: 120px !important;
+        border: 5px solid #ffffff !important ;
+    }
+   }
