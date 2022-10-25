@@ -1,4 +1,4 @@
-.side-bar-item{
+.bar-item{
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -12,7 +12,7 @@
     text-align: left;
 }
 
-.side-bar-item__notif-num{
+.bar-item__notif-num{
     background-color: rgba(254, 100, 94, 1);
     border-radius: 50%;
     color: #FFFFFF;
