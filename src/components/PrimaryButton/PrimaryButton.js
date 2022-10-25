@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 const PrimaryButton = ({ children, onClick }) => {
   return (
     <Button
-      // type='submit'
+      type='submit'
       onClick={onClick}
       variant='contained'
       className={styles.button}

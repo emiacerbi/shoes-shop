@@ -23,13 +23,12 @@
 .text {
   font-size: 10px;
   text-align: center;
-  font-weight: 500;
 }
 
 .span {
   color: var(--primary);
   margin-left: .25rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .imageContainer {

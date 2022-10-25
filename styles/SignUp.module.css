@@ -22,10 +22,12 @@
 
 .text {
   font-size: 10px;
+  margin-inline: auto;
 }
 
 .span {
   color: var(--primary);
+  font-weight: 500;
   margin-left: .25rem;
 }
 
