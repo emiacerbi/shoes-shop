@@ -22,7 +22,8 @@
 }
 
 .error-500__button {
-  width: 233px;
+  max-width: 280px;
+  width: 100%;
 }
 
 @media (min-width: 600px) {
@@ -33,9 +34,6 @@
     height: calc(100vh - 68px);
     justify-content: flex-start;
     padding-top: 60px;
-  }
-  .error-500__button {
-    width: 280px;
   }
 }
 
