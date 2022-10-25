@@ -4,7 +4,7 @@ import { Button } from '@mui/material'
 import Heading from '../src/components/Heading/heading'
 
 import styles from '../styles/Home.module.css'
-import ProfileInfoSideBar from '../src/components/ProfileInfoSideBar/ProfileInfoSideBar'
+import SideBarProfileInfo from '../src/components/SideBarProfileInfo/SideBarProfileInfo'
 
 export default function Home () {
   return (
@@ -12,7 +12,7 @@ export default function Home () {
       <Heading headingText="Header goes here"/>
       <div className={styles['home-page-container']}>
         <div className={styles['home-page-container__side-bar']}>
-          <ProfileInfoSideBar/>
+          <SideBarProfileInfo/>
         </div>
         <main className={styles['home-page-container__main']}>
           <div className={styles['panel-container']}></div>
