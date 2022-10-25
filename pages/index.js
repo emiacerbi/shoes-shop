@@ -16,6 +16,10 @@ export default function Home () {
       <Link href='/home'>
         <a style={{ color: 'black' }}>Home</a>
       </Link>
+      <br />
+      <Link href="/error404">
+        <a style={{ color: 'black' }}>Error 404</a>
+      </Link>
       <SideBarItem name='Wishlist' notifNumber={41} icon='./element-plus.svg'/>
     </>
   )
