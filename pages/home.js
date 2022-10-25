@@ -1,6 +1,6 @@
 import ProductCard from '../src/components/ProductCard/ProductCard'
 import SubHeader from '../src/components/SubHeader/SubHeader'
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import Heading from '../src/components/Heading/heading'
 
 import styles from '../styles/Home.module.css'
@@ -18,7 +18,7 @@ export default function Home () {
           <div className={styles['panel-container']}></div>
           <SubHeader className={styles.subheader}/>
           <div className={styles['titles-container']}>
-            <Heading headingText="My Products"/>
+          <Typography variant='h1'>My Produducs</Typography>
             <Button variant="contained" className={styles['titles-container__button']} > Add Product </Button>
           </div>
           <div className={styles.cards}>
