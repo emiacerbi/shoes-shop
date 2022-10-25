@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem'
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import styles from './styles.module.css'
+import BurgerMenu from '../BurgerMenu/BurgerMenu'
 const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
 const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
 
@@ -91,7 +92,8 @@ function HeaderLoggedIn () {
               </>
             )}
 
-            <IconButton
+            <BurgerMenu/>
+            {/* <IconButton
               sx={{ padding: 0 }}
               size="large"
               aria-label="account of current user"
@@ -120,9 +122,9 @@ function HeaderLoggedIn () {
               sx={{
                 display: { xs: 'block', md: 'none' }
               }}
-            >
-              {/* Links menu pages */}
-              {pages.map((page, index) => (
+            > */}
+            {/* Links menu pages */}
+            {/* {pages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Link sx={{ textDecoration: 'none', color: '#000000' }} href={`${links[index]}`}>
                     <Typography textAlign="center">{page}</Typography>
@@ -130,7 +132,7 @@ function HeaderLoggedIn () {
                 </MenuItem>
               )
               )}
-            </Menu>
+            </Menu> */}
           </Box>
         </Box>
       </Toolbar>
