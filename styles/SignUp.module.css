@@ -33,7 +33,7 @@
   display: none;
   background-color: lightblue;
   width: 50%;
-  height: 100vh;
+  /* height: 100vh; */
   background-image: url(../public/sign-up-shoes-desktop.png);
   background-position: center;
   background-repeat: no-repeat;
