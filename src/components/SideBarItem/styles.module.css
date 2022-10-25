@@ -4,13 +4,8 @@
     justify-content: flex-start;
 }
 
-.side-bar-item__icon{
-    margin-right: 15px;
-    height: 20px;
-    width: 20px;
-}
-
 .side-bar-item__name{
+    margin-left: 15px;
     font-size: 16px;
     font-weight: 500;
     color: #000000;
@@ -27,8 +22,8 @@
     width: 20px;
     height: 20px;
     margin-left: 9px;
-    text-align: center;
     padding: 2px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }

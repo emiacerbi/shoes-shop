@@ -1,14 +1,11 @@
 import styles from './styles.module.css'
 
-export default function SideBarItem ({ name, notifNumber, icon }) {
+export default function SideBarItem ({ name, notifNumber, children }) {
   return (
-
     <div className={styles['side-bar-item']}>
-      <img src={icon} className={styles['side-bar-item__icon']} alt = ''/>
+      {children}
       <p className={styles['side-bar-item__name']}>{name}</p>
-      <div className={styles['side-bar-item__notif-num']}>
-        {notifNumber ? <p>{notifNumber}</p> : null}
-      </div>
+      {notifNumber ? <div className={styles['side-bar-item__notif-num']}> <p >{notifNumber}</p> </div> : null}
     </div>
   )
 }
