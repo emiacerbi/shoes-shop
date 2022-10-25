@@ -1,10 +1,9 @@
 import Form from '../src/components/Form/Form'
 import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
-import Heading from '../src/components/Heading/heading'
-import StyledText from '../src/components/StyledText/StyledText'
 import Header from '../src/components/Header/Header'
 import Link from 'next/link'
+import { Typography } from '@mui/material'
 
 import styles from '../styles/ForgotPassword.module.css'
 
@@ -13,9 +12,8 @@ export default function ForgotPassword () {
     <div className={styles['forgot-password-page']}>
       <Header className={styles['forgot-password-header']} />
       <main className={styles['forgot-password-main']}>
-        <Heading headingText='Forgot Password?' />
-
-        <StyledText text='Don’t worry, we’ll send you reset instructions.' />
+        <Typography variant='h1'>Forgot Password?</Typography>
+        <Typography variant='p'> Don’t worry, we’ll send you reset instructions. </Typography>
 
         <Form onSubmit={(e) => console.log('form submitted') || e.preventDefault()} className={ styles.form} > { /* change onSubmit later */}
           <PrimaryInput

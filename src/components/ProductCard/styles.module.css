@@ -1,0 +1,29 @@
+.product-card-container {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+}
+
+
+.product-card-description{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2px;
+}
+
+.h3{
+    font-weight: 500;
+    line-height: 12px;  
+    font-size: 10px;
+}
+
+.p{
+    color: #5C5C5C;
+    font-weight: 500;
+    line-height: 10px;  
+    font-size: 9px;
+}
+
+
+
