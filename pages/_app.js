@@ -1,11 +1,14 @@
 import { ThemeProvider } from '@mui/material'
+import { UserProvider } from '../src/context/UserContext'
 import '../styles/globals.css'
 import { theme } from '../styles/theme'
 
 function MyApp ({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
+      <UserProvider>
+        <Component {...pageProps} />
+      </UserProvider>
     </ThemeProvider>
   )
 }
