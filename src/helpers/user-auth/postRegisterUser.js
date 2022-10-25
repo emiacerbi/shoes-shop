@@ -1,9 +1,7 @@
-import { fetchWrapper } from '../fetchWrapper'
-
-const BASE_URL = process.env.BASE_URL
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 const ENDPOINT = `${BASE_URL}/api/auth/local/register`
 
-export const postRegisterUser = async (username, email, password) => {
+export const postRegisterUser = async ({ username, email, password }) => {
   const config = {
     method: 'POST',
     headers: {
@@ -16,7 +14,7 @@ export const postRegisterUser = async (username, email, password) => {
     })
   }
 
-  const response = await fetchWrapper(ENDPOINT, config)
+  const response = await fetch(ENDPOINT, config)
   return response
 }
 

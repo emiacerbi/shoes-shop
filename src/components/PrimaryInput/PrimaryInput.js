@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 
-const PrimaryInput = ({ label, placeholder }) => {
+const PrimaryInput = ({ label, placeholder, onChange, name, type }) => {
   return (
     <label className={styles.label} >
       <h3 className={styles.heading}>
@@ -9,6 +9,9 @@ const PrimaryInput = ({ label, placeholder }) => {
       <input
         placeholder={placeholder}
         className={`roundedInput ${styles.input}`}
+        onChange={onChange}
+        name={name}
+        type={type}
       />
     </label>
   )
