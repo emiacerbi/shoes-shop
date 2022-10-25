@@ -1,14 +1,28 @@
 import { useMutation } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useContext, useState } from 'react'
+import { UserContext } from '../context/UserContext'
 import { postLoginUser } from '../helpers/user-auth/postLoginUser'
 
 const useSignInForm = () => {
+  const { user, setUser } = useContext(UserContext)
+
+  const router = useRouter()
+
   const mutation = useMutation(postLoginUser, {
-    onSuccess: () => {
-      console.log(mutation)
+    onSuccess: (response) => {
+      sessionStorage.setItem('userToken', response.jwt)
+      setUser({
+        ...user,
+        token: response.jwt
+      })
+
+      router.push('/home')
     }
+
   })
 
+  console.log(user)
   const [inputInfo, setInputInfo] = useState({
     email: '',
     password: ''
