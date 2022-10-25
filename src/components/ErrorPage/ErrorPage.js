@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './styles.module.css'
-// import Image from 'next/image'
 
 const ErrorPage = ({ title, description, image, btnLeft, btnRight }) => {
   return (
