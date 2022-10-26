@@ -21,6 +21,8 @@ export default function Home () {
     router.push('/')
   }
 
+  console.log(user, 'USER INFO')
+
   return (
     <>
       <Heading headingText="Header goes here"/>
