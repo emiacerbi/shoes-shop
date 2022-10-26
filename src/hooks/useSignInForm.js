@@ -1,28 +1,23 @@
-import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
-import { UserContext } from '../context/UserContext'
-import { postLoginUser } from '../helpers/user-auth/postLoginUser'
+// import { useMutation } from '@tanstack/react-query'
+import { useState } from 'react'
+// import { postLoginUser } from '../helpers/user-auth/postLoginUser'
+
+import { signIn } from 'next-auth/react'
 
 const useSignInForm = () => {
-  const { user, setUser } = useContext(UserContext)
+  // const { user, setUser } = useContext(UserContext)
 
-  const router = useRouter()
+  // const mutation = useMutation(postLoginUser, {
+  //   onSuccess: (response) => {
+  //     sessionStorage.setItem('userToken', response.jwt)
+  //     setUser({
+  //       ...user,
+  //       token: response.jwt
+  //     })
+  //   }
 
-  const mutation = useMutation(postLoginUser, {
-    onSuccess: (response) => {
-      sessionStorage.setItem('userToken', response.jwt)
-      setUser({
-        ...user,
-        token: response.jwt
-      })
+  // })
 
-      router.push('/home')
-    }
-
-  })
-
-  console.log(user)
   const [inputInfo, setInputInfo] = useState({
     email: '',
     password: ''
@@ -41,9 +36,15 @@ const useSignInForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    mutation.mutate({
+    // mutation.mutate({
+    //   identifier: inputInfo.email,
+    //   password: inputInfo.password
+    // })
+
+    await signIn('credentials', {
       identifier: inputInfo.email,
-      password: inputInfo.password
+      password: inputInfo.password,
+      redirect: false
     })
   }
 

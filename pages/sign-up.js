@@ -42,7 +42,7 @@ const SignUp = () => {
           </label>
 
           <PrimaryButton>
-            Sign In
+            Sign Up
           </PrimaryButton>
 
           <p className={styles.text}>

@@ -1,4 +1,4 @@
-// import { useQuery } from '@tanstack/react-query'
+import { useSession } from 'next-auth/react'
 import { createContext, useEffect, useState } from 'react'
 import { getUserInfo } from '../helpers/user-auth/getUserInfo'
 
@@ -6,27 +6,22 @@ export const UserContext = createContext(null)
 
 export function UserProvider ({ children }) {
   const [user, setUser] = useState({
-    token: null,
     userInfo: null
   })
 
+  const { data: session } = useSession()
+
   useEffect(() => {
     const fetchUserInfo = async () => {
-      const response = await getUserInfo(sessionStorage.getItem('userToken'))
+      const response = await getUserInfo(session?.accessToken)
+
       setUser({
-        token: sessionStorage.getItem('userToken'),
         userInfo: response
       })
     }
 
     fetchUserInfo()
-  }, [])
-
-  console.log(user)
-
-  if (!user.userInfo) {
-    <h1>Loading...</h1>
-  }
+  }, [session?.accessToken])
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
