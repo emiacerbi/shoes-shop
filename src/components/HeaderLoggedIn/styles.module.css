@@ -1,0 +1,63 @@
+.logo{
+    margin-left: 20px;
+}
+
+.searchInput{
+    border: 1px solid #494949;
+    border-radius: 42px;
+    width: 120px;
+    height: 30px;
+}
+
+.searchInput[type="text"]{
+    padding-left: 20px;
+    font-size: 1rem;
+    color: #494949;
+}
+.separationLine{
+    color: #EAECF0;
+    margin-top: 41px;
+    border: 1px solid #EAECF0;
+    margin-bottom: 93px;
+}
+
+.cart{
+    margin: 0;
+    color: red;
+}
+@media (min-width: 600px){
+    .logo{
+        margin-top: 50px;
+    }
+    .searchInput{
+        border: 1px solid #494949;
+        border-radius: 42px;
+        width: 320px;
+        height: 48px;
+    }
+    
+    .searchInput[type="text"]{
+        padding-left: 40px;
+        font-size: 1.25rem;
+        color: #494949;
+    }
+    
+    .searchBox{
+        display: flex;
+        max-width: 350px;
+        width: 100%;    
+        align-items: center;
+        gap: 20px;
+        margin-top: 40px;
+        margin-left: 30px;
+    }
+        
+    .box{
+        max-width: 1920px;
+        width: 100%;
+        display: flex;
+    }
+}
+
+
+

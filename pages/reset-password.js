@@ -1,22 +1,19 @@
 import Form from '../src/components/Form/Form'
 import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
-import Heading from '../src/components/Heading/heading'
-import StyledText from '../src/components/StyledText/StyledText'
 import Header from '../src/components/Header/Header'
 import Link from 'next/link'
 
 import styles from '../styles/ResetPassword.module.css'
+import { Typography } from '@mui/material'
 
 export default function ResetPassword () {
   return (
     <div className={styles['reset-password-page']}>
       <Header className={styles['reset-password-header']} />
       <main className={styles['reset-password-main']}>
-        <Heading headingText='Reset password' />
-
-        <StyledText text='Please create new password here.' />
-
+        <Typography variant='h1'>Reset Password</Typography>
+        <Typography variant='p'> Please create new password here. </Typography>
         <Form onSubmit={(e) => console.log('form submitted') || e.preventDefault()} className={ styles.form} > { /* change onSubmit later */}
           <PrimaryInput
             type='password'
