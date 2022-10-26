@@ -54,7 +54,7 @@ const SignIn = () => {
                 <span className={styles.span}>
                   <Link href='/sign-up' className={styles.span}>
                     <a>
-                  Sign up
+                    Sign up
                     </a>
                   </Link>
                 </span>
