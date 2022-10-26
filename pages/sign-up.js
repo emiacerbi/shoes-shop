@@ -10,6 +10,7 @@ import Star from '../src/components/Star/Star'
 import Wedge from '../src/components/Wedge/Wedge'
 import Link from 'next/link'
 import useSignUpForm from '../src/hooks/useSignUpForm'
+import HeaderBeforeLogin from '../src/components/Header/Header'
 
 const SignUp = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(true)
@@ -27,35 +28,40 @@ const SignUp = () => {
 
     <div className={styles.container}>
       <div className={styles.leftContainer}>
-        <Typography variant="h1">Create an account</Typography>
-        <Typography variant='p'>Create an account to get an easy access to your dream shopping</Typography>
 
-        <Form onSubmit={handleSubmit}>
-          <PrimaryInput label='Name' placeholder='Hayman Andres' name='name' onChange={handleInputChange} />
-          <PrimaryInput label='Email' placeholder='example@gmail.com' name='email' onChange={handleInputChange} />
-          <PrimaryInput label='Password' placeholder='at least 8 characters' name='password' onChange={handleInputChange} />
-          <PrimaryInput label='Repeat password' placeholder='at least 8 characters' name='repeatedPassword' onChange={handleInputChange} />
+        <HeaderBeforeLogin />
 
-          <label className={styles.checkbox}>
-            <input type='checkbox'/>
+        <div className={styles.formWrapper}>
+          <Typography variant="h1">Create an account</Typography>
+          <Typography variant='p'>Create an account to get an easy access to your dream shopping</Typography>
+
+          <Form onSubmit={handleSubmit}>
+            <PrimaryInput label='Name' placeholder='Hayman Andres' name='name' onChange={handleInputChange} />
+            <PrimaryInput label='Email' placeholder='example@gmail.com' name='email' onChange={handleInputChange} />
+            <PrimaryInput label='Password' placeholder='at least 8 characters' name='password' onChange={handleInputChange} />
+            <PrimaryInput label='Repeat password' placeholder='at least 8 characters' name='repeatedPassword' onChange={handleInputChange} />
+
+            <label className={styles.checkbox}>
+              <input type='checkbox'/>
             Remember me
-          </label>
+            </label>
 
-          <PrimaryButton>
+            <PrimaryButton>
             Sign In
-          </PrimaryButton>
+            </PrimaryButton>
 
-          <p className={styles.text}>
-            Already have an account?
-            <span className={styles.span}>
-              <Link href='/' className={styles.span}>
-                <a>
+            <p className={styles.text}>
+              Already have an account?
+              <span className={styles.span}>
+                <Link href='/' className={styles.span}>
+                  <a>
                   Log in
-                </a>
-              </Link>
-            </span>
-          </p>
-        </Form>
+                  </a>
+                </Link>
+              </span>
+            </p>
+          </Form>
+        </div>
       </div>
 
       <div className={styles.imageContainer}>
