@@ -21,7 +21,7 @@ export const authOptions = {
   ],
 
   callbacks: {
-    async signIn ({ user, account, profile, email, credentials }) {
+    async signIn () {
       return true
     },
 
@@ -30,7 +30,6 @@ export const authOptions = {
         token.accessToken = user.jwt
       }
 
-      console.log(token)
       return token
     },
 
