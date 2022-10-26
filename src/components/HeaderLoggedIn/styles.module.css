@@ -21,6 +21,10 @@
     margin-bottom: 93px;
 }
 
+.cart{
+    margin: 0;
+    color: red;
+}
 @media (min-width: 600px){
     .logo{
         margin-top: 50px;

@@ -1,31 +1,17 @@
 import { AppBar, Link, Button } from '@mui/material'
-import * as React from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import styles from './styles.module.css'
 import BurgerMenu from '../BurgerMenu/BurgerMenu'
-const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
-const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
+import BarItem from '../BarItem/BarItem'
+import Cart from '../Cart/Cart'
 
-function HeaderLoggedIn () {
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [searchInput, setSearchInput] = React.useState(false) // Hook to show/hide the search input
-  const [value, setValue] = React.useState('') // Value to handle search input
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget)
-  }
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
+function HeaderLoggedIn ({ pages, links }) {
+  const [searchInput, setSearchInput] = useState(false) // Hook to show/hide the search input
+  const [value, setValue] = useState('') // Value to handle search input
 
   const handleSearchInput = () => {
     setSearchInput(!searchInput)
@@ -41,6 +27,7 @@ function HeaderLoggedIn () {
           </Link>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1900px', width: '100%' }}>
             <Box sx={{ display: 'flex', ml: '50px', mt: '50px' }} className={styles.menuItems}>
+
               {pages.map((page, index) => (
                 <>
                   <Link sx={{ textDecoration: 'none', color: '#000000' }} href={`${links[index]}`}>
@@ -52,7 +39,7 @@ function HeaderLoggedIn () {
                         fontWeight: 500,
                         fontSize: '16px'
                       }}
-                      textAlign="center">{page}</Typography>
+                      textAlign="center"><BarItem name={page}/></Typography>
                   </Link>
                 </>
               )
@@ -61,9 +48,7 @@ function HeaderLoggedIn () {
             <Box className={styles.searchBox} >
               <SearchOutlinedIcon sx={{ color: '#494949', position: 'absolute', ml: '16px', width: '18px', height: '18px' }}/>
               <input type="text" placeholder='Search' className={styles.searchInput} />
-              <Link href={'/cart'}>
-                <LocalMallOutlinedIcon sx={{ mr: 2, color: '#292D32' }}/>
-              </Link>
+              <Cart/>
             </Box>
           </Box>
         </Box>
@@ -74,9 +59,7 @@ function HeaderLoggedIn () {
             <img src="/logo.png" alt="logo" className={styles.logo} />
           </Link>
           <Box sx={{ maxWidth: '150px', width: '100%', mr: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <Link href={'/cart'}>
-              <LocalMallOutlinedIcon sx={{ color: '#292D32' }}/>
-            </Link>
+            <Cart className={styles.cart}/>
             <SearchOutlinedIcon sx={{ color: '#494949', width: '23px', height: '23px', cursor: 'pointer' }} onClick={handleSearchInput}/>
             {searchInput && (
               <>
@@ -91,52 +74,11 @@ function HeaderLoggedIn () {
                 </form>
               </>
             )}
-
-            <BurgerMenu/>
-            {/* <IconButton
-              sx={{ padding: 0 }}
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left'
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' }
-              }}
-            > */}
-            {/* Links menu pages */}
-            {/* {pages.map((page, index) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link sx={{ textDecoration: 'none', color: '#000000' }} href={`${links[index]}`}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </Link>
-                </MenuItem>
-              )
-              )}
-            </Menu> */}
+            <BurgerMenu pages={pages} links={links}/>
           </Box>
         </Box>
       </Toolbar>
-      <div className={styles.separationLine}></div>
+      <Box className={styles.separationLine}></Box>
     </AppBar>
   )
 }

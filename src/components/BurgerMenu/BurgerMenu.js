@@ -6,10 +6,10 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 
-function BurgerMenu () {
+function BurgerMenu ({ pages, links }) {
   const [anchorElNav, setAnchorElNav] = useState(null)
-  const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
-  const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
+  // const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
+  // const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
