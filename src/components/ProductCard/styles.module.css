@@ -25,5 +25,17 @@
     font-size: 9px;
 }
 
-
+@media (min-width: 600px) {
+    .h3 {
+        font-size: 22px;
+        line-height: 25px;
+    }
+    .p{
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .product-card-container{
+        width: 320px;
+    }
+   }
 
