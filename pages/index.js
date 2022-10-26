@@ -31,7 +31,6 @@ const SignIn = () => {
   const { handleInputChange, handleSubmit } = useSignInForm()
 
   return (
-
     <div className={styles.container}>
       <div className={styles.leftContainer}>
         <Typography variant="h1">Welcome back</Typography>
