@@ -18,7 +18,7 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
   }
 
   return (
-    <AppBar position="static" sx={{ background: 'none', boxShadow: 'none' }}>
+    <AppBar position="static" sx={{ background: 'none', boxShadow: 'none', borderBottom: '1px solid #EAECF0' }}>
       <Toolbar disableGutters >
         {/* Desktop */}
         <Box sx={{ display: { xs: 'none', sm: 'flex' }, ml: '30px' }} className={styles.box}>
