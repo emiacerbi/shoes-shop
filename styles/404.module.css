@@ -1,0 +1,17 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  
+  .header {
+    display: block;
+  }
+
+}

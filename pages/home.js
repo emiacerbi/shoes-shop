@@ -5,10 +5,10 @@ import { UserContext } from '../src/context/UserContext'
 import { useSession } from 'next-auth/react'
 import SubHeader from '../src/components/SubHeader/SubHeader'
 import { Button, Typography } from '@mui/material'
-import Heading from '../src/components/Heading/heading'
 
 import styles from '../styles/Home.module.css'
 import SideBarProfileInfo from '../src/components/SideBarProfileInfo/SideBarProfileInfo'
+import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
 
 export default function Home () {
   const router = useRouter()
@@ -25,7 +25,7 @@ export default function Home () {
 
   return (
     <>
-      <Heading headingText="Header goes here"/>
+      <HeaderLoggedIn pages={['Home', 'Products']} />
       <div className={styles['home-page-container']}>
         <div className={styles['home-page-container__side-bar']}>
           <SideBarProfileInfo/>
