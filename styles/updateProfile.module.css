@@ -1,0 +1,178 @@
+/* STYLES FOR MOBILE */
+
+.container_settings{
+    display: none;
+}
+
+.container_profile{
+    max-width: 324px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.heading{
+    color: #000000;
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+}
+
+.button_outlined{
+    color: #FE645E;
+    font-family: Work Sans;
+    font-size: 11px;
+    width: 120px;
+    border-radius: 6px;
+    height: 35px;
+    margin-bottom: 16px;
+}
+
+.button_contained{
+    color: #FFFFFF;
+    font-family: Work Sans;
+    font-size: 11px;
+    width: 120px;
+    border-radius: 6px;
+    height: 30px;
+}
+
+.welcomeBack_text{
+    width: 314px;
+    height: 28px; 
+    color: #5C5C5C;
+    font-size: 12px;
+    font-weight: 300;
+    margin-top: 16px;
+    margin-left: 4px;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 1.5rem;
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  /* STYLES FOR TABLET & DESKTOP */
+
+  @media (min-width: 600px){
+    .container_settings{
+        display: block;
+        height: auto;
+        max-width: 320px;
+        width: 100%;
+    }
+
+    .container_profile{
+        margin-left: 80px;
+    }
+
+    .heading{
+        color: #000000;
+        font-family: 'Work Sans';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 45px;
+        line-height: 53px;
+    }
+    
+    .welcomeBack_text{
+        width: 459px;
+        height: 18px;
+        font-size: 15px;
+    }
+    .vector{
+        position: absolute;
+        margin-left: 46px;
+        margin-top: 2px;
+        transition: all 0.5s ease;
+    }
+
+    .vector:hover{
+        transform: rotate(-90deg);
+        cursor: pointer;
+    }
+
+    .settings_text{
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 23px;
+        margin-left: 80px;
+        cursor: pointer;
+    }
+
+    .line{
+        width: 320px;
+        color: #EAECF0;
+        border: 1px solid;
+        margin-top: 40px;
+    }
+
+    .myProfile{
+        display: flex;
+        margin-top: 30px;
+        margin-left: 46px;
+    }
+
+    .myProfile_text{
+        margin-left: 15px;
+        color: #000000;
+        transition: all 0.5s ease;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+    }
+    
+    .myProfile_text:hover{
+        color: #FE645E;
+        cursor: pointer;
+    }
+
+    .preferences_text{
+        margin-left: 15px;
+        color: #000000;
+        transition: all 0.5s ease;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    .preferences_text:hover{
+        color: #FE645E;
+        cursor: pointer;
+    }
+
+    .security_text{
+        margin-left: 15px;
+        color: #000000;
+        transition: all 0.5s ease;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    .security_text:hover{
+        color: #FE645E;
+        cursor: pointer;
+    }
+
+    .myWallet_text{
+        margin-left: 15px;
+        color: #000000;
+        transition: all 0.5s ease;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    .myWallet_text:hover{
+        color: #FE645E;
+        cursor: pointer;
+    }
+}
+
