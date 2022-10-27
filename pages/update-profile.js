@@ -7,15 +7,21 @@ import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomi
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined'
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined'
 import { useState } from 'react'
+import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
+
 export default function UpdateProfile () {
   const [settings, setSettings] = useState(true)
+  const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
+  const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
 
   function handleSettings () {
     return setSettings(!settings)
   }
+
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'baseline', mt: 12.5 }} >
+      <HeaderLoggedIn pages={pages} links={links} cart={true} burger={true}/>
+      <Box sx={{ display: 'flex', alignItems: 'baseline', mt: 4 }} >
         <div className={styles.container_settings}>
 
           <Box >

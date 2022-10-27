@@ -8,8 +8,6 @@ import Link from '@mui/material/Link'
 
 function BurgerMenu ({ pages, links }) {
   const [anchorElNav, setAnchorElNav] = useState(null)
-  // const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
-  // const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
