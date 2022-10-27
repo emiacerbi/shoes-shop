@@ -1,4 +1,8 @@
+import { useContext } from 'react'
+import { useRouter } from 'next/router'
 import ProductCard from '../src/components/ProductCard/ProductCard'
+import { UserContext } from '../src/context/UserContext'
+import { useSession } from 'next-auth/react'
 import SubHeader from '../src/components/SubHeader/SubHeader'
 import { Button, Typography } from '@mui/material'
 import Heading from '../src/components/Heading/heading'
@@ -7,6 +11,18 @@ import styles from '../styles/Home.module.css'
 import SideBarProfileInfo from '../src/components/SideBarProfileInfo/SideBarProfileInfo'
 
 export default function Home () {
+  const router = useRouter()
+
+  const { data: session } = useSession()
+
+  const { user } = useContext(UserContext)
+
+  if (!session?.accessToken) {
+    router.push('/')
+  }
+
+  console.log(user, 'USER INFO')
+
   return (
     <>
       <Heading headingText="Header goes here"/>
@@ -18,7 +34,7 @@ export default function Home () {
           <div className={styles['panel-container']}></div>
           <SubHeader className={styles.subheader}/>
           <div className={styles['titles-container']}>
-          <Typography variant='h1'>My Produducs</Typography>
+            <Typography variant='h1'>My Produducs</Typography>
             <Button variant="contained" className={styles['titles-container__button']} > Add Product </Button>
           </div>
           <div className={styles.cards}>

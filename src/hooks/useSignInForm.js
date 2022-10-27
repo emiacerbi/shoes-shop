@@ -1,13 +1,22 @@
-import { useMutation } from '@tanstack/react-query'
+// import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
-import { postLoginUser } from '../helpers/user-auth/postLoginUser'
+// import { postLoginUser } from '../helpers/user-auth/postLoginUser'
+
+import { signIn } from 'next-auth/react'
 
 const useSignInForm = () => {
-  const mutation = useMutation(postLoginUser, {
-    onSuccess: () => {
-      console.log(mutation)
-    }
-  })
+  // const { user, setUser } = useContext(UserContext)
+
+  // const mutation = useMutation(postLoginUser, {
+  //   onSuccess: (response) => {
+  //     sessionStorage.setItem('userToken', response.jwt)
+  //     setUser({
+  //       ...user,
+  //       token: response.jwt
+  //     })
+  //   }
+
+  // })
 
   const [inputInfo, setInputInfo] = useState({
     email: '',
@@ -27,9 +36,15 @@ const useSignInForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    mutation.mutate({
+    // mutation.mutate({
+    //   identifier: inputInfo.email,
+    //   password: inputInfo.password
+    // })
+
+    await signIn('credentials', {
       identifier: inputInfo.email,
-      password: inputInfo.password
+      password: inputInfo.password,
+      redirect: false
     })
   }
 
