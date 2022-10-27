@@ -39,12 +39,11 @@ export default function Home () {
           <SubHeader className={styles.subheader}/>
           <div className={styles['titles-container']}>
             <Typography variant='h1'>My Products</Typography>
-            {/* <Button variant="contained" className={styles['titles-container__button']} > Add Product </Button> */}
             <PrimaryButton maxWidth='152px'>Add Products</PrimaryButton>
           </div>
           <div className={styles.cards}>
-            <ProductCard image={'/shoes.png'} productTitle="Nike AirMax 270" productPrice="160" productDescription="Women's Shoes"/>
             <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
+            <ProductCard image={'/shoes.png'} productTitle="Nike AirMax 270" productPrice="160" productDescription="Women's Shoes"/>
             <ProductCard image={'/air-force.png'} productTitle="Nike Air Force 1 '07 SE" productPrice="110" productDescription="Women's Shoes"/>
             <ProductCard image={'/air-zoom-pegasus.png'} productTitle="Nike Air Zoom Pegasus" productPrice="120" productDescription="Men's Shoes"/>
           </div>

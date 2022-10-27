@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import styles from './styles.module.css'
 import BurgerMenu from '../BurgerMenu/BurgerMenu'
-import BarItem from '../BarItem/BarItem'
 import Cart from '../Cart/Cart'
 
 function HeaderLoggedIn ({ pages, links, cart, burger }) {
@@ -29,19 +28,17 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
             <Box sx={{ display: 'flex', ml: '50px', mt: '50px' }} className={styles.menuItems}>
 
               {pages.map((page, index) => (
-                <>
-                  <Link sx={{ textDecoration: 'none', color: '#000000' }} href={page.toLowerCase()}>
-                    <Typography
-                      sx={{
-                        color: '#000000',
-                        lineHeight: '19px',
-                        mr: '36px',
-                        fontWeight: 500,
-                        fontSize: '16px'
-                      }}
-                      textAlign="center"><BarItem name={page}/></Typography>
-                  </Link>
-                </>
+                <Link key={index} sx={{ textDecoration: 'none', color: '#000000' }} href={page.toLowerCase()}>
+                  <Typography
+                    sx={{
+                      color: '#000000',
+                      lineHeight: '19px',
+                      mr: '36px',
+                      fontWeight: 500,
+                      fontSize: '16px'
+                    }}
+                    textAlign="center">{page}</Typography>
+                </Link>
               )
               )}
             </Box>
