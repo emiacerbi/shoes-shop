@@ -30,7 +30,7 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
 
               {pages.map((page, index) => (
                 <>
-                  <Link sx={{ textDecoration: 'none', color: '#000000' }} href={`${links[index]}`}>
+                  <Link sx={{ textDecoration: 'none', color: '#000000' }} href={page.toLowerCase()}>
                     <Typography
                       sx={{
                         color: '#000000',
