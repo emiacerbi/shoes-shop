@@ -9,7 +9,7 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu'
 import BarItem from '../BarItem/BarItem'
 import Cart from '../Cart/Cart'
 
-function HeaderLoggedIn ({ pages, links }) {
+function HeaderLoggedIn ({ pages, links, cart, burger }) {
   const [searchInput, setSearchInput] = useState(false) // Hook to show/hide the search input
   const [value, setValue] = useState('') // Value to handle search input
 
@@ -48,7 +48,7 @@ function HeaderLoggedIn ({ pages, links }) {
             <Box className={styles.searchBox} >
               <SearchOutlinedIcon sx={{ color: '#494949', position: 'absolute', ml: '16px', width: '18px', height: '18px' }}/>
               <input type="text" placeholder='Search' className={styles.searchInput} />
-              <Cart/>
+              {cart && <Cart/>}
             </Box>
           </Box>
         </Box>
@@ -59,7 +59,7 @@ function HeaderLoggedIn ({ pages, links }) {
             <img src="/logo.png" alt="logo" className={styles.logo} />
           </Link>
           <Box sx={{ maxWidth: '150px', width: '100%', mr: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <Cart className={styles.cart}/>
+            {cart && <Cart className={styles.cart}/>}
             <SearchOutlinedIcon sx={{ color: '#494949', width: '23px', height: '23px', cursor: 'pointer' }} onClick={handleSearchInput}/>
             {searchInput && (
               <>
@@ -74,7 +74,7 @@ function HeaderLoggedIn ({ pages, links }) {
                 </form>
               </>
             )}
-            <BurgerMenu pages={pages} links={links}/>
+            {burger && <BurgerMenu pages={pages} links={links}/>}
           </Box>
         </Box>
       </Toolbar>
