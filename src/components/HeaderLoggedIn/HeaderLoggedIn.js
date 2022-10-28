@@ -1,10 +1,8 @@
-import { AppBar, Link, Button } from '@mui/material'
+import { Link, Button, InputBase } from '@mui/material'
 import React, { useState } from 'react'
 import Box from '@mui/material/Box'
-// import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import styles from './styles.module.css'
 import BurgerMenu from '../BurgerMenu/BurgerMenu'
 import BarItem from '../BarItem/BarItem'
 import Cart from '../Cart/Cart'
@@ -19,20 +17,16 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
 
   return (
     <Box position="static" sx={{ background: 'none', boxShadow: 'none' }}>
-      {/* <Toolbar disableGutters > */}
       {/* Desktop */}
-      <Box sx={{ display: { xs: 'none', sm: 'flex' } }} className={styles.box}>
+      <Box sx={{ display: { xs: 'none', sm: 'flex' } }} >
         <Link href={'/'}>
           <Box
             component="img"
             sx={{ marginTop: '50px', marginLeft: '20px' }}
             src="/logo.png"
             alt="logo"/>
-
         </Link>
-        {/* <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1900px', width: '100%' }}> */}
-        <Box sx={{ display: 'flex', ml: '50px', mt: '50px' }} className={styles.menuItems}>
-
+        <Box sx={{ display: 'flex', ml: '50px', mt: '50px' }} >
           {pages.map((page, index) => (
             <>
               <Link sx={{ textDecoration: 'none', color: '#000000' }} href={`${links[index]}`}>
@@ -50,14 +44,57 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
           )
           )}
         </Box>
-        <Box className={styles.searchBox} >
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          marginTop: '40px',
+          marginLeft: 'auto',
+          marginRight: '20px'
+        }} >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <SearchOutlinedIcon sx={{ color: '#494949', position: 'absolute', ml: '16px', width: '18px', height: '18px' }} className={styles.searchIcon}/>
-            <input type="text" placeholder='Search' className={styles.searchInput} />
+            <SearchOutlinedIcon
+              sx={{
+                color: '#494949',
+                position: 'absolute',
+                ml: '16px',
+                width: '18px',
+                height: '18px',
+                '@media (min-width: 601px) and (max-width: 767px)': {
+                  ml: '8px'
+                }
+              }} />
+            <InputBase
+              sx={{
+                '@media (min-width: 600px)': {
+                  border: '1px solid #494949',
+                  borderRadius: '42px',
+                  width: '100%',
+                  height: '48px',
+                  ml: '5px',
+                  paddingLeft: '40px',
+                  input: {
+                    '&::placeholder': {
+                      fontSize: '1.25rem',
+                      color: '#494949'
+                    }
+                  }
+                },
+                '@media (min-width: 601px) and (max-width: 767px)': {
+                  height: '40px',
+                  paddingLeft: '20px',
+                  input: {
+                    '&::placeholder': {
+                      fontSize: '1rem',
+                      color: '#494949'
+                    }
+                  }
+                }
+              }}
+              type="text"
+              placeholder='Search' />
           </Box>
           {cart && <Cart/>}
         </Box>
-        {/* </Box> */}
       </Box>
 
       {/* Mobile  */}
@@ -69,12 +106,29 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
             src="/logo.png"
             alt="logo"/>
         </Link>
-        <Box sx={{ maxWidth: '150px', width: '100%', mr: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-          {cart && <Cart className={styles.cart}/>}
-          <SearchOutlinedIcon sx={{ color: '#494949', width: '23px', height: '23px', cursor: 'pointer' }} onClick={handleSearchInput}/>
+        <Box sx={{ maxWidth: '200px', width: '100%', mr: 2, display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
+          {cart && <Cart />}
+          <SearchOutlinedIcon sx={{ color: '#494949', width: '23px', height: '23px', cursor: 'pointer', ml: '5px', mr: '5px' }} onClick={handleSearchInput}/>
           {searchInput && (
             <>
-              <input type="text" placeholder='Search' className={styles.searchInput} value={value} onChange={(e) => setValue(e.target.value)} />
+              <InputBase
+                sx={{
+                  border: '1px solid #494949',
+                  borderRadius: '42px',
+                  width: '200px',
+                  height: '30px',
+                  paddingLeft: '10px',
+                  input: {
+                    '&::placeholder': {
+                      fontSize: '1rem',
+                      color: '#494949'
+                    }
+                  }
+                }}
+                type="text"
+                placeholder='Search'
+                value={value}
+                onChange={(e) => setValue(e.target.value)} />
               <form onSubmit={(e) => console.log(value) || e.preventDefault()}>
                 <Button
                   type="submit"
@@ -88,8 +142,13 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
           {burger && <BurgerMenu pages={pages} links={links}/>}
         </Box>
       </Box>
-      {/* </Toolbar> */}
-      <Box className={styles.separationLine}></Box>
+
+      {/* Separation line */}
+      <Box sx={{
+        marginTop: '40px',
+        border: '1px solid #EAECF0'
+      }}/>
+
     </Box>
   )
 }
