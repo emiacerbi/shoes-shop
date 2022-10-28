@@ -1,16 +1,25 @@
 import { Button } from '@mui/material'
-import styles from './styles.module.css'
-
-// Children: Button text content
+import { useTheme } from '@mui/material/styles'
 
 const PrimaryButton = ({ children, onClick, maxWidth = '436px' }) => {
+  const theme = useTheme()
+
   return (
     <Button
       type='submit'
       onClick={onClick}
       variant='contained'
-      className={styles.button}
-      sx={{ color: 'white', textTransform: 'none', maxWidth }}
+      sx={{
+        color: 'white',
+        backgroundColor: '',
+        textTransform: 'none',
+        maxWidth,
+        fontSize: '12px',
+        width: '100%',
+        [theme.breakpoints.up('md')]: {
+          fontSize: '16px'
+        }
+      }}
     >
       {children}
     </Button>
