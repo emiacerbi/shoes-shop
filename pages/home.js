@@ -22,6 +22,7 @@ export default function Home () {
   }
 
   console.log(user, 'USER INFO')
+  console.log('test dev branch')
 
   return (
     <>
