@@ -27,7 +27,7 @@ export default function ResetPassword () {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            margin: { xs: '0', sm: 'auto' }
+            margin: { xs: '35px 0', sm: 'auto' }
           }}
           component='main'
         >
