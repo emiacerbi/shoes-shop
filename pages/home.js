@@ -1,7 +1,7 @@
 import ProductCard from '../src/components/ProductCard/ProductCard'
 import SubHeader from '../src/components/SubHeader/SubHeader'
 import { Button, Typography } from '@mui/material'
-import Heading from '../src/components/Heading/heading'
+// import Heading from '../src/components/Heading/heading'
 
 import styles from '../styles/Home.module.css'
 import SideBarProfileInfo from '../src/components/SideBarProfileInfo/SideBarProfileInfo'
@@ -9,7 +9,7 @@ import SideBarProfileInfo from '../src/components/SideBarProfileInfo/SideBarProf
 export default function Home () {
   return (
     <>
-      <Heading headingText="Header goes here"/>
+      {/* <Heading headingText="Header goes here"/> */}
       <div className={styles['home-page-container']}>
         <div className={styles['home-page-container__side-bar']}>
           <SideBarProfileInfo/>
