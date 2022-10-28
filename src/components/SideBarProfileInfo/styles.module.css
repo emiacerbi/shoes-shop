@@ -13,11 +13,11 @@
 
 .profile-info-container {
     display: flex;
-    flex-direction: row;
-    width: 200px;
-    height: 64px;
     align-items: center;
-    justify-content: center;
+    padding-inline: 2rem;
+    height: 134px;
+    width: 100%;
+    border-bottom: 1px solid #EAECF0;
 }
 
 .profile-info-text{

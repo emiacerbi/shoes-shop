@@ -18,9 +18,9 @@ const ErrorPage = ({ title, description, image, btnLeft, btnRight }) => {
                 {btnLeft}
               </a>
             </Link>
-            <Link href='/'>
+            <Link href='/home'>
               <a className={`${styles.error__btn} ${styles.error__btn__colored}`}>
-                {btnLeft}
+                {btnRight}
               </a>
             </Link>
           </div>
