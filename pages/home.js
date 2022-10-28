@@ -18,7 +18,7 @@ export default function Home () {
           <div className={styles['panel-container']}></div>
           <SubHeader className={styles.subheader}/>
           <div className={styles['titles-container']}>
-          <Typography variant='h1'>My Produducs</Typography>
+            <Typography variant='h1'>My Produducs</Typography>
             <Button variant="contained" className={styles['titles-container__button']} > Add Product </Button>
           </div>
           <div className={styles.cards}>
