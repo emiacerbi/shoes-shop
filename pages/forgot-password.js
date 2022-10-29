@@ -3,20 +3,38 @@ import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
 import Header from '../src/components/Header/Header'
 import Link from 'next/link'
-import { Typography } from '@mui/material'
-
-import styles from '../styles/ForgotPassword.module.css'
+import { Typography, Box, Container } from '@mui/material'
 
 export default function ForgotPassword () {
   return (
-    <div className={styles['forgot-password-page']}>
-      <div className={styles.leftContainer}>
-        <Header className={styles['forgot-password-header']} />
-        <main className={styles['forgot-password-main']}>
+    <Box
+      sx={{
+        height: '100vh',
+        display: 'flex'
+      }}
+    >
+      <Container
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: { xs: '100%', sm: '50%' }
+        }}
+      >
+        <Header />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            margin: { xs: '35px 0', sm: 'auto' }
+          }}
+          component='main'
+        >
           <Typography variant='h1'>Forgot Password?</Typography>
-          <Typography variant='p'> Don’t worry, we’ll send you reset instructions. </Typography>
-
-          <Form onSubmit={(e) => console.log('form submitted') || e.preventDefault()} className={ styles.form} > { /* change onSubmit later */}
+          <Typography variant='p'>
+            Don’t worry, we’ll send you reset instructions.
+          </Typography>
+          <Form onSubmit={(e) => console.log('form submitted')}>
             <PrimaryInput
               type='email'
               label='Email'
@@ -24,13 +42,19 @@ export default function ForgotPassword () {
             />
             <PrimaryButton type='submit'>Reset password</PrimaryButton>
           </Form>
-
           <Link href='/'>
-            <a className={styles['forgot-password__go-back']}>Back to log in</a>
+            <Typography component='a' sx={{ textAlign: 'center' }}>
+              Back to log in
+            </Typography>
           </Link>
-        </main>
-      </div>
-      <div className={styles.rightContainer}></div>
-    </div>
+        </Box>
+      </Container>
+      <Box
+        sx={{ width: { xs: '0%', sm: '50%' }, objectFit: 'cover' }}
+        component='img'
+        src='/shoes.png'
+        alt=''
+      ></Box>
+    </Box>
   )
 }
