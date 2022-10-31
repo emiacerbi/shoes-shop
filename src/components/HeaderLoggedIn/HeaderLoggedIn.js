@@ -1,4 +1,4 @@
-import { Link, Button, InputBase } from '@mui/material'
+import { Link, Button, InputBase, AppBar } from '@mui/material'
 import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -16,7 +16,7 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
   }
 
   return (
-    <Box position="static" sx={{ background: 'none', boxShadow: 'none' }}>
+    <AppBar position="static" sx={{ background: 'none', boxShadow: 'none' }}>
       {/* Desktop */}
       <Box sx={{ display: { xs: 'none', sm: 'flex' } }} >
         <Link href={'/'}>
@@ -147,8 +147,7 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
         marginTop: '40px',
         border: '1px solid #EAECF0'
       }}/>
-
-    </Box>
+    </AppBar>
   )
 }
 
