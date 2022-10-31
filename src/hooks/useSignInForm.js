@@ -18,6 +18,8 @@ const useSignInForm = () => {
 
   // })
 
+  const [isPasswordIncorrect, setisPasswordIncorrect] = useState(false)
+
   const [inputInfo, setInputInfo] = useState({
     email: '',
     password: ''
@@ -36,10 +38,12 @@ const useSignInForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    // mutation.mutate({
-    //   identifier: inputInfo.email,
-    //   password: inputInfo.password
-    // })
+
+    if (inputInfo.password.length < 8) {
+      setisPasswordIncorrect(true)
+    } else {
+      setisPasswordIncorrect(false)
+    }
 
     await signIn('credentials', {
       identifier: inputInfo.email,
@@ -49,7 +53,7 @@ const useSignInForm = () => {
   }
 
   return {
-    inputInfo, setInputInfo, handleInputChange, handleSubmit
+    inputInfo, setInputInfo, handleInputChange, handleSubmit, isPasswordIncorrect
   }
 }
 
