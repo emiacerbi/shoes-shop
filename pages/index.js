@@ -1,10 +1,8 @@
-import { Checkbox, InputLabel, Typography, useTheme } from '@mui/material'
+import { Checkbox, InputLabel, Typography, useTheme, Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Form from '../src/components/Form/Form'
 import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
 import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
-
-import styles from '../styles/SignIn.module.css'
 import Link from 'next/link'
 import SignInOverlay from '../src/components/SignInOverlay/SignInOverlay'
 import useSignInForm from '../src/hooks/useSignInForm'
@@ -84,17 +82,19 @@ const SignIn = () => {
               <InputLabel
                 sx={{
                   fontSize: '10px',
+                  color: '#494949',
                   display: 'flex',
+                  fontWeight: '500',
                   alignItems: 'center',
                   [theme.breakpoints.up('sm')]: {
-                    fontSize: '12px'
+                    fontSize: '15px'
                   }
                 }}
               >
                 <Checkbox />
                 Remember me
               </InputLabel>
-              <Link href='forgot-password' ><a className={styles.forgotPassword}>Forgot password?</a></Link>
+              <Link href='forgot-password' ><a>Forgot password?</a></Link>
             </Box>
 
             <PrimaryButton>
@@ -104,23 +104,22 @@ const SignIn = () => {
             <Typography
               variant='p'
               sx={{
-                textAlign: 'center'
+                textAlign: 'center',
+                fontWeight: '500'
               }}
             >
               {'Don\'t'} have an account?
-              <Box component='span'
-                sx={{
-                  color: theme.palette.primary.main,
-                  marginLeft: '.25rem',
-                  fontWeight: '500'
-                }}
-              >
-                <Link href='/sign-up' className={styles.span}>
-                  <a>
-                    Sign up
-                  </a>
-                </Link>
-              </Box>
+              <Link href='/sign-up'>
+                <Button
+                  variant='text'
+                  sx={{
+                    textTransform: 'none',
+                    fontSize: '15px'
+                  }}
+                >
+                  Sign up
+                </Button>
+              </Link>
             </Typography>
           </Form>
         </Box>
@@ -145,7 +144,7 @@ const SignIn = () => {
 
       </Box>
       {
-        isOverlayVisible && mobileWidth < 380 && (
+        isOverlayVisible && mobileWidth < 500 && (
           <SignInOverlay setIsOverlayVisible={setIsOverlayVisible} />
         )
       }

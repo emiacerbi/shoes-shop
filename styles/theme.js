@@ -13,6 +13,17 @@ export const theme = createTheme({
       dark: '#0A1047'
     }
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      overlay: 400,
+      md: 900,
+      lg: 1200,
+      xl: 1536
+    }
+  },
+
   typography: {
     fontFamily: "'Work Sans', sans-serif",
     fontWeightMedium: '500',

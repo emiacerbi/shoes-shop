@@ -16,7 +16,7 @@ const PrimaryButton = ({ children, onClick, maxWidth = '436px' }) => {
         maxWidth,
         fontSize: '12px',
         width: '100%',
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('sm')]: {
           fontSize: '16px'
         }
       }}
