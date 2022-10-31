@@ -29,7 +29,7 @@ const SignIn = () => {
     }
   }, [])
 
-  const { handleInputChange, handleSubmit } = useSignInForm()
+  const { handleInputChange, handleSubmit, isPasswordIncorrect } = useSignInForm()
 
   return (
     <Box
@@ -38,7 +38,7 @@ const SignIn = () => {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        [theme.breakpoints.up('lg')]: {
+        [theme.breakpoints.up('md')]: {
           flexDirection: 'row'
         }
       }}
@@ -48,7 +48,7 @@ const SignIn = () => {
           display: 'flex',
           flexDirection: 'column',
           flex: 1,
-          [theme.breakpoints.up('lg')]: {
+          [theme.breakpoints.up('md')]: {
             width: '50%'
           }
         }}
@@ -69,8 +69,16 @@ const SignIn = () => {
           <Typography variant='p'>Welcome back! Please enter your details to log into your account.</Typography>
 
           <Form onSubmit={handleSubmit}>
-            <PrimaryInput label='Email' placeholder='example@gmail.com' name='email' onChange={handleInputChange} type='text' />
-            <PrimaryInput label='Password' placeholder='at least 8 characters' name='password' onChange={handleInputChange} type='password' />
+            <PrimaryInput required label='Email' placeholder='example@gmail.com' name='email' onChange={handleInputChange} type='text' />
+            <PrimaryInput required label='Password' placeholder='at least 8 characters' name='password' onChange={handleInputChange} type='password' />
+
+            {
+              isPasswordIncorrect && (
+                <Typography variant='p' sx={{ color: theme.palette.primary.main, marginTop: '-15px', fontSize: '20px' }}>
+                  Your password should be 8 characters long!
+                </Typography>
+              )
+            }
 
             <Box
               sx={{
@@ -94,7 +102,18 @@ const SignIn = () => {
                 <Checkbox />
                 Remember me
               </InputLabel>
-              <Link href='forgot-password' ><a>Forgot password?</a></Link>
+              <Link href='forgot-password' >
+                <Button
+                  variant='text'
+                  sx={{
+                    textTransform: 'none',
+                    fontSize: '15px',
+                    fontWeight: '300'
+                  }}
+                >
+                  Forgot password?
+                </Button>
+              </Link>
             </Box>
 
             <PrimaryButton>
@@ -136,7 +155,7 @@ const SignIn = () => {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          [theme.breakpoints.up('lg')]: {
+          [theme.breakpoints.up('md')]: {
             display: 'grid'
           }
         }}

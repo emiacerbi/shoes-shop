@@ -12,6 +12,7 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type }) => {
         onChange={onChange}
         name={name}
         type={type}
+        required
       />
     </label>
   )
