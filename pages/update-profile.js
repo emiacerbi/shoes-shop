@@ -8,6 +8,8 @@ import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalance
 import { useState } from 'react'
 import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
 import NavBarItem from '../src/components/NavBarItem/NavBarItem'
+import { theme } from '../styles/theme'
+
 export default function UpdateProfile () {
   const [settings, setSettings] = useState(true)
   const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
@@ -24,7 +26,7 @@ export default function UpdateProfile () {
         <Box
           sx={{
             display: { xs: 'none' },
-            '@media (min-width: 600px)': {
+            [theme.breakpoints.up('sm')]: {
               display: 'block',
               height: 'auto',
               maxWidth: '320px',
@@ -92,14 +94,16 @@ export default function UpdateProfile () {
         </Box>
 
         <Box sx={{
-          '@media (max-width: 600px)': {
+          [theme.breakpoints.down('sm')]: {
             maxWidth: '350px',
             width: '100%',
             ml: 'auto',
             mr: 'auto '
+
           },
-          '@media (min-width: 601px)': {
+          [theme.breakpoints.up('sm')]: {
             width: '400px'
+
           }
         }}
         >
@@ -163,7 +167,7 @@ export default function UpdateProfile () {
               fontWight: '300',
               mt: '16px',
               ml: '10px',
-              '@media (min-width: 600px)': {
+              [theme.breakpoints.up('sm')]: {
                 maxWidth: '400px',
                 width: 'auto',
                 height: 'auto',
