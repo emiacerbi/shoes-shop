@@ -1,6 +1,5 @@
 import { Avatar, Button, FormControl, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-// import styles from '../styles/updateProfile.module.css'
 import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined'
@@ -9,7 +8,6 @@ import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalance
 import { useState } from 'react'
 import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
 import NavBarItem from '../src/components/NavBarItem/NavBarItem'
-// import theme from '../styles/theme'
 export default function UpdateProfile () {
   const [settings, setSettings] = useState(true)
   const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
@@ -33,9 +31,7 @@ export default function UpdateProfile () {
               width: '100%'
             }
           }}
-          // className={styles.container_settings}
         >
-
           <Box>
             <Box
               component="img"
@@ -51,10 +47,8 @@ export default function UpdateProfile () {
                   transform: 'rotate(-90deg)',
                   cursor: 'pointer'
                 }
-
               }}
             />
-            {/* <img src="/vector.png" alt="vector icon" className={styles.vector} onClick={handleSettings}/> */}
             <Typography sx={{
               fontWeight: '500',
               fontSize: '20px',
@@ -62,7 +56,6 @@ export default function UpdateProfile () {
               ml: '80px',
               cursor: 'pointer'
             }}
-            // className={styles.settings_text}
             > Settings </Typography>
           </Box>
           {settings && (
@@ -73,48 +66,29 @@ export default function UpdateProfile () {
                 border: '1px solid',
                 mt: '40px'
               }}
-              // className={styles.line}
               ></Box>
               <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}
-              // className={styles.myProfile}
               >
                 <AccountCircleOutlinedIcon sx={{ color: '#6E7278' }}/>
                 <NavBarItem name="My Profile"/>
-                {/* <Typography
-                  sx={{
-                    ml: '15px',
-                    color: '#000000',
-                    transition: 'all 0.5s ease',
-                    fontWeight: '500',
-                    fontSize: '16px',
-                    lineHeight: '19px'
-                  }} */}
-                {/* // className={styles.myProfile_text} */}
-                {/* > */}
-                {/* My Profile</Typography> */}
               </Box>
 
               <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
                 <DashboardCustomizeOutlinedIcon sx={{ color: '#6E7278' }}/>
                 <NavBarItem name="Preferences"/>
-                {/* <Typography className={styles.preferences_text}>Preferences</Typography> */}
               </Box>
 
               <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
                 <GppGoodOutlinedIcon sx={{ color: '#6E7278' }}/>
                 <NavBarItem name="Security"/>
-
-                {/* <Typography className={styles.security_text}>Security</Typography> */}
               </Box>
 
               <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
                 <AccountBalanceWalletOutlinedIcon sx={{ color: '#6E7278' }}/>
                 <NavBarItem name="My Wallet"/>
-                {/* <Typography className={styles.myWallet_text}>My Wallet</Typography> */}
               </Box>
             </>
           )}
-
         </Box>
 
         <Box sx={{
@@ -126,10 +100,8 @@ export default function UpdateProfile () {
           },
           '@media (min-width: 601px)': {
             width: '400px'
-            // width: '100%'
           }
         }}
-        // className={styles.container_profile}
         >
           <Typography sx={{
             color: '#000000',
@@ -140,12 +112,10 @@ export default function UpdateProfile () {
             lineHeight: '35px',
             ml: '10px'
           }}
-          // className={styles.heading}
           > My Profile </Typography>
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
-            // justifyContent: 'space-between',
             mt: 4,
             ml: '10px'
           }} >
@@ -165,7 +135,6 @@ export default function UpdateProfile () {
                   height: '35px',
                   mb: '16px'
                 }}
-                // className={styles.button_outlined}
               >
                 Change photo
               </Button>
@@ -180,7 +149,6 @@ export default function UpdateProfile () {
                   boxShadow: 'none'
                 }}
                 variant='contained'
-                // className={styles.button_contained}
               >
                 Delete
               </Button>
@@ -202,7 +170,6 @@ export default function UpdateProfile () {
                 fontSize: '15px'
               }
             }}
-            // className={styles.welcomeBack_text}
           >
             Welcome back! Please enter your details to log into your account.
           </Typography>
@@ -215,10 +182,8 @@ export default function UpdateProfile () {
               paddingBlock: '1.5rem',
               gap: '1.5rem',
               maxWidth: '350px',
-              /* width: 100%; */
               marginTop: '20px'
             }}
-            // className={styles.form}
           >
             <PrimaryInput label='Name' placeholder={'Jane'} ></PrimaryInput>
             <PrimaryInput label='Surname'placeholder={'Meldrum'}></PrimaryInput>
