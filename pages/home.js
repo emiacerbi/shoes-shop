@@ -1,8 +1,6 @@
-import { useContext, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useContext } from 'react'
 import ProductCard from '../src/components/ProductCard/ProductCard'
 import { UserContext } from '../src/context/UserContext'
-import { useSession } from 'next-auth/react'
 import SubHeader from '../src/components/SubHeader/SubHeader'
 import { Typography } from '@mui/material'
 
@@ -12,20 +10,9 @@ import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
 import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 
 export default function Home () {
-  const router = useRouter()
+  const context = useContext(UserContext)
 
-  const { data: session } = useSession()
-
-  const { user } = useContext(UserContext)
-
-  useEffect(() => {
-    if (!session?.accessToken) {
-      router.push('/')
-    }
-  }, [router, session?.accessToken])
-
-  console.log(user, 'USER INFO')
-  console.log('test dev branch')
+  console.log(context, 'USER INFO')
 
   return (
     <>
