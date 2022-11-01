@@ -38,7 +38,7 @@ export default function BarItem ({ name, num, children }) {
           fontSize: '16px',
           fontWeight: '500',
           color: 'black',
-          textAlign: 'left'
+          textAlign: 'center'
         }}
         component='a'
       >
