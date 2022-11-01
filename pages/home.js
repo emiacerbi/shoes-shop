@@ -18,7 +18,7 @@ export default function Home () {
     if (typeof window !== 'undefined') {
       setscreenWidth(window.innerWidth)
     }
-  }, [screenWidth])
+  }, [])
 
   const theme = useTheme()
   return (
