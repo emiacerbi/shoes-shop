@@ -9,29 +9,21 @@ const ErrorPage = () => {
     <Box
       sx={{
         display: 'flex',
-        flexDirection: 'colunm',
+        flexDirection: { xs: 'colunm', md: 'row' },
         flex: '.5',
         width: '100%',
         position: 'relative',
-        '@media (min-width: 1000px)': {
-          maxHeight: '80vh',
-          flexDirection: 'row'
-        }
+        maxHeight: { xs: '0', md: '80vh' }
       }}
     >
       <Box
-
         sx={{
           display: 'flex',
           alignItems: 'center',
-          minHeight: '100vh',
+          minHeight: { xs: '100vh', md: '79vh' },
           flexDirection: 'column',
-          width: '100px',
-          flex: '1',
-          '@media (min-width: 1000px)': {
-            minHeight: '79vh',
-            width: '50%'
-          }
+          width: { xs: '100px', md: '50%' },
+          flex: '1'
         }}
 
       >
@@ -42,16 +34,11 @@ const ErrorPage = () => {
             flex: '1',
             paddingBlock: '2.5rem',
             paddingInline: '3.5rem',
-            textAlign: 'center',
-            alignItems: 'center',
-            gap: '.5rem',
-            width: '100%',
-            '@media (min-width: 1000px)': {
-              justifyContent: 'center',
-              alignItems: 'flex-start',
-              gap: '1rem',
-              textAlign: 'start'
-            }
+            justifyContent: { xs: 'center', md: 'center' },
+            textAlign: { xs: 'center', md: 'start' },
+            alignItems: { xs: 'center', md: 'flex-start' },
+            gap: { xs: '.5rem', md: '1em' },
+            width: '100%'
           }}
         >
           <Typography variant="h1">Error 404</Typography>
@@ -59,8 +46,7 @@ const ErrorPage = () => {
             variant="p"
             sx={{
               maxWidth: '390px',
-              display: 'none',
-              '@media (min-width: 1000px)': { display: 'flex' }
+              display: { xs: 'none', md: 'flex' }
             }}
           >
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
@@ -68,7 +54,7 @@ const ErrorPage = () => {
           </Typography>
 
           <Typography
-            sx={{ '@media (min-width: 1000px)': { display: 'none' } }}
+            sx={{ display: { md: 'none' } }}
             variant="p"
           >
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam{' '}
@@ -77,13 +63,10 @@ const ErrorPage = () => {
           <Box
             sx={{
               display: 'flex',
-              marginTop: 'auto',
+              marginTop: { xs: 'auto', md: '0' },
               width: '300px',
-              gap: '1rem',
-              '@media (min-width: 1000px)': {
-                marginTop: '0',
-                margin: '0'
-              }
+              margin: { md: '0' },
+              gap: '1rem'
             }}
           >
             <Link href="/">
@@ -104,32 +87,22 @@ const ErrorPage = () => {
           backgroundRepeat: 'no-repeat',
           position: 'absolute',
           height: '75%',
-          width: '100%',
+          width: { xs: '100%', md: '0' },
           top: '0',
-          borderRadius: '0 0 2rem 2rem',
+          borderRadius: { xs: '0 0 2rem 2rem', md: '0' },
           zIndex: -1,
-          '@media (min-width: 1000px)': {
-            display: 'none',
-            width: '50%',
-            borderRadius: '0',
-            backgroundSize: 'contain',
-            flexDirection: 'column'
-          }
+          flexDirection: { xs: 'row', md: 'column' }
         }}
       ></Box>
       <Box
         sx={{
-          display: 'none',
+          display: { xs: 'none', md: 'block' },
           width: '50%',
           backgroundImage: "url('/error404.png')",
-          backgroundPosition: 'bottom',
+          backgroundPosition: { xs: 'bottom', md: 'center' },
           backgroundColor: '#E5E6E7',
           backgroundSize: '90%',
-          backgroundRepeat: 'no-repeat',
-          '@media (min-width: 1000px)': {
-            display: 'block',
-            backgroundPosition: 'center'
-          }
+          backgroundRepeat: 'no-repeat'
         }}
       ></Box>
     </Box>
