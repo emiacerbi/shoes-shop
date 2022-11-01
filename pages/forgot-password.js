@@ -5,7 +5,28 @@ import Header from '../src/components/Header/Header'
 import Link from 'next/link'
 import { Typography, Box, Container } from '@mui/material'
 
+import { postForgotPassword } from '../src/helpers/user-auth/postForgotPassword'
+import { useMutation } from '@tanstack/react-query'
+
 export default function ForgotPassword () {
+  const { mutate } = useMutation(
+    postForgotPassword,
+    {
+      mutationKey: 'forgot-password',
+      onError: (error) => console.log(error)
+    }
+  )
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('submit')
+    const email = e.target.email.value
+    console.log(email)
+    //mutate(email, { onSuccess: resetForm(e) })
+  }
+  const resetForm = (event) => {
+    event.target.reset()
+  }
+
   return (
     <Box
       sx={{
@@ -34,13 +55,14 @@ export default function ForgotPassword () {
           <Typography variant='p'>
             Don’t worry, we’ll send you reset instructions.
           </Typography>
-          <Form onSubmit={(e) => console.log('form submitted')}>
+          <Form onSubmit={handleSubmit}>
             <PrimaryInput
               type='email'
               label='Email'
+              name = 'email'
               placeholder='example@mail.com'
             />
-            <PrimaryButton type='submit'>Reset password</PrimaryButton>
+            <PrimaryButton>Reset password</PrimaryButton>
           </Form>
           <Link href='/'>
             <Typography component='a' sx={{ textAlign: 'center' }}>
