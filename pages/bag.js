@@ -35,15 +35,15 @@ const Bag = () => {
         >
 
           {/* Left container */}
-          <Box>
+          <Box sx={{ width: '100%', maxWidth: '963px' }}>
             <Typography variant='h1'>Chart</Typography>
 
             {/* Cards */}
             <Grid item xs={12} mt={5} sx={{ marginInline: 'auto' }} >
               <Stack spacing={3} mb={3}>
                 <ChartShoeCard name='Nike Air Max 270' price='$160' gender='Women' img='/airmax-270.png' />
-                <ChartShoeCard />
-                <ChartShoeCard />
+                <ChartShoeCard name='Nike Air Max 90' price='$140' gender='Men' img='/airmax-90.png' />
+                <ChartShoeCard name={'Nike Air Force 1 07 SE'} price='$160' gender='Women' img='/air-force.png' />
               </Stack>
 
               <Box sx={{

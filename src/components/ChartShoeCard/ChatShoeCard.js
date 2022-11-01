@@ -39,6 +39,12 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
       >
         <Typography variant='h3'>{name}</Typography>
         <Typography variant='subtitle1'>{gender} {'\''}s Shoes</Typography>
+        <Typography sx={{
+          display: 'none',
+          [theme.breakpoints.up('sm')]: {
+            display: 'block'
+          }
+        }} variant='main'>In stock</Typography>
 
         <Box sx={{ marginTop: 'auto' }}>
           <FormControl size='small' sx={{ m: 0, minWidth: 120 }}>
@@ -50,7 +56,7 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
               sx={{ m: 1, minWidth: 120, padding: 0, margin: 0, fontSize: '12px' }}
             >
               <MenuItem value="">
-              Size
+                Size
               </MenuItem>
               <MenuItem value={10}>Ten</MenuItem>
               <MenuItem value={20}>Twenty</MenuItem>
@@ -68,7 +74,7 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
 
             >
               <MenuItem value="">
-              Color
+                Color
               </MenuItem>
               <MenuItem value={10}>Ten</MenuItem>
               <MenuItem value={20}>Twenty</MenuItem>
@@ -86,7 +92,7 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
 
             >
               <MenuItem value="">
-              Quantity
+                Quantity
               </MenuItem>
               <MenuItem value={10}>Ten</MenuItem>
               <MenuItem value={20}>Twenty</MenuItem>

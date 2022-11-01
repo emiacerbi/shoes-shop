@@ -69,5 +69,10 @@ theme.typography.subtitle1 = {
 theme.typography.body2 = {
   color: '#000000',
   fontSize: '30px'
+}
 
+theme.typography.main = {
+  color: theme.palette.primary.main,
+  fontSize: '25px',
+  fontWeight: 600
 }
