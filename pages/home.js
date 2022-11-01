@@ -9,6 +9,7 @@ import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
 import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 
 export default function Home () {
+  const context = useContext(UserContext)
   const [screenWidth, setscreenWidth] = useState()
 
   console.log(context, 'USER INFO')
