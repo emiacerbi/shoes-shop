@@ -19,8 +19,9 @@ export function UserProvider ({ children }) {
         userInfo: response
       })
     }
-
-    fetchUserInfo()
+    if (session?.accessToken) {
+      fetchUserInfo()
+    }
   }, [session?.accessToken])
 
   return (

@@ -6,8 +6,6 @@ import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 import Link from 'next/link'
 import SignInOverlay from '../src/components/SignInOverlay/SignInOverlay'
 import useSignInForm from '../src/hooks/useSignInForm'
-import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
 import HeaderBeforeLogin from '../src/components/Header/Header'
 import { Box } from '@mui/system'
 
@@ -15,13 +13,6 @@ const SignIn = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(true)
   const [mobileWidth, setMobileWidth] = useState()
   const theme = useTheme()
-
-  const router = useRouter()
-  const { data: session } = useSession()
-
-  if (session?.accessToken) {
-    router.push('/home')
-  }
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
