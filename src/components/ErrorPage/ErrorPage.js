@@ -1,37 +1,136 @@
 import Link from 'next/link'
+import { Typography, Box } from '@mui/material'
 import React from 'react'
-import styles from './styles.module.css'
+import PrimaryButton from '../PrimaryButton/PrimaryButton'
+import SecondaryButton from '../SecondaryButton.js/SecondaryButton'
 
-const ErrorPage = ({ title, description, image, btnLeft, btnRight }) => {
+const ErrorPage = () => {
   return (
-    <div className={styles.error}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'colunm',
+        flex: '.5',
+        width: '100%',
+        position: 'relative',
+        '@media (min-width: 1000px)': {
+          border: '2px solid black',
+          maxHeight: '80vh',
+          flexDirection: 'row'
 
-      <div className={styles.error__description__wrapper}>
+        }
 
-        <div className={styles.error__text__box}>
-          <h1 className={styles.error__description__title}>{title}</h1>
-          <p className={styles.error__description__message}>{description}</p>
+      }}
+    >
 
-          <div className={styles.error__btns}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          // width: '430px',
+          minHeight: '100vh', // 50 Update
+          flexDirection: 'column',
+          // width: '430px',
+          width: '100px',
+
+          border: '5px solid yellow',
+          flex: '1',
+          '@media (min-width: 1000px)': {
+            minHeight: '79vh',
+            width: '50%'
+
+          }
+
+        }}>
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: '1',
+            paddingBlock: '2.5rem',
+            paddingInline: '3.5rem',
+            textAlign: 'center',
+            border: '2px solid red',
+            alignItems: 'center',
+            gap: '.5rem',
+            width: '100%',
+            // width: '420px',
+
+            '@media (min-width: 1000px)': {
+              justifyContent: 'center',
+              alignItems: 'flex-start',
+              gap: '1rem',
+              textAlign: 'start'
+
+            }
+          }}>
+
+          <Typography variant='h1'>Error 404</Typography>
+          <Typography variant='p'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna</Typography>
+
+          <Box
+            sx={{
+              display: 'flex',
+              marginTop: 'auto',
+              marginInline: 'auto',
+              width: '300px',
+              gap: '1rem',
+              '@media (min-width: 1000px)': {
+                marginTop: '0',
+                margin: '0'
+              }
+            }}>
             <Link href='/'>
-              <a className={`${styles.error__btn} ${styles.error__btn__notColored}`}>
-                {btnLeft}
-              </a>
+              <SecondaryButton>Go Back</SecondaryButton>
             </Link>
             <Link href='/home'>
-              <a className={`${styles.error__btn} ${styles.error__btn__colored}`}>
-                {btnRight}
-              </a>
+              <PrimaryButton maxWidth='152px'>Home</PrimaryButton>
             </Link>
-          </div>
-        </div>
 
-      </div>
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: '#e5e6e7',
+          backgroundImage: "url('/error404.png')",
+          border: '2px solid blue',
+          backgroundPosition: 'bottom',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          position: 'absolute',
+          height: '80vh',
+          // minHeight: { sm: '55vh', xs: '40vh', md: '60vh' },
+          width: '100%',
+          top: '0',
+          borderRadius: '0 0 2rem 2rem',
+          zIndex: -1,
+          '@media (min-width: 1000px)': {
+            display: 'none',
+            width: '50%',
+            borderRadius: '0',
+            backgroundSize: 'contain',
+            flexDirection: 'column'
+          }
 
-      <div className={styles.error__img__overlay}></div>
-      <div className={styles.error__img}></div>
+        }}></Box>
+      <Box
+        sx={{
+          display: 'none',
+          width: '50%',
+          backgroundImage: "url('/error404.png')",
+          backgroundPosition: 'bottom',
+          backgroundColor: '#E5E6E7',
+          backgroundSize: '90%',
+          backgroundRepeat: 'no-repeat',
+          '@media (min-width: 1000px)': {
+            display: 'block',
+            backgroundPosition: 'center'
+          }
+        }}></Box>
 
-    </div>
+    </Box>
   )
 }
 
