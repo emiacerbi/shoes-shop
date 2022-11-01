@@ -1,6 +1,4 @@
-// import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
-// import { postLoginUser } from '../helpers/user-auth/postLoginUser'
 
 import { signIn } from 'next-auth/react'
 
@@ -45,10 +43,10 @@ const useSignInForm = () => {
       setisPasswordIncorrect(false)
     }
 
-    await signIn('credentials', {
+    signIn('credentials', {
       identifier: inputInfo.email,
       password: inputInfo.password,
-      redirect: false
+      callbackUrl: '/home'
     })
   }
 
