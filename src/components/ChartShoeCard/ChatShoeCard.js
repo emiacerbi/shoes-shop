@@ -5,7 +5,7 @@ import { useState } from 'react'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 
-const ChartShoeCard = ({ img, alt }) => {
+const ChartShoeCard = ({ img, alt, name, price, gender }) => {
   const theme = useTheme()
 
   const [size, setSize] = useState('')
@@ -17,11 +17,6 @@ const ChartShoeCard = ({ img, alt }) => {
   return (
 
     <Grid container
-
-      sx={{
-        // [theme.breakpoints.up('sm')]: {
-        // }
-      }}
     >
       <Grid
         item xs={4} sm={3}
@@ -35,15 +30,15 @@ const ChartShoeCard = ({ img, alt }) => {
             height: '200px'
           }
         }}>
-          <Image src='/air-force.png' alt={alt} layout='fill' objectFit="cover" />
+          <Image src={img} alt={alt} layout='fill' objectFit="cover" />
         </Box>
       </Grid>
 
       <Grid item xs={5} sm={6}
         sx={{ display: 'flex', flexDirection: 'column' }}
       >
-        <Typography variant='h3'>Nike Air Max 270</Typography>
-        <Typography variant='subtitle1'>{'Women\'s Shoes'}</Typography>
+        <Typography variant='h3'>{name}</Typography>
+        <Typography variant='subtitle1'>{gender} {'\''}s Shoes</Typography>
 
         <Box sx={{ marginTop: 'auto' }}>
           <FormControl size='small' sx={{ m: 0, minWidth: 120 }}>
@@ -104,9 +99,9 @@ const ChartShoeCard = ({ img, alt }) => {
       <Grid
         item
         xs={3}
-        sx={{ display: 'flex', flexDirection: 'column', pb: '.25rem' }}
+        sx={{ display: 'flex', flexDirection: 'column', pb: '.25rem', alignItems: 'flex-end' }}
       >
-        <Typography variant='h3'>$160</Typography>
+        <Typography variant='h3'>{price}</Typography>
         <Stack
           sx={{
             marginTop: 'auto',

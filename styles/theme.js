@@ -65,3 +65,9 @@ theme.typography.subtitle1 = {
     fontSize: '20px'
   }
 }
+
+theme.typography.body2 = {
+  color: '#000000',
+  fontSize: '30px'
+
+}

@@ -15,88 +15,108 @@ const Bag = () => {
     <>
       <HeaderLoggedIn pages={pages} links={links} burger={true} cart={true} />
 
-      <Box sx={{
-        padding: '1rem',
-        borderBottom: '1px solid #EAECF0'
-
-      }}>
-        <Typography variant='h1'>Chart</Typography>
-      </Box>
-
       <Grid
         container
         p={2}
       >
-        <Grid item xs={12} md={9} lg={8}>
-          <Stack spacing={3} mb={3}>
-            <ChartShoeCard />
-            <ChartShoeCard />
-            <ChartShoeCard />
-          </Stack>
 
-          {/* Button */}
-          <Box sx={{
-            maxWidth: '432px',
-            marginInline: 'auto',
-            marginTop: '3rem',
-            [theme.breakpoints.up('md')]: {
-              display: 'none'
-            }
-          }}
-          >
-            <PrimaryButton>
-            Go to checkout
-            </PrimaryButton>
-          </Box>
-        </Grid>
-
-        {/* Summary */}
-
-        <Grid item md={3} lg={4}
+        <Box
+          py={8}
           sx={{
-            maxWidth: '399px',
+            display: 'flex',
+            width: '100%',
+            maxWidth: '1500px',
             marginInline: 'auto',
-            textAlign: 'center',
-            display: 'none',
             [theme.breakpoints.up('md')]: {
-              display: 'block'
+              gap: '1.5rem'
             }
           }}
+
         >
-          <Typography sx={{ textAlign: 'left' }} variant='h1'>Summary</Typography>
 
-          <Box sx={{ marginTop: '3rem' }} />
-          <Typography variant='p'>Do you have a promocode?</Typography>
+          {/* Left container */}
+          <Box>
+            <Typography variant='h1'>Chart</Typography>
 
-          <Box sx={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography variant='p'>Subtotal</Typography>
-              <Typography variant='p'>$410</Typography>
-            </Box>
+            {/* Cards */}
+            <Grid item xs={12} mt={5} sx={{ marginInline: 'auto' }} >
+              <Stack spacing={3} mb={3}>
+                <ChartShoeCard name='Nike Air Max 270' price='$160' gender='Women' img='/airmax-270.png' />
+                <ChartShoeCard />
+                <ChartShoeCard />
+              </Stack>
 
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography variant='p'>Shipping</Typography>
-              <Typography variant='p'>$20</Typography>
-            </Box>
+              <Box sx={{
+                maxWidth: '432px',
+                marginInline: 'auto',
+                marginTop: '3rem',
 
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography variant='p'>Tax</Typography>
-              <Typography variant='p'>$0</Typography>
-            </Box>
-
-            <Divider sx={{ marginBlock: '1rem' }} />
-
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography variant='p'>Total</Typography>
-              <Typography variant='p'>$430</Typography>
-            </Box>
-            <Divider sx={{ marginBlock: '1rem' }} />
-
-            <PrimaryButton>Checkout</PrimaryButton>
-            <SecondaryButton>PayPal</SecondaryButton>
+                [theme.breakpoints.up('md')]: {
+                  display: 'none'
+                }
+              }}
+              >
+                <PrimaryButton>
+                  Go to checkout
+                </PrimaryButton>
+              </Box>
+            </Grid>
           </Box>
 
-        </Grid>
+          {/* Summary - Right Container */}
+          <Box
+            sx={{
+              marginLeft: 'auto'
+            }}
+          >
+
+            <Box
+              sx={{
+                width: '399px',
+                marginInline: 'auto',
+                textAlign: 'left',
+                display: 'none',
+                [theme.breakpoints.up('md')]: {
+                  display: 'block'
+                }
+              }}
+            >
+              <Typography variant='h1'>Summary</Typography>
+
+              <Box sx={{ marginTop: '3rem' }} />
+
+              <Typography variant='p'>Do you have a promocode?</Typography>
+
+              <Box sx={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography variant='body2'>Subtotal</Typography>
+                  <Typography variant='body2'>$410</Typography>
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography variant='body2'>Shipping</Typography>
+                  <Typography variant='body2'>$20</Typography>
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography variant='body2'>Tax</Typography>
+                  <Typography variant='body2'>$0</Typography>
+                </Box>
+
+                <Divider sx={{ marginBlock: '1rem' }} />
+
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography variant='body2'>Total</Typography>
+                  <Typography variant='body2'>$430</Typography>
+                </Box>
+
+                <Divider sx={{ marginBlock: '1rem' }} />
+
+                <SecondaryButton>PayPal</SecondaryButton>
+                <PrimaryButton>Checkout</PrimaryButton>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
 
       </Grid>
 
