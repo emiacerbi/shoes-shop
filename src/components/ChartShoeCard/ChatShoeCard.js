@@ -20,14 +20,20 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
     >
       <Grid
         item xs={4} sm={3}
-        sx={{ display: 'flex' }}
+        sx={{
+          display: 'flex',
+          height: '100px',
+          [theme.breakpoints.up('sm')]: {
+            height: '200px'
+          }
+        }}
       >
         <Box sx={{
           minWidth: '105px',
           width: '90%',
           position: 'relative',
           [theme.breakpoints.up('sm')]: {
-            height: '200px'
+            height: '100%'
           }
         }}>
           <Image src={img} alt={alt} layout='fill' objectFit="cover" />
