@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../src/context/UserContext'
-import { Box, Typography, useTheme } from '@mui/material'
+import { Box, Button, Typography, useTheme } from '@mui/material'
 
 import ProductCard from '../src/components/ProductCard/ProductCard'
 import SubHeader from '../src/components/SubHeader/SubHeader'
@@ -10,6 +10,7 @@ import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 import NavBarItem from '../src/components/NavBarItem/NavBarItem'
 import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
+import { signOut } from 'next-auth/react'
 
 export default function Home () {
   const context = useContext(UserContext)
@@ -35,8 +36,13 @@ export default function Home () {
             <NavBarItem name="My Profile"/>
           </Box>
           <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
-            <LogoutIcon sx={{ color: '#6E7278' }}/>
-            <NavBarItem name="My Profile"/>
+            <Button
+              onClick={() => signOut()}
+              sx={{ textTransform: 'none', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <LogoutIcon sx={{ color: '#6E7278' }}/>
+              <NavBarItem name="Log out"/>
+            </Button>
           </Box>
         </Box>
         <Box component='main' sx={{ m: '20px', width: '100%' }}>
