@@ -1,4 +1,4 @@
-import { Avatar, Button, FormControl, Typography } from '@mui/material'
+import { Avatar, Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
@@ -9,6 +9,7 @@ import { useState } from 'react'
 import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
 import NavBarItem from '../src/components/NavBarItem/NavBarItem'
 import { theme } from '../styles/theme'
+import Form from '../src/components/Form/Form'
 
 export default function UpdateProfile () {
   const [settings, setSettings] = useState(true)
@@ -178,7 +179,7 @@ export default function UpdateProfile () {
             Welcome back! Please enter your details to log into your account.
           </Typography>
 
-          <FormControl
+          <Form
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -193,7 +194,7 @@ export default function UpdateProfile () {
             <PrimaryInput label='Surname'placeholder={'Meldrum'}></PrimaryInput>
             <PrimaryInput label= "Email" placeholder={'example@mail.com'}></PrimaryInput>
             <PrimaryInput label='Phone Number' placeholder={'(949) 354-2574)'}></PrimaryInput>
-          </FormControl>
+          </Form>
         </Box>
       </Box>
     </>
