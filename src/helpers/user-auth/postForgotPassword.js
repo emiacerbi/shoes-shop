@@ -1,5 +1,3 @@
-import { fetchWrapper } from '../fetchWrapper'
-
 const BASE_URL = process.env.BASE_URL
 const ENDPOINT = `${BASE_URL}/api/auth/forgot-password`
 
@@ -14,7 +12,7 @@ export const postForgotPassword = async (email) => {
     })
   }
 
-  const response = await fetchWrapper(ENDPOINT, config)
+  const response = await fetch(ENDPOINT, config)
   return response
 }
 
