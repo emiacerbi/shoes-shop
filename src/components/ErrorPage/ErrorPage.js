@@ -10,10 +10,9 @@ const ErrorPage = () => {
       sx={{
         display: 'flex',
         flexDirection: { xs: 'colunm', md: 'row' },
-        flex: '.5',
+        flex: '1',
         width: '100%',
-        position: 'relative',
-        maxHeight: { xs: '0', md: '80vh' }
+        position: 'relative'
       }}
     >
       <Box
