@@ -18,9 +18,7 @@ export default function ForgotPassword () {
   )
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('submit')
     const email = e.target.email.value
-    console.log(email)
     mutate(email, { onSuccess: resetForm(e) })
   }
   const resetForm = (event) => {
