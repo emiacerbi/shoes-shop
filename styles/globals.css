@@ -29,13 +29,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-.MuiOutlinedInput-notchedOutline {
-  /* border: none; */
-  /* padding: 2rem;
-  margin: 0; */
-}
-
-.MuiInputBase-input {
-  padding: 0;
-}

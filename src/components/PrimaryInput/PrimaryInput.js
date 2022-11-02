@@ -23,11 +23,11 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type }) => {
         required
         sx={{
           width: '100%',
-          borderRadius: '5px',
-          padding: '.8rem',
-          paddingBottom: '.5rem',
+          paddingTop: '.3rem',
+          borderRadius: '8px',
           fontFamily: "'Work Sans', sans-serif"
         }}
+        className='carlos'
       />
     </InputLabel>
   )

@@ -1,9 +1,7 @@
-import { FormGroup } from '@mui/material'
-
 const Form = ({ onSubmit, children }) => {
   return (
-    <FormGroup
-      sx={{
+    <form
+      style={{
         display: 'flex',
         flexDirection: 'column',
         paddingBlock: '2.5rem',
@@ -14,7 +12,7 @@ const Form = ({ onSubmit, children }) => {
       onSubmit={onSubmit}
     >
       {children}
-    </FormGroup>
+    </form>
   )
 }
 
