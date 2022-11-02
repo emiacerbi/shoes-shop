@@ -11,6 +11,9 @@ export const theme = createTheme({
     neutral: {
       main: '#141E7A',
       dark: '#0A1047'
+    },
+    common: {
+      main: '#6E7278'
     }
   },
   breakpoints: {
@@ -45,4 +48,31 @@ theme.typography.p = {
   [theme.breakpoints.up('sm')]: {
     fontSize: '15px'
   }
+}
+
+theme.typography.h3 = {
+  fontSize: '12px',
+  fontWeight: '500',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '30px'
+  }
+}
+
+theme.typography.subtitle1 = {
+  fontSize: '8px',
+  fontWeight: '500',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '20px'
+  }
+}
+
+theme.typography.body2 = {
+  color: '#000000',
+  fontSize: '30px'
+}
+
+theme.typography.main = {
+  color: theme.palette.primary.main,
+  fontSize: '25px',
+  fontWeight: 600
 }

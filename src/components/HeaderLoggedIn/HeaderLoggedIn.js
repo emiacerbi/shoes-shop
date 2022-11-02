@@ -145,7 +145,7 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
       {/* Separation line */}
       <Box sx={{
         marginTop: '40px',
-        border: '1px solid #EAECF0'
+        borderBottom: '1px solid #EAECF0'
       }}/>
     </AppBar>
   )
