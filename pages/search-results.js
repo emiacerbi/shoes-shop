@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
-import { Box, Checkbox, FormControlLabel, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import ProductCard from '../src/components/ProductCard/ProductCard'
 import { theme } from '../styles/theme'
+import FilterTitle from '../src/components/FilterTitle/FilterTitle'
+import CheckBox from '../src/components/CheckBox/CheckBox'
 
 export default function SearchResults () {
   const [showFilters, setShowFilters] = useState(true) // State to show/hide the side filters
@@ -10,11 +12,15 @@ export default function SearchResults () {
   const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
   const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
 
-  const handleFilterOn = () => {
+  const showFiltersBlock = () => {
     return setShowFilters(!showFilters)
   }
 
   function handleGender () {
+    return setFilter(!filter)
+  }
+
+  function handleKids () {
     return setFilter(!filter)
   }
 
@@ -46,36 +52,11 @@ export default function SearchResults () {
           ></Box>
           {/* GENDER BLOCK */}
           <Box sx={{ maxWidth: '320px' }}>
-            <Box display={'flex'} sx={{ width: 'auto', alignItems: 'end' }}>
-              <Typography sx={{ fontWeight: 500, fontSize: '16px', lineHeight: '19px', mt: '28px' }}>Gender</Typography>
-              <Box
-                component="img"
-                src="/vector.png"
-                alt="vector icon"
-                onClick={handleGender}
-                sx={{
-                  // position: 'absolute',
-                  marginLeft: '180px',
-                  width: '8px',
-                  height: '16px',
-                  transition: 'all 0.5s ease',
-                  '&:hover': {
-                    transform: 'rotate(180deg)',
-                    cursor: 'pointer'
-                  }
-                }}
-              ></Box>
-            </Box>
-            <Box display={'flex'} sx={{ flexDirection: 'column' }}>
-              <FormControlLabel
-                control={<Checkbox/>}
-                label={'Men'}
-              />
-              <FormControlLabel
-                control={<Checkbox/>}
-                label={'Women'}
-              />
-            </Box>
+
+            <FilterTitle onClick={handleGender} filterName={'Gender'}/>
+            {filter && <> <CheckBox label="Men"/> <CheckBox label="Women"/></>}
+            <FilterTitle onClick={handleKids} filterName={'Kids'}/>
+            {filter && <> <CheckBox label="Boys"/> <CheckBox label="Girls"/></>}
           </Box>
         </Box> }
         <Box sx={{ width: '1540px', m: '20px' }}> {/* CONTAINER ZAPATILLAS */}
@@ -106,7 +87,7 @@ export default function SearchResults () {
                 </Typography>}
               {/* FILTER-REMOVE ICON */}
               <Box
-                onClick={() => { handleFilterOn() }}
+                onClick={() => { showFiltersBlock() }}
                 component="img"
                 src="/filter-remove.png"
                 sx={{ width: '24px', height: '24px', cursor: 'pointer' }}/>
