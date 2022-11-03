@@ -12,7 +12,7 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type }) => {
         maxWidth: '436px'
       }}
     >
-      <Typography variant='p' >
+      <Typography variant='p' sx={{ fontWeight: '500' }} >
         {label} <Box component='span' sx={{ color: theme.palette.primary.main }}>*</Box>
       </Typography>
       <OutlinedInput
@@ -21,13 +21,13 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type }) => {
         name={name}
         type={type}
         required
+        size='small'
         sx={{
           width: '100%',
-          paddingTop: '.3rem',
+          fontFamily: "'Work Sans', sans-serif",
           borderRadius: '8px',
-          fontFamily: "'Work Sans', sans-serif"
+          padding: '0'
         }}
-        className='carlos'
       />
     </InputLabel>
   )
