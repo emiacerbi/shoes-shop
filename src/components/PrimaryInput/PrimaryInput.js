@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 
-const PrimaryInput = ({ label, placeholder, onChange, name, type }) => {
+const PrimaryInput = ({ label, placeholder, onChange, name, type, list }) => {
   return (
     <label className={styles.label} >
       <h3 className={styles.heading}>
@@ -13,6 +13,7 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type }) => {
         name={name}
         type={type}
         required
+        list={list}
       />
     </label>
   )
