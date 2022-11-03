@@ -12,7 +12,7 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type }) => {
         maxWidth: '436px'
       }}
     >
-      <Typography variant='p' >
+      <Typography variant='p' sx={{ fontWeight: '500' }} >
         {label} <Box component='span' sx={{ color: theme.palette.primary.main }}>*</Box>
       </Typography>
       <OutlinedInput
