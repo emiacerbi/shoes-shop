@@ -11,6 +11,7 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type, list }) => {
         width: '100%',
         maxWidth: '436px'
       }}
+
     >
       <Typography variant='p' >
         {label} <Box component='span' sx={{ color: theme.palette.primary.main }}>*</Box>
@@ -20,8 +21,8 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type, list }) => {
         onChange={onChange}
         name={name}
         type={type}
+        inputProps={{ list }}
         required
-        list={list}
         sx={{
           width: '100%',
           paddingTop: '.3rem',
