@@ -3,7 +3,6 @@ import { Box } from '@mui/material'
 import PrimaryInput from '../PrimaryInput/PrimaryInput'
 import Form from '../Form/Form'
 import TextArea from '../TextArea/TextArea'
-import ProductImageStore from '../ProductImageStore/ProductImageStore'
 import useSignInForm from '../../hooks/useSignInForm'
 
 const AddProductForm = () => {
