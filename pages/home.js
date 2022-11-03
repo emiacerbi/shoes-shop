@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../src/context/UserContext'
-import { Box, Button, Typography, useTheme } from '@mui/material'
+import { Box, Button, Link, Typography, useTheme } from '@mui/material'
 
 import ProductCard from '../src/components/ProductCard/ProductCard'
 import SubHeader from '../src/components/SubHeader/SubHeader'
@@ -50,7 +50,7 @@ export default function Home () {
           <SubHeader/>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant='h1'>My Products</Typography>
-            {ScreenWidth > 599 && (<PrimaryButton maxWidth='152px' >Add Products</PrimaryButton>)}
+            {ScreenWidth > 599 && (<Link href='/add-products'><PrimaryButton maxWidth='152px' >Add Products</PrimaryButton></Link>)}
           </Box>
           <Box sx={{ mt: '20px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
             <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
