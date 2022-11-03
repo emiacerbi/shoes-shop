@@ -8,7 +8,7 @@ const TextArea = ({ label, placeholder, onChange, rows }) => {
       </Typography>
       <TextField
         placeholder={placeholder}
-        sx={{ width: '100%', borderRadius: '5px', border: '1px solid lightgray' }}
+        sx={{ width: '100%', borderRadius: '5px' }}
         multiline
         onChange={onChange}
         rows={rows}
