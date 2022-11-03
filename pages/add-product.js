@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
+import { signOut } from 'next-auth/react'
 
 import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
 import SideBarProfileInfo from '../src/components/SideBarProfileInfo/SideBarProfileInfo'
@@ -7,6 +8,7 @@ import NavBarItem from '../src/components/NavBarItem/NavBarItem'
 import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 import SecondaryButton from '../src/components/SecondaryButton.js/SecondaryButton'
 
+import LogoutIcon from '@mui/icons-material/Logout'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import ChatIcon from '@mui/icons-material/Chat'
@@ -45,6 +47,15 @@ export default function AddProduct () {
           <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
             <ChatIcon sx={{ color: '#6E7278' }} />
             <NavBarItem name="Newsletters" />
+          </Box>
+          <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
+            <Button
+              onClick={() => signOut()}
+              sx={{ textTransform: 'none', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <LogoutIcon sx={{ color: '#6E7278' }}/>
+              <NavBarItem name="Log out"/>
+            </Button>
           </Box>
         </Box>
         }
