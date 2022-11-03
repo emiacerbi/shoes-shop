@@ -66,7 +66,7 @@ const AddProductForm = () => {
         name="sizes"
         onChange={handleInputChange}
         type="text"
-        list="sizes"
+        list='sizes'
       />
       <datalist id="sizes">
         <option>EUR-36</option>
