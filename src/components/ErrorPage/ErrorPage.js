@@ -1,37 +1,110 @@
 import Link from 'next/link'
+import { Typography, Box } from '@mui/material'
 import React from 'react'
-import styles from './styles.module.css'
+import PrimaryButton from '../PrimaryButton/PrimaryButton'
+import SecondaryButton from '../SecondaryButton.js/SecondaryButton'
 
-const ErrorPage = ({ title, description, image, btnLeft, btnRight }) => {
+const ErrorPage = () => {
   return (
-    <div className={styles.error}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: { xs: 'colunm', md: 'row' },
+        flex: '1',
+        width: '100%',
+        position: 'relative'
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          minHeight: { xs: '100vh', md: '79vh' },
+          flexDirection: 'column',
+          width: { xs: '100px', md: '50%' },
+          flex: '1'
+        }}
 
-      <div className={styles.error__description__wrapper}>
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: '1',
+            paddingBlock: '2.5rem',
+            paddingInline: '3.5rem',
+            justifyContent: { xs: 'center', md: 'center' },
+            textAlign: { xs: 'center', md: 'start' },
+            alignItems: { xs: 'center', md: 'flex-start' },
+            gap: { xs: '.5rem', md: '1em' },
+            width: '100%'
+          }}
+        >
+          <Typography variant="h1">Error 404</Typography>
+          <Typography
+            variant="p"
+            sx={{
+              maxWidth: '390px',
+              display: { xs: 'none', md: 'flex' }
+            }}
+          >
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+            nonummy nibh euismod tincidunt ut laoreet dolore magna
+          </Typography>
 
-        <div className={styles.error__text__box}>
-          <h1 className={styles.error__description__title}>{title}</h1>
-          <p className={styles.error__description__message}>{description}</p>
+          <Typography
+            sx={{ display: { md: 'none' } }}
+            variant="p"
+          >
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam{' '}
+          </Typography>
 
-          <div className={styles.error__btns}>
-            <Link href='/'>
-              <a className={`${styles.error__btn} ${styles.error__btn__notColored}`}>
-                {btnLeft}
-              </a>
+          <Box
+            sx={{
+              display: 'flex',
+              marginTop: { xs: 'auto', md: '0' },
+              width: '300px',
+              margin: { md: '0' },
+              gap: '1rem'
+            }}
+          >
+            <Link href="/">
+              <SecondaryButton>Go Back</SecondaryButton>
             </Link>
-            <Link href='/home'>
-              <a className={`${styles.error__btn} ${styles.error__btn__colored}`}>
-                {btnRight}
-              </a>
+            <Link href="/home">
+              <PrimaryButton maxWidth="152px">Home</PrimaryButton>
             </Link>
-          </div>
-        </div>
-
-      </div>
-
-      <div className={styles.error__img__overlay}></div>
-      <div className={styles.error__img}></div>
-
-    </div>
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: '#e5e6e7',
+          backgroundImage: "url('/error404.png')",
+          backgroundPosition: 'bottom',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          position: 'absolute',
+          height: '75%',
+          width: { xs: '100%', md: '0' },
+          top: '0',
+          borderRadius: { xs: '0 0 2rem 2rem', md: '0' },
+          zIndex: -1,
+          flexDirection: { xs: 'row', md: 'column' }
+        }}
+      ></Box>
+      <Box
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          width: '50%',
+          backgroundImage: "url('/error404.png')",
+          backgroundPosition: { xs: 'bottom', md: 'center' },
+          backgroundColor: '#E5E6E7',
+          backgroundSize: '90%',
+          backgroundRepeat: 'no-repeat'
+        }}
+      ></Box>
+    </Box>
   )
 }
 

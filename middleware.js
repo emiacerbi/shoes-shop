@@ -9,8 +9,6 @@ export async function middleware (req) {
     url.pathname = '/'
     return NextResponse.redirect(url)
   }
-
-  // return NextResponse.next()
 }
 
-export const config = { matcher: ['/home'] }
+export const config = { matcher: ['/home', '/bag', '/update-profile'] }

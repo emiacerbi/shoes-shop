@@ -39,6 +39,7 @@ const useSignInForm = () => {
 
     if (inputInfo.password.length < 8) {
       setisPasswordIncorrect(true)
+      return
     } else {
       setisPasswordIncorrect(false)
     }

@@ -1,21 +1,36 @@
-import styles from './styles.module.css'
+import { Box, InputLabel, OutlinedInput, Typography, useTheme } from '@mui/material'
 
 const PrimaryInput = ({ label, placeholder, onChange, name, type, list }) => {
+  const theme = useTheme()
   return (
-    <label className={styles.label} >
-      <h3 className={styles.heading}>
-        {label} <span className={styles.span}>*</span>
-      </h3>
-      <input
+    <InputLabel
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '.5rem',
+        width: '100%',
+        maxWidth: '436px'
+      }}
+    >
+      <Typography variant='p' >
+        {label} <Box component='span' sx={{ color: theme.palette.primary.main }}>*</Box>
+      </Typography>
+      <OutlinedInput
         placeholder={placeholder}
-        className={`roundedInput ${styles.input}`}
         onChange={onChange}
         name={name}
         type={type}
         required
         list={list}
+        sx={{
+          width: '100%',
+          paddingTop: '.3rem',
+          borderRadius: '8px',
+          fontFamily: "'Work Sans', sans-serif"
+        }}
+        className='carlos'
       />
-    </label>
+    </InputLabel>
   )
 }
 

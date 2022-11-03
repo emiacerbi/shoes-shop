@@ -29,20 +29,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-.MuiOutlinedInput-notchedOutline {
-  /* outline: none; */
-  border: none;
-  padding: 0;
-  margin: 0;
-}
-
-.MuiInputBase-input {
-  padding: 0;
-}
-
-
