@@ -14,6 +14,9 @@ export const theme = createTheme({
     },
     common: {
       main: '#6E7278'
+    },
+    action: {
+      main: '#FFFFFF'
     }
   },
   breakpoints: {

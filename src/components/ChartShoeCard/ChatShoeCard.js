@@ -45,6 +45,8 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
       >
         <Typography variant='h3'>{name}</Typography>
         <Typography variant='subtitle1'>{gender} {'\''}s Shoes</Typography>
+
+        <Box sx={{ marginTop: '.1rem' }} />
         <Typography sx={{
           display: 'none',
           [theme.breakpoints.up('sm')]: {
@@ -59,7 +61,8 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
               onChange={handleChange}
               displayEmpty
               inputProps={{ 'aria-label': 'Without label' }}
-              sx={{ m: 1, minWidth: 120, padding: 0, margin: 0, fontSize: '12px' }}
+              outline={false}
+              sx={{ height: '25px', minWidth: 120, fontSize: '12px', boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
             >
               <MenuItem value="">
                 Size
@@ -76,7 +79,7 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
               onChange={handleChange}
               displayEmpty
               inputProps={{ 'aria-label': 'Without label' }}
-              sx={{ m: 1, minWidth: 120, padding: 0, margin: 0, fontSize: '12px' }}
+              sx={{ height: '25px', minWidth: 120, fontSize: '12px', boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
 
             >
               <MenuItem value="">
@@ -94,7 +97,7 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
               onChange={handleChange}
               displayEmpty
               inputProps={{ 'aria-label': 'Without label' }}
-              sx={{ m: 1, minWidth: 120, padding: 0, margin: 0, fontSize: '12px' }}
+              sx={{ height: '25px', minWidth: 120, fontSize: '12px', boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
 
             >
               <MenuItem value="">

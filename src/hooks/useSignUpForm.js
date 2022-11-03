@@ -1,13 +1,30 @@
-import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
 import { postRegisterUser } from '../helpers/user-auth/postRegisterUser'
+import toast from 'react-hot-toast'
 
 const useSignUpForm = () => {
   const mutation = useMutation(postRegisterUser, {
-    onSuccess: () => {
-      console.log(mutation)
+    onSuccess: async (data) => {
+      const response = await data.json()
+
+      if (response.user) {
+        toast.success('Account successfully created, please check your email')
+        return
+      }
+
+      if (response.error.message.length > 40) {
+        toast.error('There was an issue')
+        return
+      }
+
+      if (response.error.message) {
+        toast.error(response.error.message)
+      }
     }
   })
+
+  const [isPasswordIncorrect, setisPasswordIncorrect] = useState(false)
 
   const [inputInfo, setInputInfo] = useState({
     name: '',
@@ -27,12 +44,19 @@ const useSignUpForm = () => {
     })
   }
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
 
     if (inputInfo.password !== inputInfo.repeatedPassword) {
       alert('Passwords do not match')
       return
+    }
+
+    if (inputInfo.password.length < 8) {
+      setisPasswordIncorrect(true)
+      return
+    } else {
+      setisPasswordIncorrect(false)
     }
 
     mutation.mutate({
@@ -43,7 +67,7 @@ const useSignUpForm = () => {
   }
 
   return {
-    inputInfo, setInputInfo, handleInputChange, handleSubmit
+    inputInfo, setInputInfo, handleInputChange, handleSubmit, isPasswordIncorrect, mutation
   }
 }
 

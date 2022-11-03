@@ -7,11 +7,10 @@ const SecondaryButton = ({ children, onClick, maxWidth = '436px' }) => {
       onClick={onClick}
       sx={{
         backgroundColor: 'transparent',
-        border: '1px solid var(--primary)',
+        border: theme.palette.primary,
         width: '100%',
         borderRadius: '5px',
         fontFamily: '"Work Sans", sans-serif',
-        color: 'var(--primary)',
         fontWeight: 500,
         textTransform: 'none',
         maxWidth,
