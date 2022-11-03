@@ -21,10 +21,11 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type }) => {
         name={name}
         type={type}
         required
+        size='small'
         sx={{
           width: '100%',
           fontFamily: "'Work Sans', sans-serif",
-          height: '48px',
+          borderRadius: '8px',
           padding: '0'
         }}
       />

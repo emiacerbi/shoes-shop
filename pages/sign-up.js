@@ -83,8 +83,8 @@ const SignUp = () => {
                 }
               }}
             >
-              <Checkbox />
-                Remember me
+              <Checkbox sx={{ marginLeft: '-.75rem', marginRight: '-.5rem' }} />
+              Remember me
             </InputLabel>
             <PrimaryButton>
               {
