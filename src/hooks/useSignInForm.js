@@ -1,22 +1,11 @@
 import { useState } from 'react'
 
 import { signIn } from 'next-auth/react'
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/router'
 
 const useSignInForm = () => {
-  // const { user, setUser } = useContext(UserContext)
-
-  // const mutation = useMutation(postLoginUser, {
-  //   onSuccess: (response) => {
-  //     sessionStorage.setItem('userToken', response.jwt)
-  //     setUser({
-  //       ...user,
-  //       token: response.jwt
-  //     })
-  //   }
-
-  // })
-
-  const [isPasswordIncorrect, setisPasswordIncorrect] = useState(false)
+  const router = useRouter()
 
   const [inputInfo, setInputInfo] = useState({
     email: '',
@@ -37,22 +26,24 @@ const useSignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    if (inputInfo.password.length < 8) {
-      setisPasswordIncorrect(true)
-      return
-    } else {
-      setisPasswordIncorrect(false)
-    }
-
     signIn('credentials', {
       identifier: inputInfo.email,
       password: inputInfo.password,
-      callbackUrl: '/home'
+      redirect: false
     })
+      .then(res => {
+        if (!res.ok) {
+          toast.error('Wrong credentials')
+        }
+
+        if (res.ok) {
+          router.push('/home')
+        }
+      })
   }
 
   return {
-    inputInfo, setInputInfo, handleInputChange, handleSubmit, isPasswordIncorrect
+    inputInfo, setInputInfo, handleInputChange, handleSubmit
   }
 }
 
