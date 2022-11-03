@@ -20,7 +20,7 @@ const SignIn = () => {
     }
   }, [])
 
-  const { handleInputChange, handleSubmit, isPasswordIncorrect } = useSignInForm()
+  const { handleInputChange, handleSubmit } = useSignInForm()
 
   return (
     <Box
@@ -60,16 +60,8 @@ const SignIn = () => {
           <Typography variant='p'>Welcome back! Please enter your details to log into your account.</Typography>
 
           <Form onSubmit={handleSubmit}>
-            <PrimaryInput required label='Email' placeholder='example@gmail.com' name='email' onChange={handleInputChange} type='text' />
+            <PrimaryInput required label='Email' placeholder='example@gmail.com' name='email' onChange={handleInputChange} type='email' />
             <PrimaryInput required label='Password' placeholder='at least 8 characters' name='password' onChange={handleInputChange} type='password' />
-
-            {
-              isPasswordIncorrect && (
-                <Typography variant='p' sx={{ color: theme.palette.primary.main, marginTop: '-15px', fontSize: '20px' }}>
-                  Your password should be 8 characters long!
-                </Typography>
-              )
-            }
 
             <Box
               sx={{
@@ -90,7 +82,7 @@ const SignIn = () => {
                   }
                 }}
               >
-                <Checkbox />
+                <Checkbox sx={{ marginLeft: '-.75rem', marginRight: '-.5rem' }} />
                 Remember me
               </InputLabel>
               <Link href='forgot-password' >
@@ -108,7 +100,7 @@ const SignIn = () => {
             </Box>
 
             <PrimaryButton>
-              Sign In
+              Sign in
             </PrimaryButton>
 
             <Typography
