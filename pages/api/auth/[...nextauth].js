@@ -21,8 +21,12 @@ export const authOptions = {
   ],
 
   callbacks: {
-    async signIn () {
-      return true
+    async signIn ({ user }) {
+      if (user.jwt) {
+        return true
+      }
+
+      return false
     },
 
     async jwt ({ token, account, user }) {
