@@ -7,22 +7,25 @@ import { Typography, Box, Container } from '@mui/material'
 
 import { postForgotPassword } from '../src/helpers/user-auth/postForgotPassword'
 import { useMutation } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
 
 export default function ForgotPassword () {
-  const { mutate } = useMutation(
-    postForgotPassword,
-    {
-      mutationKey: 'forgot-password',
-      onError: (error) => console.log(error)
-    }
-  )
+  const { mutate } = useMutation(postForgotPassword, {
+    mutationKey: 'forgot-password'
+  })
   const handleSubmit = (e) => {
     e.preventDefault()
     const email = e.target.email.value
-    mutate(email, { onSuccess: resetForm(e) })
-  }
-  const resetForm = (event) => {
-    event.target.reset()
+    mutate(email, {
+      onSuccess: () => {
+        toast.success('Mail was sent. Check your inbox.')
+      },
+      onError: () => {
+        console.log('error')
+        toast.error('Something went wrong. Try again.')
+      }
+    })
+    e.target.reset()
   }
 
   return (
@@ -57,7 +60,7 @@ export default function ForgotPassword () {
             <PrimaryInput
               type='email'
               label='Email'
-              name = 'email'
+              name='email'
               placeholder='example@mail.com'
             />
             <PrimaryButton>Reset password</PrimaryButton>
