@@ -21,7 +21,6 @@ export default function ForgotPassword () {
         toast.success('Mail was sent. Check your inbox.')
       },
       onError: () => {
-        console.log('error')
         toast.error('Something went wrong. Try again.')
       }
     })
