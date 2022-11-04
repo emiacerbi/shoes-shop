@@ -1,4 +1,4 @@
-const BASE_URL = process.env.BASE_URL
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 const ENDPOINT = `${BASE_URL}/api/auth/forgot-password`
 
 export const postForgotPassword = async (email) => {

@@ -1,5 +1,4 @@
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-
 const ENDPOINT = `${BASE_URL}/api/auth/local`
 
 export const postLoginUser = async ({ identifier, password }) => {
