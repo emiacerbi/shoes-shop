@@ -36,7 +36,7 @@ export default function ResetPassword () {
       const code = params.get('code')
       mutate(
         { password, passwordConfirmation, code },
-        { onSuccess: console.log('success') }
+        { onSuccess: toast.success('Password reset successfully') }
       )
     }
     e.target.reset()
