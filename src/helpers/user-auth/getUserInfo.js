@@ -1,5 +1,3 @@
-import { fetchWrapper } from '../fetchWrapper'
-
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 const ENDPOINT = `${BASE_URL}/api/users/me`
 
@@ -12,7 +10,7 @@ export const getUserInfo = async (token) => {
     }
   }
 
-  const response = await fetchWrapper(ENDPOINT, config)
+  const response = await fetch(ENDPOINT, config)
   console.log(response)
   return response
 }
