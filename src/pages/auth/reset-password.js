@@ -6,6 +6,7 @@ import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
 import { Box, Container, Typography } from '@mui/material'
 import { useMutation } from '@tanstack/react-query'
 import { postResetPassword } from 'helpers/user-auth/postResetPassword'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function ResetPassword () {
@@ -91,11 +92,14 @@ export default function ResetPassword () {
         </Box>
       </Container>
       <Box
-        sx={{ width: { xs: '0%', sm: '50%' }, objectFit: 'cover' }}
-        component='img'
-        src='/shoes.png'
-        alt=''
-      ></Box>
+        sx={{
+          width: { xs: '0%', sm: '50%' },
+          overflow: 'hidden',
+          position: 'relative'
+        }}
+      >
+        <Image src='/shoes.png' alt='' layout='fill' objectFit='cover' />
+      </Box>
     </Box>
   )
 }

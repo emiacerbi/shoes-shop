@@ -39,8 +39,7 @@ export default function Home () {
               onClick={() => signOut()}
               sx={{ textTransform: 'none', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-              <LogoutIcon sx={{ color: '#6E7278' }}/>
-              <BarItem name="Log out"/>
+              <BarItem name="Log out"> <LogoutIcon sx={{ color: '#6E7278' }}/></BarItem>
             </Button>
           </Box>
         </Box>
