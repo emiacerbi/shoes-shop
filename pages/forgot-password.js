@@ -10,7 +10,7 @@ import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
 import { postForgotPassword } from '../src/helpers/user-auth/postForgotPassword'
 
-export default function ForgotPassword() {
+export default function ForgotPassword () {
   const { mutate } = useMutation(postForgotPassword, {
     mutationKey: 'forgot-password'
   })
