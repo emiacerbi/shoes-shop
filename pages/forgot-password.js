@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast'
 import { Box, Container, Typography } from '@mui/material'
 import { useMutation } from '@tanstack/react-query'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import Form from '../src/components/Form/Form'
@@ -72,11 +73,14 @@ export default function ForgotPassword () {
         </Box>
       </Container>
       <Box
-        sx={{ width: { xs: '0%', sm: '50%' }, objectFit: 'cover' }}
-        component='img'
-        src='/shoes.png'
-        alt=''
-      ></Box>
+        sx={{
+          width: { xs: '0%', sm: '50%' },
+          overflow: 'hidden',
+          position: 'relative'
+        }}
+      >
+        <Image src='/shoes.png' layout='fill' objectFit='cover' alt='' />
+      </Box>
     </Box>
   )
 }
