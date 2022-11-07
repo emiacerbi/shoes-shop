@@ -1,9 +1,9 @@
+import { useState } from 'react'
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { Divider, FormControl, Grid, MenuItem, Select, Stack, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
-import { useState } from 'react'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 
 const ChartShoeCard = ({ img, alt, name, price, gender }) => {
   const theme = useTheme()

@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
 
-import PrimaryInput from '../PrimaryInput/PrimaryInput'
-import Form from '../Form/Form'
-import TextArea from '../TextArea/TextArea'
 import useSignInForm from '../../hooks/useSignInForm'
+import Form from '../Form/Form'
+import PrimaryInput from '../PrimaryInput/PrimaryInput'
+import TextArea from '../TextArea/TextArea'
 
 const AddProductForm = () => {
   const { handleInputChange, handleSubmit } = useSignInForm()

@@ -1,12 +1,13 @@
+import toast from 'react-hot-toast'
+import { Box, Container, Typography } from '@mui/material'
+import { useMutation } from '@tanstack/react-query'
+import Link from 'next/link'
+
 import Form from '../../src/components/Form/Form'
+import Header from '../../src/components/Header/Header'
 import PrimaryButton from '../../src/components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '../../src/components/PrimaryInput/PrimaryInput'
-import Header from '../../src/components/Header/Header'
-import Link from 'next/link'
-import { useMutation } from '@tanstack/react-query'
 import { postResetPassword } from '../../src/helpers/user-auth/postResetPassword'
-import { Typography, Box, Container } from '@mui/material'
-import toast from 'react-hot-toast'
 
 export default function ResetPassword () {
   const { mutate } = useMutation(postResetPassword, {

@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../src/context/UserContext'
-import { Box, Button, Link, Typography, useTheme } from '@mui/material'
-
-import ProductCard from '../src/components/ProductCard/ProductCard'
-import SubHeader from '../src/components/SubHeader/SubHeader'
-import SideBarProfileInfo from '../src/components/SideBarProfileInfo/SideBarProfileInfo'
-import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
-import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
-import NavBarItem from '../src/components/NavBarItem/NavBarItem'
 import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
+import { Box, Button, Link, Typography, useTheme } from '@mui/material'
 import { signOut } from 'next-auth/react'
+
+import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
+import NavBarItem from '../src/components/NavBarItem/NavBarItem'
+import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
+import ProductCard from '../src/components/ProductCard/ProductCard'
+import SideBarProfileInfo from '../src/components/SideBarProfileInfo/SideBarProfileInfo'
+import SubHeader from '../src/components/SubHeader/SubHeader'
+import { UserContext } from '../src/context/UserContext'
 
 export default function Home () {
   const context = useContext(UserContext)
