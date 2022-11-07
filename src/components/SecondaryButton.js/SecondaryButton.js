@@ -7,18 +7,18 @@ const SecondaryButton = ({ children, onClick, maxWidth = '436px' }) => {
       onClick={onClick}
       sx={{
         backgroundColor: 'transparent',
-        border: theme.palette.primary,
+        border: '1px primary.main solid',
         width: '100%',
         borderRadius: '5px',
         fontFamily: '"Work Sans", sans-serif',
         fontWeight: 500,
         textTransform: 'none',
         maxWidth,
-        fontSize: '12px',
         [theme.breakpoints.up('md')]: {
           fontSize: '16px'
         }
       }}
+      variant = 'outlined'
     >
       {children}
     </Button>

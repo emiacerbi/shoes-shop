@@ -40,8 +40,7 @@ export default function Home () {
               onClick={() => signOut()}
               sx={{ textTransform: 'none', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-              <LogoutIcon sx={{ color: '#6E7278' }}/>
-              <NavBarItem name="Log out"/>
+              <NavBarItem name="Log out"> <LogoutIcon sx={{ color: '#6E7278' }}/></NavBarItem>
             </Button>
           </Box>
         </Box>

@@ -82,7 +82,7 @@ const ErrorPage = () => {
           backgroundColor: '#e5e6e7',
           backgroundImage: "url('/error404.png')",
           backgroundPosition: 'bottom',
-          backgroundSize: 'contain',
+          backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           position: 'absolute',
           height: '75%',
