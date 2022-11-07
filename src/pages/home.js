@@ -7,8 +7,9 @@ import ProfileInfoSideBar from '@components/SideBarProfileInfo/SideBarProfileInf
 import SubHeader from '@components/SubHeader/SubHeader'
 import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
-import { Box, Button, Link, Typography, useTheme } from '@mui/material'
+import { Box, Button, Typography, useTheme } from '@mui/material'
 import { UserContext } from 'context/UserContext'
+import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 
 export default function Home () {
