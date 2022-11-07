@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react'
+import AddProductForm from '@components/AddProductForm/AddProductForm'
+import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
+import BarItem from '@components/NavBarItem/NavBarItem'
+import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
+import ProductImageStore from '@components/ProductImageStore/ProductImageStore'
+import SecondaryButton from '@components/SecondaryButton.js/SecondaryButton'
+import ProfileInfoSideBar from '@components/SideBarProfileInfo/SideBarProfileInfo'
 import ChatIcon from '@mui/icons-material/Chat'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import LogoutIcon from '@mui/icons-material/Logout'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
 import { Box, Button, Typography } from '@mui/material'
 import { signOut } from 'next-auth/react'
-
-import AddProductForm from '../src/components/AddProductForm/AddProductForm'
-import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
-import NavBarItem from '../src/components/NavBarItem/NavBarItem'
-import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
-import ProductImageStore from '../src/components/ProductImageStore/ProductImageStore'
-import SecondaryButton from '../src/components/SecondaryButton.js/SecondaryButton'
-import SideBarProfileInfo from '../src/components/SideBarProfileInfo/SideBarProfileInfo'
 
 export default function AddProduct () {
   const [screenWidth, setscreenWidth] = useState()
@@ -34,18 +33,18 @@ export default function AddProduct () {
 
         {screenWidth > 599 &&
         <Box sx={{ flexDirection: 'column' }}>
-          <SideBarProfileInfo/>
+          <ProfileInfoSideBar />
           <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }} >
             <ShoppingBagIcon sx={{ color: '#6E7278' }}/>
-            <NavBarItem name="My Orders"/>
+            <BarItem name="My Orders"/>
           </Box>
           <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
             <ListAltIcon sx={{ color: '#6E7278' }} />
-            <NavBarItem name="Wish List" num={4} />
+            <BarItem name="Wish List" num={4} />
           </Box>
           <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
             <ChatIcon sx={{ color: '#6E7278' }} />
-            <NavBarItem name="Newsletters" />
+            <BarItem name="Newsletters" />
           </Box>
           <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
             <Button
@@ -53,7 +52,7 @@ export default function AddProduct () {
               sx={{ textTransform: 'none', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
               <LogoutIcon sx={{ color: '#6E7278' }}/>
-              <NavBarItem name="Log out"/>
+              <BarItem name="Log out"/>
             </Button>
           </Box>
         </Box>

@@ -1,13 +1,13 @@
 import { Toaster } from 'react-hot-toast'
 import { ThemeProvider } from '@mui/material'
+import { theme } from '@styles/theme'
 import {
   QueryClient,
   QueryClientProvider
 } from '@tanstack/react-query'
 import { SessionProvider } from 'next-auth/react'
 
-import { UserProvider } from '../src/context/UserContext'
-import { theme } from '../styles/theme'
+import { UserProvider } from '../context/UserContext'
 
 import '../styles/globals.css'
 

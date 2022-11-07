@@ -1,13 +1,12 @@
 import toast from 'react-hot-toast'
+import Form from '@components/Form/Form'
+import HeaderBeforeLogin from '@components/Header/Header'
+import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
+import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
 import { Box, Container, Typography } from '@mui/material'
 import { useMutation } from '@tanstack/react-query'
+import { postForgotPassword } from 'helpers/user-auth/postForgotPassword'
 import Link from 'next/link'
-
-import Form from '../src/components/Form/Form'
-import Header from '../src/components/Header/Header'
-import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
-import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
-import { postForgotPassword } from '../src/helpers/user-auth/postForgotPassword'
 
 export default function ForgotPassword () {
   const { mutate } = useMutation(postForgotPassword, {
@@ -41,7 +40,7 @@ export default function ForgotPassword () {
           width: { xs: '100%', sm: '50%' }
         }}
       >
-        <Header />
+        <HeaderBeforeLogin />
         <Box
           sx={{
             display: 'flex',
