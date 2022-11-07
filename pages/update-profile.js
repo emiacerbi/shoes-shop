@@ -5,15 +5,21 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined'
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined'
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
 import NavBarItem from '../src/components/NavBarItem/NavBarItem'
 import { theme } from '../styles/theme'
 
 export default function UpdateProfile () {
   const [settings, setSettings] = useState(true)
-  const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
-  const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
+  const [pages, setPages] = useState([])
+  const [links, setLinks] = useState([])
+  console.log(pages)
+
+  useEffect(() => {
+    setPages(['Home', 'For women', 'For Men', 'Accesories', 'Sale'])
+    setLinks(['/', '/for-women', '/for-men', '/accesories', '/sale'])
+  }, [])
 
   function handleSettings () {
     return setSettings(!settings)
