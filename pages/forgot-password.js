@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast'
 import { Box, Container, Typography } from '@mui/material'
 import { useMutation } from '@tanstack/react-query'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import Form from '../src/components/Form/Form'
@@ -9,7 +10,7 @@ import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
 import { postForgotPassword } from '../src/helpers/user-auth/postForgotPassword'
 
-export default function ForgotPassword () {
+export default function ForgotPassword() {
   const { mutate } = useMutation(postForgotPassword, {
     mutationKey: 'forgot-password'
   })
@@ -72,11 +73,14 @@ export default function ForgotPassword () {
         </Box>
       </Container>
       <Box
-        sx={{ width: { xs: '0%', sm: '50%' }, objectFit: 'cover' }}
-        component='img'
-        src='/shoes.png'
-        alt=''
-      ></Box>
+        sx={{
+          width: { xs: '0%', sm: '50%' },
+          overflow: 'hidden',
+          position: 'relative'
+        }}
+      >
+        <Image src='/shoes.png' layout='fill' objectFit='cover' alt='' />
+      </Box>
     </Box>
   )
 }
