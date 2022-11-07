@@ -1,13 +1,14 @@
+import { useEffect, useState } from 'react'
 import { Box, Button, Checkbox, CircularProgress, InputLabel, Typography, useTheme } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import Form from '../src/components/Form/Form'
-import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
-import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
-import SignUpOverlay from '../src/components/SignUpOverlay/SignUpOverlay'
 import Link from 'next/link'
-import useSignUpForm from '../src/hooks/useSignUpForm'
-import HeaderBeforeLogin from '../src/components/Header/Header'
+
 import Blockquote from '../src/components/Blockquote/Blockquote'
+import Form from '../src/components/Form/Form'
+import HeaderBeforeLogin from '../src/components/Header/Header'
+import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
+import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
+import SignUpOverlay from '../src/components/SignUpOverlay/SignUpOverlay'
+import useSignUpForm from '../src/hooks/useSignUpForm'
 
 const SignUp = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(true)

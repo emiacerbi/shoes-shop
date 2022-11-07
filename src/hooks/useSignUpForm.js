@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
-import { postRegisterUser } from '../helpers/user-auth/postRegisterUser'
 import toast from 'react-hot-toast'
+import { useMutation } from '@tanstack/react-query'
+
+import { postRegisterUser } from '../helpers/user-auth/postRegisterUser'
 
 const useSignUpForm = () => {
   const mutation = useMutation(postRegisterUser, {

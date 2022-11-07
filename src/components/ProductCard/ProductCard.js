@@ -1,7 +1,6 @@
-import { Box } from '@mui/system'
-import React from 'react'
-import Image from 'next/image'
 import { Typography } from '@mui/material'
+import { Box } from '@mui/system'
+import Image from 'next/image'
 
 export default function ProductCard ({ productTitle, productDescription, productPrice, image }) {
   return (

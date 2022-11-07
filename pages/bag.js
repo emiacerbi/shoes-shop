@@ -1,6 +1,6 @@
 import { Divider, Grid, Stack, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
+
 import ChartShoeCard from '../src/components/ChartShoeCard/ChatShoeCard'
 import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
 import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'

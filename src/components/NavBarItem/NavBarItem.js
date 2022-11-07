@@ -1,4 +1,4 @@
-import { Typography, Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 export default function BarItem ({ name, num, children }) {
   const numTag = num

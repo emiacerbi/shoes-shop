@@ -1,10 +1,10 @@
-import { Link, Button, InputBase, AppBar } from '@mui/material'
-import React, { useState } from 'react'
+import { useState } from 'react'
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
+import { AppBar, Button, InputBase, Link } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
+
 import BurgerMenu from '../BurgerMenu/BurgerMenu'
-// import BarItem from '../NavBarItem/NavBarItem'
 import Cart from '../Cart/Cart'
 
 function HeaderLoggedIn ({ pages, links, cart, burger }) {

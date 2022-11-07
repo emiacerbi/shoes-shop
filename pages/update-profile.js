@@ -1,15 +1,16 @@
-import { Avatar, Button, Typography } from '@mui/material'
-import { Box } from '@mui/system'
-import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
+import { useState } from 'react'
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined'
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined'
-import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined'
-import { useState } from 'react'
+import { Avatar, Button, Typography } from '@mui/material'
+import { Box } from '@mui/system'
+
+import Form from '../src/components/Form/Form'
 import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
 import NavBarItem from '../src/components/NavBarItem/NavBarItem'
+import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
 import { theme } from '../styles/theme'
-import Form from '../src/components/Form/Form'
 
 export default function UpdateProfile () {
   const [settings, setSettings] = useState(true)

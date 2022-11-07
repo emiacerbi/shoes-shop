@@ -15,8 +15,8 @@ export const getEmailConfirmation = async () => {
 
 /*
 
-{
-  Redirects to the configure email confirmation redirect url
-}
+  {
+    Redirects to the configure email confirmation redirect url
+  }
 
 */

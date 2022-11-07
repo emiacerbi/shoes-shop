@@ -1,19 +1,18 @@
-import { useState, useEffect } from 'react'
-import { Box, Typography, Button } from '@mui/material'
-import { signOut } from 'next-auth/react'
-
-import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
-import SideBarProfileInfo from '../src/components/SideBarProfileInfo/SideBarProfileInfo'
-import NavBarItem from '../src/components/NavBarItem/NavBarItem'
-import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
-import SecondaryButton from '../src/components/SecondaryButton.js/SecondaryButton'
-
+import { useEffect, useState } from 'react'
+import ChatIcon from '@mui/icons-material/Chat'
+import ListAltIcon from '@mui/icons-material/ListAlt'
 import LogoutIcon from '@mui/icons-material/Logout'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
-import ListAltIcon from '@mui/icons-material/ListAlt'
-import ChatIcon from '@mui/icons-material/Chat'
+import { Box, Button, Typography } from '@mui/material'
+import { signOut } from 'next-auth/react'
+
 import AddProductForm from '../src/components/AddProductForm/AddProductForm'
+import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
+import NavBarItem from '../src/components/NavBarItem/NavBarItem'
+import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 import ProductImageStore from '../src/components/ProductImageStore/ProductImageStore'
+import SecondaryButton from '../src/components/SecondaryButton.js/SecondaryButton'
+import SideBarProfileInfo from '../src/components/SideBarProfileInfo/SideBarProfileInfo'
 
 export default function AddProduct () {
   const [screenWidth, setscreenWidth] = useState()

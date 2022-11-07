@@ -1,5 +1,6 @@
-import { useSession } from 'next-auth/react'
 import { createContext, useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
+
 import { getUserInfo } from '../helpers/user-auth/getUserInfo'
 
 export const UserContext = createContext(null)

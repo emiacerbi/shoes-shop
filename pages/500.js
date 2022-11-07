@@ -1,4 +1,5 @@
-import { Typography, Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+
 import Header from '../src/components/Header/Header'
 import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 

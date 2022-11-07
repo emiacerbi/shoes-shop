@@ -1,6 +1,6 @@
+import { Box, Typography } from '@mui/material'
 import Link from 'next/link'
-import { Typography, Box } from '@mui/material'
-import React from 'react'
+
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
 import SecondaryButton from '../SecondaryButton.js/SecondaryButton'
 
