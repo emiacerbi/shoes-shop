@@ -1,15 +1,7 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-const ENDPOINT = `${BASE_URL}/api/auth/email-confirmation`
+import { fetchWrapper } from '../fetchWrapper'
 
 export const getEmailConfirmation = async () => {
-  const config = {
-    method: 'GET',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8'
-    }
-  }
-
-  const response = await fetch(ENDPOINT, config)
+  const response = await fetchWrapper('/api/auth/email-confirmation', { method: 'GET' })
   return response
 }
 
