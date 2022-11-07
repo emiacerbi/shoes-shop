@@ -1,7 +1,6 @@
+import { postLoginUser } from 'helpers/user-auth/postLoginUser'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-
-import { postLoginUser } from '../../../src/helpers/user-auth/postLoginUser'
 
 export const authOptions = {
 

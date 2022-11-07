@@ -1,7 +1,6 @@
+import ErrorPage from '@components/ErrorPage/ErrorPage'
+import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import { Box } from '@mui/material'
-
-import ErrorPage from '../src/components/ErrorPage/ErrorPage'
-import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
 
 // import styles from '../styles/404.module.css'
 

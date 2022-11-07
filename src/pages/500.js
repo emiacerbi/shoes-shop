@@ -1,8 +1,7 @@
+import HeaderBeforeLogin from '@components/Header/Header'
+import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
-
-import Header from '../src/components/Header/Header'
-import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
 
 export default function Custom500 () {
   return (
@@ -12,7 +11,7 @@ export default function Custom500 () {
           display: { xs: 'none', sm: 'block' }
         }}
       >
-        <Header />
+        <HeaderBeforeLogin />
       </Box>
       <Box
         component='main'

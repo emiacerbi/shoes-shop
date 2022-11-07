@@ -1,4 +1,8 @@
 import { useState } from 'react'
+import Form from '@components/Form/Form'
+import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
+import BarItem from '@components/NavBarItem/NavBarItem'
+import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined'
@@ -6,10 +10,6 @@ import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined'
 import { Avatar, Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 
-import Form from '../src/components/Form/Form'
-import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
-import NavBarItem from '../src/components/NavBarItem/NavBarItem'
-import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
 import { theme } from '../styles/theme'
 
 export default function UpdateProfile () {
@@ -74,22 +74,22 @@ export default function UpdateProfile () {
               <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}
               >
                 <AccountCircleOutlinedIcon sx={{ color: '#6E7278' }}/>
-                <NavBarItem name="My Profile"/>
+                <BarItem name="My Profile"/>
               </Box>
 
               <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
                 <DashboardCustomizeOutlinedIcon sx={{ color: '#6E7278' }}/>
-                <NavBarItem name="Preferences"/>
+                <BarItem name="Preferences"/>
               </Box>
 
               <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
                 <GppGoodOutlinedIcon sx={{ color: '#6E7278' }}/>
-                <NavBarItem name="Security"/>
+                <BarItem name="Security"/>
               </Box>
 
               <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
                 <AccountBalanceWalletOutlinedIcon sx={{ color: '#6E7278' }}/>
-                <NavBarItem name="My Wallet"/>
+                <BarItem name="My Wallet"/>
               </Box>
             </>
           )}
