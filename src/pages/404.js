@@ -2,8 +2,6 @@ import ErrorPage from '@components/ErrorPage/ErrorPage'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import { Box } from '@mui/material'
 
-// import styles from '../styles/404.module.css'
-
 export default function Error404 () {
   return (
 
