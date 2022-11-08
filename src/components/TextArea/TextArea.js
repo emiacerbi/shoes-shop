@@ -13,6 +13,7 @@ const TextArea = ({ label, placeholder, onChange, rows }) => {
         onChange={onChange}
         rows={rows}
         inputProps={{ maxLength: 300 }}
+        name='Description'
       />
     </FormLabel>
   )

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Box } from '@mui/material'
 
 import Form from '../Form/Form'
@@ -9,21 +10,32 @@ const AddProductForm = ({ brands, genders, sizes }) => {
   const [inputInfo, setInputInfo] = useState({
     productName: '',
     category: '',
-    gender: '',
-    brand: '',
-    size: ''
+    Gender: '',
+    Brand: '',
+    Description: '',
+    Size: ''
   })
 
+  const handleInputChange = (e) => {
+    const focus = e.target
+    const value = focus.value
+    const name = focus.name
+
+    setInputInfo({
+      ...inputInfo,
+      [name]: value
+    })
+  }
 
   return (
 
-    <Form onSubmit={}>
+    <Form>
       <PrimaryInput
         required
         label="Product Name"
         placeholder="Nike Air Max 90"
         name="productName"
-        onChange={}
+        onChange={handleInputChange}
         type="text"
       />
       <PrimaryInput
@@ -31,15 +43,15 @@ const AddProductForm = ({ brands, genders, sizes }) => {
         label="Category"
         placeholder="Sport"
         name="category"
-        onChange={}
+        onChange={handleInputChange}
         type="text"
       />
       <Box sx={{ display: 'flex', gap: '5%' }}>
-        <SelectInput required onChange={} name={'Gender'} inputValues={genders}></SelectInput>
-        <SelectInput required onChange={} name={'Brand'} inputValues={brands}></SelectInput>
+        <SelectInput required onChange={handleInputChange} name={'Gender'} inputValues={genders}></SelectInput>
+        <SelectInput required onChange={handleInputChange} name={'Brand'} inputValues={brands}></SelectInput>
       </Box>
-      <TextArea placeholder='Do not exceed 300 characters' label='Description' rows={7} />
-      <SelectInput required onChange={} name={'Size'} inputValues={sizes}></SelectInput>
+      <TextArea placeholder='Do not exceed 300 characters' label='Description' rows={7} onChange={handleInputChange} />
+      <SelectInput required onChange={handleInputChange} name={'Size'} inputValues={sizes}></SelectInput>
 
     </Form>
 

@@ -12,6 +12,9 @@ const SelectInput = ({ inputValues, name, onChange }) => {
           labelId={`select-input-${name}`}
           id="select"
           label={name}
+          name={name}
+          onChange={onChange}
+          defaultValue=''
         >
           {inputValues.map((value, i) => <MenuItem key={i} value={value}>{value}</MenuItem>)}
         </Select>
