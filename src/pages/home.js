@@ -46,7 +46,7 @@ export default function Home () {
           </Box>
         </Box>
         <Box component='main' sx={{ m: '20px', width: '100%' }}>
-          <Box sx={{ width: '100%', height: { xs: 132, sm: 260 }, m: { xs: '-20px', sm: 0 }, position: 'relative' }}>
+          <Box sx={{ height: { xs: 132, sm: 260 }, m: { xs: '-20px', sm: 0 }, position: 'relative' }}>
             <Image src='/bgHomeImg.png' alt='panelImage' layout='fill' ></Image>
           </Box>
           <SubHeader/>
