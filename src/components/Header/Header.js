@@ -11,7 +11,8 @@ export default function Header () {
         justifyContent: 'flex-start',
         alignItems: 'center',
         borderBottom: { sx: 'none', sm: '1px solid #eaecf0' },
-        padding: '20px'
+        height: { sm: '68px' },
+        paddingLeft: { sm: '20px' }
       }}
     >
       <Box
