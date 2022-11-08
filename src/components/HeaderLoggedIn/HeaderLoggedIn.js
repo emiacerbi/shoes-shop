@@ -2,7 +2,7 @@ import { useState } from 'react'
 import BurgerMenu from '@components/BurgerMenu/BurgerMenu'
 import Cart from '@components/Cart/Cart'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import { AppBar, Button, InputBase, Link } from '@mui/material'
+import { AppBar, Button, InputBase, Link, useTheme } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
@@ -10,6 +10,8 @@ import Image from 'next/image'
 function HeaderLoggedIn ({ pages, links, cart, burger }) {
   const [searchInput, setSearchInput] = useState(false) // Hook to show/hide the search input
   const [value, setValue] = useState('') // Value to handle search input
+
+  const theme = useTheme()
 
   const handleSearchInput = () => {
     setSearchInput(!searchInput)
@@ -50,7 +52,7 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
             }} />
           <InputBase
             sx={{
-              '@media (min-width: 600px)': {
+              [theme.breakpoints.up('sm')]: {
                 border: '1px solid #494949',
                 borderRadius: '42px',
                 width: '100%',
@@ -60,16 +62,6 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
                 input: {
                   '&::placeholder': {
                     fontSize: '1.25rem',
-                    color: '#494949'
-                  }
-                }
-              },
-              '@media (min-width: 601px) and (max-width: 767px)': {
-                height: '40px',
-                paddingLeft: '20px',
-                input: {
-                  '&::placeholder': {
-                    fontSize: '1rem',
                     color: '#494949'
                   }
                 }
