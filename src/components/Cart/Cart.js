@@ -1,5 +1,5 @@
-import { Link } from '@mui/material'
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined'
+import { Link } from '@mui/material'
 
 export default function Cart () {
   return (

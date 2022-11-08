@@ -1,22 +1,10 @@
-// import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
-// import { postLoginUser } from '../helpers/user-auth/postLoginUser'
-
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
 
 const useSignInForm = () => {
-  // const { user, setUser } = useContext(UserContext)
-
-  // const mutation = useMutation(postLoginUser, {
-  //   onSuccess: (response) => {
-  //     sessionStorage.setItem('userToken', response.jwt)
-  //     setUser({
-  //       ...user,
-  //       token: response.jwt
-  //     })
-  //   }
-
-  // })
+  const router = useRouter()
 
   const [inputInfo, setInputInfo] = useState({
     email: '',
@@ -36,16 +24,21 @@ const useSignInForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    // mutation.mutate({
-    //   identifier: inputInfo.email,
-    //   password: inputInfo.password
-    // })
 
-    await signIn('credentials', {
+    signIn('credentials', {
       identifier: inputInfo.email,
       password: inputInfo.password,
       redirect: false
     })
+      .then(res => {
+        if (!res.ok) {
+          toast.error('Wrong credentials')
+        }
+
+        if (res.ok) {
+          router.push('/home')
+        }
+      })
   }
 
   return {

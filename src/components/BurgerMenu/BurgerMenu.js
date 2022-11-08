@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import Typography from '@mui/material/Typography'
 
 function BurgerMenu ({ pages, links }) {
   const [anchorElNav, setAnchorElNav] = useState(null)

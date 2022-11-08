@@ -1,11 +1,10 @@
-import { Link, Button, InputBase, AppBar } from '@mui/material'
-import React, { useState } from 'react'
+import { useState } from 'react'
+import BurgerMenu from '@components/BurgerMenu/BurgerMenu'
+import Cart from '@components/Cart/Cart'
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
+import { AppBar, Button, InputBase, Link } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import BurgerMenu from '../BurgerMenu/BurgerMenu'
-// import BarItem from '../NavBarItem/NavBarItem'
-import Cart from '../Cart/Cart'
 
 function HeaderLoggedIn ({ pages, links, cart, burger }) {
   const [searchInput, setSearchInput] = useState(false) // Hook to show/hide the search input
@@ -145,7 +144,7 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
       {/* Separation line */}
       <Box sx={{
         marginTop: '40px',
-        border: '1px solid #EAECF0'
+        borderBottom: '1px solid #EAECF0'
       }}/>
     </AppBar>
   )

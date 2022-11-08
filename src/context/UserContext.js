@@ -1,5 +1,6 @@
-import { useSession } from 'next-auth/react'
 import { createContext, useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
+
 import { getUserInfo } from '../helpers/user-auth/getUserInfo'
 
 export const UserContext = createContext(null)
@@ -19,8 +20,9 @@ export function UserProvider ({ children }) {
         userInfo: response
       })
     }
-
-    fetchUserInfo()
+    if (session?.accessToken) {
+      fetchUserInfo()
+    }
   }, [session?.accessToken])
 
   return (

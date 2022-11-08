@@ -1,10 +1,27 @@
-import styles from './styles.module.css'
+import { Button, useTheme } from '@mui/material'
 
-const SecondaryButton = ({ children, onClick }) => {
+const SecondaryButton = ({ children, onClick, maxWidth = '436px' }) => {
+  const theme = useTheme()
   return (
-    <button onClick={onClick} className={styles.button}>
+    <Button
+      onClick={onClick}
+      sx={{
+        backgroundColor: 'transparent',
+        border: '1px primary.main solid',
+        width: '100%',
+        borderRadius: '5px',
+        fontFamily: '"Work Sans", sans-serif',
+        fontWeight: 500,
+        textTransform: 'none',
+        maxWidth,
+        [theme.breakpoints.up('md')]: {
+          fontSize: '16px'
+        }
+      }}
+      variant = 'outlined'
+    >
       {children}
-    </button>
+    </Button>
   )
 }
 

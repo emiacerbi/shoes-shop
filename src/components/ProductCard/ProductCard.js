@@ -1,18 +1,29 @@
-import React from 'react'
+import { Typography } from '@mui/material'
+import { Box } from '@mui/system'
 import Image from 'next/image'
-import styles from './styles.module.css'
 
 export default function ProductCard ({ productTitle, productDescription, productPrice, image }) {
   return (
-    <div className={styles['product-card-container']}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', width: { xs: 150, sm: 320 } }}>
       <Image src={image} layout='responsive' width={150} height={180} alt="product"/>
-      <div className={styles['product-card-description']}>
-        <div>
-          <h3 className={styles.h3}>{productTitle}</h3>
-          <p className={styles.p}>{productDescription}</p>
-        </div>
-        <h3 className={styles.h3}>${productPrice}</h3>
-      </div>
-    </div>
+      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '2px' }}>
+        <Box>
+          <Typography variant='h1' sx={{
+            fontSize: { xs: '10px', sm: '22px' },
+            lineHeight: { xs: '12px', sm: '25px' }
+          }} >{productTitle}</Typography>
+          <Typography component='p' sx={{
+            color: '#5C5C5C',
+            fontWeight: 500,
+            fontSize: { xs: '9px', sm: '18px' },
+            lineHeight: { xs: '10px', sm: '22px' }
+          }}>{productDescription}</Typography>
+        </Box>
+        <Typography variant='h1' sx={{
+          fontSize: { xs: '10px', sm: '22px' },
+          lineHeight: { xs: '12px', sm: '25px' }
+        }} >${productPrice}</Typography>
+      </Box>
+    </Box>
   )
 }
