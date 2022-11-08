@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import { Box, Typography, InputBase } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import CheckBox from '@components/CheckBox/CheckBox'
+import FilterTitle from '@components/FilterTitle/FilterTitle'
+import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
+import ProductCard from '@components/ProductCard/ProductCard'
+import SeparationLine from '@components/SeparationLine/SeparationLine'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
-import ProductCard from '../src/components/ProductCard/ProductCard'
-import FilterTitle from '../src/components/FilterTitle/FilterTitle'
-import CheckBox from '../src/components/CheckBox/CheckBox'
-import SeparationLine from '../src/components/SeparationLine/SeparationLine'
-// import useWindowDimensions from '../src/hooks/useWindowDimensions'
+import { Box, InputBase, Typography } from '@mui/material'
+
 import { theme } from '../styles/theme'
 
 export default function SearchResults () {
   // const { width } = useWindowDimensions()
   // console.log(width)
 
-  const [showFilters, setShowFilters] = useState(true) // State to show/hide the side filters
-  const [width, setWidth] = useState(0)
+  const [opacity, setOpacity] = useState(1)
+  const [screenWidth, setScreenWidth] = useState(0)
 
   // Filters
+  const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
   const [filterGender, setFilterGender] = useState(true) // State to show/hide Gender filters
   const [filterKids, setFilterKids] = useState(true) // State to show/hide Kids filters
   const [filterBrand, setFilterBrand] = useState(true) // State to show/hide Brand filters
@@ -33,15 +34,20 @@ export default function SearchResults () {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setWidth(window.innerWidth)
+      setScreenWidth(window.innerWidth)
     }
-  }, [])
-
-  // Arrays for Header
-  const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
-  const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
+    console.log(screenWidth)
+  }, [screenWidth])
 
   const showFiltersBlock = () => {
+    if (screenWidth < 599 & showFilters === true) {
+      setOpacity(1)
+    } else {
+      (
+        setOpacity(0.4)
+      )
+    }
+    console.log(screenWidth)
     return setShowFilters(!showFilters)
   }
 
@@ -88,10 +94,13 @@ export default function SearchResults () {
 
   return (
     <>
-      <HeaderLoggedIn pages={pages} links={links} cart={true} burger={true}/>
+      <HeaderLoggedIn
+        pages={['Home', 'For women', 'For Men', 'Accesories', 'Sale']}
+        links={['/', '/for-women', '/for-men', '/accesories', '/sale']}
+        cart={true} burger={true}/>
       <Box display={{ xs: 'flex', sm: 'flex' }} sx={{ maxWidth: '1920px', mt: 'auto' }}>
 
-        {/* DESKTOP */}
+        {/* DESKTOP FILTERS */}
         {showFilters &&
         <Box sx={{ width: '320px', heigth: 'auto', display: { xs: 'none', sm: 'flex' }, flexDirection: 'column', ml: '40px', mr: '40px' }}>
           <Typography
@@ -186,12 +195,13 @@ export default function SearchResults () {
         {showFilters &&
         <Box
           sx={{
-            width: '320px',
-            height: 'auto',
+            maxWidth: '320px',
+            width: 'auto',
+            // height: '100vh',
             display: { xs: 'flex', sm: 'none' },
             flexDirection: 'column',
             // ml: '40px',
-            right: '-85px',
+            right: '0px',
             position: 'absolute',
             zIndex: 100,
             background: 'grey'
@@ -270,22 +280,22 @@ export default function SearchResults () {
               <CheckBox label="Reebok" handleChangeReebok={handleChangeReebok}/>
               {checkedReebok && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '100px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography> }
             </>}
+
+            <SeparationLine/>
+
+            {/* Price */}
+            <FilterTitle filterName={'Price'} handlePrice={handlePrice}/>
+            <SeparationLine/>
+
+            {/* Color */}
+            <FilterTitle filterName={'Color'} handleColor={handleColor}/>
+            <SeparationLine/>
           </Box>
-
-          <SeparationLine/>
-
-          {/* Price */}
-          <FilterTitle filterName={'Price'} handlePrice={handlePrice}/>
-          <SeparationLine/>
-
-          {/* Color */}
-          <FilterTitle filterName={'Color'} handleColor={handleColor}/>
-          <SeparationLine/>
-
         </Box> }
 
         {/* CONTAINER ZAPATILLAS */}
-        <Box sx={{ maxWidth: '1540px', m: '20px', width: 'auto', opacity: '0.2' }}>
+
+        <Box sx={{ maxWidth: '1540px', m: '20px', width: 'auto', opacity: `${opacity}` }}>
           <Box sx={{
             // width: 'auto',
             [theme.breakpoints.up('sm')]: {
@@ -311,9 +321,7 @@ export default function SearchResults () {
             }}> Search Results
             </Typography>
 
-            {console.log(`soy  width ${width}`)}
-            {width <= '600px' && <SeparationLine/>}
-            {/* {window.innerWidth < 600 ? console.log('menor a 600') : console.log('mayor a 600')} */}
+            {screenWidth < 599 && <SeparationLine/>}
 
             <Typography
               sx={{

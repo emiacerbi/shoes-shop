@@ -21,6 +21,7 @@ function FilterTitle ({ filterName, handleGender, handleKids, handleBrand, handl
           marginLeft: 'auto',
           width: '8px',
           height: '16px',
+          marginRight: '20px',
           transition: 'all 0.5s ease',
           '&:hover': {
             transform: 'rotate(180deg)',
