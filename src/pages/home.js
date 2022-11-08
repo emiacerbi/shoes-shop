@@ -28,7 +28,7 @@ export default function Home () {
   const theme = useTheme()
   return (
     <>
-      <HeaderLoggedIn pages={['Home', 'Products']} burger={true} links={['Test1', 'Test2']}/>
+      <HeaderLoggedIn pages={['Home', 'Products']} burger={true} links={['home', 'bag']}/>
       <Box sx={{ [theme.breakpoints.up('sm')]: { display: 'flex', flexDirection: 'row' } }}>
         <Box sx={{ display: 'none', [theme.breakpoints.up('sm')]: { width: 360, padding: '5px', display: 'block', flexDirection: 'column' } }}>
           <ProfileInfoSideBar/>
