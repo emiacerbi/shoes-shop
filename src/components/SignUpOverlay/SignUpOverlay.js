@@ -1,4 +1,5 @@
 import { Box, Typography, useTheme } from '@mui/material'
+import Image from 'next/image'
 
 import ColoredDash from '../ColoredDash/ColoredDash'
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
@@ -15,36 +16,33 @@ const SignUpOverlay = ({ setIsOverlayVisible }) => {
         backgroundColor: 'white',
         top: '0',
         left: '0',
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('overlay')]: {
           display: 'none'
         }
       }}
     >
       <Box
         sx={{
-          position: 'absolute',
+          position: 'relative',
           width: '100%',
-          height: '80vh',
-          top: '0px',
-          left: '0',
-          zIndex: 1,
-          backgroundImage: "url('/sign-up-shoes.png')",
-          backgroundSize: 'container',
-          backgroundRepeat: 'no-repeat',
+          height: '72vh',
           backgroundColor: '#e9eef4',
-          borderRadius: '0 0 20px 20px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-          paddingInline: '2rem',
-          paddingBlock: '1rem',
-          gap: '.75rem'
+          zIndex: 3
         }}
       >
-        <Typography variant='h1'>Welcome to Wellrun</Typography>
+        <Image src='/sign-up-shoes.png' alt='pair of shoes' layout='fill' objectFit='cover' />
+
+      </Box>
+
+      <Box sx={{
+        backgroundColor: '#e9eef4',
+        paddingInline: '1rem',
+        paddingBottom: '1rem'
+      }}>
+        <Typography variant='h1' sx={{ zIndex: 1, maxWidth: '170px' }}>Welcome to Wellrun</Typography>
         <Box
           sx={{
-            display: 'flex', gap: '.5rem'
+            display: 'flex', gap: '.5rem', zIndex: 1
           }}
         >
           <ColoredDash />
@@ -60,7 +58,7 @@ const SignUpOverlay = ({ setIsOverlayVisible }) => {
           paddingInline: '1rem',
           display: 'flex',
           gap: '1rem',
-          bottom: '50px'
+          bottom: '30px'
         }}
       >
         <SecondaryButton onClick={() => setIsOverlayVisible(false)}>

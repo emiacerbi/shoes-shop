@@ -1,5 +1,6 @@
 import { Button, Link, Typography } from '@mui/material'
 import { Box, useTheme } from '@mui/system'
+import Image from 'next/image'
 
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
 
@@ -11,10 +12,11 @@ const SignInOverlay = ({ setIsOverlayVisible }) => {
         position: 'absolute',
         width: '100%',
         height: '100vh',
-        backgroundColor: 'white',
         top: '0',
         left: '0',
         zIndex: '0',
+        backgroundColor: '#e9eef4',
+
         [theme.breakpoints.up('overlay')]: {
           display: 'none'
         }
@@ -22,25 +24,23 @@ const SignInOverlay = ({ setIsOverlayVisible }) => {
     >
       <Box
         sx={{
-          position: 'absolute',
+          position: 'relative',
           width: '100%',
-          height: '100vh',
+          height: '80vh',
           top: '0px',
           left: '0',
-          zIndex: '0',
-          backgroundImage: "url('/sign-up-shoes.png')",
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundColor: '#e9eef4',
           borderRadius: '0 0 20px 20px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',
           paddingInline: '2rem',
           paddingBlock: '1rem',
-          gap: '.75rem'
+          gap: '.75rem',
+          zIndex: -1,
+          overflow: 'hidden'
         }}
       >
+        <Image src='/sign-up-shoes.png' alt='pair of shoes' layout='fill' objectFit='cover' />
         <Typography
           variant='h1'
           sx={{
@@ -48,7 +48,8 @@ const SignInOverlay = ({ setIsOverlayVisible }) => {
             width: '9ch',
             left: '1.5rem',
             fontWeight: '600',
-            marginBottom: '7rem'
+            marginBottom: '-1rem',
+            zIndex: '2'
           }}
         >
           Welcome to Wellrun
@@ -85,8 +86,8 @@ const SignInOverlay = ({ setIsOverlayVisible }) => {
             <Button
               variant='text'
               sx={{
-                textTransform: 'none'
-
+                textTransform: 'none',
+                padding: 0
               }}
             >
               Sign up

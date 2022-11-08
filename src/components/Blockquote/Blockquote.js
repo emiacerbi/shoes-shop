@@ -1,6 +1,7 @@
 import React from 'react'
 import { Typography } from '@mui/material'
 import { Box, useTheme } from '@mui/system'
+import Image from 'next/image'
 
 import Star from '../Star/Star'
 import Wedge from '../Wedge/Wedge'
@@ -13,19 +14,17 @@ const Blockquote = () => {
       sx={{
         display: 'none',
         width: '50%',
-        backgroundImage: 'url(/sign-up-shoes-desktop.png)',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        [theme.breakpoints.up('lg')]: {
+        position: 'relative',
+        [theme.breakpoints.up('xl')]: {
           display: 'grid',
           placeContent: 'center',
           padding: '2rem',
           position: 'relative',
-          zIndex: 0
+          zIndex: 1
         }
       }}
     >
+      <Image src='/sign-up-shoes-desktop.png' layout='fill' objectFit='cover' alt='pair of shoes' priority />
       <Box
         sx={{
           [theme.breakpoints.up('lg')]: {
@@ -36,15 +35,13 @@ const Blockquote = () => {
             maxWidth: '756px',
             height: '317px',
             borderRadius: '32px',
-            padding: '4rem',
             display: 'flex',
             alignItems: 'center',
             border: '2px solid white',
             position: 'absolute',
             top: '50%',
             left: '50%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: -1
+            transform: 'translate(-50%, -50%)'
           }
         }}
       >
@@ -53,8 +50,9 @@ const Blockquote = () => {
         sx={{
           fontSize: '20px',
           color: '#0D0D0D',
-          maxWidth: '400px',
+          maxWidth: '450px',
           position: 'relative',
+          paddingBlock: '2rem',
           [theme.breakpoints.up('lg')]: {
             fontSize: '25px',
             maxWidth: '550px'
@@ -68,7 +66,7 @@ const Blockquote = () => {
             height: '38px',
             backgroundColor: 'transparent',
             position: 'absolute',
-            bottom: '-40px',
+            bottom: '10px',
             right: '75px',
             borderRadius: '50%',
             border: '2px solid white',
@@ -78,8 +76,8 @@ const Blockquote = () => {
             justifyContent: 'center',
             cursor: 'pointer',
             [theme.breakpoints.up('xl')]: {
-              top: '0',
-              right: '0'
+              top: '40px',
+              right: '-5px'
             }
           }}
         >
@@ -92,7 +90,7 @@ const Blockquote = () => {
             height: '38px',
             backgroundColor: 'transparent',
             position: 'absolute',
-            bottom: '-40px',
+            bottom: '10px',
             right: '15px',
             borderRadius: '50%',
             border: '2px solid white',
@@ -104,8 +102,8 @@ const Blockquote = () => {
             transform: 'rotate(180deg)',
             zIndex: 3,
             [theme.breakpoints.up('xl')]: {
-              top: '0',
-              right: '-60px'
+              top: '40px',
+              right: '-70px'
             }
           }}
 
@@ -113,31 +111,33 @@ const Blockquote = () => {
           <Wedge />
         </Box>
             &quot;Lorem Ipsum is a really great company because the team is passionate about the projects they produce, the people they work with, the quality of the work they do.&quot;`
-      </Box>
-      <Typography
-        variant='p'
-        sx={{
-          marginTop: '1rem',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '.75rem',
-          fontWeight: '600',
-          color: '#0D0D0D',
-          [theme.breakpoints.up('lg')]: {
-            fontSize: '25px'
-          }
-        }}
-      >
+        <Typography
+          variant='p'
+          sx={{
+            marginTop: '1rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '.75rem',
+            fontWeight: '600',
+            color: '#0D0D0D',
+            zIndex: 1,
+            [theme.breakpoints.up('lg')]: {
+              fontSize: '25px'
+            }
+          }}
+        >
       John Stone <Star /><Star /><Star /><Star /><Star />
-      </Typography>
+        </Typography>
 
-      <Typography
-        sx={{
-          color: '#797979'
-        }}
-      >
+        <Typography
+          sx={{
+            color: '#797979',
+            zIndex: 1
+          }}
+        >
       Ukraine, Chernivtsi
-      </Typography>
+        </Typography>
+      </Box>
     </Box>
   )
 }
