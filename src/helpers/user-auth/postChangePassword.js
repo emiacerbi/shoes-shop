@@ -1,20 +1,14 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-const ENDPOINT = `${BASE_URL}/api/auth/change-password`
+import { fetchWrapper } from '../fetchWrapper'
 
 export const postChangePassword = async (password, currentPassword, passwordConfirmation) => {
-  const config = {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify({
+  const response = await fetchWrapper('api/auth/change-password', {
+    body: {
       password,
       currentPassword,
       passwordConfirmation
-    })
-  }
+    }
+  })
 
-  const response = await fetch(ENDPOINT, config)
   return response
 }
 

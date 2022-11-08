@@ -1,19 +1,12 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-const ENDPOINT = `${BASE_URL}/api/auth/local`
+import { fetchWrapper } from '../fetchWrapper'
 
 export const postLoginUser = async ({ identifier, password }) => {
-  const config = {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify({
+  const response = await fetchWrapper('api/auth/local', {
+    body: {
       identifier,
       password
-    })
-  }
-
-  const response = await fetch(ENDPOINT, config)
+    }
+  })
   return response
 }
 
