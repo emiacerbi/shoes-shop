@@ -1,7 +1,6 @@
-import { Button, useTheme } from '@mui/material'
+import { Button } from '@mui/material'
 
 const SecondaryButton = ({ children, onClick, maxWidth = '436px' }) => {
-  const theme = useTheme()
   return (
     <Button
       onClick={onClick}
@@ -15,11 +14,9 @@ const SecondaryButton = ({ children, onClick, maxWidth = '436px' }) => {
         textTransform: 'none',
         cursor: 'pointer',
         maxWidth,
-        [theme.breakpoints.up('md')]: {
-          fontSize: '16px'
-        }
+        fontSize: { md: '16px' }
       }}
-      variant = 'outlined'
+      variant='outlined'
     >
       {children}
     </Button>
