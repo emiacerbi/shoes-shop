@@ -2,7 +2,7 @@ import { Box, Typography, useTheme } from '@mui/material'
 
 import ColoredDash from '../ColoredDash/ColoredDash'
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
-import SecondaryButton from '../SecondaryButton.js/SecondaryButton'
+import SecondaryButton from '../SecondaryButton/SecondaryButton'
 
 const SignUpOverlay = ({ setIsOverlayVisible }) => {
   const theme = useTheme()

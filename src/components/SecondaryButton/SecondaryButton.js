@@ -13,6 +13,7 @@ const SecondaryButton = ({ children, onClick, maxWidth = '436px' }) => {
         fontFamily: '"Work Sans", sans-serif',
         fontWeight: 500,
         textTransform: 'none',
+        cursor: 'pointer',
         maxWidth,
         [theme.breakpoints.up('md')]: {
           fontSize: '16px'

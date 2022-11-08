@@ -1,7 +1,7 @@
 import ChartShoeCard from '@components/ChartShoeCard/ChatShoeCard'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
-import SecondaryButton from '@components/SecondaryButton.js/SecondaryButton'
+import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import { Divider, Grid, Stack, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
 

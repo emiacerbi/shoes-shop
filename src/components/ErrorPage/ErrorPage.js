@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material'
 import Link from 'next/link'
 
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
-import SecondaryButton from '../SecondaryButton.js/SecondaryButton'
+import SecondaryButton from '../SecondaryButton/SecondaryButton'
 
 const ErrorPage = () => {
   return (
