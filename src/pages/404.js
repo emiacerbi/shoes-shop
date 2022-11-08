@@ -14,10 +14,9 @@ export default function Error404 () {
 
       <Box
         sx={{
-          display: { xs: 'none', md: 'flex' },
-          minWidth: '1000px'
+          display: { xs: 'none', md: 'flex' }
         }}>
-        <HeaderLoggedIn pages={['Home', 'For women', 'For men', 'Accesories', 'Sale']} />
+        <HeaderLoggedIn links={['Home', 'For women', 'For men', 'Accesories', 'Sale']} pages={['Home', 'For women', 'For men', 'Accesories', 'Sale']} />
       </Box>
 
       <ErrorPage/>

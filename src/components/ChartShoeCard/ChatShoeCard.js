@@ -61,7 +61,7 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
               onChange={handleChange}
               displayEmpty
               inputProps={{ 'aria-label': 'Without label' }}
-              outline={false}
+              outline='false'
               sx={{ height: '25px', minWidth: 120, fontSize: '12px', boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
             >
               <MenuItem value="">

@@ -11,7 +11,6 @@ const PrimaryButton = ({ children, onClick, maxWidth = '436px' }) => {
       variant='contained'
       sx={{
         color: 'white',
-        backgroundColor: '',
         textTransform: 'none',
         maxWidth,
         fontSize: '12px',
