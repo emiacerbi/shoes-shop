@@ -21,10 +21,10 @@ const SignUp = () => {
     }
   }, [mobileWidth])
 
-  const { handleSubmit, handleInputChange, isPasswordIncorrect, mutation } = useSignUpForm()
+  const { handleSubmit, handleInputChange, isPasswordIncorrect, mutation } =
+    useSignUpForm()
 
   return (
-
     <Box
       sx={{
         position: 'relative',
@@ -44,7 +44,6 @@ const SignUp = () => {
           [theme.breakpoints.up('lg')]: {
             width: '50%'
           }
-
         }}
       >
         <HeaderBeforeLogin />
@@ -57,20 +56,51 @@ const SignUp = () => {
             paddingBlock: '2rem'
           }}
         >
-          <Typography variant="h1">Create an account</Typography>
-          <Typography variant='p'>Create an account to get an easy access to your dream shopping</Typography>
+          <Typography variant='h1'>Create an account</Typography>
+          <Typography variant='p'>
+            Create an account to get an easy access to your dream shopping
+          </Typography>
           <Form onSubmit={handleSubmit}>
-            <PrimaryInput label='Name' placeholder='Hayman Andres' name='name' onChange={handleInputChange} type='text' />
-            <PrimaryInput label='Email' placeholder='example@gmail.com' name='email' onChange={handleInputChange} type='email' />
-            <PrimaryInput label='Password' placeholder='at least 8 characters' name='password' onChange={handleInputChange} type='password' />
-            {
-              isPasswordIncorrect && (
-                <Typography variant='p' sx={{ color: theme.palette.primary.main, marginTop: '-15px', fontSize: '20px' }}>
-                  Your password should be 8 characters long!
-                </Typography>
-              )
-            }
-            <PrimaryInput label='Repeat password' placeholder='at least 8 characters' name='repeatedPassword' onChange={handleInputChange} type='password' />
+            <PrimaryInput
+              label='Name'
+              placeholder='Hayman Andres'
+              name='name'
+              onChange={handleInputChange}
+              type='text'
+            />
+            <PrimaryInput
+              label='Email'
+              placeholder='example@gmail.com'
+              name='email'
+              onChange={handleInputChange}
+              type='email'
+            />
+            <PrimaryInput
+              label='Password'
+              placeholder='at least 8 characters'
+              name='password'
+              onChange={handleInputChange}
+              type='password'
+            />
+            {isPasswordIncorrect && (
+              <Typography
+                variant='p'
+                sx={{
+                  color: theme.palette.primary.main,
+                  marginTop: '-15px',
+                  fontSize: '20px'
+                }}
+              >
+                Your password should be 8 characters long!
+              </Typography>
+            )}
+            <PrimaryInput
+              label='Repeat password'
+              placeholder='at least 8 characters'
+              name='repeatedPassword'
+              onChange={handleInputChange}
+              type='password'
+            />
             <InputLabel
               sx={{
                 fontSize: '10px',
@@ -87,9 +117,9 @@ const SignUp = () => {
               Remember me
             </InputLabel>
             <PrimaryButton>
-              {
-                mutation.isLoading ? <CircularProgress size={28} color='action' /> : 'Sign up'
-              }
+              {mutation.isLoading
+                ? (<CircularProgress size={28} color='action' />)
+                : ('Sign up')}
             </PrimaryButton>
             <Typography
               variant='p'
@@ -98,7 +128,7 @@ const SignUp = () => {
                 fontWeight: '500'
               }}
             >
-                Already have an account?
+              Already have an account?
               <Link href='/'>
                 <Button
                   variant='text'
@@ -118,13 +148,10 @@ const SignUp = () => {
       {/* Right container */}
       <Blockquote />
 
-      {
-        isOverlayVisible && mobileWidth < 380 && (
-          <SignUpOverlay setIsOverlayVisible={setIsOverlayVisible} />
-        )
-      }
+      {isOverlayVisible && mobileWidth < 380 && (
+        <SignUpOverlay setIsOverlayVisible={setIsOverlayVisible} />
+      )}
     </Box>
-
   )
 }
 

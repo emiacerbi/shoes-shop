@@ -2,9 +2,9 @@ import { Box, Typography } from '@mui/material'
 
 export default function BarItem ({ name, num, children }) {
   const numTag = num
-    ? (<Box>
+    ? (<Box sx={{ cursor: 'pointer' }}>
       <Typography
-        sx = {{
+        sx={{
           backgroundColor: 'primary.main',
           color: 'white',
           borderRadius: '50%',
@@ -19,7 +19,9 @@ export default function BarItem ({ name, num, children }) {
           marginLeft: '9px',
           padding: '2px'
         }}
-      > {num} </Typography>
+      >
+        {num}
+      </Typography>
     </Box>)
     : null
 
@@ -44,7 +46,7 @@ export default function BarItem ({ name, num, children }) {
       >
         {name}
       </Typography>
-      {numTag }
+      {numTag}
     </Box>
   )
 }
