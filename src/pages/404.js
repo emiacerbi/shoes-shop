@@ -17,7 +17,6 @@ export default function Error404 () {
           display: { xs: 'none', md: 'flex' },
           minWidth: '1000px'
         }}>
-
         <HeaderLoggedIn pages={['Home', 'For women', 'For men', 'Accesories', 'Sale']} />
       </Box>
 

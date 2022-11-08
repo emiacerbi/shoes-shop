@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
@@ -37,7 +38,9 @@ const ErrorPage = () => {
             textAlign: { xs: 'center', md: 'start' },
             alignItems: { xs: 'center', md: 'flex-start' },
             gap: { xs: '.5rem', md: '1em' },
-            width: '100%'
+            width: '100%',
+            maxWidth: '538px',
+            marginInline: 'auto'
           }}
         >
           <Typography variant="h1">Error 404</Typography>
@@ -66,6 +69,7 @@ const ErrorPage = () => {
               width: '300px',
               margin: { md: '0' },
               gap: '1rem'
+
             }}
           >
             <Link href="/">
@@ -77,33 +81,38 @@ const ErrorPage = () => {
           </Box>
         </Box>
       </Box>
+      <Box sx={{
+        display: { xs: 'block', sm: 'none' },
+        height: '85px',
+        width: '100%',
+        background: '#E5E5E7',
+        position: 'absolute',
+        zIndex: -1
+      }} />
       <Box
         sx={{
-          backgroundColor: '#e5e6e7',
-          backgroundImage: "url('/error404.png')",
-          backgroundPosition: 'bottom',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
+          display: { xs: 'block', md: 'none' },
           position: 'absolute',
-          height: '75%',
+          height: { xs: '75%', sm: '85%' },
           width: { xs: '100%', md: '0' },
-          top: '0',
+          top: { xs: '80px', sm: '0' },
           borderRadius: { xs: '0 0 2rem 2rem', md: '0' },
           zIndex: -1,
           flexDirection: { xs: 'row', md: 'column' }
         }}
-      ></Box>
+      >
+        <Image src='/error404.png' layout='fill' objectFit='cover' alt='error image' priority />
+      </Box>
       <Box
         sx={{
           display: { xs: 'none', md: 'block' },
           width: '50%',
-          backgroundImage: "url('/error404.png')",
-          backgroundPosition: { xs: 'bottom', md: 'center' },
-          backgroundColor: '#E5E6E7',
-          backgroundSize: '90%',
-          backgroundRepeat: 'no-repeat'
+          position: 'relative',
+          backgroundColor: '#E5E6E7'
         }}
-      ></Box>
+      >
+        <Image src='/error404.png' layout='fill' objectFit='cover' alt='error image' priority />
+      </Box>
     </Box>
   )
 }

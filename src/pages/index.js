@@ -7,9 +7,8 @@ import SignInOverlay from '@components/SignInOverlay/SignInOverlay'
 import { Button, Checkbox, InputLabel, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
 import useSignInForm from 'hooks/useSignInForm'
+import Image from 'next/image'
 import Link from 'next/link'
-
-// import Form from '../src/components/Form/Form'
 
 const SignIn = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(true)
@@ -133,19 +132,16 @@ const SignIn = () => {
       <Box
         sx={{
           display: 'none',
+          position: 'relative',
           backgroundColor: 'lightblue',
           width: '50%',
           height: '100vh',
-          backgroundImage: 'url(/sigin-in-shoes-desktop.png)',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
           [theme.breakpoints.up('md')]: {
             display: 'grid'
           }
         }}
       >
-
+        <Image src='/sigin-in-shoes-desktop.png 'layout='fill' alt='pair of shoes' objectFit='cover'/>
       </Box>
       {
         isOverlayVisible && mobileWidth < 500 && (
