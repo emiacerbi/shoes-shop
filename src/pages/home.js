@@ -9,11 +9,23 @@ import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Box, Button, Typography, useTheme } from '@mui/material'
 import { UserContext } from 'context/UserContext'
+import { getProducts } from 'helpers/products/getProducts'
 import Image from 'next/image'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 
-export default function Home () {
+export async function getStaticProps () {
+  const res = await getProducts()
+  const products = await res.json()
+  return {
+    props: {
+      products
+    }
+  }
+}
+
+export default function Home ({ products }) {
+  console.log(products)
   const context = useContext(UserContext)
   const [ScreenWidth, setScreenWidth] = useState()
 
@@ -26,6 +38,7 @@ export default function Home () {
   }, [])
 
   const theme = useTheme()
+
   return (
     <>
       <HeaderLoggedIn pages={['Home', 'Products']} burger={true} links={['home', 'bag']}/>
