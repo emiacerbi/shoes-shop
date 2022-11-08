@@ -36,14 +36,14 @@ export default function Home () {
             <AccountCircleOutlined sx={{ color: '#6E7278' }}/>
             <BarItem name="My Profile"/>
           </Box>
-          {/* <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
+          <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
             <Button
               onClick={() => signOut()}
               sx={{ textTransform: 'none', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
               <BarItem name="Log out"> <LogoutIcon sx={{ color: '#6E7278' }}/></BarItem>
             </Button>
-          </Box> */}
+          </Box>
         </Box>
         <Box component='main' sx={{ m: '20px', width: '100%' }}>
           <Box sx={{ height: { xs: 132, sm: 260 }, m: { xs: '-20px', sm: 0 }, position: 'relative' }}>
