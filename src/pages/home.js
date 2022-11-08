@@ -36,14 +36,14 @@ export default function Home () {
             <AccountCircleOutlined sx={{ color: '#6E7278' }}/>
             <BarItem name="My Profile"/>
           </Box>
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
+          {/* <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
             <Button
               onClick={() => signOut()}
               sx={{ textTransform: 'none', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
               <BarItem name="Log out"> <LogoutIcon sx={{ color: '#6E7278' }}/></BarItem>
             </Button>
-          </Box>
+          </Box> */}
         </Box>
         <Box component='main' sx={{ m: '20px', width: '100%' }}>
           <Box sx={{ height: { xs: 132, sm: 260 }, m: { xs: '-20px', sm: 0 }, position: 'relative' }}>
@@ -52,7 +52,7 @@ export default function Home () {
           <SubHeader/>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant='h1'>My Products</Typography>
-            {ScreenWidth > 599 && (<Link href='/add-product'><PrimaryButton maxWidth='152px' >Add Products</PrimaryButton></Link>)}
+            {ScreenWidth > 599 && (<PrimaryButton maxWidth='152px' ><Link href='/add-product'>Add Products</Link></PrimaryButton>)}
           </Box>
           <Box sx={{ mt: '20px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
             <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
