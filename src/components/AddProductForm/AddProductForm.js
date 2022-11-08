@@ -27,9 +27,13 @@ const AddProductForm = ({ brands, genders, sizes }) => {
     })
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+
   return (
 
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <PrimaryInput
         required
         label="Product Name"
