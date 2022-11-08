@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Form from '@components/Form/Form'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
@@ -14,8 +14,14 @@ import { theme } from '../styles/theme'
 
 export default function UpdateProfile () {
   const [settings, setSettings] = useState(true)
-  const pages = ['Home', 'For women', 'For Men', 'Accesories', 'Sale']
-  const links = ['/', '/for-women', '/for-men', '/accesories', '/sale']
+  const [pages, setPages] = useState([])
+  const [links, setLinks] = useState([])
+  console.log(pages)
+
+  useEffect(() => {
+    setPages(['Home', 'For women', 'For Men', 'Accesories', 'Sale'])
+    setLinks(['/', '/for-women', '/for-men', '/accesories', '/sale'])
+  }, [])
 
   function handleSettings () {
     return setSettings(!settings)
