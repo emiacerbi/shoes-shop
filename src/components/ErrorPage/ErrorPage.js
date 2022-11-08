@@ -1,6 +1,6 @@
+import { Box, Typography } from '@mui/material'
 import Link from 'next/link'
-import { Typography, Box } from '@mui/material'
-import React from 'react'
+
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
 import SecondaryButton from '../SecondaryButton.js/SecondaryButton'
 
@@ -82,7 +82,7 @@ const ErrorPage = () => {
           backgroundColor: '#e5e6e7',
           backgroundImage: "url('/error404.png')",
           backgroundPosition: 'bottom',
-          backgroundSize: 'contain',
+          backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           position: 'absolute',
           height: '75%',

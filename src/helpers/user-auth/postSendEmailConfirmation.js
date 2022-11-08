@@ -1,20 +1,11 @@
 import { fetchWrapper } from '../fetchWrapper'
 
-const BASE_URL = process.env.BASE_URL
-const ENDPOINT = `${BASE_URL}/api/auth/send-email-confirmation`
-
 export const postResetPassword = async (email) => {
-  const config = {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify({
+  const response = await fetchWrapper('api/auth/send-email-confirmation', {
+    body: {
       email
-    })
-  }
-
-  const response = await fetchWrapper(ENDPOINT, config)
+    }
+  })
   return response
 }
 

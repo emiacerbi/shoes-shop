@@ -1,6 +1,7 @@
+import React from 'react'
 import { Typography } from '@mui/material'
 import { Box, useTheme } from '@mui/system'
-import React from 'react'
+
 import Star from '../Star/Star'
 import Wedge from '../Wedge/Wedge'
 

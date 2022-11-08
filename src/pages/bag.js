@@ -1,10 +1,9 @@
+import ChartShoeCard from '@components/ChartShoeCard/ChatShoeCard'
+import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
+import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
+import SecondaryButton from '@components/SecondaryButton.js/SecondaryButton'
 import { Divider, Grid, Stack, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
-import ChartShoeCard from '../src/components/ChartShoeCard/ChatShoeCard'
-import HeaderLoggedIn from '../src/components/HeaderLoggedIn/HeaderLoggedIn'
-import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
-import SecondaryButton from '../src/components/SecondaryButton.js/SecondaryButton'
 
 const pages = ['Home', 'For women', 'For men', 'Accesories', 'Sale']
 const links = ['/home', '/for-women', 'for-men', 'accesories', 'sale']

@@ -1,13 +1,15 @@
-import { Checkbox, InputLabel, Typography, useTheme, Button } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import Form from '../src/components/Form/Form'
-import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
-import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
-import Link from 'next/link'
-import SignInOverlay from '../src/components/SignInOverlay/SignInOverlay'
-import useSignInForm from '../src/hooks/useSignInForm'
-import HeaderBeforeLogin from '../src/components/Header/Header'
+import { useEffect, useState } from 'react'
+import Form from '@components/Form/Form'
+import HeaderBeforeLogin from '@components/Header/Header'
+import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
+import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
+import SignInOverlay from '@components/SignInOverlay/SignInOverlay'
+import { Button, Checkbox, InputLabel, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
+import useSignInForm from 'hooks/useSignInForm'
+import Link from 'next/link'
+
+// import Form from '../src/components/Form/Form'
 
 const SignIn = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(true)
@@ -20,7 +22,7 @@ const SignIn = () => {
     }
   }, [])
 
-  const { handleInputChange, handleSubmit, isPasswordIncorrect } = useSignInForm()
+  const { handleInputChange, handleSubmit } = useSignInForm()
 
   return (
     <Box
@@ -60,16 +62,8 @@ const SignIn = () => {
           <Typography variant='p'>Welcome back! Please enter your details to log into your account.</Typography>
 
           <Form onSubmit={handleSubmit}>
-            <PrimaryInput required label='Email' placeholder='example@gmail.com' name='email' onChange={handleInputChange} type='text' />
+            <PrimaryInput required label='Email' placeholder='example@gmail.com' name='email' onChange={handleInputChange} type='email' />
             <PrimaryInput required label='Password' placeholder='at least 8 characters' name='password' onChange={handleInputChange} type='password' />
-
-            {
-              isPasswordIncorrect && (
-                <Typography variant='p' sx={{ color: theme.palette.primary.main, marginTop: '-15px', fontSize: '20px' }}>
-                  Your password should be 8 characters long!
-                </Typography>
-              )
-            }
 
             <Box
               sx={{
@@ -90,7 +84,7 @@ const SignIn = () => {
                   }
                 }}
               >
-                <Checkbox />
+                <Checkbox sx={{ marginLeft: '-.75rem', marginRight: '-.5rem' }} />
                 Remember me
               </InputLabel>
               <Link href='forgot-password' >
@@ -108,7 +102,7 @@ const SignIn = () => {
             </Box>
 
             <PrimaryButton>
-              Sign In
+              Sign in
             </PrimaryButton>
 
             <Typography

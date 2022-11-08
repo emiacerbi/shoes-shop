@@ -1,5 +1,5 @@
-import { getToken } from 'next-auth/jwt'
 import { NextResponse } from 'next/server'
+import { getToken } from 'next-auth/jwt'
 
 export async function middleware (req) {
   const url = req.nextUrl.clone()
@@ -11,4 +11,4 @@ export async function middleware (req) {
   }
 }
 
-export const config = { matcher: ['/home', '/bag', '/update-profile'] }
+export const config = { matcher: ['/home', '/bag', '/update-profile', '/add-product'] }

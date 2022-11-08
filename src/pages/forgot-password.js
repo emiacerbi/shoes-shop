@@ -1,28 +1,30 @@
-import Form from '../src/components/Form/Form'
-import PrimaryButton from '../src/components/PrimaryButton/PrimaryButton'
-import PrimaryInput from '../src/components/PrimaryInput/PrimaryInput'
-import Header from '../src/components/Header/Header'
-import Link from 'next/link'
-import { Typography, Box, Container } from '@mui/material'
-
-import { postForgotPassword } from '../src/helpers/user-auth/postForgotPassword'
+import toast from 'react-hot-toast'
+import Form from '@components/Form/Form'
+import HeaderBeforeLogin from '@components/Header/Header'
+import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
+import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
+import { Box, Container, Typography } from '@mui/material'
 import { useMutation } from '@tanstack/react-query'
+import { postForgotPassword } from 'helpers/user-auth/postForgotPassword'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function ForgotPassword () {
-  const { mutate } = useMutation(
-    postForgotPassword,
-    {
-      mutationKey: 'forgot-password',
-      onError: (error) => console.log(error)
-    }
-  )
+  const { mutate } = useMutation(postForgotPassword, {
+    mutationKey: 'forgot-password'
+  })
   const handleSubmit = (e) => {
     e.preventDefault()
     const email = e.target.email.value
-    mutate(email, { onSuccess: resetForm(e) })
-  }
-  const resetForm = (event) => {
-    event.target.reset()
+    mutate(email, {
+      onSuccess: () => {
+        toast.success('Mail was sent. Check your inbox.')
+      },
+      onError: () => {
+        toast.error('Something went wrong. Try again.')
+      }
+    })
+    e.target.reset()
   }
 
   return (
@@ -39,7 +41,7 @@ export default function ForgotPassword () {
           width: { xs: '100%', sm: '50%' }
         }}
       >
-        <Header />
+        <HeaderBeforeLogin />
         <Box
           sx={{
             display: 'flex',
@@ -57,7 +59,7 @@ export default function ForgotPassword () {
             <PrimaryInput
               type='email'
               label='Email'
-              name = 'email'
+              name='email'
               placeholder='example@mail.com'
             />
             <PrimaryButton>Reset password</PrimaryButton>
@@ -70,11 +72,14 @@ export default function ForgotPassword () {
         </Box>
       </Container>
       <Box
-        sx={{ width: { xs: '0%', sm: '50%' }, objectFit: 'cover' }}
-        component='img'
-        src='/shoes.png'
-        alt=''
-      ></Box>
+        sx={{
+          width: { xs: '0%', sm: '50%' },
+          overflow: 'hidden',
+          position: 'relative'
+        }}
+      >
+        <Image src='/shoes.png' layout='fill' objectFit='cover' alt='' />
+      </Box>
     </Box>
   )
 }

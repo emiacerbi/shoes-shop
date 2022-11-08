@@ -1,12 +1,15 @@
+import { Toaster } from 'react-hot-toast'
 import { ThemeProvider } from '@mui/material'
-import { UserProvider } from '../src/context/UserContext'
+import { theme } from '@styles/theme'
 import {
   QueryClient,
   QueryClientProvider
 } from '@tanstack/react-query'
-import '../styles/globals.css'
-import { theme } from '../styles/theme'
 import { SessionProvider } from 'next-auth/react'
+
+import { UserProvider } from '../context/UserContext'
+
+import '../styles/globals.css'
 
 export default function App ({
   Component,
@@ -19,6 +22,7 @@ export default function App ({
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <UserProvider>
+            <Toaster />
             <Component {...pageProps} />
           </UserProvider>
         </QueryClientProvider>

@@ -1,22 +1,14 @@
 import { fetchWrapper } from '../fetchWrapper'
 
-const BASE_URL = process.env.BASE_URL
-const ENDPOINT = `${BASE_URL}/api/auth/change-password`
-
 export const postChangePassword = async (password, currentPassword, passwordConfirmation) => {
-  const config = {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify({
+  const response = await fetchWrapper('api/auth/change-password', {
+    body: {
       password,
       currentPassword,
       passwordConfirmation
-    })
-  }
+    }
+  })
 
-  const response = await fetchWrapper(ENDPOINT, config)
   return response
 }
 
