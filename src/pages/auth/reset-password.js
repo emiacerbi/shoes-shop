@@ -40,8 +40,13 @@ export default function ResetPassword () {
         mutate(
           { password, passwordConfirmation, code },
           {
-            onSuccess: () => toast.success('Password reset successfully'),
-            onError: () => toast.error('Password reset failed. Try again later')
+            onSuccess: (res) => {
+              if (res.ok) {
+                toast.success('Password reset successfully')
+              } else {
+                toast.error('Password reset failed. Try again later')
+              }
+            }
           }
         )
       }
@@ -109,3 +114,9 @@ export default function ResetPassword () {
     </Box>
   )
 }
+
+// on error response is ...
+// {"data":null,"error":{"status":400,"name":"ValidationError","message":"Incorrect code provided","details":{}}}
+
+// on success response is ...
+// {"jwt":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODMsImlhdCI6MTY2ODAyMzIyMCwiZXhwIjoxNjcwNjE1MjIwfQ.GJ1EoHrtKgXZktFWRFCO-4wNnsN4a-OuIU392omMfWU","user":{"id":83,"username":"probando","email":"kawek23729@jernang.com","provider":"local","confirmed":true,"blocked":false,"createdAt":"2022-11-09T19:45:58.381Z","updatedAt":"2022-11-09T19:46:24.843Z"}}
