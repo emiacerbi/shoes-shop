@@ -34,13 +34,17 @@ export default function ResetPassword () {
     } else {
       const params = new URLSearchParams(document.location.search)
       const code = params.get('code')
-      mutate(
-        { password, passwordConfirmation, code },
-        {
-          onSuccess: toast.success('Password reset successfully'),
-          onError: toast.error('Password reset failed')
-        }
-      )
+      if (!code) {
+        toast.error('Password reset failed. Try again later')
+      } else {
+        mutate(
+          { password, passwordConfirmation, code },
+          {
+            onSuccess: toast.success('Password reset successfully'),
+            onError: toast.error('Password reset failed. Try again later')
+          }
+        )
+      }
     }
     e.target.reset()
   }
