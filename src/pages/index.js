@@ -141,7 +141,7 @@ const SignIn = () => {
           }
         }}
       >
-        <Image src='/sigin-in-shoes-desktop.png 'layout='fill' alt='pair of shoes' objectFit='cover'/>
+        <Image src='/sign-in-shoes-desktop.png 'layout='fill' alt='pair of shoes' objectFit='cover'/>
       </Box>
       {
         isOverlayVisible && mobileWidth < 500 && (
