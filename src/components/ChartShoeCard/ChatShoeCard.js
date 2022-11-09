@@ -5,7 +5,7 @@ import { Divider, FormControl, Grid, MenuItem, Select, Stack, Typography, useThe
 import { Box } from '@mui/system'
 import Image from 'next/image'
 
-const ChartShoeCard = ({ img, alt, name, price, gender }) => {
+const ChartShoeCard = ({ img, alt, name, price, gender, categories }) => {
   const theme = useTheme()
 
   const [size, setSize] = useState('')
@@ -62,14 +62,16 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
               displayEmpty
               inputProps={{ 'aria-label': 'Without label' }}
               outline='false'
-              sx={{ height: '25px', minWidth: 120, fontSize: '12px', boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
+              sx={{ height: '25px', minWidth: 120, fontSize: '12px', boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0, padding: 0 } }}
             >
               <MenuItem value="">
                 Size
               </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+
+              {
+                categories.sizes.data.map(size => <MenuItem key={size.id}>{size.attributes.value}</MenuItem>)
+              }
+
             </Select>
           </FormControl>
 
@@ -85,9 +87,11 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
               <MenuItem value="">
                 Color
               </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+
+              {
+                categories.colors.data.map(color => <MenuItem key={color.id}>{color.attributes.name}</MenuItem>)
+              }
+
             </Select>
           </FormControl>
 
@@ -103,9 +107,12 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
               <MenuItem value="">
                 Quantity
               </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={1}>1</MenuItem>
+              <MenuItem value={2}>2</MenuItem>
+              <MenuItem value={4}>4</MenuItem>
+              <MenuItem value={5}>5</MenuItem>
+              <MenuItem value={6}>6</MenuItem>
+              <MenuItem value={7}>7</MenuItem>
             </Select>
           </FormControl>
         </Box>
