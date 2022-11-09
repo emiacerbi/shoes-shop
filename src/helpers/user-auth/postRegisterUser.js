@@ -1,5 +1,7 @@
+import { fetchWrapper } from 'helpers/fetchWrapper'
+
 export const postRegisterUser = async ({ username, email, password }) => {
-  const response = await fetch('api/auth/local/register', {
+  const response = await fetchWrapper('api/auth/local/register', {
     body: {
       username,
       email,

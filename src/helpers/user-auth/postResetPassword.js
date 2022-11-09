@@ -1,5 +1,7 @@
+import { fetchWrapper } from 'helpers/fetchWrapper'
+
 export const postResetPassword = async ({ password, passwordConfirmation, code }) => {
-  const response = await fetch('api/auth/reset-password', {
+  const response = await fetchWrapper('api/auth/reset-password', {
     body: {
       password,
       passwordConfirmation,
