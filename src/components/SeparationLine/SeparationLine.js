@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
 
-function SeparationLine () {
+function SeparationLine ({ width }) {
   return (
     <Box
       sx={{
-        width: '320px',
+        width: `${width}`,
         color: '#EAECF0',
         border: '1px solid',
         mt: '16px'

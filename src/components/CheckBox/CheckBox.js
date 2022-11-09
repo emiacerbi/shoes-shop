@@ -1,4 +1,4 @@
-import { FormGroup, FormControlLabel, Checkbox } from '@mui/material'
+import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 
 function CheckBox ({ label, checked, handleChangeAdidas, handleChangeAsics, handleChangeNB, handleChangeNike, handleChangePuma, handleChangeReebok }) {
   return (
@@ -18,21 +18,6 @@ function CheckBox ({ label, checked, handleChangeAdidas, handleChangeAsics, hand
         />
       </FormGroup>
 
-      {/* { checked === false
-        ? label === 'Adidas' && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography>
-        : checked === false
-          ? label === 'Asics' && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography>
-          : checked === false
-            ? label === 'New Balance' && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography>
-            : checked === false
-              ? label === 'Nike'
-              : checked === false
-                ? label === 'Puma'
-                : checked === false
-                  ? label === 'Reebok'
-                // <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography>
-
-                  : null } */}
     </>
   )
 }

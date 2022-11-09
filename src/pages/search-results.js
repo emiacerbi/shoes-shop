@@ -6,16 +6,9 @@ import ProductCard from '@components/ProductCard/ProductCard'
 import SeparationLine from '@components/SeparationLine/SeparationLine'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import { Box, InputBase, Typography } from '@mui/material'
-
-import { theme } from '../styles/theme'
+import { theme } from '@styles/theme'
 
 export default function SearchResults () {
-  // const { width } = useWindowDimensions()
-  // console.log(width)
-
-  const [opacity, setOpacity] = useState(1)
-  const [screenWidth, setScreenWidth] = useState(0)
-
   // Filters
   const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
   const [filterGender, setFilterGender] = useState(true) // State to show/hide Gender filters
@@ -32,23 +25,24 @@ export default function SearchResults () {
   const [checkedPuma, setCheckedPuma] = useState(true) // State to show/hide the stock
   const [checkedReebok, setCheckedReebok] = useState(true) // State to show/hide the stock
 
+  const [opacity, setOpacity] = useState('')
+  const [screenWidth, setScreenWidth] = useState(0)
+
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    window.addEventListener('resize', () => {
       setScreenWidth(window.innerWidth)
-    }
-    console.log(screenWidth)
-  }, [screenWidth])
+    })
+  })
 
   const showFiltersBlock = () => {
-    if (screenWidth < 599 & showFilters === true) {
-      setOpacity(1)
-    } else {
-      (
-        setOpacity(0.4)
-      )
+    if (screenWidth > 599 & (showFilters === false || showFilters === true)) {
+      setOpacity('100%')
+    } else if (screenWidth < 599 & showFilters === false) {
+      setOpacity('65%')
+    } else if (screenWidth < 599 & showFilters === true) {
+      setOpacity('100%')
     }
-    console.log(screenWidth)
-    return setShowFilters(!showFilters)
+    setShowFilters(!showFilters)
   }
 
   function handleGender () {
@@ -97,12 +91,12 @@ export default function SearchResults () {
       <HeaderLoggedIn
         pages={['Home', 'For women', 'For Men', 'Accesories', 'Sale']}
         links={['/', '/for-women', '/for-men', '/accesories', '/sale']}
-        cart={true} burger={true}/>
-      <Box display={{ xs: 'flex', sm: 'flex' }} sx={{ maxWidth: '1920px', mt: 'auto' }}>
+        cart={true} burger={true} opacity={opacity}/>
+      <Box display={{ xs: 'block', sm: 'flex' }} sx={{ maxWidth: '1920px', mt: 'auto', width: 'auto' }}>
 
         {/* DESKTOP FILTERS */}
         {showFilters &&
-        <Box sx={{ width: '320px', heigth: 'auto', display: { xs: 'none', sm: 'flex' }, flexDirection: 'column', ml: '40px', mr: '40px' }}>
+        <Box sx={{ width: '200px', heigth: 'auto', display: { xs: 'none', sm: 'flex' }, flexDirection: 'column', ml: '40px', mr: '40px' }}>
           <Typography
             sx={{
               fontWeight: 300,
@@ -115,19 +109,19 @@ export default function SearchResults () {
           <Typography {...theme.typography.h1}>
             Air Force 1 (137)
           </Typography>
-          <SeparationLine/>
+          <SeparationLine width={'200px'}/>
 
           {/* FILTER BLOCK */}
-          <Box sx={{ maxWidth: '320px' }}>
+          <Box sx={{ maxWidth: '200px' }}>
             {/* Gender */}
             <FilterTitle filterName={'Gender'} handleGender={handleGender}/>
             {filterGender && <> <CheckBox label="Men"/> <CheckBox label="Women"/></>}
-            <SeparationLine/>
+            <SeparationLine width={'200px'}/>
 
             {/* Kids */}
             <FilterTitle filterName={'Kids'} handleKids={handleKids}/>
             {filterKids && <> <CheckBox label="Boys"/> <CheckBox label="Girls"/></>}
-            <SeparationLine/>
+            <SeparationLine width={'200px'}/>
 
             {/* Brand */}
             <FilterTitle filterName={'Brand'} handleBrand={handleBrand}/>
@@ -163,34 +157,33 @@ export default function SearchResults () {
               </Box>
 
               <CheckBox label="Adidas" handleChangeAdidas={handleChangeAdidas}/>
-              {checkedAdidas && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography>}
+              {checkedAdidas && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+350)</Typography>}
               <CheckBox label="Asics" handleChangeAsics={handleChangeAsics}/>
-              {checkedAsics && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography>}
+              {checkedAsics && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+840)</Typography>}
               <CheckBox label="New Balance" handleChangeNB={handleChangeNB}/>
-              {checkedNB && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '140px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography> }
+              {checkedNB && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '140px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+840)</Typography> }
               <CheckBox label="Nike" handleChangeNike={handleChangeNike}/>
-              {checkedNike && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '80px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography> }
+              {checkedNike && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '80px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+240)</Typography> }
               <CheckBox label="Puma" handleChangePuma={handleChangePuma}/>
-              {checkedPuma && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography> }
+              {checkedPuma && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+350)</Typography> }
               <CheckBox label="Reebok" handleChangeReebok={handleChangeReebok}/>
-              {checkedReebok && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '100px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography> }
+              {checkedReebok && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '100px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+97)</Typography> }
             </>}
           </Box>
 
-          <SeparationLine/>
+          <SeparationLine width={'200px'}/>
 
           {/* Price */}
           <FilterTitle filterName={'Price'} handlePrice={handlePrice}/>
-          <SeparationLine/>
+          <SeparationLine width={'200px'}/>
 
           {/* Color */}
           <FilterTitle filterName={'Color'} handleColor={handleColor}/>
-          <SeparationLine/>
+          <SeparationLine width={'200px'}/>
 
         </Box> }
 
         {/* MOBILE FILTERS */}
-
         {/* FILTER BLOCK */}
         {showFilters &&
         <Box
@@ -201,28 +194,16 @@ export default function SearchResults () {
             display: { xs: 'flex', sm: 'none' },
             flexDirection: 'column',
             // ml: '40px',
-            right: '0px',
+            right: 0,
+            top: 0,
             position: 'absolute',
             zIndex: 100,
-            background: 'grey'
+            background: 'white'
           }}>
-          {/* <Typography
-            sx={{
-              fontWeight: 300,
-              fontSize: '15px',
-              lineHeight: '18px'
-            }}
-          >
-            Shoes/Air Force 1
-          </Typography>
-          <Typography {...theme.typography.h1}>
-            Air Force 1 (137)
-          </Typography>
-          <SeparationLine/> */}
 
           <Box sx={{ maxWidth: '320px', ml: '15px' }}>
             <Typography sx={{ display: 'flex', justifyContent: 'end', mt: '25px', mr: '20px' }}
-              onClick={showFiltersBlock} > X</Typography>
+              onClick={showFiltersBlock}> X </Typography>
 
             {/* Gender */}
             <FilterTitle filterName={'Gender'} handleGender={handleGender}/>
@@ -249,7 +230,7 @@ export default function SearchResults () {
                   }} />
                 <InputBase
                   sx={{
-                    [theme.breakpoints.up('sm')]: {
+                    [theme.breakpoints.down('sm')]: {
                       border: '1px solid #494949',
                       borderRadius: '42px',
                       width: '260px',
@@ -268,17 +249,17 @@ export default function SearchResults () {
               </Box>
 
               <CheckBox label="Adidas" handleChangeAdidas={handleChangeAdidas}/>
-              {checkedAdidas && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography>}
+              {checkedAdidas && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+350)</Typography>}
               <CheckBox label="Asics" handleChangeAsics={handleChangeAsics}/>
-              {checkedAsics && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography>}
+              {checkedAsics && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+840)</Typography>}
               <CheckBox label="New Balance" handleChangeNB={handleChangeNB}/>
-              {checkedNB && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '140px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography> }
+              {checkedNB && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '140px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+840)</Typography> }
               <CheckBox label="Nike" handleChangeNike={handleChangeNike}/>
-              {checkedNike && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '80px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography> }
+              {checkedNike && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '80px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+240)</Typography> }
               <CheckBox label="Puma" handleChangePuma={handleChangePuma}/>
-              {checkedPuma && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography> }
+              {checkedPuma && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+350)</Typography> }
               <CheckBox label="Reebok" handleChangeReebok={handleChangeReebok}/>
-              {checkedReebok && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '100px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>stock</Typography> }
+              {checkedReebok && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '100px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+97)</Typography> }
             </>}
 
             <SeparationLine/>
@@ -294,10 +275,8 @@ export default function SearchResults () {
         </Box> }
 
         {/* CONTAINER ZAPATILLAS */}
-
-        <Box sx={{ maxWidth: '1540px', m: '20px', width: 'auto', opacity: `${opacity}` }}>
+        <Box sx={{ m: '20px', width: 'auto', opacity: `${opacity}` }}>
           <Box sx={{
-            // width: 'auto',
             [theme.breakpoints.up('sm')]: {
               mt: '68px',
               display: 'flex',
@@ -366,6 +345,7 @@ export default function SearchResults () {
                   }}>
               Filters
                   </Typography>}
+
                 {/* FILTER-REMOVE ICON */}
                 <Box
                   onClick={() => { showFiltersBlock() }}
