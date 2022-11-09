@@ -40,8 +40,8 @@ export default function ResetPassword () {
         mutate(
           { password, passwordConfirmation, code },
           {
-            onSuccess: toast.success('Password reset successfully'),
-            onError: toast.error('Password reset failed. Try again later')
+            onSuccess: () => toast.success('Password reset successfully'),
+            onError: () => toast.error('Password reset failed. Try again later')
           }
         )
       }
