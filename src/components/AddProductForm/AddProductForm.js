@@ -1,12 +1,35 @@
+import { useState } from 'react'
 import { Box } from '@mui/material'
 
-import useSignInForm from '../../hooks/useSignInForm'
 import Form from '../Form/Form'
 import PrimaryInput from '../PrimaryInput/PrimaryInput'
+import SelectInput from '../SelectInput/SelectInput'
 import TextArea from '../TextArea/TextArea'
 
-const AddProductForm = () => {
-  const { handleInputChange, handleSubmit } = useSignInForm()
+const AddProductForm = ({ brands, genders, sizes }) => {
+  const [inputInfo, setInputInfo] = useState({
+    productName: '',
+    category: '',
+    Gender: '',
+    Brand: '',
+    Description: '',
+    Size: ''
+  })
+
+  const handleInputChange = (e) => {
+    const focus = e.target
+    const value = focus.value
+    const name = focus.name
+
+    setInputInfo({
+      ...inputInfo,
+      [name]: value
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
 
   return (
 
@@ -28,56 +51,12 @@ const AddProductForm = () => {
         type="text"
       />
       <Box sx={{ display: 'flex', gap: '5%' }}>
-        <PrimaryInput
-          required
-          label="Gender"
-          placeholder="Male"
-          name="gender"
-          onChange={handleInputChange}
-          type="text"
-          list="gender"
-        />
-        <PrimaryInput
-          required
-          label="Brand"
-          placeholder="Nike"
-          name="brand"
-          onChange={handleInputChange}
-          type="text"
-          list="brands"
-        />
-        <datalist id="brands">
-          <option>Nike</option>
-          <option>Adidas</option>
-          <option>Fila</option>
-          <option>Puma</option>
-        </datalist>
-        <datalist id="gender">
-          <option>Male</option>
-          <option>Female</option>
-        </datalist>
-
+        <SelectInput required onChange={handleInputChange} name={'Gender'} inputValues={genders}></SelectInput>
+        <SelectInput required onChange={handleInputChange} name={'Brand'} inputValues={brands}></SelectInput>
       </Box>
-      <TextArea placeholder='Do not exceed 300 characters' label='Description' rows={7} />
-      <PrimaryInput
-        required
-        label="Add Size"
-        placeholder="Sizes"
-        name="sizes"
-        onChange={handleInputChange}
-        type="text"
-        list='sizes'
-      />
-      <datalist id="sizes">
-        <option>EUR-36</option>
-        <option>EUR-37</option>
-        <option>EUR-38</option>
-        <option>EUR-39</option>
-        <option>EUR-40</option>
-        <option>EUR-41</option>
-        <option>EUR-42</option>
-        <option>EUR-43</option>
-      </datalist>
+      <TextArea placeholder='Do not exceed 300 characters' label='Description' rows={7} onChange={handleInputChange} />
+      <SelectInput required onChange={handleInputChange} name={'Size'} inputValues={sizes}></SelectInput>
+
     </Form>
 
   )

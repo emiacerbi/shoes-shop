@@ -11,9 +11,31 @@ import ListAltIcon from '@mui/icons-material/ListAlt'
 import LogoutIcon from '@mui/icons-material/Logout'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
 import { Box, Button, Typography } from '@mui/material'
+import { getBrands } from 'helpers/products/getBrands'
+import { getGenders } from 'helpers/products/getGenders'
+import { getSizes } from 'helpers/products/getSizes'
 import { signOut } from 'next-auth/react'
 
-export default function AddProduct () {
+export const getStaticProps = async () => {
+  const brandsData = await getBrands()
+  const brands = await brandsData.json()
+
+  const genderData = await getGenders()
+  const genders = await genderData.json()
+
+  const sizeData = await getSizes()
+  const sizes = await sizeData.json()
+
+  return {
+    props: {
+      brands: brands.data.map(data => data.attributes.name),
+      genders: genders.data.map(data => data.attributes.name),
+      sizes: sizes.data.map(data => `EUR-${data.attributes.value}`)
+    }
+  }
+}
+
+export default function AddProduct ({ brands, genders, sizes }) {
   const [screenWidth, setscreenWidth] = useState()
 
   useEffect(() => {
@@ -90,7 +112,7 @@ export default function AddProduct () {
               justifyContent: 'space-between'
             }}
           >
-            <AddProductForm/>
+            <AddProductForm brands={brands} genders={genders} sizes={sizes}/>
             {screenWidth > 599 && <ProductImageStore/>}
           </Box>
         </Box>
