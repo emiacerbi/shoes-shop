@@ -7,8 +7,26 @@ import SeparationLine from '@components/SeparationLine/SeparationLine'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import { Box, InputBase, Typography } from '@mui/material'
 import { theme } from '@styles/theme'
+// import { getBrands } from 'helpers/products/getBrands'
+import { getGenders } from 'helpers/products/getGenders'
 
-export default function SearchResults () {
+export const getStaticProps = async () => {
+  const genderData = await getGenders()
+  const genders = await genderData.json()
+
+  // const brandData = await getBrands()
+  // const brands = await brandData.json()
+
+  return {
+    props: {
+      // brands: brands.data.map(data => data.attributes.name),
+      genders: genders.data.map(data => data.attributes.name)
+    }
+  }
+}
+
+export default function SearchResults ({ genders }) {
+  // console.log(brands)
   // Filters
   const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
   const [filterGender, setFilterGender] = useState(true) // State to show/hide Gender filters
@@ -115,7 +133,7 @@ export default function SearchResults () {
           <Box sx={{ maxWidth: '200px' }}>
             {/* Gender */}
             <FilterTitle filterName={'Gender'} handleGender={handleGender}/>
-            {filterGender && <> <CheckBox label="Men"/> <CheckBox label="Women"/></>}
+            {filterGender && <> <CheckBox label={genders[0]}/> <CheckBox label={genders[1]}/></>}
             <SeparationLine width={'200px'}/>
 
             {/* Kids */}
@@ -207,7 +225,7 @@ export default function SearchResults () {
 
             {/* Gender */}
             <FilterTitle filterName={'Gender'} handleGender={handleGender}/>
-            {filterGender && <> <CheckBox label="Men"/> <CheckBox label="Women"/></>}
+            {filterGender && <> <CheckBox label={genders[0]}/> <CheckBox label={genders[1]}/></>}
             <SeparationLine/>
 
             {/* Kids */}
