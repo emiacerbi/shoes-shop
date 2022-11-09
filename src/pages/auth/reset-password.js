@@ -11,8 +11,7 @@ import Link from 'next/link'
 
 export default function ResetPassword () {
   const { mutate } = useMutation(postResetPassword, {
-    mutationKey: 'reset-password',
-    onError: (error) => console.log(error)
+    mutationKey: 'reset-password'
   })
 
   const checkPasswordsMatch = (pass1, pass2) => {
@@ -37,7 +36,10 @@ export default function ResetPassword () {
       const code = params.get('code')
       mutate(
         { password, passwordConfirmation, code },
-        { onSuccess: toast.success('Password reset successfully') }
+        {
+          onSuccess: toast.success('Password reset successfully'),
+          onError: toast.error('Password reset failed')
+        }
       )
     }
     e.target.reset()
