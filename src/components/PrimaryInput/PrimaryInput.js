@@ -1,7 +1,6 @@
-import { Box, InputLabel, OutlinedInput, Typography, useTheme } from '@mui/material'
+import { Box, InputLabel, OutlinedInput, Typography } from '@mui/material'
 
 const PrimaryInput = ({ label, placeholder, onChange, name, type, list }) => {
-  const theme = useTheme()
   return (
     <InputLabel
       sx={{
@@ -14,7 +13,7 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type, list }) => {
 
     >
       <Typography variant='p' sx={{ fontWeight: '500' }} >
-        {label} <Box component='span' sx={{ color: theme.palette.primary.main }}>*</Box>
+        {label} <Box component='span' sx={{ color: 'primary.main' }}>*</Box>
       </Typography>
       <OutlinedInput
         placeholder={placeholder}

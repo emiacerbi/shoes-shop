@@ -6,6 +6,5 @@ export default function Cart () {
     <Link href={'/cart'}>
       <LocalMallOutlinedIcon sx={{ color: '#292D32', mt: '5px' }}/>
     </Link>
-
   )
 }

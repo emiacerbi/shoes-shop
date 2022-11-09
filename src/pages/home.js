@@ -7,7 +7,7 @@ import ProfileInfoSideBar from '@components/SideBarProfileInfo/SideBarProfileInf
 import SubHeader from '@components/SubHeader/SubHeader'
 import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
-import { Box, Button, Typography, useTheme } from '@mui/material'
+import { Box, Button, Skeleton, Typography, useTheme } from '@mui/material'
 import { UserContext } from 'context/UserContext'
 import { getProducts } from 'helpers/products/getProducts'
 import Image from 'next/image'
@@ -44,7 +44,7 @@ export default function Home ({ products }) {
       <HeaderLoggedIn pages={['Home', 'Products']} burger={true} links={['home', 'bag']}/>
       <Box sx={{ [theme.breakpoints.up('sm')]: { display: 'flex', flexDirection: 'row' } }}>
         <Box sx={{ display: 'none', [theme.breakpoints.up('sm')]: { width: 360, padding: '5px', display: 'block', flexDirection: 'column' } }}>
-          <ProfileInfoSideBar/>
+          <ProfileInfoSideBar name = { context?.user?.userInfo?.username ? context?.user?.userInfo?.username : <Skeleton variant="rectangular" width={100} height={20} />}/>
           <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
             <AccountCircleOutlined sx={{ color: '#6E7278' }}/>
             <BarItem name="My Profile"/>
@@ -62,7 +62,7 @@ export default function Home ({ products }) {
           <Box sx={{ height: { xs: 132, sm: 260 }, m: { xs: '-20px', sm: 0 }, position: 'relative' }}>
             <Image src='/bgHomeImg.png' alt='panelImage' layout='fill' ></Image>
           </Box>
-          <SubHeader/>
+          <SubHeader name = { context?.user?.userInfo?.username ? context?.user?.userInfo?.username : <Skeleton variant="rectangular" width={100} height={20} />}/>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant='h1'>My Products</Typography>
             {ScreenWidth > 599 && (<PrimaryButton maxWidth='152px' ><Link href='/add-product'>Add Products</Link></PrimaryButton>)}

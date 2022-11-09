@@ -1,6 +1,6 @@
 import { Avatar, Box, Typography, useTheme } from '@mui/material'
 
-export default function SubHeader () {
+export default function SubHeader ({ name }) {
   const theme = useTheme()
 
   return (
@@ -27,7 +27,7 @@ export default function SubHeader () {
         <Typography variant='h1' sx={{
           fontSize: { xs: '14px', sm: '20px' },
           lineHeight: { xs: '12px', sm: '24px' }
-        }}>Jane Meldrum</Typography>
+        }}>{ name }</Typography>
         <Typography variant='p' sx={{ lineHeight: '14px' }}>1374 bonus points</Typography>
       </Box>
     </Box>

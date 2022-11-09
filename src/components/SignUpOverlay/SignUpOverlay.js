@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
 
 import ColoredDash from '../ColoredDash/ColoredDash'
@@ -6,7 +6,6 @@ import PrimaryButton from '../PrimaryButton/PrimaryButton'
 import SecondaryButton from '../SecondaryButton/SecondaryButton'
 
 const SignUpOverlay = ({ setIsOverlayVisible }) => {
-  const theme = useTheme()
   return (
     <Box
       sx={{
@@ -16,9 +15,7 @@ const SignUpOverlay = ({ setIsOverlayVisible }) => {
         backgroundColor: 'white',
         top: '0',
         left: '0',
-        [theme.breakpoints.up('overlay')]: {
-          display: 'none'
-        }
+        display: { overlay: 'none' }
       }}
     >
       <Box

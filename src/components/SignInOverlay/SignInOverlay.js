@@ -1,11 +1,10 @@
 import { Button, Link, Typography } from '@mui/material'
-import { Box, useTheme } from '@mui/system'
+import { Box } from '@mui/system'
 import Image from 'next/image'
 
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
 
 const SignInOverlay = ({ setIsOverlayVisible }) => {
-  const theme = useTheme()
   return (
     <Box
       sx={{
@@ -16,10 +15,7 @@ const SignInOverlay = ({ setIsOverlayVisible }) => {
         left: '0',
         zIndex: '0',
         backgroundColor: '#e9eef4',
-
-        [theme.breakpoints.up('overlay')]: {
-          display: 'none'
-        }
+        display: { overlay: 'none' }
       }}
     >
       <Box
