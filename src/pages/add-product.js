@@ -11,9 +11,11 @@ import ListAltIcon from '@mui/icons-material/ListAlt'
 import LogoutIcon from '@mui/icons-material/Logout'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
 import { Box, Button, Typography } from '@mui/material'
+import { useMutation } from '@tanstack/react-query'
 import { getBrands } from 'helpers/products/getBrands'
 import { getGenders } from 'helpers/products/getGenders'
 import { getSizes } from 'helpers/products/getSizes'
+import { postProduct } from 'helpers/products/postProduct'
 import { signOut } from 'next-auth/react'
 
 export const getStaticProps = async () => {
@@ -36,6 +38,13 @@ export const getStaticProps = async () => {
 }
 
 export default function AddProduct ({ brands, genders, sizes }) {
+  const mutation = useMutation({
+    mutationFn: postProduct,
+    onSuccess: (data) => {
+      console.log(data)
+    }
+  })
+
   const [screenWidth, setscreenWidth] = useState()
 
   useEffect(() => {
@@ -43,6 +52,19 @@ export default function AddProduct ({ brands, genders, sizes }) {
       setscreenWidth(window.innerWidth)
     }
   }, [])
+
+  const handleClick = () => {
+    // Hardcoded shoe, should change
+    mutation.mutate({
+      name: 'Test4',
+      images: ['Img11', 'Img22'],
+      categories: ['Category11', 'Category22'],
+      description: 'Description2',
+      brand: 'Adidas',
+      size: 'SM',
+      price: 2000
+    })
+  }
 
   return (
     <>
@@ -102,7 +124,7 @@ export default function AddProduct ({ brands, genders, sizes }) {
             </Box>
             <Box sx={{ display: { xs: 'none', sm: 'flex' }, height: 40, width: 323, gap: '19px', flex: '1', justifyContent: 'flex-end' }}>
               <PrimaryButton maxWidth="152px">Schedule</PrimaryButton>
-              <SecondaryButton maxWidth="152px">Save</SecondaryButton>
+              <SecondaryButton onClick={handleClick} maxWidth="152px">Save</SecondaryButton>
             </Box>
           </Box>
           <Box
