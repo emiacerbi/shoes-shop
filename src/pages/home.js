@@ -70,7 +70,7 @@ export default function Home ({ products }) {
               <ProductCard image={'/air-zoom-pegasus.png'} productTitle="Nike Air Zoom Pegasus" productPrice="120" productDescription="Men's Shoes"/>
             </Box>
             <Box sx={{ display: { xs: 'block', sm: 'none' }, mt: '1rem' }}>
-              <PrimaryButton ><Link href='/add-product'>Add Products</Link></PrimaryButton>
+              <PrimaryButton maxWidth='100%'><Link href='/add-product'>Add Products</Link></PrimaryButton>
             </Box>
           </Box>
         </Box>
