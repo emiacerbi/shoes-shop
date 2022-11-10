@@ -11,4 +11,4 @@ export async function middleware (req) {
   }
 }
 
-export const config = { matcher: ['/home', '/bag', '/update-profile', '/add-product'] }
+export const config = { matcher: [] }
