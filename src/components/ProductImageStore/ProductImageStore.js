@@ -1,8 +1,10 @@
 import PhotoCameraBackIcon from '@mui/icons-material/PhotoCameraBack'
 import { Box, Container, FormLabel, Input, Link, Typography } from '@mui/material'
+import useAddProductForm from 'hooks/useAddProductForm'
 import Image from 'next/image'
 
 export default function ProductImageStore () {
+  const { handleInputChange } = useAddProductForm()
   return (
     <>
       <Container sx={{ pt: '40px', ml: '150px' }}>
@@ -12,7 +14,7 @@ export default function ProductImageStore () {
             <FormLabel htmlFor='srcImg'>
               <PhotoCameraBackIcon sx={{ color: '#6E7278', fontSize: '100px', cursor: 'pointer' }}/>
             </FormLabel>
-            <Input id='srcImg' type='file' sx={{ display: 'none' }}></Input>
+            <Input onChange={handleInputChange} form='addProduct' id='srcImg' type='file' sx={{ display: 'none' }}></Input>
             <Typography variant='p' align="center">
                 Drop your image here, or select <Link href="//www.google.com">click here to browse</Link>
             </Typography>
