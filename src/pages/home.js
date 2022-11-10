@@ -51,7 +51,7 @@ export default function Home ({ products }) {
             </Button>
           </Box>
         </Box>
-        <Box component='main' sx={{ m: { xs: 0, sm: '20px' } }}>
+        <Box component='main' sx={{ m: { xs: 0, sm: '20px' }, width: '100%' }}>
           <Box sx={{ width: '100%', height: { xs: 132, sm: 260 }, mb: '-30px', position: 'relative' }}>
             <Image src='/bgHomeImg.png' alt='panelImage' layout='fill' ></Image>
           </Box>
