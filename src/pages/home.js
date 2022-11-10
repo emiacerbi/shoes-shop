@@ -63,11 +63,14 @@ export default function Home ({ products }) {
                 <PrimaryButton maxWidth='152px' ><Link href='/add-product'>Add Products</Link></PrimaryButton>
               </Box>
             </Box>
-            <Box sx={{ mt: '20px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
+            <Box sx={{ mt: '20px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px', [theme.breakpoints.down('sm')]: { overflow: 'auto', maxHeight: 400 } }}>
               <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
               <ProductCard image={'/shoes.png'} productTitle="Nike AirMax 270" productPrice="160" productDescription="Women's Shoes"/>
               <ProductCard image={'/air-force.png'} productTitle="Nike Air Force 1 '07 SE" productPrice="110" productDescription="Women's Shoes"/>
               <ProductCard image={'/air-zoom-pegasus.png'} productTitle="Nike Air Zoom Pegasus" productPrice="120" productDescription="Men's Shoes"/>
+            </Box>
+            <Box sx={{ display: { xs: 'block', sm: 'none' }, mt: '1rem' }}>
+              <PrimaryButton ><Link href='/add-product'>Add Products</Link></PrimaryButton>
             </Box>
           </Box>
         </Box>
