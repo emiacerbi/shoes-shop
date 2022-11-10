@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import AddProductForm from '@components/AddProductForm/AddProductForm'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
@@ -36,14 +35,6 @@ export const getStaticProps = async () => {
 }
 
 export default function AddProduct ({ brands, genders, sizes }) {
-  const [screenWidth, setscreenWidth] = useState()
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setscreenWidth(window.innerWidth)
-    }
-  }, [])
-
   return (
     <>
       <HeaderLoggedIn
@@ -53,8 +44,7 @@ export default function AddProduct ({ brands, genders, sizes }) {
       />
       <Box component="main" sx={{ display: 'flex' }}>
 
-        {screenWidth > 599 &&
-        <Box sx={{ flexDirection: 'column' }}>
+        <Box sx={{ display: { xs: 'none', sm: 'block' }, flexDirection: 'column' }}>
           <ProfileInfoSideBar />
           <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }} >
             <ShoppingBagIcon sx={{ color: '#6E7278' }}/>
@@ -78,7 +68,6 @@ export default function AddProduct ({ brands, genders, sizes }) {
             </Button>
           </Box>
         </Box>
-        }
 
         <Box
           sx={{
@@ -102,7 +91,7 @@ export default function AddProduct ({ brands, genders, sizes }) {
             </Box>
             <Box sx={{ display: { xs: 'none', sm: 'flex' }, height: 40, width: 323, gap: '19px', flex: '1', justifyContent: 'flex-end' }}>
               <PrimaryButton maxWidth="152px">Schedule</PrimaryButton>
-              <SecondaryButton maxWidth="152px">Save</SecondaryButton>
+              <SecondaryButton type='submit' form='addProduct' maxWidth="152px">Save</SecondaryButton>
             </Box>
           </Box>
           <Box
@@ -112,8 +101,8 @@ export default function AddProduct ({ brands, genders, sizes }) {
               justifyContent: 'space-between'
             }}
           >
-            <AddProductForm brands={brands} genders={genders} sizes={sizes}/>
-            {screenWidth > 599 && <ProductImageStore/>}
+            <AddProductForm id='addProduct' brands={brands} genders={genders} sizes={sizes}/>
+            <ProductImageStore/>
           </Box>
         </Box>
       </Box>
