@@ -1,16 +1,19 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
 import { postRegisterUser } from '../helpers/user-auth/postRegisterUser'
 
 const useSignUpForm = () => {
+  const router = useRouter()
   const mutation = useMutation(postRegisterUser, {
     onSuccess: async (data) => {
       const response = await data.json()
 
       if (response.user) {
         toast.success('Account successfully created, please check your email')
+        router.push('/')
         return
       }
 

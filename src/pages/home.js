@@ -14,24 +14,27 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 
-export async function getStaticProps () {
+export async function getServerSideProps () {
   const res = await getProducts()
   const products = await res.json()
+
+  const filteredProducts = products.data.filter(product => product.attributes.teamName === 'ea-team')
   return {
     props: {
+      filteredProducts,
       products
     }
   }
 }
 
-export default function Home ({ products }) {
-  console.log(products)
+export default function Home ({ filteredProducts, products }) {
+  const theme = useTheme()
   const context = useContext(UserContext)
 
+  console.log(products)
+  console.log(filteredProducts)
+
   console.log(context, 'USER INFO')
-
-  const theme = useTheme()
-
   return (
     <>
       <HeaderLoggedIn pages={['Home', 'Products']} burger={true} links={['home', 'bag']}/>
