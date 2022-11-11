@@ -1,12 +1,14 @@
-import { fetchWrapper } from '../fetchWrapper'
+import axiosInstance from '../../axios/axiosInstance'
 
-export const postChangePassword = async (password, currentPassword, passwordConfirmation) => {
-  const response = await fetchWrapper('api/auth/change-password', {
-    body: {
-      password,
-      currentPassword,
-      passwordConfirmation
-    }
+export const postChangePassword = async (
+  password,
+  currentPassword,
+  passwordConfirmation
+) => {
+  const response = await axiosInstance.post('/api/auth/change-password', {
+    password,
+    currentPassword,
+    passwordConfirmation
   })
 
   return response

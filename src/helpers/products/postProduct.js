@@ -1,14 +1,8 @@
-import { v4 as uuidv4 } from 'uuid'
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-const ENDPOINT = `${BASE_URL}/api/products`
+import { fetchWrapper } from 'helpers/fetchWrapper'
 
-export const postProduct = async ({ name, images, description, brand, categories, color, gender, size, uniqueID, price }) => {
-  const config = {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify({
+export const postProduct = async ({ name, images, description, brand, categories, color, gender, size, price }) => {
+  const response = await fetchWrapper('api/products', {
+    body: {
       data: {
         name,
         images: [...images],
@@ -18,14 +12,14 @@ export const postProduct = async ({ name, images, description, brand, categories
         color,
         gender,
         size,
-        uniqueID: uuidv4(),
+        uniqueID: Math.floor(Math.random() * 100000),
         price,
-        sitemap_exclude: true
+        sitemap_exclude: true,
+        teamName: 'ea-team'
       }
-    })
-  }
+    }
+  })
 
-  const response = await fetch(ENDPOINT, config)
   return response
 }
 

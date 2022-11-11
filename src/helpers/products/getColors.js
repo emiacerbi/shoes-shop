@@ -1,14 +1,6 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-const ENDPOINT = `${BASE_URL}/api/colors`
+import { fetchWrapper } from 'helpers/fetchWrapper'
 
 export const getColors = async () => {
-  const config = {
-    method: 'GET',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8'
-    }
-  }
-
-  const response = await fetch(ENDPOINT, config)
+  const response = await fetchWrapper('api/colors', { method: 'GET' })
   return response
 }

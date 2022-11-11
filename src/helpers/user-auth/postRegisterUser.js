@@ -1,12 +1,10 @@
-import { fetchWrapper } from 'helpers/fetchWrapper'
+import axiosInstance from '../../axios/axiosInstance'
 
 export const postRegisterUser = async ({ username, email, password }) => {
-  const response = await fetchWrapper('api/auth/local/register', {
-    body: {
-      username,
-      email,
-      password
-    }
+  const response = await axiosInstance.post('/api/auth/local/register', {
+    username,
+    email,
+    password
   })
 
   return response

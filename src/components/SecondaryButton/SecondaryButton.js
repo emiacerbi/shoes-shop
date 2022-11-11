@@ -1,8 +1,9 @@
 import { Button } from '@mui/material'
 
-const SecondaryButton = ({ children, onClick, maxWidth = '436px' }) => {
+const SecondaryButton = ({ children, onClick, maxWidth = '436px', form, type }) => {
   return (
     <Button
+      form={form}
       onClick={onClick}
       sx={{
         backgroundColor: 'transparent',
@@ -17,6 +18,7 @@ const SecondaryButton = ({ children, onClick, maxWidth = '436px' }) => {
         fontSize: { md: '16px' }
       }}
       variant='outlined'
+      type={type}
     >
       {children}
     </Button>
