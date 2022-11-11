@@ -17,7 +17,7 @@ export function UserProvider ({ children }) {
       const response = await getUserInfo(session?.accessToken)
 
       setUser({
-        userInfo: response
+        userInfo: response.data
       })
     }
     if (session?.accessToken) {
