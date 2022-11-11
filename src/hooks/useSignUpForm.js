@@ -8,23 +8,13 @@ import { postRegisterUser } from '../helpers/user-auth/postRegisterUser'
 const useSignUpForm = () => {
   const router = useRouter()
   const mutation = useMutation(postRegisterUser, {
-    onSuccess: async (data) => {
-      const response = await data.json()
+    onSuccess: async () => {
+      toast.success('Account successfully created, please check your email')
+      router.push('/')
+    },
 
-      if (response.user) {
-        toast.success('Account successfully created, please check your email')
-        router.push('/')
-        return
-      }
-
-      if (response.error.message.length > 40) {
-        toast.error('There was an issue')
-        return
-      }
-
-      if (response.error.message) {
-        toast.error(response.error.message)
-      }
+    onError: async (data) => {
+      toast.error(data.response.data.error.message)
     }
   })
 

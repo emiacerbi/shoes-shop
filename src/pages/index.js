@@ -4,7 +4,7 @@ import HeaderBeforeLogin from '@components/Header/Header'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
 import SignInOverlay from '@components/SignInOverlay/SignInOverlay'
-import { Button, Checkbox, InputLabel, Typography, useTheme } from '@mui/material'
+import { Button, Checkbox, CircularProgress, InputLabel, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
 import useSignInForm from 'hooks/useSignInForm'
 import Image from 'next/image'
@@ -21,7 +21,7 @@ const SignIn = () => {
     }
   }, [])
 
-  const { handleInputChange, handleSubmit } = useSignInForm()
+  const { handleInputChange, handleSubmit, isLoading } = useSignInForm()
 
   return (
     <Box
@@ -101,7 +101,9 @@ const SignIn = () => {
             </Box>
 
             <PrimaryButton>
-              Sign in
+              {
+                isLoading ? (<CircularProgress size={28} color='action' />) : 'Sign in'
+              }
             </PrimaryButton>
 
             <Typography
