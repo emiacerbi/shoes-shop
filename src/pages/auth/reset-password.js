@@ -41,10 +41,9 @@ export default function ResetPassword () {
           { password, passwordConfirmation, code },
           {
             onSuccess: () =>
-              console.log('hey all is ok') ||
               toast.success('Password reset successfully'),
-            onError: () =>
-              console.log('not good') ||
+            onError: (err) =>
+              console.dir(err) ||
               toast.error('Password reset failed. Try again later')
           }
         )

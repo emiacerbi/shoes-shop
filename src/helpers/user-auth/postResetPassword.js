@@ -5,13 +5,10 @@ export const postResetPassword = async ({
   passwordConfirmation,
   code
 }) => {
-  const response = await axiosInstance('/api/auth/reset-password', {
-    method: 'POST',
-    body: {
-      password,
-      passwordConfirmation,
-      code
-    }
+  const response = await axiosInstance.post('/api/auth/reset-password', {
+    password,
+    passwordConfirmation,
+    code
   })
 
   return response
