@@ -42,8 +42,11 @@ export default function ResetPassword () {
         mutate(
           { password, passwordConfirmation, code },
           {
-            onSuccess: () =>
-              toast.success('Password reset successfully'),
+            onSuccess: () => {
+              toast.success('Password reset successfully')
+              setTimeout(() => { router.push('/') }, 4000)
+            },
+
             onError: () =>
               toast.error('Wrong code. Ask for a new password reset and try again.')
           }
