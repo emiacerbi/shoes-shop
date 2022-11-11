@@ -1,24 +1,42 @@
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 
-function CheckBox ({ label, checked, handleChangeAdidas, handleChangeAsics, handleChangeNB, handleChangeNike, handleChangePuma, handleChangeReebok }) {
+function CheckBox ({ label, handleChecked, checked }) {
   return (
     <>
       <FormGroup aria-label="position" column >
-        <FormControlLabel
-          control={<Checkbox onChange={() => {
-            label === 'Adidas' && handleChangeAdidas()
-            label === 'Asics' && handleChangeAsics()
-            label === 'New Balance' && handleChangeNB()
-            label === 'Nike' && handleChangeNike()
-            label === 'Puma' && handleChangePuma()
-            label === 'Reebok' && handleChangeReebok()
-          }}
-          inputProps={{ 'aria-label': 'controlled' }} />}
-          label={label}
-        />
+        {
+          label.data.map(data => (
+            <>
+              <FormControlLabel
+                label={data.attributes.name}
+                control={
+                  <Checkbox onChange={() => {
+                    data.attributes.name === 'Adidas' && handleChecked()
+                    data.attributes.name === 'Asics' && handleChecked()
+                    data.attributes.name === 'New Balance' && handleChecked()
+                    data.attributes.name === 'Nike' && handleChecked()
+                    data.attributes.name === 'Puma' && handleChecked()
+                    data.attributes.name === 'Reebok' && handleChecked()
+                  }}
+
+                  inputProps={{ 'aria-label': 'controlled' }} >
+                  </Checkbox>
+                }
+              />
+
+              {/* {checked &&
+        <Typography
+          sx={{ position: 'absolute', mt: '10px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>
+        (+3500)
+        </Typography>} */}
+
+            </>
+          ))
+        }
       </FormGroup>
 
     </>
+
   )
 }
 
