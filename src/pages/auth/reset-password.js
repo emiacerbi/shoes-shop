@@ -37,16 +37,15 @@ export default function ResetPassword () {
     } else {
       const code = router.query.code
       if (!code) {
-        toast.error('Password reset failed. Try again later')
+        toast.error('There is no code. Ask for a new password reset link.')
       } else {
         mutate(
           { password, passwordConfirmation, code },
           {
             onSuccess: () =>
               toast.success('Password reset successfully'),
-            onError: (err) =>
-              console.dir(err) ||
-              toast.error('Password reset failed. Try again later')
+            onError: () =>
+              toast.error('Wrong code. Ask for a new password reset and try again.')
           }
         )
       }
