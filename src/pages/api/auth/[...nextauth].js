@@ -9,10 +9,8 @@ export const authOptions = {
       async authorize (credentials, req) {
         const res = await postLoginUser({ ...credentials })
 
-        const user = await res.json()
-
-        if (res.ok && user) {
-          return user
+        if (res.statusText && res.data) {
+          return res.data
         }
 
         return null

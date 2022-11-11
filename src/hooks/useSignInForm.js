@@ -6,6 +6,8 @@ import { signIn } from 'next-auth/react'
 const useSignInForm = () => {
   const router = useRouter()
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const [inputInfo, setInputInfo] = useState({
     email: '',
     password: ''
@@ -23,26 +25,29 @@ const useSignInForm = () => {
   }
 
   const handleSubmit = async (event) => {
+    setIsLoading(true)
     event.preventDefault()
 
     signIn('credentials', {
       identifier: inputInfo.email,
       password: inputInfo.password,
       redirect: false
-    })
-      .then(res => {
-        if (!res.ok) {
-          toast.error('Wrong credentials')
-        }
+    }).then(res => {
+      if (res.ok) {
+        toast.success('Logged in succesfully')
+        setIsLoading(false)
+        router.push('/home')
+      }
 
-        if (res.ok) {
-          router.push('/home')
-        }
-      })
+      if (!res.ok) {
+        toast.error('Wrong credentials')
+        setIsLoading(false)
+      }
+    })
   }
 
   return {
-    inputInfo, setInputInfo, handleInputChange, handleSubmit
+    inputInfo, setInputInfo, handleInputChange, handleSubmit, isLoading
   }
 }
 
