@@ -8,6 +8,7 @@ import { useMutation } from '@tanstack/react-query'
 import { postResetPassword } from 'helpers/user-auth/postResetPassword'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function ResetPassword () {
   const { mutate } = useMutation(postResetPassword, {
@@ -21,6 +22,8 @@ export default function ResetPassword () {
     return pass.length > 7
   }
 
+  const router = useRouter()
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -32,8 +35,7 @@ export default function ResetPassword () {
     } else if (!checkPasswordLength(password)) {
       toast.error('Password must be at least 8 characters long')
     } else {
-      const params = new URLSearchParams(document.location.search)
-      const code = params.get('code')
+      const code = router.query.code
       if (!code) {
         toast.error('Password reset failed. Try again later')
       } else {
