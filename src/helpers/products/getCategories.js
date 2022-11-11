@@ -1,6 +1,6 @@
-import { fetchWrapper } from 'helpers/fetchWrapper'
+import axiosInstance from '../../axios/axiosInstance'
 
 export const getCategories = async () => {
-  const response = await fetchWrapper('api/categories', { method: 'GET' })
+  const response = await axiosInstance.get('api/categories')
   return response
 }
