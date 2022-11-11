@@ -1,14 +1,6 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-const ENDPOINT = `${BASE_URL}/api/sizes`
+import { fetchWrapper } from 'helpers/fetchWrapper'
 
 export const getSizes = async () => {
-  const config = {
-    method: 'GET',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8'
-    }
-  }
-
-  const response = await fetch(ENDPOINT, config)
+  const response = await fetchWrapper('api/sizes', { method: 'GET' })
   return response
 }

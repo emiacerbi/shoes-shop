@@ -1,14 +1,6 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-const ENDPOINT = `${BASE_URL}/api/categories`
+import { fetchWrapper } from 'helpers/fetchWrapper'
 
 export const getCategories = async () => {
-  const config = {
-    method: 'GET',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8'
-    }
-  }
-
-  const response = await fetch(ENDPOINT, config)
+  const response = await fetchWrapper('api/categories', { method: 'GET' })
   return response
 }
