@@ -1,11 +1,12 @@
-import { fetchWrapper } from '../fetchWrapper'
+import axiosInstance from '../../axios/axiosInstance'
 
 export const postResetPassword = async (email) => {
-  const response = await fetchWrapper('api/auth/send-email-confirmation', {
-    body: {
+  const response = await axiosInstance.post(
+    '/api/auth/send-email-confirmation',
+    {
       email
     }
-  })
+  )
   return response
 }
 

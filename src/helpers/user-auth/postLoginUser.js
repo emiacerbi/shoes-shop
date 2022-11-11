@@ -1,11 +1,9 @@
-import { fetchWrapper } from '../fetchWrapper'
+import axiosInstance from '../../axios/axiosInstance'
 
 export const postLoginUser = async ({ identifier, password }) => {
-  const response = await fetchWrapper('api/auth/local', {
-    body: {
-      identifier,
-      password
-    }
+  const response = await axiosInstance.post('/api/auth/local', {
+    identifier,
+    password
   })
   return response
 }

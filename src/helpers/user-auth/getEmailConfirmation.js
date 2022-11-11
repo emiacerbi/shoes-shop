@@ -1,7 +1,7 @@
-import { fetchWrapper } from '../fetchWrapper'
+import axiosInstance from '../../axios/axiosInstance'
 
 export const getEmailConfirmation = async () => {
-  const response = await fetchWrapper('/api/auth/email-confirmation', { method: 'GET' })
+  const response = await axiosInstance.get('/api/auth/email-confirmation')
   return response
 }
 
