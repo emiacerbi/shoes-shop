@@ -1,7 +1,12 @@
-import { fetchWrapper } from 'helpers/fetchWrapper'
+import axiosInstance from 'axios/axiosInstance'
 
-export const postResetPassword = async ({ password, passwordConfirmation, code }) => {
-  const response = await fetchWrapper('api/auth/reset-password', {
+export const postResetPassword = async ({
+  password,
+  passwordConfirmation,
+  code
+}) => {
+  const response = await axiosInstance('/api/auth/reset-password', {
+    method: 'POST',
     body: {
       password,
       passwordConfirmation,
