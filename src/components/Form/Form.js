@@ -1,4 +1,4 @@
-const Form = ({ onSubmit, children }) => {
+const Form = ({ onSubmit, children, id }) => {
   return (
     <form
       style={{
@@ -10,6 +10,7 @@ const Form = ({ onSubmit, children }) => {
         maxWidth: '436px'
       }}
       onSubmit={onSubmit}
+      id={id}
     >
       {children}
     </form>

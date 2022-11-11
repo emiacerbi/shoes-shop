@@ -15,6 +15,7 @@ const SelectInput = ({ inputValues, name, onChange }) => {
           name={name}
           onChange={onChange}
           defaultValue=''
+          required
         >
           {inputValues.map((value, i) => <MenuItem key={i} value={value}>{value}</MenuItem>)}
         </Select>

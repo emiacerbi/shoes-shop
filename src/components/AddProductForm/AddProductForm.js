@@ -1,39 +1,18 @@
-import { useState } from 'react'
+import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import { Box } from '@mui/material'
+import useAddProductForm from 'hooks/useAddProductForm'
 
 import Form from '../Form/Form'
 import PrimaryInput from '../PrimaryInput/PrimaryInput'
 import SelectInput from '../SelectInput/SelectInput'
 import TextArea from '../TextArea/TextArea'
 
-const AddProductForm = ({ brands, genders, sizes }) => {
-  const [inputInfo, setInputInfo] = useState({
-    productName: '',
-    category: '',
-    Gender: '',
-    Brand: '',
-    Description: '',
-    Size: ''
-  })
-
-  const handleInputChange = (e) => {
-    const focus = e.target
-    const value = focus.value
-    const name = focus.name
-
-    setInputInfo({
-      ...inputInfo,
-      [name]: value
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+const AddProductForm = ({ brands, genders, sizes, id }) => {
+  const { handleInputChange, handleSubmit } = useAddProductForm()
 
   return (
 
-    <Form onSubmit={handleSubmit}>
+    <Form id={id} onSubmit={handleSubmit}>
       <PrimaryInput
         required
         label="Product Name"
@@ -56,7 +35,16 @@ const AddProductForm = ({ brands, genders, sizes }) => {
       </Box>
       <TextArea placeholder='Do not exceed 300 characters' label='Description' rows={7} onChange={handleInputChange} />
       <SelectInput required onChange={handleInputChange} name={'Size'} inputValues={sizes}></SelectInput>
-
+      <Box sx={{ display: { xs: 'flex', sm: 'none' }, flexDirection: 'column', gap: '1rem' }}>
+        <PrimaryInput
+          required
+          label="Product Image"
+          placeholder="Nike Air Max 90"
+          name="Img"
+          onChange={handleInputChange}
+          type="file"/>
+        <PrimaryButton>Save</PrimaryButton>
+      </Box>
     </Form>
 
   )
