@@ -15,17 +15,13 @@ import { getGenders } from 'helpers/products/getGenders'
 import { getSizes } from 'helpers/products/getSizes'
 
 export const getStaticProps = async () => {
-  const genderData = await getGenders()
-  const genders = await genderData.json()
+  const genders = await getGenders()
 
-  const brandData = await getBrands()
-  const brands = await brandData.json()
+  const brands = await getBrands()
 
-  const colorsData = await getColors()
-  const colors = await colorsData.json()
+  const colors = await getColors()
 
-  const sizesData = await getSizes()
-  const sizes = await sizesData.json()
+  const sizes = await getSizes()
 
   return {
     props: {
