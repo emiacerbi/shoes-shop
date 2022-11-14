@@ -6,7 +6,6 @@ import FilterTitle from '@components/FilterTitle/FilterTitle'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import ProductCard from '@components/ProductCard/ProductCard'
 import SeparationLine from '@components/SeparationLine/SeparationLine'
-// import { Search } from '@mui/icons-material'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import { Box, InputBase, Typography } from '@mui/material'
 import { theme } from '@styles/theme'
@@ -47,15 +46,6 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
   const [filterColor, setFilterColor] = useState(true) // State to show/hide Color filters
   const [filterSize, setFilterSize] = useState(true) // State to show/hide Color filters
 
-  // Checkboxes
-  // const [checkedAdidas, setCheckedAdidas] = useState(true) // State to show/hide the stock
-  // const [checkedAsics, setCheckedAsics] = useState(true) // State to show/hide the stock
-  // const [checkedNB, setCheckedNB] = useState(true) // State to show/hide the stock
-  // const [checkedNike, setCheckedNike] = useState(true) // State to show/hide the stock
-  // const [checkedPuma, setCheckedPuma] = useState(true) // State to show/hide the stock
-  // const [checkedReebok, setCheckedReebok] = useState(true) // State to show/hide the stock
-  const [checked, setChecked] = useState(true) // State to show/hide the stock
-
   const [opacity, setOpacity] = useState('')
   const [screenWidth, setScreenWidth] = useState(0)
 
@@ -95,31 +85,6 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
   function handleSize () {
     return setFilterSize(!filterSize)
   }
-
-  function handleChecked () {
-    setChecked(!checked)
-  }
-
-  // function handleChangeAdidas () {
-  //   setCheckedAdidas(!checkedAdidas)
-  // }
-
-  // function handleChangeAsics () {
-  //   setCheckedAsics(!checkedAsics)
-  // }
-
-  // function handleChangeNB () {
-  //   setCheckedNB(!checkedNB)
-  // }
-  // function handleChangeNike () {
-  //   setCheckedNike(!checkedNike)
-  // }
-  // function handleChangePuma () {
-  //   setCheckedPuma(!checkedPuma)
-  // }
-  // function handleChangeReebok () {
-  //   setCheckedReebok(!checkedReebok)
-  // }
 
   // Filter data
   const [search, setSearch] = useState('')
@@ -200,7 +165,7 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
                   placeholder='Search' />
               </Box>
 
-              <CheckBoxBrand label={results} handleChecked={handleChecked} checked={checked}/>
+              <CheckBoxBrand label={results} />
             </>}
           </Box>
 
@@ -228,10 +193,8 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
           sx={{
             maxWidth: '320px',
             width: 'auto',
-            // height: '100vh',
             display: { xs: 'flex', sm: 'none' },
             flexDirection: 'column',
-            // ml: '40px',
             right: 0,
             top: 0,
             position: 'absolute',
@@ -283,8 +246,7 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
                   placeholder='Search' />
               </Box>
 
-              <CheckBoxBrand label={results} handleChecked={handleChecked} checked={checked}/>
-              {/* {checked && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+3500)</Typography>} */}
+              <CheckBoxBrand label={results} />
             </>}
 
             <SeparationLine/>
