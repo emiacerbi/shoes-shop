@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import CheckBox from '@components/CheckBox/CheckBox'
+import CheckBoxBrand from '@components/CheckBoxBrand/CheckBoxBrand'
 import CheckBoxSizes from '@components/CheckBoxSizes/CheckBoxSizes'
 import FilterTitle from '@components/FilterTitle/FilterTitle'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import ProductCard from '@components/ProductCard/ProductCard'
 import SeparationLine from '@components/SeparationLine/SeparationLine'
+// import { Search } from '@mui/icons-material'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import { Box, InputBase, Typography } from '@mui/material'
 import { theme } from '@styles/theme'
@@ -37,8 +39,6 @@ export const getStaticProps = async () => {
 }
 
 export default function SearchResults ({ genders, brands, colors, sizes }) {
-  // console.log(sizes.data.map(size => size.attributes.value))
-  console.log(sizes.data.map(el => el.attributes.value))
   // Filters
   const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
   const [filterGender, setFilterGender] = useState(true) // State to show/hide Gender filters
@@ -121,6 +121,17 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
   //   setCheckedReebok(!checkedReebok)
   // }
 
+  // Filter data
+  const [search, setSearch] = useState('')
+
+  const handleInput = (e) => {
+    setSearch(e.target.value)
+  }
+
+  const results = !search
+    ? brands.data
+    : brands.data.filter(brand => brand.attributes.name.toLowerCase().includes(search.toLocaleLowerCase()))
+
   return (
     <>
       <HeaderLoggedIn
@@ -184,10 +195,12 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
                     }
                   }}
                   type="text"
+                  onChange={handleInput}
+                  value={search}
                   placeholder='Search' />
               </Box>
 
-              <CheckBox label={brands} handleChecked={handleChecked} checked={checked}/>
+              <CheckBoxBrand label={results} handleChecked={handleChecked} checked={checked}/>
             </>}
           </Box>
 
@@ -265,10 +278,12 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
                     }
                   }}
                   type="text"
+                  onChange={handleInput}
+                  value={search}
                   placeholder='Search' />
               </Box>
 
-              <CheckBox label={brands} handleChecked={handleChecked}/>
+              <CheckBoxBrand label={results} handleChecked={handleChecked} checked={checked}/>
               {/* {checked && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+3500)</Typography>} */}
             </>}
 
@@ -367,7 +382,7 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
 
                 {/* FILTER-REMOVE ICON */}
                 <Box
-                  onClick={() => { showFiltersBlock() }}
+                  onClick={showFiltersBlock}
                   component="img"
                   src="/filter-remove.png"
                   sx={{ width: '24px', height: '24px', cursor: 'pointer' }}/>
