@@ -6,7 +6,7 @@ import { postProduct } from 'helpers/products/postProduct'
 const useAddProductForm = () => {
   const context = useContext(UserContext)
 
-  const userId = context.user.userInfo.id
+  const userId = context?.user.userInfo?.id
 
   const [inputInfo, setInputInfo] = useState({
     productName: '',
@@ -52,8 +52,6 @@ const useAddProductForm = () => {
       price: 2000,
       userId
     })
-
-    e.reset()
   }
 
   return {
