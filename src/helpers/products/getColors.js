@@ -1,6 +1,5 @@
-import { fetchWrapper } from 'helpers/fetchWrapper'
-
+import axiosInstance from '../../axios/axiosInstance'
 export const getColors = async () => {
-  const response = await fetchWrapper('api/colors', { method: 'GET' })
-  return response
+  const response = await axiosInstance('/api/colors')
+  return response.data
 }

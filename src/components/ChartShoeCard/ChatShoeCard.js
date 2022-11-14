@@ -5,7 +5,7 @@ import { Divider, FormControl, Grid, MenuItem, Select, Stack, Typography, useThe
 import { Box } from '@mui/system'
 import Image from 'next/image'
 
-const ChartShoeCard = ({ img, alt, name, price, gender, categories }) => {
+const ChartShoeCard = ({ img, alt, name, price, gender }) => {
   const theme = useTheme()
 
   const [size, setSize] = useState('')
@@ -36,7 +36,7 @@ const ChartShoeCard = ({ img, alt, name, price, gender, categories }) => {
             height: '100%'
           }
         }}>
-          <Image src={img} alt={alt} layout='fill' objectFit="cover" />
+          <Image src={img} alt={alt} layout='fill' objectFit="cover" priority />
         </Box>
       </Grid>
 
@@ -55,46 +55,6 @@ const ChartShoeCard = ({ img, alt, name, price, gender, categories }) => {
         }} variant='main'>In stock</Typography>
 
         <Box sx={{ marginTop: 'auto' }}>
-          <FormControl size='small' sx={{ m: 0, minWidth: 120 }}>
-            <Select
-              value={size}
-              onChange={handleChange}
-              displayEmpty
-              inputProps={{ 'aria-label': 'Without label' }}
-              outline='false'
-              sx={{ height: '25px', minWidth: 120, fontSize: '12px', boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0, padding: 0 } }}
-            >
-              <MenuItem value="">
-                Size
-              </MenuItem>
-
-              {
-                categories.sizes.data.map(size => <MenuItem key={size.id}>{size.attributes.value}</MenuItem>)
-              }
-
-            </Select>
-          </FormControl>
-
-          <FormControl size='small' sx={{ m: 0, minWidth: 120 }}>
-            <Select
-              value={size}
-              onChange={handleChange}
-              displayEmpty
-              inputProps={{ 'aria-label': 'Without label' }}
-              sx={{ height: '25px', minWidth: 120, fontSize: '12px', boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
-
-            >
-              <MenuItem value="">
-                Color
-              </MenuItem>
-
-              {
-                categories.colors.data.map(color => <MenuItem key={color.id}>{color.attributes.name}</MenuItem>)
-              }
-
-            </Select>
-          </FormControl>
-
           <FormControl size='small' sx={{ m: 0, minWidth: 120 }}>
             <Select
               value={size}
