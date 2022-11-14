@@ -12,14 +12,11 @@ const pages = ['Home', 'For women', 'For men', 'Accesories', 'Sale']
 const links = ['/home', '/for-women', 'for-men', 'accesories', 'sale']
 
 export async function getStaticProps () {
-  const brandsRes = await getBrands()
-  const brands = await brandsRes.json()
+  const brands = await getBrands()
 
-  const colorsRes = await getColors()
-  const colors = await colorsRes.json()
+  const colors = await getColors()
 
-  const sizesRes = await getSizes()
-  const sizes = await sizesRes.json()
+  const sizes = await getSizes()
 
   return {
     props: {

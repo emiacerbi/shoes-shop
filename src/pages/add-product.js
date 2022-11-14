@@ -18,14 +18,11 @@ import { postProduct } from 'helpers/products/postProduct'
 import { signOut } from 'next-auth/react'
 
 export const getStaticProps = async () => {
-  const brandsData = await getBrands()
-  const brands = await brandsData.json()
+  const brands = await getBrands()
 
-  const genderData = await getGenders()
-  const genders = await genderData.json()
+  const genders = await getGenders()
 
-  const sizeData = await getSizes()
-  const sizes = await sizeData.json()
+  const sizes = await getSizes()
 
   return {
     props: {
