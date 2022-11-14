@@ -16,13 +16,12 @@ import { signOut } from 'next-auth/react'
 
 export async function getServerSideProps () {
   const res = await getProducts()
-  const products = await res.json()
 
-  const filteredProducts = products.data.filter(product => product.attributes.teamName === 'ea-team')
+  const filteredProducts = res.data.filter(product => product.attributes.teamName === 'ea-team')
   return {
     props: {
-      filteredProducts,
-      products
+      filteredProducts
+      // products
     }
   }
 }
