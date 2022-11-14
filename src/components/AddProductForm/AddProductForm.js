@@ -1,15 +1,12 @@
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import { Box } from '@mui/material'
-import useAddProductForm from 'hooks/useAddProductForm'
 
 import Form from '../Form/Form'
 import PrimaryInput from '../PrimaryInput/PrimaryInput'
 import SelectInput from '../SelectInput/SelectInput'
 import TextArea from '../TextArea/TextArea'
 
-const AddProductForm = ({ brands, genders, sizes, id }) => {
-  const { handleInputChange, handleSubmit } = useAddProductForm()
-
+const AddProductForm = ({ brands, genders, sizes, id, handleInputChange, handleSubmit }) => {
   return (
 
     <Form id={id} onSubmit={handleSubmit}>
@@ -30,17 +27,17 @@ const AddProductForm = ({ brands, genders, sizes, id }) => {
         type="text"
       />
       <Box sx={{ display: 'flex', gap: '5%' }}>
-        <SelectInput required onChange={handleInputChange} name={'Gender'} inputValues={genders}></SelectInput>
-        <SelectInput required onChange={handleInputChange} name={'Brand'} inputValues={brands}></SelectInput>
+        <SelectInput required onChange={handleInputChange} label='Gender' name={'gender'} inputValues={genders}></SelectInput>
+        <SelectInput required onChange={handleInputChange} label='Brand' name={'brand'} inputValues={brands}></SelectInput>
       </Box>
       <TextArea placeholder='Do not exceed 300 characters' label='Description' rows={7} onChange={handleInputChange} />
-      <SelectInput required onChange={handleInputChange} name={'Size'} inputValues={sizes}></SelectInput>
+      <SelectInput required onChange={handleInputChange} name={'size'} inputValues={sizes}></SelectInput>
       <Box sx={{ display: { xs: 'flex', sm: 'none' }, flexDirection: 'column', gap: '1rem' }}>
         <PrimaryInput
           required
           label="Product Image"
           placeholder="Nike Air Max 90"
-          name="Img"
+          name="img"
           onChange={handleInputChange}
           type="file"/>
         <PrimaryButton>Save</PrimaryButton>
