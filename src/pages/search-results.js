@@ -52,14 +52,9 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
   })
 
   const showFiltersBlock = () => {
-    if (screenWidth > 599 & (showFilters === false || showFilters === true)) {
-      setOpacity('100%')
-    } else if (screenWidth < 599 & showFilters === false) {
-      setOpacity('65%')
-    } else if (screenWidth < 599 & showFilters === true) {
-      setOpacity('100%')
-    }
     setShowFilters(!showFilters)
+    screenWidth <= 599 & showFilters === false && setOpacity('65%')
+    screenWidth <= 599 & showFilters === true && setOpacity('100%')
   }
 
   function handleGender () {
@@ -98,7 +93,7 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
       <HeaderLoggedIn
         pages={['Home', 'For women', 'For Men', 'Accesories', 'Sale']}
         links={['/', '/for-women', '/for-men', '/accesories', '/sale']}
-        cart={true} burger={true} opacity={opacity}/>
+        cart={true} burger={true}/>
       <Box display={{ xs: 'block', sm: 'flex' }} sx={{ maxWidth: '1920px', mt: 'auto', width: 'auto' }}>
 
         {/* DESKTOP FILTERS */}
@@ -264,7 +259,11 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
         </Box> }
 
         {/* CONTAINER ZAPATILLAS */}
-        <Box sx={{ m: '20px', width: 'auto', opacity: `${opacity}` }}>
+        <Box sx={{
+          m: '20px',
+          width: 'auto',
+          [theme.breakpoints.down('sm')]: { opacity: `${opacity}` }
+        }}>
           <Box sx={{
             [theme.breakpoints.up('sm')]: {
               mt: '68px',
