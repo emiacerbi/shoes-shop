@@ -4,33 +4,12 @@ import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import { Divider, Grid, Stack, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
-import { getBrands } from 'helpers/products/getBrands'
-import { getColors } from 'helpers/products/getColors'
-import { getSizes } from 'helpers/products/getSizes'
 
 const pages = ['Home', 'For women', 'For men', 'Accesories', 'Sale']
 const links = ['/home', '/for-women', 'for-men', 'accesories', 'sale']
 
-export async function getStaticProps () {
-  const brands = await getBrands()
-
-  const colors = await getColors()
-
-  const sizes = await getSizes()
-
-  return {
-    props: {
-      brands,
-      colors,
-      sizes
-    }
-  }
-}
-
-const Bag = ({ brands, genders, colors, sizes }) => {
+const Bag = () => {
   const theme = useTheme()
-
-  const categories = { brands, colors, sizes }
 
   return (
     <>
@@ -61,9 +40,9 @@ const Bag = ({ brands, genders, colors, sizes }) => {
             {/* Cards */}
             <Grid item xs={12} mt={5} sx={{ marginInline: 'auto' }} >
               <Stack spacing={3} mb={3}>
-                <ChartShoeCard categories={categories} name='Nike Air Max 270' price='$160' gender='Women' img='/airmax-270.png' />
-                <ChartShoeCard categories={categories} name='Nike Air Max 90' price='$140' gender='Men' img='/airmax-90.png' />
-                <ChartShoeCard categories={categories} name={'Nike Air Force 1 07 SE'} price='$160' gender='Women' img='/air-force.png' />
+                <ChartShoeCard name='Nike Air Max 270' price='$160' gender='Women' img='/airmax-270.png' />
+                <ChartShoeCard name='Nike Air Max 90' price='$140' gender='Men' img='/airmax-90.png' />
+                <ChartShoeCard name={'Nike Air Force 1 07 SE'} price='$160' gender='Women' img='/air-force.png' />
               </Stack>
 
               <Box sx={{
