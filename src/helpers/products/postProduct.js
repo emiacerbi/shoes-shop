@@ -1,22 +1,21 @@
-import { fetchWrapper } from 'helpers/fetchWrapper'
+import axiosInstance from '../../axios/axiosInstance'
 
-export const postProduct = async ({ name, images, description, brand, categories, color, gender, size, price }) => {
-  const response = await fetchWrapper('api/products', {
-    body: {
-      data: {
-        name,
-        images: [...images],
-        description,
-        brand,
-        categories: [...categories],
-        color,
-        gender,
-        size,
-        uniqueID: Math.floor(Math.random() * 100000),
-        price,
-        sitemap_exclude: true,
-        teamName: 'ea-team'
-      }
+export const postProduct = async ({ name, images, description, brand, categories, color, gender, size, price, userId }) => {
+  const response = await axiosInstance.post('api/products', {
+    data: {
+      name,
+      images: [...images],
+      description,
+      brand,
+      categories: [...categories],
+      color,
+      gender,
+      size,
+      uniqueID: Math.floor(Math.random() * 100000),
+      price,
+      sitemap_exclude: true,
+      teamName: 'ea-team',
+      userId
     }
   })
 
