@@ -1,21 +1,23 @@
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 
-function CheckBox ({ label }) {
+function CheckBoxSizes ({ label }) {
   return (
     <>
       <FormGroup aria-label="position" column >
         {
-          label.data.map(data => (
+          label.data.map(size => (
             <>
               <FormControlLabel
-                label={data.attributes.name}
-                control={<Checkbox/>}/>
+                label={size.attributes.value}
+                control={<Checkbox/>}
+              />
             </>
           ))
         }
       </FormGroup>
+
     </>
   )
 }
 
-export default CheckBox
+export default CheckBoxSizes

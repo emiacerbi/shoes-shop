@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CheckBox from '@components/CheckBox/CheckBox'
+import CheckBoxBrand from '@components/CheckBoxBrand/CheckBoxBrand'
+import CheckBoxSizes from '@components/CheckBoxSizes/CheckBoxSizes'
 import FilterTitle from '@components/FilterTitle/FilterTitle'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import ProductCard from '@components/ProductCard/ProductCard'
@@ -7,23 +9,42 @@ import SeparationLine from '@components/SeparationLine/SeparationLine'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import { Box, InputBase, Typography } from '@mui/material'
 import { theme } from '@styles/theme'
+import { getBrands } from 'helpers/products/getBrands'
+import { getColors } from 'helpers/products/getColors'
+import { getGenders } from 'helpers/products/getGenders'
+import { getSizes } from 'helpers/products/getSizes'
 
-export default function SearchResults () {
+export const getStaticProps = async () => {
+  const genderData = await getGenders()
+  const genders = await genderData.json()
+
+  const brandData = await getBrands()
+  const brands = await brandData.json()
+
+  const colorsData = await getColors()
+  const colors = await colorsData.json()
+
+  const sizesData = await getSizes()
+  const sizes = await sizesData.json()
+
+  return {
+    props: {
+      brands,
+      genders,
+      colors,
+      sizes
+    }
+  }
+}
+
+export default function SearchResults ({ genders, brands, colors, sizes }) {
   // Filters
   const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
   const [filterGender, setFilterGender] = useState(true) // State to show/hide Gender filters
-  const [filterKids, setFilterKids] = useState(true) // State to show/hide Kids filters
   const [filterBrand, setFilterBrand] = useState(true) // State to show/hide Brand filters
   const [filterPrice, setFilterPrice] = useState(true) // State to show/hide Price filters
   const [filterColor, setFilterColor] = useState(true) // State to show/hide Color filters
-
-  // Checkboxes
-  const [checkedAdidas, setCheckedAdidas] = useState(true) // State to show/hide the stock
-  const [checkedAsics, setCheckedAsics] = useState(true) // State to show/hide the stock
-  const [checkedNB, setCheckedNB] = useState(true) // State to show/hide the stock
-  const [checkedNike, setCheckedNike] = useState(true) // State to show/hide the stock
-  const [checkedPuma, setCheckedPuma] = useState(true) // State to show/hide the stock
-  const [checkedReebok, setCheckedReebok] = useState(true) // State to show/hide the stock
+  const [filterSize, setFilterSize] = useState(true) // State to show/hide Color filters
 
   const [opacity, setOpacity] = useState('')
   const [screenWidth, setScreenWidth] = useState(0)
@@ -49,10 +70,6 @@ export default function SearchResults () {
     return setFilterGender(!filterGender)
   }
 
-  function handleKids () {
-    return setFilterKids(!filterKids)
-  }
-
   function handleBrand () {
     return setFilterBrand(!filterBrand)
   }
@@ -65,26 +82,20 @@ export default function SearchResults () {
     return setFilterColor(!filterColor)
   }
 
-  function handleChangeAdidas () {
-    setCheckedAdidas(!checkedAdidas)
+  function handleSize () {
+    return setFilterSize(!filterSize)
   }
 
-  function handleChangeAsics () {
-    setCheckedAsics(!checkedAsics)
+  // Filter data
+  const [search, setSearch] = useState('')
+
+  const handleInput = (e) => {
+    setSearch(e.target.value)
   }
 
-  function handleChangeNB () {
-    setCheckedNB(!checkedNB)
-  }
-  function handleChangeNike () {
-    setCheckedNike(!checkedNike)
-  }
-  function handleChangePuma () {
-    setCheckedPuma(!checkedPuma)
-  }
-  function handleChangeReebok () {
-    setCheckedReebok(!checkedReebok)
-  }
+  const results = !search
+    ? brands.data
+    : brands.data.filter(brand => brand.attributes.name.toLowerCase().includes(search.toLocaleLowerCase()))
 
   return (
     <>
@@ -115,12 +126,8 @@ export default function SearchResults () {
           <Box sx={{ maxWidth: '200px' }}>
             {/* Gender */}
             <FilterTitle filterName={'Gender'} handleGender={handleGender}/>
-            {filterGender && <> <CheckBox label="Men"/> <CheckBox label="Women"/></>}
-            <SeparationLine width={'200px'}/>
+            {filterGender && <> <CheckBox label={genders}/> </>}
 
-            {/* Kids */}
-            <FilterTitle filterName={'Kids'} handleKids={handleKids}/>
-            {filterKids && <> <CheckBox label="Boys"/> <CheckBox label="Girls"/></>}
             <SeparationLine width={'200px'}/>
 
             {/* Brand */}
@@ -153,21 +160,12 @@ export default function SearchResults () {
                     }
                   }}
                   type="text"
+                  onChange={handleInput}
+                  value={search}
                   placeholder='Search' />
               </Box>
 
-              <CheckBox label="Adidas" handleChangeAdidas={handleChangeAdidas}/>
-              {checkedAdidas && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+350)</Typography>}
-              <CheckBox label="Asics" handleChangeAsics={handleChangeAsics}/>
-              {checkedAsics && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+840)</Typography>}
-              <CheckBox label="New Balance" handleChangeNB={handleChangeNB}/>
-              {checkedNB && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '140px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+840)</Typography> }
-              <CheckBox label="Nike" handleChangeNike={handleChangeNike}/>
-              {checkedNike && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '80px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+240)</Typography> }
-              <CheckBox label="Puma" handleChangePuma={handleChangePuma}/>
-              {checkedPuma && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+350)</Typography> }
-              <CheckBox label="Reebok" handleChangeReebok={handleChangeReebok}/>
-              {checkedReebok && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '100px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+97)</Typography> }
+              <CheckBoxBrand label={results} />
             </>}
           </Box>
 
@@ -179,7 +177,12 @@ export default function SearchResults () {
 
           {/* Color */}
           <FilterTitle filterName={'Color'} handleColor={handleColor}/>
+          {filterColor && <> <CheckBox label={colors}/> </>}
           <SeparationLine width={'200px'}/>
+
+          {/* Size */}
+          <FilterTitle filterName={'Size'} handleSize={handleSize}/>
+          {filterSize && <> <CheckBoxSizes label={sizes}/> </>}
 
         </Box> }
 
@@ -190,10 +193,8 @@ export default function SearchResults () {
           sx={{
             maxWidth: '320px',
             width: 'auto',
-            // height: '100vh',
             display: { xs: 'flex', sm: 'none' },
             flexDirection: 'column',
-            // ml: '40px',
             right: 0,
             top: 0,
             position: 'absolute',
@@ -207,12 +208,7 @@ export default function SearchResults () {
 
             {/* Gender */}
             <FilterTitle filterName={'Gender'} handleGender={handleGender}/>
-            {filterGender && <> <CheckBox label="Men"/> <CheckBox label="Women"/></>}
-            <SeparationLine/>
-
-            {/* Kids */}
-            <FilterTitle filterName={'Kids'} handleKids={handleKids}/>
-            {filterKids && <> <CheckBox label="Boys"/> <CheckBox label="Girls"/></>}
+            {filterGender && <> <CheckBox label={genders}/> </>}
             <SeparationLine/>
 
             {/* Brand */}
@@ -245,21 +241,12 @@ export default function SearchResults () {
                     }
                   }}
                   type="text"
+                  onChange={handleInput}
+                  value={search}
                   placeholder='Search' />
               </Box>
 
-              <CheckBox label="Adidas" handleChangeAdidas={handleChangeAdidas}/>
-              {checkedAdidas && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+350)</Typography>}
-              <CheckBox label="Asics" handleChangeAsics={handleChangeAsics}/>
-              {checkedAsics && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+840)</Typography>}
-              <CheckBox label="New Balance" handleChangeNB={handleChangeNB}/>
-              {checkedNB && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '140px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+840)</Typography> }
-              <CheckBox label="Nike" handleChangeNike={handleChangeNike}/>
-              {checkedNike && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '80px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+240)</Typography> }
-              <CheckBox label="Puma" handleChangePuma={handleChangePuma}/>
-              {checkedPuma && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '90px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+350)</Typography> }
-              <CheckBox label="Reebok" handleChangeReebok={handleChangeReebok}/>
-              {checkedReebok && <Typography sx={{ position: 'absolute', mt: '-31px', ml: '100px', fontSize: '16px', color: '#6E7278', lineHeight: '19px' }}>(+97)</Typography> }
+              <CheckBoxBrand label={results} />
             </>}
 
             <SeparationLine/>
@@ -270,7 +257,13 @@ export default function SearchResults () {
 
             {/* Color */}
             <FilterTitle filterName={'Color'} handleColor={handleColor}/>
+            {filterColor && <> <CheckBox label={colors}/> </>}
             <SeparationLine/>
+
+            {/* Size */}
+            <FilterTitle filterName={'Size'} handleSize={handleSize}/>
+            {filterSize && <> <CheckBoxSizes label={sizes}/> </>}
+
           </Box>
         </Box> }
 
@@ -330,6 +323,9 @@ export default function SearchResults () {
               <Box sx={{ display: 'flex' }}>
                 {showFilters
                   ? <Typography sx={{
+                    [theme.breakpoints.down('sm')]: {
+                      display: 'none'
+                    },
                     fontWeight: 400,
                     fontSize: '24px',
                     lineHeight: '28px',
@@ -339,7 +335,7 @@ export default function SearchResults () {
                   </Typography>
                   : <Typography sx={{
                     fontWeight: 400,
-                    fontSize: '15px',
+                    fontSize: '24px',
                     lineHeight: '28px',
                     mr: '6px'
                   }}>
@@ -348,7 +344,7 @@ export default function SearchResults () {
 
                 {/* FILTER-REMOVE ICON */}
                 <Box
-                  onClick={() => { showFiltersBlock() }}
+                  onClick={showFiltersBlock}
                   component="img"
                   src="/filter-remove.png"
                   sx={{ width: '24px', height: '24px', cursor: 'pointer' }}/>
