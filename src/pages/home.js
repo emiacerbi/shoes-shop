@@ -40,17 +40,14 @@ export default function Home ({ filteredProducts, products }) {
       <Box sx={{ [theme.breakpoints.up('sm')]: { display: 'flex', flexDirection: 'row' } }}>
         <Box sx={{ display: 'none', [theme.breakpoints.up('md')]: { width: 360, padding: '5px', display: 'block', flexDirection: 'column' } }}>
           <ProfileInfoSideBar name = { context?.user?.userInfo?.username ? context?.user?.userInfo?.username : <Skeleton variant="rectangular" width={100} height={20} />}/>
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
-            <AccountCircleOutlined sx={{ color: '#6E7278' }}/>
-            <BarItem name="My Profile"/>
-          </Box>
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
-            <Button
-              onClick={() => signOut()}
-              sx={{ textTransform: 'none', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            >
-              <BarItem name="Log out"> <LogoutIcon sx={{ color: '#6E7278' }}/></BarItem>
-            </Button>
+          <Link href='/update-profile'>
+            <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
+              <AccountCircleOutlined sx={{ color: '#6E7278' }}/>
+              <BarItem name="My Profile"/>
+            </Box>
+          </Link>
+          <Box onClick={() => signOut()} sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
+            <BarItem name="Log out"> <LogoutIcon sx={{ color: '#6E7278' }}/></BarItem>
           </Box>
         </Box>
         <Box component='main' sx={{ m: { xs: 0, sm: '20px' }, width: '100%' }}>
