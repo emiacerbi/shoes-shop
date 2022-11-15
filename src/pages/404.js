@@ -1,5 +1,5 @@
 import ErrorPage from '@components/ErrorPage/ErrorPage'
-import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
+import HeaderBeforeLogin from '@components/Header/Header'
 import { Box } from '@mui/material'
 
 export default function Error404 () {
@@ -16,7 +16,7 @@ export default function Error404 () {
         sx={{
           display: { xs: 'none', md: 'flex' }
         }}>
-        <HeaderLoggedIn links={['Home', 'For women', 'For men', 'Accesories', 'Sale']} pages={['Home', 'For women', 'For men', 'Accesories', 'Sale']} />
+        <HeaderBeforeLogin />
       </Box>
 
       <ErrorPage/>
