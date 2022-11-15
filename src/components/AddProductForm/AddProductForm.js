@@ -27,8 +27,8 @@ const AddProductForm = ({ brands, genders, sizes, id, handleInputChange, handleS
         type="text"
       />
       <Box sx={{ display: 'flex', gap: '5%' }}>
-        <SelectInput required onChange={handleInputChange} label='Gender' name={'gender'} inputValues={genders}></SelectInput>
-        <SelectInput required onChange={handleInputChange} label='Brand' name={'brand'} inputValues={brands}></SelectInput>
+        <SelectInput required onChange={handleInputChange} label='Gender' name='gender' inputValues={genders}></SelectInput>
+        <SelectInput required onChange={handleInputChange} label='Brand' name='brand' inputValues={brands}></SelectInput>
       </Box>
       <TextArea placeholder='Do not exceed 300 characters' label='Description' rows={7} onChange={handleInputChange} />
       <SelectInput required onChange={handleInputChange} label='Sizes' name={'size'} inputValues={sizes}></SelectInput>

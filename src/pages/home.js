@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
@@ -7,8 +6,7 @@ import ProfileInfoSideBar from '@components/SideBarProfileInfo/SideBarProfileInf
 import SubHeader from '@components/SubHeader/SubHeader'
 import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
-import { Box, Skeleton, Typography, useTheme } from '@mui/material'
-import { UserContext } from 'context/UserContext'
+import { Box, Typography, useTheme } from '@mui/material'
 import { getProducts } from 'helpers/products/getProducts'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -28,18 +26,13 @@ export async function getServerSideProps () {
 
 export default function Home ({ filteredProducts, products }) {
   const theme = useTheme()
-  const context = useContext(UserContext)
 
-  console.log(products)
-  console.log(filteredProducts)
-
-  console.log(context, 'USER INFO')
   return (
     <>
       <HeaderLoggedIn pages={['Bag', 'Add Product', 'Search']} burger={true} links={['/bag', '/add-product', '/search-results']}/>
       <Box sx={{ [theme.breakpoints.up('sm')]: { display: 'flex', flexDirection: 'row' } }}>
         <Box sx={{ display: 'none', [theme.breakpoints.up('md')]: { width: 360, padding: '5px', display: 'block', flexDirection: 'column' } }}>
-          <ProfileInfoSideBar name = { context?.user?.userInfo?.username ? context?.user?.userInfo?.username : <Skeleton variant="rectangular" width={100} height={20} />}/>
+          <ProfileInfoSideBar />
           <Link href='/update-profile'>
             <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
               <AccountCircleOutlined sx={{ color: '#6E7278' }}/>
@@ -55,7 +48,7 @@ export default function Home ({ filteredProducts, products }) {
             <Image src='/bgHomeImg.png' alt='panelImage' layout='fill' ></Image>
           </Box>
           <Box sx={{ width: '100%', p: '20px' }}>
-            <SubHeader name = { context?.user?.userInfo?.username ? context?.user?.userInfo?.username : <Skeleton variant="rectangular" width={100} height={20} />}/>
+            <SubHeader />
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Typography variant='h1'>My Products</Typography>
               <Box sx={{ display: { xs: 'none', md: 'block' } }}>
