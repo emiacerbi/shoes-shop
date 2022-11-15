@@ -6,7 +6,7 @@ import ProfileInfoSideBar from '@components/SideBarProfileInfo/SideBarProfileInf
 import SubHeader from '@components/SubHeader/SubHeader'
 import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
-import { Box, Button, Typography, useTheme } from '@mui/material'
+import { Box, Typography, useTheme } from '@mui/material'
 import { getProducts } from 'helpers/products/getProducts'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -29,21 +29,18 @@ export default function Home ({ filteredProducts, products }) {
 
   return (
     <>
-      <HeaderLoggedIn pages={['Home', 'Products']} burger={true} links={['home', 'bag']}/>
+      <HeaderLoggedIn pages={['Bag', 'Add Product', 'Search']} burger={true} links={['/bag', '/add-product', '/search-results']}/>
       <Box sx={{ [theme.breakpoints.up('sm')]: { display: 'flex', flexDirection: 'row' } }}>
-        <Box sx={{ display: 'none', [theme.breakpoints.up('sm')]: { width: 360, padding: '5px', display: 'block', flexDirection: 'column' } }}>
-          <ProfileInfoSideBar/>
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
-            <AccountCircleOutlined sx={{ color: '#6E7278' }}/>
-            <BarItem name="My Profile"/>
-          </Box>
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
-            <Button
-              onClick={() => signOut()}
-              sx={{ textTransform: 'none', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            >
-              <BarItem name="Log out"> <LogoutIcon sx={{ color: '#6E7278' }}/></BarItem>
-            </Button>
+        <Box sx={{ display: 'none', [theme.breakpoints.up('md')]: { width: 360, padding: '5px', display: 'block', flexDirection: 'column' } }}>
+          <ProfileInfoSideBar />
+          <Link href='/update-profile'>
+            <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
+              <AccountCircleOutlined sx={{ color: '#6E7278' }}/>
+              <BarItem name="My Profile"/>
+            </Box>
+          </Link>
+          <Box onClick={() => signOut()} sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
+            <BarItem name="Log out"> <LogoutIcon sx={{ color: '#6E7278' }}/></BarItem>
           </Box>
         </Box>
         <Box component='main' sx={{ m: { xs: 0, sm: '20px' }, width: '100%' }}>
@@ -54,7 +51,7 @@ export default function Home ({ filteredProducts, products }) {
             <SubHeader />
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Typography variant='h1'>My Products</Typography>
-              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                 <PrimaryButton maxWidth='152px' ><Link href='/add-product'>Add Products</Link></PrimaryButton>
               </Box>
             </Box>
@@ -64,7 +61,7 @@ export default function Home ({ filteredProducts, products }) {
               <ProductCard image={'/air-force.png'} productTitle="Nike Air Force 1 '07 SE" productPrice="110" productDescription="Women's Shoes"/>
               <ProductCard image={'/air-zoom-pegasus.png'} productTitle="Nike Air Zoom Pegasus" productPrice="120" productDescription="Men's Shoes"/>
             </Box>
-            <Box sx={{ display: { xs: 'block', sm: 'none' }, mt: '1rem' }}>
+            <Box sx={{ display: { xs: 'block', md: 'none' }, mt: '1rem' }}>
               <PrimaryButton maxWidth='100%'><Link href='/add-product'>Add Products</Link></PrimaryButton>
             </Box>
           </Box>

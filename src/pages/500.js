@@ -2,6 +2,7 @@ import HeaderBeforeLogin from '@components/Header/Header'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Custom500 () {
   return (
@@ -55,7 +56,9 @@ export default function Custom500 () {
             maxWidth: '280px'
           }}
         >
-          <PrimaryButton>Back Home</PrimaryButton>
+          <Link href='/home'>
+            <PrimaryButton>Back Home</PrimaryButton>
+          </Link>
         </Box>
       </Box>
     </>

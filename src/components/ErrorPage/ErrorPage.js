@@ -1,11 +1,14 @@
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
 import SecondaryButton from '../SecondaryButton/SecondaryButton'
 
 const ErrorPage = () => {
+  const router = useRouter()
+
   return (
     <Box
       sx={{
@@ -72,9 +75,8 @@ const ErrorPage = () => {
 
             }}
           >
-            <Link href="/">
-              <SecondaryButton>Go Back</SecondaryButton>
-            </Link>
+            <SecondaryButton onClick={() => router.back()}
+            >Go Back</SecondaryButton>
             <Link href="/home">
               <PrimaryButton maxWidth="152px">Home</PrimaryButton>
             </Link>

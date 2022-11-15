@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { Divider, FormControl, Grid, MenuItem, Select, Stack, Typography, useTheme } from '@mui/material'
+import { FormControl, Grid, MenuItem, Select, Stack, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
 
-const ChartShoeCard = ({ img, alt, name, price, gender }) => {
+const ChartShoeCard = ({ img, alt, name, price, gender, deleteShoe, id, changeQuantity }) => {
   const theme = useTheme()
 
-  const [size, setSize] = useState('')
+  const [quantity, setQuantity] = useState(1)
 
   const handleChange = (event) => {
-    setSize(event.target.value)
+    setQuantity(event.target.value)
+    changeQuantity(id, event.target.value)
   }
 
   return (
@@ -22,10 +22,7 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
         item xs={4} sm={3}
         sx={{
           display: 'flex',
-          height: '100px',
-          [theme.breakpoints.up('sm')]: {
-            height: '200px'
-          }
+          height: { xs: '100px', sm: '200px' }
         }}
       >
         <Box sx={{
@@ -47,28 +44,22 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
         <Typography variant='subtitle1'>{gender} {'\''}s Shoes</Typography>
 
         <Box sx={{ marginTop: '.1rem' }} />
-        <Typography sx={{
-          display: 'none',
-          [theme.breakpoints.up('sm')]: {
-            display: 'block'
-          }
-        }} variant='main'>In stock</Typography>
+        <Typography sx={{ display: { xs: 'none', sm: 'block' } }} variant='main'>In stock</Typography>
 
-        <Box sx={{ marginTop: 'auto' }}>
-          <FormControl size='small' sx={{ m: 0, minWidth: 120 }}>
+        <Box sx={{ marginTop: 'auto', minWidth: 120 }}>
+          <FormControl >
             <Select
-              value={size}
+              value={quantity}
               onChange={handleChange}
-              displayEmpty
-              inputProps={{ 'aria-label': 'Without label' }}
               sx={{ height: '25px', minWidth: 120, fontSize: '12px', boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
-
+              displayEmpty
             >
               <MenuItem value="">
                 Quantity
               </MenuItem>
               <MenuItem value={1}>1</MenuItem>
               <MenuItem value={2}>2</MenuItem>
+              <MenuItem value={3}>3</MenuItem>
               <MenuItem value={4}>4</MenuItem>
               <MenuItem value={5}>5</MenuItem>
               <MenuItem value={6}>6</MenuItem>
@@ -81,35 +72,18 @@ const ChartShoeCard = ({ img, alt, name, price, gender }) => {
       <Grid
         item
         xs={3}
-        sx={{ display: 'flex', flexDirection: 'column', pb: '.25rem', alignItems: 'flex-end' }}
+        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}
       >
-        <Typography variant='h3'>{price}</Typography>
+        <Typography variant='h3'>${price}</Typography>
         <Stack
           sx={{
             marginTop: 'auto',
-            flexDirection: 'column',
-            gap: '.25rem',
-            [theme.breakpoints.up('md')]: {
-              flexDirection: 'row',
-              gap: '1rem'
-            }
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: { xs: '.25rem', md: '1rem' }
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: '.25rem', opacity: '.5' }}>
-            <FavoriteBorderIcon color='common' fontSize='small' />
-            <Typography variant='p'>Save</Typography>
-          </Box>
-          <Divider
-            orientation='vertical'
-            sx={{
-              display: 'none',
-              [theme.breakpoints.up('md')]: {
-                display: 'block'
-              }
-            }}
 
-          />
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: '.25rem', opacity: '.5' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: '.25rem', opacity: '.5', cursor: 'pointer' }} onClick={() => deleteShoe(id)}>
             <DeleteOutlineIcon color='common' fontSize='small' />
             <Typography variant='p'>Delete</Typography>
           </Box>
