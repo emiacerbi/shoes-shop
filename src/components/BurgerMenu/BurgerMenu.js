@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
-import BarItem from '@components/NavBarItem/NavBarItem'
-import LogoutIcon from '@mui/icons-material/Logout'
 import MenuIcon from '@mui/icons-material/Menu'
-import { Box } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import Link from '@mui/material/Link'
 import Menu from '@mui/material/Menu'
