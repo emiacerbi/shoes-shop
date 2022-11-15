@@ -63,7 +63,7 @@ const Bag = () => {
             {/* Cards */}
             <Grid item xs={12} mt={5} sx={{ marginInline: 'auto' }} >
               <Stack spacing={3} mb={3}>
-                { shoes.map(shoe => <ChartShoeCard key={shoe.id} id={shoe.id} name={shoe.name} setSubTotal={setSubTotal} changeQuantity={changeQuantity} deleteShoe={deleteShoe} price={shoe.price} gender={shoe.gender} img={shoe.img} />) }
+                { shoes.map(shoe => <ChartShoeCard key={shoe.id} id={shoe.id} name={shoe.name} changeQuantity={changeQuantity} deleteShoe={deleteShoe} price={shoe.price} gender={shoe.gender} img={shoe.img} />) }
               </Stack>
 
               <Box sx={{
