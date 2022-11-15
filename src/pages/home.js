@@ -7,7 +7,7 @@ import ProfileInfoSideBar from '@components/SideBarProfileInfo/SideBarProfileInf
 import SubHeader from '@components/SubHeader/SubHeader'
 import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
-import { Box, Button, Skeleton, Typography, useTheme } from '@mui/material'
+import { Box, Skeleton, Typography, useTheme } from '@mui/material'
 import { UserContext } from 'context/UserContext'
 import { getProducts } from 'helpers/products/getProducts'
 import Image from 'next/image'
