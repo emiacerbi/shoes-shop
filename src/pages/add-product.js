@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import AddProductForm from '@components/AddProductForm/AddProductForm'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
@@ -9,7 +10,8 @@ import ChatIcon from '@mui/icons-material/Chat'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import LogoutIcon from '@mui/icons-material/Logout'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Skeleton, Typography } from '@mui/material'
+import { UserContext } from 'context/UserContext'
 import { getBrands } from 'helpers/products/getBrands'
 import { getGenders } from 'helpers/products/getGenders'
 import { getSizes } from 'helpers/products/getSizes'
@@ -37,6 +39,8 @@ export default function AddProduct ({ brands, genders, sizes }) {
 
   console.log(inputInfo)
 
+  const context = useContext(UserContext)
+
   return (
     <>
       <HeaderLoggedIn
@@ -47,7 +51,7 @@ export default function AddProduct ({ brands, genders, sizes }) {
       <Box component="main" sx={{ display: 'flex' }}>
 
         <Box sx={{ display: { xs: 'none', sm: 'block' }, flexDirection: 'column' }}>
-          <ProfileInfoSideBar />
+          <ProfileInfoSideBar name = { context?.user?.userInfo?.username ? context?.user?.userInfo?.username : <Skeleton variant="rectangular" width={100} height={20} />}/>
           <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }} >
             <ShoppingBagIcon sx={{ color: '#6E7278' }}/>
             <BarItem name="My Orders"/>
