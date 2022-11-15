@@ -1,7 +1,11 @@
-import { Avatar, Box, Typography, useTheme } from '@mui/material'
+import { useContext } from 'react'
+import { Avatar, Box, Skeleton, Typography, useTheme } from '@mui/material'
+import { UserContext } from 'context/UserContext'
 
-export default function SubHeader ({ name }) {
+export default function SubHeader () {
   const theme = useTheme()
+
+  const context = useContext(UserContext)
 
   return (
     <Box sx={{
@@ -27,7 +31,9 @@ export default function SubHeader ({ name }) {
         <Typography variant='h1' sx={{
           fontSize: { xs: '14px', sm: '20px' },
           lineHeight: { xs: '12px', sm: '24px' }
-        }}>{ name }</Typography>
+        }}>
+          { context?.user?.userInfo?.username ? context?.user?.userInfo?.username : <Skeleton variant="rectangular" width={100} height={20} />}
+        </Typography>
         <Typography variant='p' sx={{ lineHeight: '14px' }}>1374 bonus points</Typography>
       </Box>
     </Box>
