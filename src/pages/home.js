@@ -38,7 +38,7 @@ export default function Home ({ filteredProducts, products }) {
     <>
       <HeaderLoggedIn pages={['Home', 'Products']} burger={true} links={['home', 'bag']}/>
       <Box sx={{ [theme.breakpoints.up('sm')]: { display: 'flex', flexDirection: 'row' } }}>
-        <Box sx={{ display: 'none', [theme.breakpoints.up('sm')]: { width: 360, padding: '5px', display: 'block', flexDirection: 'column' } }}>
+        <Box sx={{ display: 'none', [theme.breakpoints.up('md')]: { width: 360, padding: '5px', display: 'block', flexDirection: 'column' } }}>
           <ProfileInfoSideBar name = { context?.user?.userInfo?.username ? context?.user?.userInfo?.username : <Skeleton variant="rectangular" width={100} height={20} />}/>
           <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
             <AccountCircleOutlined sx={{ color: '#6E7278' }}/>
@@ -61,7 +61,7 @@ export default function Home ({ filteredProducts, products }) {
             <SubHeader name = { context?.user?.userInfo?.username ? context?.user?.userInfo?.username : <Skeleton variant="rectangular" width={100} height={20} />}/>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Typography variant='h1'>My Products</Typography>
-              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                 <PrimaryButton maxWidth='152px' ><Link href='/add-product'>Add Products</Link></PrimaryButton>
               </Box>
             </Box>
@@ -71,7 +71,7 @@ export default function Home ({ filteredProducts, products }) {
               <ProductCard image={'/air-force.png'} productTitle="Nike Air Force 1 '07 SE" productPrice="110" productDescription="Women's Shoes"/>
               <ProductCard image={'/air-zoom-pegasus.png'} productTitle="Nike Air Zoom Pegasus" productPrice="120" productDescription="Men's Shoes"/>
             </Box>
-            <Box sx={{ display: { xs: 'block', sm: 'none' }, mt: '1rem' }}>
+            <Box sx={{ display: { xs: 'block', md: 'none' }, mt: '1rem' }}>
               <PrimaryButton maxWidth='100%'><Link href='/add-product'>Add Products</Link></PrimaryButton>
             </Box>
           </Box>
