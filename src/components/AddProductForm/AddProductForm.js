@@ -31,8 +31,8 @@ const AddProductForm = ({ brands, genders, sizes, id, handleInputChange, handleS
         <SelectInput required onChange={handleInputChange} label='Brand' name={'brand'} inputValues={brands}></SelectInput>
       </Box>
       <TextArea placeholder='Do not exceed 300 characters' label='Description' rows={7} onChange={handleInputChange} />
-      <SelectInput required onChange={handleInputChange} name={'size'} inputValues={sizes}></SelectInput>
-      <Box sx={{ display: { xs: 'flex', sm: 'none' }, flexDirection: 'column', gap: '1rem' }}>
+      <SelectInput required onChange={handleInputChange} label='Sizes' name={'size'} inputValues={sizes}></SelectInput>
+      <Box sx={{ display: { xs: 'flex', lg: 'none' }, flexDirection: 'column', gap: '1rem' }}>
         <PrimaryInput
           required
           label="Product Image"
