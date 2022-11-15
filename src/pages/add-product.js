@@ -9,7 +9,7 @@ import ChatIcon from '@mui/icons-material/Chat'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import LogoutIcon from '@mui/icons-material/Logout'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Typography, useTheme } from '@mui/material'
 import { getBrands } from 'helpers/products/getBrands'
 import { getGenders } from 'helpers/products/getGenders'
 import { getSizes } from 'helpers/products/getSizes'
@@ -37,12 +37,14 @@ export default function AddProduct ({ brands, genders, sizes }) {
 
   console.log(inputInfo)
 
+  const theme = useTheme()
+
   return (
     <>
       <HeaderLoggedIn
-        pages={['Home', 'For Women', 'For Man', 'Accesories', 'Sale']}
+        pages={['Home', 'Search', 'Bag']}
         burger={true}
-        links={['Test1', 'Test2']}
+        links={['/home', '/search-results', '/bag']}
       />
       <Box component="main" sx={{ display: 'flex' }}>
 
@@ -79,23 +81,23 @@ export default function AddProduct ({ brands, genders, sizes }) {
             p: { xs: '20px', sm: '55px' }
           }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'row', flex: '1' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', flex: '1', mb: '15px' }}>
             <Box sx={{ flex: '1', maxWidth: 890 }}>
-              <Typography variant="h1">Add Product</Typography>
-              <Typography variant="p" >
+              <Typography variant="h1" sx={{ [theme.breakpoints.down('md')]: { fontSize: '30px' } }}>Add Product</Typography>
+            </Box>
+            <Box sx={{ display: { xs: 'none', lg: 'flex' }, height: 40, width: 323, gap: '19px', flex: '1', justifyContent: 'flex-end' }}>
+              <PrimaryButton maxWidth="152px">Schedule</PrimaryButton>
+              <SecondaryButton onClick={handleSubmit} form='addProduct' maxWidth="152px">Save</SecondaryButton>
+            </Box>
+          </Box>
+          <Typography variant="p" sx={{ maxWidth: '900px' }} >
                 Lorem ipsum, or lipsum as it is sometimes known, is dummy text
                 used in laying out print, graphic or web designs. The passage
                 is attributed to an unknown typesetter in the 15th century who
                 is thought to have scrambled parts of Ciceros De Finibus
                 Bonorum et Malorum for use in a type specimen book. It usually
                 begins with:
-              </Typography>
-            </Box>
-            <Box sx={{ display: { xs: 'none', sm: 'flex' }, height: 40, width: 323, gap: '19px', flex: '1', justifyContent: 'flex-end' }}>
-              <PrimaryButton maxWidth="152px">Schedule</PrimaryButton>
-              <SecondaryButton onClick={handleSubmit} form='addProduct' maxWidth="152px">Save</SecondaryButton>
-            </Box>
-          </Box>
+          </Typography>
           <Box
             sx={{
               display: 'flex',

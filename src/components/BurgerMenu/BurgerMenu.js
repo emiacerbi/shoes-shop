@@ -5,6 +5,7 @@ import Link from '@mui/material/Link'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
+import { signOut } from 'next-auth/react'
 
 function BurgerMenu ({ pages, links }) {
   const [anchorElNav, setAnchorElNav] = useState(null)
@@ -50,6 +51,7 @@ function BurgerMenu ({ pages, links }) {
         }}
       >
         {/* Links menu pages */}
+
         {pages.map((page, index) => (
           <MenuItem key={page} onClick={handleCloseNavMenu}>
             <Link sx={{ textDecoration: 'none', color: '#000000' }} href={`${links[index]}`}>
@@ -58,6 +60,9 @@ function BurgerMenu ({ pages, links }) {
           </MenuItem>
         )
         )}
+        <MenuItem>
+          <Typography onClick={() => signOut()} textAlign="center">Log out</Typography>
+        </MenuItem>
       </Menu>
     </>
   )

@@ -7,8 +7,10 @@ import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalance
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined'
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined'
+import LogoutIcon from '@mui/icons-material/Logout'
 import { Avatar, Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import { signOut } from 'next-auth/react'
 
 import { theme } from '../styles/theme'
 
@@ -19,8 +21,8 @@ export default function UpdateProfile () {
   console.log(pages)
 
   useEffect(() => {
-    setPages(['Home', 'For women', 'For Men', 'Accesories', 'Sale'])
-    setLinks(['/', '/for-women', '/for-men', '/accesories', '/sale'])
+    setPages(['Home', 'Bag', 'Add Product', 'Search'])
+    setLinks(['/home', '/bag', '/add-product', '/search-results'])
   }, [])
 
   function handleSettings () {
@@ -96,6 +98,9 @@ export default function UpdateProfile () {
               <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
                 <AccountBalanceWalletOutlinedIcon sx={{ color: '#6E7278' }}/>
                 <BarItem name="My Wallet"/>
+              </Box>
+              <Box onClick={() => signOut()} sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
+                <BarItem name="Log out"> <LogoutIcon sx={{ color: '#6E7278' }}/></BarItem>
               </Box>
             </>
           )}

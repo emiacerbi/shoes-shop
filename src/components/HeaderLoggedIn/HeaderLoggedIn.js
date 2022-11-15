@@ -21,12 +21,12 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
     <AppBar position="static" sx={{ background: 'transparent', boxShadow: 'none', padding: '1.75rem', borderBottom: '1px solid #EAECF0' }}>
       {/* Desktop */}
       <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }} >
-        <Link href={'/'}>
+        <Link href={'/home'}>
           <Image src='/logo.png' width={35} height={26} alt='logo' />
         </Link>
         <Box sx={{ display: 'flex', gap: '2rem', marginLeft: '2.5rem' }} >
           {pages.map((page, index) => (
-            <Link key={index} sx={{ textDecoration: 'none', color: '#000000' }} href={page.toLowerCase()}>
+            <Link key={index} sx={{ textDecoration: 'none', color: '#000000' }} href={links[index]}>
               <Typography
                 sx={{
                   color: '#000000',
