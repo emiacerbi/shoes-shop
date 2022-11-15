@@ -21,8 +21,8 @@ export default function UpdateProfile () {
   console.log(pages)
 
   useEffect(() => {
-    setPages(['Home', 'For women', 'For Men', 'Accesories', 'Sale'])
-    setLinks(['/', '/for-women', '/for-men', '/accesories', '/sale'])
+    setPages(['Home', 'Bag', 'Add Product', 'Search'])
+    setLinks(['/home', '/bag', '/add-product', '/search-results'])
   }, [])
 
   function handleSettings () {
