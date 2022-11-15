@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import toast from 'react-hot-toast'
 import { useMutation } from '@tanstack/react-query'
 import { UserContext } from 'context/UserContext'
 import { postProduct } from 'helpers/products/postProduct'
@@ -18,10 +19,13 @@ const useAddProductForm = () => {
     img: ''
   })
 
-  const mutation = useMutation({
+  const { mutate } = useMutation({
     mutationFn: postProduct,
-    onSuccess: (data) => {
-      console.log(data)
+    onSuccess: () => {
+      toast.success('Product added successfully')
+    },
+    onError: () => {
+      toast.error('There was an error adding the product. Try again later.')
     }
   })
 
@@ -41,7 +45,7 @@ const useAddProductForm = () => {
 
     // Hardcoded shoe, should change
     e.preventDefault()
-    mutation.mutate({
+    mutate({
       name: productName,
       images: ['img1'],
       categories: [category],
