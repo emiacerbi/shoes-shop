@@ -96,8 +96,8 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
   return (
     <>
       <HeaderLoggedIn
-        pages={['Home', 'For women', 'For Men', 'Accesories', 'Sale']}
-        links={['/', '/for-women', '/for-men', '/accesories', '/sale']}
+        pages={['Home', 'Bag', 'Add Product']}
+        links={['/', '/bag', '/add-product']}
         cart={true} burger={true} opacity={opacity}/>
       <Box display={{ xs: 'block', sm: 'flex' }} sx={{ maxWidth: '1920px', mt: 'auto', width: 'auto' }}>
 

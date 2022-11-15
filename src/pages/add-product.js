@@ -42,9 +42,9 @@ export default function AddProduct ({ brands, genders, sizes }) {
   return (
     <>
       <HeaderLoggedIn
-        pages={['Home', 'For Women', 'For Man', 'Accesories', 'Sale']}
+        pages={['Home', 'Search', 'Bag']}
         burger={true}
-        links={['Test1', 'Test2']}
+        links={['/home', '/search-results', '/bag']}
       />
       <Box component="main" sx={{ display: 'flex' }}>
 

@@ -36,7 +36,7 @@ export default function Home ({ filteredProducts, products }) {
   console.log(context, 'USER INFO')
   return (
     <>
-      <HeaderLoggedIn pages={['Home', 'Products']} burger={true} links={['home', 'bag']}/>
+      <HeaderLoggedIn pages={['Bag', 'Add Product', 'Search']} burger={true} links={['/bag', '/add-product', '/search-results']}/>
       <Box sx={{ [theme.breakpoints.up('sm')]: { display: 'flex', flexDirection: 'row' } }}>
         <Box sx={{ display: 'none', [theme.breakpoints.up('md')]: { width: 360, padding: '5px', display: 'block', flexDirection: 'column' } }}>
           <ProfileInfoSideBar name = { context?.user?.userInfo?.username ? context?.user?.userInfo?.username : <Skeleton variant="rectangular" width={100} height={20} />}/>

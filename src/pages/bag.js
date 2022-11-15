@@ -5,8 +5,8 @@ import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import { Divider, Grid, Stack, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
 
-const pages = ['Home', 'For women', 'For men', 'Accesories', 'Sale']
-const links = ['/home', '/for-women', 'for-men', 'accesories', 'sale']
+const pages = ['Home', 'Add Product', 'Search']
+const links = ['/home', '/add-product', '/search-results']
 
 const Bag = () => {
   const theme = useTheme()
