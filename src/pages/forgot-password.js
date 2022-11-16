@@ -9,7 +9,7 @@ import { postForgotPassword } from 'helpers/user-auth/postForgotPassword'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function ForgotPassword () {
+export default function ForgotPassword() {
   const { mutate } = useMutation(postForgotPassword, {
     mutationKey: 'forgot-password'
   })
@@ -49,23 +49,23 @@ export default function ForgotPassword () {
             alignItems: 'center',
             margin: { xs: '35px 0', sm: 'auto' }
           }}
-          component='main'
+          component="main"
         >
-          <Typography variant='h1'>Forgot Password?</Typography>
-          <Typography variant='p'>
+          <Typography variant="h1">Forgot Password?</Typography>
+          <Typography variant="p">
             Don’t worry, we’ll send you reset instructions.
           </Typography>
           <Form onSubmit={handleSubmit}>
             <PrimaryInput
-              type='email'
-              label='Email'
-              name='email'
-              placeholder='example@mail.com'
+              type="email"
+              label="Email"
+              name="email"
+              placeholder="example@mail.com"
             />
             <PrimaryButton>Reset password</PrimaryButton>
           </Form>
-          <Link href='/'>
-            <Typography component='a' sx={{ textAlign: 'center' }}>
+          <Link href="/">
+            <Typography component="a" sx={{ textAlign: 'center' }}>
               Back to log in
             </Typography>
           </Link>
@@ -78,7 +78,7 @@ export default function ForgotPassword () {
           position: 'relative'
         }}
       >
-        <Image src='/shoes.png' layout='fill' objectFit='cover' alt='' />
+        <Image src="/shoes.png" layout="fill" objectFit="cover" alt="" />
       </Box>
     </Box>
   )

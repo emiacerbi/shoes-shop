@@ -6,9 +6,15 @@ import PrimaryInput from '../PrimaryInput/PrimaryInput'
 import SelectInput from '../SelectInput/SelectInput'
 import TextArea from '../TextArea/TextArea'
 
-const AddProductForm = ({ brands, genders, sizes, id, handleInputChange, handleSubmit }) => {
+const AddProductForm = ({
+  brands,
+  genders,
+  sizes,
+  id,
+  handleInputChange,
+  handleSubmit
+}) => {
   return (
-
     <Form id={id} onSubmit={handleSubmit}>
       <PrimaryInput
         required
@@ -27,23 +33,52 @@ const AddProductForm = ({ brands, genders, sizes, id, handleInputChange, handleS
         type="text"
       />
       <Box sx={{ display: 'flex', gap: '5%' }}>
-        <SelectInput required onChange={handleInputChange} label='Gender' name='gender' inputValues={genders}></SelectInput>
-        <SelectInput required onChange={handleInputChange} label='Brand' name='brand' inputValues={brands}></SelectInput>
+        <SelectInput
+          required
+          onChange={handleInputChange}
+          label="Gender"
+          name="gender"
+          inputValues={genders}
+        ></SelectInput>
+        <SelectInput
+          required
+          onChange={handleInputChange}
+          label="Brand"
+          name="brand"
+          inputValues={brands}
+        ></SelectInput>
       </Box>
-      <TextArea placeholder='Do not exceed 300 characters' label='Description' rows={7} onChange={handleInputChange} />
-      <SelectInput required onChange={handleInputChange} label='Sizes' name={'size'} inputValues={sizes}></SelectInput>
-      <Box sx={{ display: { xs: 'flex', lg: 'none' }, flexDirection: 'column', gap: '1rem' }}>
+      <TextArea
+        placeholder="Do not exceed 300 characters"
+        label="Description"
+        rows={7}
+        onChange={handleInputChange}
+      />
+      <SelectInput
+        required
+        onChange={handleInputChange}
+        label="Sizes"
+        name={'size'}
+        inputValues={sizes}
+      ></SelectInput>
+      <Box
+        sx={{
+          display: { xs: 'flex', lg: 'none' },
+          flexDirection: 'column',
+          gap: '1rem'
+        }}
+      >
         <PrimaryInput
           required
           label="Product Image"
           placeholder="Nike Air Max 90"
           name="img"
           onChange={handleInputChange}
-          type="file"/>
+          type="file"
+        />
         <PrimaryButton>Save</PrimaryButton>
       </Box>
     </Form>
-
   )
 }
 
