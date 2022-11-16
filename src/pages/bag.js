@@ -5,6 +5,7 @@ import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import { Divider, Grid, Stack, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
+import { reducePrice } from 'helpers/reducePrice'
 
 const pages = ['Home', 'Add Product', 'Search']
 const links = ['/home', '/add-product', '/search-results']
@@ -35,9 +36,6 @@ const shoesArray = [
     quantity: 1
   }
 ]
-
-const reducePrice = (array) =>
-  array.reduce((acc, elem) => acc + elem.price * elem.quantity, 0)
 
 const Bag = () => {
   const theme = useTheme()

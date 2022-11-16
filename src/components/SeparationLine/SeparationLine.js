@@ -6,7 +6,7 @@ function SeparationLine ({ width }) {
       sx={{
         width: `${width}`,
         color: '#EAECF0',
-        border: '1px solid',
+        borderTop: '1px solid',
         mt: '16px'
       }}
     ></Box>)

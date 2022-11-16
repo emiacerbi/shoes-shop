@@ -7,7 +7,7 @@ import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import ProductCard from '@components/ProductCard/ProductCard'
 import SeparationLine from '@components/SeparationLine/SeparationLine'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import { Box, InputBase, Typography } from '@mui/material'
+import { Box, Grid, InputBase, Typography } from '@mui/material'
 import { theme } from '@styles/theme'
 import { getBrands } from 'helpers/products/getBrands'
 import { getColors } from 'helpers/products/getColors'
@@ -95,7 +95,7 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
         links={['/', '/bag', '/add-product']}
         cart={true} burger={true} opacity={opacity}/>
 
-      <Box display={{ xs: 'block', sm: 'flex' }} sx={{ maxWidth: '1920px', mt: 'auto', width: 'auto' }}>
+      <Box display={{ xs: 'block', sm: 'flex' }} >
 
         {/* DESKTOP FILTERS */}
         {showFilters &&
@@ -261,11 +261,12 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
 
         {/* CONTAINER ZAPATILLAS */}
         <Box sx={{
-          m: '20px',
-          width: 'auto',
+          mt: '20px',
           [theme.breakpoints.down('sm')]: { opacity: `${opacity}` }
         }}>
           <Box sx={{
+            paddingInline: { xs: '1rem', lg: '3.5rem' },
+
             [theme.breakpoints.up('sm')]: {
               mt: '68px',
               display: 'flex',
@@ -347,16 +348,16 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
               </Box>
             </Box>
           </Box>
-          <Box sx={{ mt: '20px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-          </Box>
+          <Grid container spacing={2} sx={{ my: '20px', justifyContent: 'center', paddingInline: { xs: 0, lg: '3.5rem' } }}>
+            <ProductCard image={'/airmax-270.png'} productTitle="Nike Air Max 270" productPrice="140" productDescription="Women's Shoes"/>
+            <ProductCard image={'/airmax-90.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
+            <ProductCard image={'/air-force.png'} productTitle="Nike Air Force 1 07 SE" productPrice="140" productDescription="Women's Shoes"/>
+            <ProductCard image={'/airmax-270.png'} productTitle="Nike Air Max 270" productPrice="140" productDescription="Women's Shoes"/>
+            <ProductCard image={'/airmax-90.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
+            <ProductCard image={'/air-force.png'} productTitle="Nike Air Force 1 07 SE" productPrice="140" productDescription="Women's Shoes"/>
+            <ProductCard image={'/airmax-270.png'} productTitle="Nike Air Max 270" productPrice="140" productDescription="Women's Shoes"/>
+            <ProductCard image={'/airmax-90.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
+          </Grid>
         </Box>
       </Box>
     </>
