@@ -32,7 +32,24 @@ function HeaderLoggedIn ({ pages, links, cart, burger }) {
                   color: '#000000',
                   lineHeight: '19px',
                   fontWeight: 500,
-                  fontSize: '16px'
+                  fontSize: '16px',
+                  position: 'relative',
+                  '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    bottom: -1,
+                    left: 0,
+                    width: '100%',
+                    height: '0.125rem',
+                    backgroundColor: 'primary.main',
+                    transition: 'opacity 300ms, transform 300ms',
+                    opacity: '1',
+                    transform: 'scale(0)',
+                    transformOrigin: 'center'
+                  },
+                  '&:hover::after': {
+                    transform: 'scale(1)'
+                  }
 
                 }}
                 textAlign="center">{page}</Typography>

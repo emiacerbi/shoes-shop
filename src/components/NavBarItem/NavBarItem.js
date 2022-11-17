@@ -18,6 +18,7 @@ export default function BarItem ({ name, num, children }) {
           alignItems: 'center',
           marginLeft: '9px',
           padding: '2px'
+
         }}
       >
         {num}
@@ -40,7 +41,24 @@ export default function BarItem ({ name, num, children }) {
           fontSize: '16px',
           fontWeight: '500',
           color: 'black',
-          textAlign: 'center'
+          textAlign: 'center',
+          position: 'relative',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: -1,
+            left: 0,
+            width: '100%',
+            height: '0.125rem',
+            backgroundColor: 'primary.main',
+            transition: 'opacity 300ms, transform 300ms',
+            opacity: '1',
+            transform: 'scale(0)',
+            transformOrigin: 'center'
+          },
+          '&:hover::after': {
+            transform: 'scale(1)'
+          }
         }}
         component='a'
       >
