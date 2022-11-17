@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ReactSimplyCarousel from 'react-simply-carousel'
 import Quote from '@components/Quote/Quote'
 import Wedge from '@components/Wedge/Wedge'
