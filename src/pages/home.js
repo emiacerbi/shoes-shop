@@ -53,7 +53,6 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home({ products }) {
-  console.log(products)
   const theme = useTheme()
 
   return (
