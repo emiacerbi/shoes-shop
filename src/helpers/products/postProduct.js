@@ -1,6 +1,17 @@
 import axiosInstance from '../../axios/axiosInstance'
 
-export const postProduct = async ({ name, images, description, brand, categories, color, gender, size, price, userId }) => {
+export const postProduct = async ({
+  name,
+  images,
+  description,
+  brand,
+  categories,
+  color,
+  gender,
+  size,
+  price,
+  userId
+}) => {
   const response = await axiosInstance.post('api/products', {
     data: {
       name,
@@ -11,11 +22,11 @@ export const postProduct = async ({ name, images, description, brand, categories
       color,
       gender,
       size,
-      uniqueID: Math.floor(Math.random() * 100000),
+      uniqueID: Date.now(),
       price,
       sitemap_exclude: true,
       teamName: 'ea-team',
-      userId
+      userID: userId
     }
   })
 
