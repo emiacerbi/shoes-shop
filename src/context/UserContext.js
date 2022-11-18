@@ -5,7 +5,7 @@ import { getUserInfo } from '../helpers/user-auth/getUserInfo'
 
 export const UserContext = createContext(null)
 
-export function UserProvider ({ children }) {
+export function UserProvider({ children }) {
   const [user, setUser] = useState({
     userInfo: null
   })

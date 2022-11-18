@@ -8,25 +8,52 @@ import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Box, Typography, useTheme } from '@mui/material'
 import { getProducts } from 'helpers/products/getProducts'
+import { getUserInfo } from 'helpers/user-auth/getUserInfo'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getToken } from 'next-auth/jwt'
 import { signOut } from 'next-auth/react'
 
-export async function getServerSideProps() {
-  const res = await getProducts()
+export async function getServerSideProps(context) {
+  const qs = require('qs')
 
-  const filteredProducts = res.data.filter(
-    (product) => product.attributes.teamName === 'ea-team'
+  const token = await getToken(context)
+
+  const userRes = await getUserInfo(token.accessToken)
+  const userId = userRes.data.id
+
+  const query = qs.stringify(
+    {
+      populate: '*',
+      pagination: {
+        page: 1,
+        pageSize: 100
+      },
+      filters: {
+        userID: {
+          id: {
+            $eq: userId
+          }
+        }
+      }
+    },
+    {
+      encodeValuesOnly: true // prettify URL
+    }
   )
+
+  const res = await getProducts(`?${query}`)
+  const products = res.data
+
   return {
     props: {
-      filteredProducts
-      // products
+      products
     }
   }
 }
 
-export default function Home({ filteredProducts, products }) {
+export default function Home({ products }) {
+  console.log(products)
   const theme = useTheme()
 
   return (
