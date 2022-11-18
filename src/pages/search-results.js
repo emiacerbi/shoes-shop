@@ -32,8 +32,6 @@ export const getStaticProps = async () => {
 }
 
 export default function SearchResults({ genders, brands, colors, sizes }) {
-  console.log(brands)
-
   // Filters
   const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
   const [filterGender, setFilterGender] = useState(true) // State to show/hide Gender filters
