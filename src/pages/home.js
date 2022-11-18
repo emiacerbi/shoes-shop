@@ -110,9 +110,9 @@ export default function Home({ filteredProducts, products }) {
               sx={{
                 mt: '20px',
                 display: 'flex',
-                justifyContent: 'space-between',
                 flexWrap: 'wrap',
-                gap: '20px',
+                flex: '50%',
+                gap: '4rem',
                 [theme.breakpoints.down('sm')]: {
                   overflow: 'auto',
                   maxHeight: 400
@@ -141,6 +141,12 @@ export default function Home({ filteredProducts, products }) {
                 image={'/air-zoom-pegasus.png'}
                 productTitle="Nike Air Zoom Pegasus"
                 productPrice="120"
+                productDescription="Men's Shoes"
+              />
+              <ProductCard
+                image={'/airmax-270.png'}
+                productTitle="Nike AirMax 90"
+                productPrice="140"
                 productDescription="Men's Shoes"
               />
             </Box>
