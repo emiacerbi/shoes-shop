@@ -164,18 +164,16 @@ export default function Home({ products }) {
                 productPrice="110"
                 productDescription="Women's Shoes"
               />
-              <ProductCard
-                image={'/air-zoom-pegasus.png'}
-                productTitle="Nike Air Zoom Pegasus"
-                productPrice="120"
-                productDescription="Men's Shoes"
-              />
-              <ProductCard
-                image={'/airmax-270.png'}
-                productTitle="Nike AirMax 90"
-                productPrice="140"
-                productDescription="Men's Shoes"
-              />
+
+              {products.map(({ id, attributes }) => (
+                <ProductCard
+                  key={id}
+                  productTitle={attributes.name}
+                  productDescription={attributes.description}
+                  image={attributes.images[0] || '/shoes.png'}
+                  productPrice={attributes.price}
+                />
+              ))}
             </Box>
             <Box sx={{ display: { xs: 'block', md: 'none' }, mt: '1rem' }}>
               <PrimaryButton maxWidth="100%">
