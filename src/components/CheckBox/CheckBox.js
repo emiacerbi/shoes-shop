@@ -5,10 +5,10 @@ function CheckBox ({ label }) {
     <>
       <FormGroup aria-label="position" column >
         {
-          label.data.map(data => (
+          label.map(data => (
             <>
               <FormControlLabel
-                label={data.attributes.name}
+                label={data}
                 control={<Checkbox/>}/>
             </>
           ))
