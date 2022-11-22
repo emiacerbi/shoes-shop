@@ -1,4 +1,4 @@
-import AddItemToCartButton from '@components/AddItemToCartButton/AddItemToCart'
+import AddItemToCart from '@components/AddItemToCartButton/AddItemToCart'
 import { Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
@@ -66,7 +66,7 @@ export default function ProductCard({
           >
             ${productPrice}
           </Typography>
-          <AddItemToCartButton
+          <AddItemToCart
             product={{
               name: productTitle,
               price: productPrice,

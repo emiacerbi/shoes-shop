@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import AddShoppingCart from '@mui/icons-material/AddShoppingCart'
 import { Box, Typography } from '@mui/material'
 
-export default function AddItemToCartButton({ product }) {
+export default function AddItemToCart({ product }) {
   const [quantity, setQuantity] = useState(0)
 
   useEffect(() => {
