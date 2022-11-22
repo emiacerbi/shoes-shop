@@ -8,25 +8,51 @@ import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Box, Typography, useTheme } from '@mui/material'
 import { getProducts } from 'helpers/products/getProducts'
+import { getUserInfo } from 'helpers/user-auth/getUserInfo'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getToken } from 'next-auth/jwt'
 import { signOut } from 'next-auth/react'
 
-export async function getServerSideProps() {
-  const res = await getProducts()
+export async function getServerSideProps(context) {
+  const qs = require('qs')
 
-  const filteredProducts = res.data.filter(
-    (product) => product.attributes.teamName === 'ea-team'
+  const token = await getToken(context)
+
+  const userRes = await getUserInfo(token.accessToken)
+  const userId = userRes.data.id
+
+  const query = qs.stringify(
+    {
+      populate: '*',
+      pagination: {
+        page: 1,
+        pageSize: 100
+      },
+      filters: {
+        userID: {
+          id: {
+            $eq: userId
+          }
+        }
+      }
+    },
+    {
+      encodeValuesOnly: true // prettify URL
+    }
   )
+
+  const res = await getProducts(`?${query}`)
+  const products = res.data
+
   return {
     props: {
-      filteredProducts
-      // products
+      products
     }
   }
 }
 
-export default function Home({ filteredProducts, products }) {
+export default function Home({ products }) {
   const theme = useTheme()
 
   return (
@@ -137,18 +163,16 @@ export default function Home({ filteredProducts, products }) {
                 productPrice="110"
                 productDescription="Women's Shoes"
               />
-              <ProductCard
-                image={'/air-zoom-pegasus.png'}
-                productTitle="Nike Air Zoom Pegasus"
-                productPrice="120"
-                productDescription="Men's Shoes"
-              />
-              <ProductCard
-                image={'/airmax-270.png'}
-                productTitle="Nike AirMax 90"
-                productPrice="140"
-                productDescription="Men's Shoes"
-              />
+
+              {products.map(({ id, attributes }) => (
+                <ProductCard
+                  key={id}
+                  productTitle={attributes.name}
+                  productDescription={attributes.description}
+                  image={attributes.images[0] || '/shoes.png'}
+                  productPrice={attributes.price}
+                />
+              ))}
             </Box>
             <Box sx={{ display: { xs: 'block', md: 'none' }, mt: '1rem' }}>
               <PrimaryButton maxWidth="100%">
