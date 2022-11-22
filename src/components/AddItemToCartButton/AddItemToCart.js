@@ -47,19 +47,12 @@ export default function AddItemToCart({ product }) {
       <AddShoppingCart />
       {quantity > 0 && (
         <Typography
+          component="p"
           sx={{
-            backgroundColor: 'primary.main',
-            color: 'white',
-            borderRadius: '50%',
-            fontsize: '16px',
-            fontWeight: '500',
-            lineHeight: '100%',
-            width: '20px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginLeft: '9px',
-            padding: '2px'
+            color: '#5C5C5C',
+            fontSize: { xs: '11px', sm: '20px' },
+            lineHeight: { xs: '10px', sm: '22px' },
+            px: 1
           }}
         >
           {quantity}
