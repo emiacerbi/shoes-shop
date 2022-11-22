@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import ChartShoeCard from '@components/ChartShoeCard/ChatShoeCard'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
@@ -19,6 +20,10 @@ const Bag = () => {
     }
   }, [])
 
+  useEffect(() => {
+    setSubTotal(reducePrice(shoes))
+  }, [shoes])
+
   const theme = useTheme()
   const [subTotal, setSubTotal] = useState(reducePrice(shoes))
 
@@ -36,6 +41,16 @@ const Bag = () => {
     setShoes(newShoes)
     localStorage.setItem('shoes', JSON.stringify(newShoes))
     setSubTotal(reducePrice(newShoes))
+  }
+
+  const handleClick = () => {
+    if (shoes.length === 0) {
+      toast.error('Please add some items first!')
+      return
+    }
+    localStorage.removeItem('shoes')
+    setShoes([])
+    toast.success('Thank you for your purchase!')
   }
 
   return (
@@ -151,7 +166,7 @@ const Bag = () => {
                 <Divider sx={{ marginBlock: '1rem' }} />
 
                 <SecondaryButton>PayPal</SecondaryButton>
-                <PrimaryButton>Checkout</PrimaryButton>
+                <PrimaryButton onClick={handleClick}>Checkout</PrimaryButton>
               </Box>
             </Box>
           </Box>
