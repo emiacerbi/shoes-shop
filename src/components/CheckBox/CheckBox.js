@@ -12,8 +12,10 @@ function CheckBox({ label }) {
     const checked = e.target.checked
     if (checked) {
       valueArr.push(val)
+    } else {
+      const idx = valueArr.indexOf(val)
+      valueArr.splice(idx, 1)
     }
-    console.log(valueArr)
   }
 
   router.push(
