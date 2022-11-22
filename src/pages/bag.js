@@ -10,42 +10,13 @@ import { reducePrice } from 'helpers/reducePrice'
 const pages = ['Home', 'Add Product', 'Search']
 const links = ['/home', '/add-product', '/search-results']
 
-const shoesArray = [
-  {
-    id: 1,
-    name: 'Nike Air Max 270',
-    price: 160,
-    gender: 'Women',
-    img: '/airmax-270.png',
-    quantity: 1
-  },
-  {
-    id: 2,
-    name: 'Nike Air Max 90',
-    price: 140,
-    gender: 'Men',
-    img: '/airmax-90.png',
-    quantity: 1
-  },
-  {
-    id: 3,
-    name: 'Nike Air Force 1 07 SE',
-    price: 160,
-    gender: 'Women',
-    img: '/air-force.png',
-    quantity: 1
-  }
-]
-
 const Bag = () => {
   const [shoes, setShoes] = useState([])
 
   useEffect(() => {
-    if (!localStorage.getItem('shoes')) {
-      setShoes(shoesArray)
+    if (localStorage.getItem('shoes')) {
+      setShoes(JSON.parse(localStorage.getItem('shoes')))
     }
-
-    setShoes(JSON.parse(localStorage.getItem('shoes')))
   }, [])
 
   const theme = useTheme()
@@ -99,7 +70,7 @@ const Bag = () => {
                     changeQuantity={changeQuantity}
                     deleteShoe={deleteShoe}
                     price={shoe.price}
-                    gender={shoe.gender}
+                    description={shoe.description}
                     img={shoe.img}
                   />
                 ))}
