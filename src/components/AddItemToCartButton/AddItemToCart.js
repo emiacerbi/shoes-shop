@@ -21,7 +21,9 @@ export default function AddItemToCartButton({ product }) {
     // update the local storage
     if (shoppingBag && shoppingBag.find((shoe) => shoe.id === product.id)) {
       const newShoppingBag = shoppingBag.map((shoe) =>
-        shoe.id === product.id ? { ...shoe, quantity: shoe.quantity + 1 } : shoe
+        shoe.id === product.id
+          ? { ...shoe, quantity: +shoe.quantity + 1 }
+          : shoe
       )
       localStorage.setItem('shoes', JSON.stringify(newShoppingBag))
       setQuantity(quantity + 1)

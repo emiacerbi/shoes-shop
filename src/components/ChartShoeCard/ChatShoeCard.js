@@ -1,14 +1,6 @@
 import { useState } from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-import {
-  FormControl,
-  Grid,
-  MenuItem,
-  Select,
-  Stack,
-  Typography,
-  useTheme
-} from '@mui/material'
+import { Grid, Stack, TextField, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
 
@@ -20,15 +12,28 @@ const ChartShoeCard = ({
   deleteShoe,
   id,
   changeQuantity,
-  description
+  description,
+  initialQuantity
 }) => {
   const theme = useTheme()
 
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(initialQuantity)
 
   const handleChange = (event) => {
-    setQuantity(event.target.value)
-    changeQuantity(id, event.target.value)
+    const value = event.target.value
+    const valueLength = value.length
+
+    if (valueLength && value.match(/[0-9]/g).length === valueLength) {
+      // if all digits are numbers
+      const aux = parseInt(event.target.value)
+      setQuantity(aux)
+      changeQuantity(id, aux)
+    }
+    if ((value === '' || value === '0') && valueLength <= 1) {
+      // user wanted to put quantity to 0
+      setQuantity(0)
+      changeQuantity(0)
+    }
   }
 
   return (
@@ -77,29 +82,13 @@ const ChartShoeCard = ({
         </Typography>
 
         <Box sx={{ marginTop: 'auto', minWidth: 120 }}>
-          <FormControl>
-            <Select
-              value={quantity}
-              onChange={handleChange}
-              sx={{
-                height: '25px',
-                minWidth: 120,
-                fontSize: '12px',
-                boxShadow: 'none',
-                '.MuiOutlinedInput-notchedOutline': { border: 0 }
-              }}
-              displayEmpty
-            >
-              <MenuItem value="">Quantity</MenuItem>
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-              <MenuItem value={3}>3</MenuItem>
-              <MenuItem value={4}>4</MenuItem>
-              <MenuItem value={5}>5</MenuItem>
-              <MenuItem value={6}>6</MenuItem>
-              <MenuItem value={7}>7</MenuItem>
-            </Select>
-          </FormControl>
+          <TextField
+            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+            value={quantity}
+            onChange={handleChange}
+            label="Quantity"
+            variant="standard"
+          />
         </Box>
       </Grid>
 

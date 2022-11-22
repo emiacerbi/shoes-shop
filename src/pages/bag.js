@@ -72,6 +72,7 @@ const Bag = () => {
                     price={shoe.price}
                     description={shoe.description}
                     img={shoe.img}
+                    initialQuantity={shoe.quantity}
                   />
                 ))}
 
