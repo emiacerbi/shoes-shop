@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material'
 
-export default function BarItem ({ name, num, children }) {
+export default function NavBarItem ({ name, num, children }) {
   const numTag = num
     ? (<Box sx={{ cursor: 'pointer' }}>
       <Typography

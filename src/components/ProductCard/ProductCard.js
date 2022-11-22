@@ -1,7 +1,5 @@
-import { useState } from 'react'
-import toast from 'react-hot-toast'
-import { AddShoppingCart } from '@mui/icons-material'
-import { Button, Grid, Typography } from '@mui/material'
+import AddItemToCartButton from '@components/AddItemToCartButton/AddItemToCart'
+import { Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
 
@@ -12,35 +10,6 @@ export default function ProductCard({
   image,
   id
 }) {
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const currentShoe = {
-    name: productTitle,
-    price: productPrice,
-    description: productDescription,
-    img: image,
-    id
-  }
-
-  const addProduct = () => {
-    const prevShoes = JSON.parse(localStorage.getItem('shoes'))
-
-    console.log(prevShoes)
-
-    if (prevShoes && prevShoes.some((shoe) => shoe.id === currentShoe.id)) {
-      toast.error('That shoe is already in your cart!')
-      return
-    }
-
-    if (prevShoes) {
-      const newShoes = [...prevShoes, currentShoe]
-      localStorage.setItem('shoes', JSON.stringify(newShoes))
-      return
-    }
-
-    localStorage.setItem('shoes', JSON.stringify([currentShoe]))
-  }
-
   return (
     <Grid
       item
@@ -57,71 +26,6 @@ export default function ProductCard({
       >
         <Image src={image} layout="fill" alt="product" objectFit="cover" />
       </Box>
-
-      {/* Modal button */}
-      <Box
-        sx={{
-          position: 'absolute',
-          width: '25px',
-          height: '25px',
-          top: 5,
-          right: 10,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '.25rem',
-          cursor: 'pointer'
-        }}
-        onClick={() => setIsModalVisible(!isModalVisible)}
-      >
-        <Box
-          sx={{
-            width: '5px',
-            height: '5px',
-            background: 'black',
-            borderRadius: '50%'
-          }}
-        />
-        <Box
-          sx={{
-            width: '5px',
-            height: '5px',
-            background: 'black',
-            borderRadius: '50%'
-          }}
-        />
-        <Box
-          sx={{
-            width: '5px',
-            height: '5px',
-            background: 'black',
-            borderRadius: '50%'
-          }}
-        />
-
-        {isModalVisible && (
-          <Button
-            variant="contained"
-            sx={{
-              minWidth: '150px',
-              position: 'absolute',
-              textAlign: 'center',
-              top: '2rem',
-              left: '-50px',
-              transform: 'translateX(-50%)',
-              padding: '.5rem',
-              borderRadius: '.25rem',
-              textTransform: 'none',
-              color: 'white'
-            }}
-            onClick={addProduct}
-          >
-            Add product
-            <AddShoppingCart sx={{ marginLeft: '.5rem' }} fontSize={'small'} />
-          </Button>
-        )}
-      </Box>
-
       <Box
         sx={{
           display: 'flex',
@@ -152,15 +56,26 @@ export default function ProductCard({
             {productDescription}
           </Typography>
         </Box>
-        <Typography
-          variant="h1"
-          sx={{
-            fontSize: { xs: '10px', sm: '22px' },
-            lineHeight: { xs: '12px', sm: '25px' }
-          }}
-        >
-          ${productPrice}
-        </Typography>
+        <Box>
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: { xs: '10px', sm: '22px' },
+              lineHeight: { xs: '12px', sm: '25px' }
+            }}
+          >
+            ${productPrice}
+          </Typography>
+          <AddItemToCartButton
+            product={{
+              name: productTitle,
+              price: productPrice,
+              description: productDescription,
+              img: image,
+              id
+            }}
+          />
+        </Box>
       </Box>
     </Grid>
   )
