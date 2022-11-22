@@ -30,9 +30,9 @@ const ChartShoeCard = ({
       changeQuantity(id, aux)
     }
     if ((value === '' || value === '0') && valueLength <= 1) {
-      // user wanted to put quantity to 0
-      setQuantity(0)
-      changeQuantity(0)
+      // 1 is minimun quantity to buy, if user wants to delete the shoe, they should use the delete button
+      setQuantity(1)
+      changeQuantity(1)
     }
   }
 
