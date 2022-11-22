@@ -145,7 +145,7 @@ export default function Home({ products }) {
                 }
               }}
             >
-              <ProductCard
+              {/* <ProductCard
                 image={'/airmax-270.png'}
                 productTitle="Nike AirMax 90"
                 productPrice="140"
@@ -162,7 +162,7 @@ export default function Home({ products }) {
                 productTitle="Nike Air Force 1 '07 SE"
                 productPrice="110"
                 productDescription="Women's Shoes"
-              />
+              /> */}
 
               {products.map(({ id, attributes }) => (
                 <ProductCard
@@ -171,6 +171,7 @@ export default function Home({ products }) {
                   productDescription={attributes.description}
                   image={attributes.images[0] || '/shoes.png'}
                   productPrice={attributes.price}
+                  id={id}
                 />
               ))}
             </Box>

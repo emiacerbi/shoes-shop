@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+import { AddShoppingCart } from '@mui/icons-material'
 import { Button, Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
@@ -28,6 +29,7 @@ export default function ProductCard({
 
     if (prevShoes && prevShoes.some((shoe) => shoe.id === currentShoe.id)) {
       toast.error('That shoe is already in your cart!')
+      return
     }
 
     if (prevShoes) {
@@ -101,11 +103,11 @@ export default function ProductCard({
           <Button
             variant="contained"
             sx={{
-              minWidth: '120px',
+              minWidth: '150px',
               position: 'absolute',
               textAlign: 'center',
               top: '2rem',
-              left: '-35px',
+              left: '-50px',
               transform: 'translateX(-50%)',
               padding: '.5rem',
               borderRadius: '.25rem',
@@ -115,6 +117,7 @@ export default function ProductCard({
             onClick={addProduct}
           >
             Add product
+            <AddShoppingCart sx={{ marginLeft: '.5rem' }} fontSize={'small'} />
           </Button>
         )}
       </Box>
