@@ -17,10 +17,10 @@ const ChartShoeCard = ({
   alt,
   name,
   price,
-  gender,
   deleteShoe,
   id,
-  changeQuantity
+  changeQuantity,
+  description
 }) => {
   const theme = useTheme()
 
@@ -64,7 +64,8 @@ const ChartShoeCard = ({
       >
         <Typography variant="h3">{name}</Typography>
         <Typography variant="subtitle1">
-          {gender} {"'"}s Shoes
+          {/* {gender} {"'"}s Shoes */}
+          {description}
         </Typography>
 
         <Box sx={{ marginTop: '.1rem' }} />
