@@ -55,6 +55,11 @@ export async function getServerSideProps(context) {
 export default function Home({ products }) {
   const theme = useTheme()
 
+  const handleLogOut = () => {
+    signOut()
+    localStorage.removeItem('shoes')
+  }
+
   return (
     <>
       <HeaderLoggedIn
@@ -96,7 +101,7 @@ export default function Home({ products }) {
             </Box>
           </Link>
           <Box
-            onClick={() => signOut()}
+            onClick={handleLogOut}
             sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}
           >
             <BarItem name="Log out">
@@ -145,7 +150,7 @@ export default function Home({ products }) {
                 }
               }}
             >
-              {/* <ProductCard
+              <ProductCard
                 image={'/airmax-270.png'}
                 productTitle="Nike AirMax 90"
                 productPrice="140"
@@ -165,7 +170,7 @@ export default function Home({ products }) {
                 productPrice="110"
                 productDescription="Women's Shoes"
                 id={3}
-              /> */}
+              />
 
               {products.map(({ id, attributes }) => (
                 <ProductCard
