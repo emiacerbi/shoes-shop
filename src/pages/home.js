@@ -143,10 +143,11 @@ export default function Home({ products }) {
                 display: 'flex',
                 flexWrap: 'wrap',
                 flex: '50%',
-                gap: '4rem',
+                gap: '2rem',
                 [theme.breakpoints.down('sm')]: {
                   overflow: 'auto',
-                  maxHeight: 400
+                  maxHeight: 400,
+                  justifyContent: 'center'
                 }
               }}
             >
