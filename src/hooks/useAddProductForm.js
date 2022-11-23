@@ -16,7 +16,8 @@ const useAddProductForm = () => {
     brand: '',
     description: '',
     size: '',
-    img: ''
+    img: '',
+    color: ''
   })
 
   const { mutate } = useMutation({
@@ -41,7 +42,8 @@ const useAddProductForm = () => {
   }
 
   const handleSubmit = (e) => {
-    const { productName, category, gender, brand, description, size } = inputInfo
+    const { productName, category, gender, brand, description, size, color } =
+      inputInfo
 
     // Hardcoded shoe, should change
     e.preventDefault()
@@ -51,6 +53,7 @@ const useAddProductForm = () => {
       categories: [category],
       description,
       brand,
+      color,
       size,
       gender,
       price: 2000,
@@ -59,7 +62,10 @@ const useAddProductForm = () => {
   }
 
   return {
-    inputInfo, setInputInfo, handleInputChange, handleSubmit
+    inputInfo,
+    setInputInfo,
+    handleInputChange,
+    handleSubmit
   }
 }
 

@@ -54,7 +54,7 @@ const AddProductForm = ({
         required
         label="Color"
         placeholder="Sport"
-        name="colors"
+        name="color"
         onChange={handleInputChange}
         inputValues={colors}
       />
