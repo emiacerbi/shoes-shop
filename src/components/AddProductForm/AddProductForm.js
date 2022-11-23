@@ -10,6 +10,8 @@ const AddProductForm = ({
   brands,
   genders,
   sizes,
+  categories,
+  colors,
   id,
   handleInputChange,
   handleSubmit
@@ -24,13 +26,13 @@ const AddProductForm = ({
         onChange={handleInputChange}
         type="text"
       />
-      <PrimaryInput
+      <SelectInput
         required
         label="Category"
         placeholder="Sport"
         name="category"
         onChange={handleInputChange}
-        type="text"
+        inputValues={categories}
       />
       <Box sx={{ display: 'flex', gap: '5%' }}>
         <SelectInput
@@ -48,6 +50,14 @@ const AddProductForm = ({
           inputValues={brands}
         ></SelectInput>
       </Box>
+      <SelectInput
+        required
+        label="Color"
+        placeholder="Sport"
+        name="colors"
+        onChange={handleInputChange}
+        inputValues={colors}
+      />
       <TextArea
         placeholder="Do not exceed 300 characters"
         label="Description"
