@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import AddShoppingCart from '@mui/icons-material/AddShoppingCart'
 import { Button, CircularProgress, Typography } from '@mui/material'
 
@@ -38,6 +39,7 @@ export default function AddItemToCart({ product }) {
       }
 
       setIsLoading(false)
+      toast.success('Product added to bag !')
     }, 1000)
   }
 

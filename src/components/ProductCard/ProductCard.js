@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import AddItemToCart from '@components/AddItemToCartButton/AddItemToCart'
+import MenuIcon from '@mui/icons-material/Menu'
 import { Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
@@ -46,28 +47,13 @@ export default function ProductCard({
         }}
         onClick={() => setIsModalVisible(!isModalVisible)}
       >
-        <Box
+        <MenuIcon
           sx={{
-            width: '5px',
-            height: '5px',
-            background: 'black',
-            borderRadius: '50%'
-          }}
-        />
-        <Box
-          sx={{
-            width: '5px',
-            height: '5px',
-            background: 'black',
-            borderRadius: '50%'
-          }}
-        />
-        <Box
-          sx={{
-            width: '5px',
-            height: '5px',
-            background: 'black',
-            borderRadius: '50%'
+            '&:hover': {
+              transform: 'scale(1.3)',
+              color: 'primary.main',
+              transition: 'opacity 300ms, transform 300ms'
+            }
           }}
         />
       </Box>
@@ -77,7 +63,8 @@ export default function ProductCard({
           sx={{
             position: 'absolute',
             top: '2rem',
-            right: '.5rem'
+            right: '.5rem',
+            pointerEvents: 'inherit'
           }}
         >
           <AddItemToCart
