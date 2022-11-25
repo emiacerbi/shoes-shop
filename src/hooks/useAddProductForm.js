@@ -52,30 +52,27 @@ const useAddProductForm = () => {
     } = inputInfo
 
     e.preventDefault()
+
     toast.promise(
-      postFiles({ img })
-        .then((data) => {
-          const IMAGE_ID = data[0].id
-          postProduct({
-            name: productName,
-            images: [IMAGE_ID],
-            categories: [category],
-            description,
-            brand,
-            color,
-            size,
-            gender,
-            price: 39624,
-            userID
-          })
+      postFiles({ img }).then((data) => {
+        const IMAGE_ID = data[0].id
+        postProduct({
+          name: productName,
+          images: [IMAGE_ID],
+          categories: [category],
+          description,
+          brand,
+          color,
+          size,
+          gender,
+          price: 39624,
+          userID
         })
-        .catch((err) => {
-          console.log(err)
-        }),
+      }),
       {
         loading: 'Saving...',
-        success: <b>Product added succesfully !!</b>,
-        error: <b>There was an error uploading the product. Try again later.</b>
+        success: <b>Product Added Succesfully !!</b>,
+        error: <b>Could not save. Try again later, please.</b>
       }
     )
   }
