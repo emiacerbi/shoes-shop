@@ -178,7 +178,7 @@ export default function Home({ products }) {
                   key={id}
                   productTitle={attributes.name}
                   productDescription={attributes.description}
-                  image={attributes.images[0] || '/shoes.png'}
+                  image={attributes.images[0]}
                   productPrice={attributes.price}
                   id={id}
                 />

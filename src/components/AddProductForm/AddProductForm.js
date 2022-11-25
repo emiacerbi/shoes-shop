@@ -1,5 +1,5 @@
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
-import { Box } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 
 import Form from '../Form/Form'
 import PrimaryInput from '../PrimaryInput/PrimaryInput'
@@ -14,7 +14,9 @@ const AddProductForm = ({
   colors,
   id,
   handleInputChange,
-  handleSubmit
+  handleSubmit,
+  handleInputImg,
+  isLoading
 }) => {
   return (
     <Form id={id} onSubmit={handleSubmit}>
@@ -83,10 +85,12 @@ const AddProductForm = ({
           label="Product Image"
           placeholder="Nike Air Max 90"
           name="img"
-          onChange={handleInputChange}
+          onChange={handleInputImg}
           type="file"
         />
-        <PrimaryButton>Save</PrimaryButton>
+        <PrimaryButton>
+          {isLoading ? <CircularProgress size={28} color="action" /> : 'Save'}
+        </PrimaryButton>{' '}
       </Box>
     </Form>
   )

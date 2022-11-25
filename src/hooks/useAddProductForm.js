@@ -2,12 +2,15 @@ import { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useMutation } from '@tanstack/react-query'
 import { UserContext } from 'context/UserContext'
+import { postFiles } from 'helpers/products/postFiles'
 import { postProduct } from 'helpers/products/postProduct'
 
 const useAddProductForm = () => {
   const context = useContext(UserContext)
 
-  const userId = context?.user.userInfo?.id
+  const userID = context?.user.userInfo?.id
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const [inputInfo, setInputInfo] = useState({
     productName: '',
@@ -18,16 +21,6 @@ const useAddProductForm = () => {
     size: '',
     img: '',
     color: ''
-  })
-
-  const { mutate } = useMutation({
-    mutationFn: postProduct,
-    onSuccess: () => {
-      toast.success('Product added successfully')
-    },
-    onError: () => {
-      toast.error('There was an error adding the product. Try again later.')
-    }
   })
 
   const handleInputChange = (e) => {
@@ -41,31 +34,63 @@ const useAddProductForm = () => {
     })
   }
 
-  const handleSubmit = (e) => {
-    const { productName, category, gender, brand, description, size, color } =
-      inputInfo
-
-    // Hardcoded shoe, should change
-    e.preventDefault()
-    mutate({
-      name: productName,
-      images: ['img1'],
-      categories: [category],
-      description,
-      brand,
-      color,
-      size,
-      gender,
-      price: 2000,
-      userId
+  const handleInputImg = (e) => {
+    const focus = e.target
+    setInputInfo({
+      ...inputInfo,
+      img: focus.files[0]
     })
+  }
+
+  const handleSubmit = async (e) => {
+    setIsLoading(true)
+    const {
+      productName,
+      category,
+      gender,
+      brand,
+      description,
+      size,
+      img,
+      color
+    } = inputInfo
+
+    e.preventDefault()
+
+    postFiles({ img })
+      .then((data) => {
+        const IMAGE_ID = data[0].id
+        postProduct({
+          name: productName,
+          images: [IMAGE_ID],
+          categories: [category],
+          description,
+          brand,
+          color,
+          size,
+          gender,
+          price: 39624,
+          userID
+        })
+        toast.success('Product added succesfully !!')
+      })
+      .catch((err) => {
+        toast.error(
+          'There was an error uploading the product. Try again later.'
+        )
+        console.log(err)
+        setIsLoading(false)
+      })
+    setIsLoading(false)
   }
 
   return {
     inputInfo,
     setInputInfo,
     handleInputChange,
-    handleSubmit
+    handleSubmit,
+    handleInputImg,
+    isLoading
   }
 }
 

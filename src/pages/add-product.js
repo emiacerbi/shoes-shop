@@ -33,7 +33,7 @@ export const getStaticProps = async () => {
     props: {
       brands: brands.data.map((data) => data.attributes.name),
       genders: genders.data.map((data) => data.attributes.name),
-      sizes: sizes.data.map((data) => `EUR-${data.attributes.value}`),
+      sizes: sizes.data.map((data) => data.attributes.value),
       categories: categories.data.map((data) => data.attributes.name),
       colors: colors.data.map((data) => data.attributes.name)
     }
@@ -47,8 +47,13 @@ export default function AddProduct({
   categories,
   colors
 }) {
-  const { inputInfo, setInputInfo, handleInputChange, handleSubmit } =
-    useAddProductForm()
+  const {
+    inputInfo,
+    setInputInfo,
+    handleInputChange,
+    handleSubmit,
+    handleInputImg
+  } = useAddProductForm()
 
   console.log(inputInfo)
 
@@ -164,6 +169,7 @@ export default function AddProduct({
               colors={colors}
               setInputInfo={setInputInfo}
               handleInputChange={handleInputChange}
+              handleInputImg={handleInputImg}
             />
             <ProductImageStore />
           </Box>
