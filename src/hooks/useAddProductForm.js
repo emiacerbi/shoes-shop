@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
-import { useMutation } from '@tanstack/react-query'
 import { UserContext } from 'context/UserContext'
 import { postFiles } from 'helpers/products/postFiles'
 import { postProduct } from 'helpers/products/postProduct'
