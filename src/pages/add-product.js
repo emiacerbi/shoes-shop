@@ -2,7 +2,6 @@ import AddProductForm from '@components/AddProductForm/AddProductForm'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
-import ProductImageStore from '@components/ProductImageStore/ProductImageStore'
 import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import ProfileInfoSideBar from '@components/SideBarProfileInfo/SideBarProfileInfo'
 import ChatIcon from '@mui/icons-material/Chat'
@@ -33,7 +32,7 @@ export const getStaticProps = async () => {
     props: {
       brands: brands.data.map((data) => data.attributes.name),
       genders: genders.data.map((data) => data.attributes.name),
-      sizes: sizes.data.map((data) => `EUR-${data.attributes.value}`),
+      sizes: sizes.data.map((data) => data.attributes.value),
       categories: categories.data.map((data) => data.attributes.name),
       colors: colors.data.map((data) => data.attributes.name)
     }
@@ -47,8 +46,13 @@ export default function AddProduct({
   categories,
   colors
 }) {
-  const { inputInfo, setInputInfo, handleInputChange, handleSubmit } =
-    useAddProductForm()
+  const {
+    inputInfo,
+    setInputInfo,
+    handleInputChange,
+    handleSubmit,
+    handleInputImg
+  } = useAddProductForm()
 
   console.log(inputInfo)
 
@@ -148,25 +152,18 @@ export default function AddProduct({
             thought to have scrambled parts of Ciceros De Finibus Bonorum et
             Malorum for use in a type specimen book. It usually begins with:
           </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between'
-            }}
-          >
-            <AddProductForm
-              id="addProduct"
-              brands={brands}
-              genders={genders}
-              sizes={sizes}
-              categories={categories}
-              colors={colors}
-              setInputInfo={setInputInfo}
-              handleInputChange={handleInputChange}
-            />
-            <ProductImageStore />
-          </Box>
+
+          <AddProductForm
+            id="addProduct"
+            brands={brands}
+            genders={genders}
+            sizes={sizes}
+            categories={categories}
+            colors={colors}
+            setInputInfo={setInputInfo}
+            handleInputChange={handleInputChange}
+            handleInputImg={handleInputImg}
+          />
         </Box>
       </Box>
     </>
