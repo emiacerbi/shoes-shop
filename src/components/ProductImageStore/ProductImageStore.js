@@ -8,7 +8,6 @@ import {
   Link,
   Typography
 } from '@mui/material'
-// import { postFiles } from 'helpers/products/postFiles'
 import Image from 'next/image'
 
 const images = [
