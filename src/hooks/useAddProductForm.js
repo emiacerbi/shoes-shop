@@ -9,8 +9,6 @@ const useAddProductForm = () => {
 
   const userID = context?.user.userInfo?.id
 
-  const [isLoading, setIsLoading] = useState(false)
-
   const [inputInfo, setInputInfo] = useState({
     productName: '',
     category: '',
@@ -42,7 +40,6 @@ const useAddProductForm = () => {
   }
 
   const handleSubmit = async (e) => {
-    setIsLoading(true)
     const {
       productName,
       category,
@@ -55,32 +52,32 @@ const useAddProductForm = () => {
     } = inputInfo
 
     e.preventDefault()
-
-    postFiles({ img })
-      .then((data) => {
-        const IMAGE_ID = data[0].id
-        postProduct({
-          name: productName,
-          images: [IMAGE_ID],
-          categories: [category],
-          description,
-          brand,
-          color,
-          size,
-          gender,
-          price: 39624,
-          userID
+    toast.promise(
+      postFiles({ img })
+        .then((data) => {
+          const IMAGE_ID = data[0].id
+          postProduct({
+            name: productName,
+            images: [IMAGE_ID],
+            categories: [category],
+            description,
+            brand,
+            color,
+            size,
+            gender,
+            price: 39624,
+            userID
+          })
         })
-        toast.success('Product added succesfully !!')
-      })
-      .catch((err) => {
-        toast.error(
-          'There was an error uploading the product. Try again later.'
-        )
-        console.log(err)
-        setIsLoading(false)
-      })
-    setIsLoading(false)
+        .catch((err) => {
+          console.log(err)
+        }),
+      {
+        loading: 'Saving...',
+        success: <b>Product added succesfully !!</b>,
+        error: <b>There was an error uploading the product. Try again later.</b>
+      }
+    )
   }
 
   return {
@@ -88,8 +85,7 @@ const useAddProductForm = () => {
     setInputInfo,
     handleInputChange,
     handleSubmit,
-    handleInputImg,
-    isLoading
+    handleInputImg
   }
 }
 

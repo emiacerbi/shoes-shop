@@ -13,6 +13,7 @@ const SelectInput = ({ inputValues, name, onChange, label }) => {
         width: '100%',
         display: 'flex',
         gap: '.5rem',
+        py: '.5rem',
         flexDirection: 'column'
       }}
     >

@@ -7,16 +7,12 @@ import {
   Link,
   Typography
 } from '@mui/material'
-import useAddProductForm from 'hooks/useAddProductForm'
 import Image from 'next/image'
 
-export default function ProductImageStore() {
-  const { handleInputChange } = useAddProductForm()
+export default function ProductImageStore({ handleInputImg }) {
   return (
     <>
-      <Container
-        sx={{ pt: '40px', ml: '8rem', display: { xs: 'none', lg: 'block' } }}
-      >
+      <Container sx={{ ml: '8rem', display: { xs: 'none', lg: 'block' } }}>
         <Typography
           variant="h3"
           sx={{ fontSize: '15px !important', color: '#494949', mb: '1.2rem' }}
@@ -28,7 +24,7 @@ export default function ProductImageStore() {
             display: 'flex',
             overflow: 'auto',
             maxWidth: 740,
-            maxHeight: 720,
+            maxHeight: 600,
             flexWrap: 'wrap',
             gap: '50px',
             justifyContent: 'space-between'
@@ -51,9 +47,10 @@ export default function ProductImageStore() {
               />
             </FormLabel>
             <Input
-              onChange={handleInputChange}
+              onChange={handleInputImg}
               form="addProduct"
               id="srcImg"
+              name="img"
               type="file"
               sx={{ display: 'none' }}
             ></Input>
