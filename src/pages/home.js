@@ -54,6 +54,7 @@ export async function getServerSideProps(context) {
 
 export default function Home({ products }) {
   const theme = useTheme()
+  console.log(products)
 
   const handleLogOut = () => {
     signOut()
@@ -178,7 +179,10 @@ export default function Home({ products }) {
                   key={id}
                   productTitle={attributes.name}
                   productDescription={attributes.description}
-                  image={attributes.images[0]}
+                  image={
+                    `https://shoes-shop-strapi.herokuapp.com${attributes.images.data[0].attributes.url}` ||
+                    '/shoes.png'
+                  }
                   productPrice={attributes.price}
                   id={id}
                 />
