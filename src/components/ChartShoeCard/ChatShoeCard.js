@@ -1,6 +1,13 @@
 import { useState } from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-import { Grid, Stack, TextField, Typography, useTheme } from '@mui/material'
+import {
+  Button,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+  useTheme
+} from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
 
@@ -18,9 +25,9 @@ const ChartShoeCard = ({
   const theme = useTheme()
 
   const [quantity, setQuantity] = useState(initialQuantity)
-
+  const [disabled, setDisabled] = useState(false)
   const handleChange = (event) => {
-    const value = event.target.value
+    let value = event.target.value
     const valueLength = value.length
 
     if (valueLength && value.match(/[0-9]/g).length === valueLength) {
@@ -29,11 +36,24 @@ const ChartShoeCard = ({
       setQuantity(aux)
       changeQuantity(id, aux)
     }
-    if ((value === '' || value === '0') && valueLength <= 1) {
-      // 1 is minimun quantity to buy, if user wants to delete the shoe, they should use the delete button
-      setQuantity(1)
-      changeQuantity(1)
+
+    if (valueLength === 0) {
+      setQuantity(valueLength)
+      value = quantity
+      changeQuantity(id, valueLength)
     }
+  }
+
+  const handleSum = () => {
+    quantity < 0 ? setDisabled(true) : setDisabled(false)
+    setQuantity(quantity + 1)
+    changeQuantity(id, quantity + 1)
+  }
+
+  const handleSubstraction = () => {
+    quantity === 1 ? setDisabled(true) : setDisabled(false)
+    setQuantity(quantity - 1)
+    changeQuantity(id, quantity - 1)
   }
 
   return (
@@ -83,12 +103,24 @@ const ChartShoeCard = ({
 
         <Box sx={{ marginTop: 'auto', minWidth: 120 }}>
           <TextField
-            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+            inputProps={{ inputMode: 'text', pattern: '[0-9]*' }}
             value={quantity}
             onChange={handleChange}
             label="Quantity"
             variant="standard"
           />
+          <Button sx={{ ml: '10px' }} variant="outlined" onClick={handleSum}>
+            +
+          </Button>
+
+          <Button
+            variant="outlined"
+            onClick={handleSubstraction}
+            disabled={disabled}
+            sx={{ margin: '10px' }}
+          >
+            -
+          </Button>
         </Box>
       </Grid>
 
