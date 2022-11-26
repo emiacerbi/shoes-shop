@@ -51,7 +51,8 @@ export default function AddProduct({
     setInputInfo,
     handleInputChange,
     handleSubmit,
-    handleInputImg
+    handleInputImg,
+    handlePremadeImg
   } = useAddProductForm()
 
   console.log(inputInfo)
@@ -163,6 +164,7 @@ export default function AddProduct({
             setInputInfo={setInputInfo}
             handleInputChange={handleInputChange}
             handleInputImg={handleInputImg}
+            handlePremadeImg={handlePremadeImg}
           />
         </Box>
       </Box>

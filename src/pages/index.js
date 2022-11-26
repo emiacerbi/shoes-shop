@@ -4,7 +4,14 @@ import HeaderBeforeLogin from '@components/Header/Header'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
 import SignInOverlay from '@components/SignInOverlay/SignInOverlay'
-import { Button, Checkbox, CircularProgress, InputLabel, Typography, useTheme } from '@mui/material'
+import {
+  Button,
+  Checkbox,
+  CircularProgress,
+  InputLabel,
+  Typography,
+  useTheme
+} from '@mui/material'
 import { Box } from '@mui/system'
 import useSignInForm from 'hooks/useSignInForm'
 import Image from 'next/image'
@@ -45,7 +52,6 @@ const SignIn = () => {
           }
         }}
       >
-
         <HeaderBeforeLogin />
 
         <Box
@@ -58,11 +64,27 @@ const SignIn = () => {
           }}
         >
           <Typography variant="h1">Welcome back</Typography>
-          <Typography variant='p'>Welcome back! Please enter your details to log into your account.</Typography>
+          <Typography variant="p">
+            Welcome back! Please enter your details to log into your account.
+          </Typography>
 
           <Form onSubmit={handleSubmit}>
-            <PrimaryInput required label='Email' placeholder='example@gmail.com' name='email' onChange={handleInputChange} type='email' />
-            <PrimaryInput required label='Password' placeholder='at least 8 characters' name='password' onChange={handleInputChange} type='password' />
+            <PrimaryInput
+              required
+              label="Email"
+              placeholder="example@gmail.com"
+              name="email"
+              onChange={handleInputChange}
+              type="email"
+            />
+            <PrimaryInput
+              required
+              label="Password"
+              placeholder="at least 8 characters"
+              name="password"
+              onChange={handleInputChange}
+              type="password"
+            />
 
             <Box
               sx={{
@@ -83,12 +105,14 @@ const SignIn = () => {
                   }
                 }}
               >
-                <Checkbox sx={{ marginLeft: '-.75rem', marginRight: '-.5rem' }} />
+                <Checkbox
+                  sx={{ marginLeft: '-.75rem', marginRight: '-.5rem' }}
+                />
                 Remember me
               </InputLabel>
-              <Link href='forgot-password' >
+              <Link href="forgot-password">
                 <Button
-                  variant='text'
+                  variant="text"
                   sx={{
                     textTransform: 'none',
                     fontSize: '15px',
@@ -101,22 +125,24 @@ const SignIn = () => {
             </Box>
 
             <PrimaryButton>
-              {
-                isLoading ? (<CircularProgress size={28} color='action' />) : 'Sign in'
-              }
+              {isLoading ? (
+                <CircularProgress size={28} color="action" />
+              ) : (
+                'Sign in'
+              )}
             </PrimaryButton>
 
             <Typography
-              variant='p'
+              variant="p"
               sx={{
                 textAlign: 'center',
                 fontWeight: '500'
               }}
             >
-              {'Don\'t'} have an account?
-              <Link href='/sign-up'>
+              {"Don't"} have an account?
+              <Link href="/sign-up">
                 <Button
-                  variant='text'
+                  variant="text"
                   sx={{
                     textTransform: 'none',
                     fontSize: '15px'
@@ -128,14 +154,12 @@ const SignIn = () => {
             </Typography>
           </Form>
         </Box>
-
       </Box>
 
       <Box
         sx={{
           display: 'none',
           position: 'relative',
-          backgroundColor: 'lightblue',
           width: '50%',
           height: '100vh',
           [theme.breakpoints.up('md')]: {
@@ -143,15 +167,17 @@ const SignIn = () => {
           }
         }}
       >
-        <Image src='/sigin-in-shoes-desktop.png' layout='fill' alt='pair of shoes' objectFit='cover'/>
+        <Image
+          src="/sigin-in-shoes-desktop.png"
+          layout="fill"
+          alt="pair of shoes"
+          objectFit="cover"
+        />
       </Box>
-      {
-        isOverlayVisible && mobileWidth < 500 && (
-          <SignInOverlay setIsOverlayVisible={setIsOverlayVisible} />
-        )
-      }
+      {isOverlayVisible && mobileWidth < 500 && (
+        <SignInOverlay setIsOverlayVisible={setIsOverlayVisible} />
+      )}
     </Box>
-
   )
 }
 

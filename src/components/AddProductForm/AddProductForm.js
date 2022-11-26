@@ -15,7 +15,8 @@ const AddProductForm = ({
   id,
   handleInputChange,
   handleSubmit,
-  handleInputImg
+  handleInputImg,
+  handlePremadeImg
 }) => {
   return (
     <form
@@ -102,7 +103,10 @@ const AddProductForm = ({
             <PrimaryButton>Save</PrimaryButton>
           </Box>
         </Box>
-        <ProductImageStore handleInputImg={handleInputImg} />
+        <ProductImageStore
+          handleInputImg={handleInputImg}
+          handlePremadeImg={handlePremadeImg}
+        />
       </Box>
     </form>
   )

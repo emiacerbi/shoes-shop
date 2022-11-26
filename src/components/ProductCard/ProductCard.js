@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import AddItemToCart from '@components/AddItemToCartButton/AddItemToCart'
-import MenuIcon from '@mui/icons-material/Menu'
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
@@ -13,6 +13,7 @@ export default function ProductCard({
   id
 }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [imgSrc, setImgSrc] = useState(image)
 
   return (
     <Grid
@@ -28,7 +29,13 @@ export default function ProductCard({
           height: { xs: '178px', sm: '380px' }
         }}
       >
-        <Image src={image} layout="fill" alt="product" objectFit="cover" />
+        <Image
+          src={imgSrc}
+          layout="fill"
+          alt="product"
+          objectFit="cover"
+          onError={() => setImgSrc('/shoes.png')}
+        />
       </Box>
 
       {/* Modal button */}
@@ -47,12 +54,13 @@ export default function ProductCard({
         }}
         onClick={() => setIsModalVisible(!isModalVisible)}
       >
-        <MenuIcon
+        <MoreHorizIcon
+          fontSize="large"
           sx={{
             '&:hover': {
-              transform: 'scale(1.3)',
+              transform: 'scale(1.2)',
               color: 'primary.main',
-              transition: 'opacity 300ms, transform 300ms'
+              transition: 'transform 300ms'
             }
           }}
         />

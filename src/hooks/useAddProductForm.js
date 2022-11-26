@@ -31,6 +31,13 @@ const useAddProductForm = () => {
     })
   }
 
+  const handlePremadeImg = (img) => {
+    setInputInfo({
+      ...inputInfo,
+      img
+    })
+  }
+
   const handleInputImg = (e) => {
     const focus = e.target
     setInputInfo({
@@ -53,6 +60,30 @@ const useAddProductForm = () => {
 
     e.preventDefault()
 
+    if (typeof img === 'number') {
+      toast.promise(
+        postProduct({
+          name: productName,
+          images: [img],
+          categories: [category],
+          description,
+          brand,
+          color,
+          size,
+          gender,
+          price: 150,
+          userID
+        }),
+        {
+          loading: 'Saving...',
+          success: 'Product added succesfully!',
+          error: 'Could not save. Try again later, please.'
+        }
+      )
+
+      return
+    }
+
     toast.promise(
       postFiles({ img }).then((data) => {
         const IMAGE_ID = data[0].id
@@ -65,14 +96,14 @@ const useAddProductForm = () => {
           color,
           size,
           gender,
-          price: 39624,
+          price: 150,
           userID
         })
       }),
       {
         loading: 'Saving...',
-        success: <b>Product Added Succesfully !!</b>,
-        error: <b>Could not save. Try again later, please.</b>
+        success: 'Product added succesfully!',
+        error: 'Could not save. Try again later, please.'
       }
     )
   }
@@ -82,7 +113,8 @@ const useAddProductForm = () => {
     setInputInfo,
     handleInputChange,
     handleSubmit,
-    handleInputImg
+    handleInputImg,
+    handlePremadeImg
   }
 }
 

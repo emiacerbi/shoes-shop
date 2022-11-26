@@ -14,6 +14,8 @@ import Link from 'next/link'
 import { getToken } from 'next-auth/jwt'
 import { signOut } from 'next-auth/react'
 
+const baseURL = 'https://shoes-shop-strapi.herokuapp.com'
+
 export async function getServerSideProps(context) {
   const qs = require('qs')
 
@@ -54,7 +56,6 @@ export async function getServerSideProps(context) {
 
 export default function Home({ products }) {
   const theme = useTheme()
-  console.log(products)
 
   const handleLogOut = () => {
     signOut()
@@ -179,10 +180,9 @@ export default function Home({ products }) {
                   key={id}
                   productTitle={attributes.name}
                   productDescription={attributes.description}
-                  image={
-                    `https://shoes-shop-strapi.herokuapp.com${attributes.images.data[0].attributes.url}` ||
-                    '/shoes.png'
-                  }
+                  image={`${
+                    baseURL + attributes.images.data[0].attributes.url
+                  }`}
                   productPrice={attributes.price}
                   id={id}
                 />
