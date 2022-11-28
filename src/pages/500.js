@@ -9,7 +9,7 @@ export default function Custom500() {
   return (
     <>
       <Head>
-        <title>Error 404</title>
+        <title>Error 500</title>
       </Head>
 
       <Box
