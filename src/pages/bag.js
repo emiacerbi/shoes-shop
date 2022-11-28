@@ -143,7 +143,9 @@ const Bag = () => {
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography variant="body2">Shipping</Typography>
-                  <Typography variant="body2">$20</Typography>
+                  <Typography variant="body2">
+                    {shoes.length === 0 ? '$0' : '$20'}
+                  </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography variant="body2">Tax</Typography>
@@ -160,7 +162,9 @@ const Bag = () => {
                   }}
                 >
                   <Typography variant="body2">Total</Typography>
-                  <Typography variant="body2">${subTotal + 20}</Typography>
+                  <Typography variant="body2">
+                    {shoes.length === 0 ? '$0' : `$ ${parseInt(subTotal) + 20}`}
+                  </Typography>
                 </Box>
 
                 <Divider sx={{ marginBlock: '1rem' }} />
