@@ -11,6 +11,7 @@ import { getBrands } from 'helpers/products/getBrands'
 import { getColors } from 'helpers/products/getColors'
 import { getGenders } from 'helpers/products/getGenders'
 import { getSizes } from 'helpers/products/getSizes'
+import Head from 'next/head'
 
 export const getStaticProps = async () => {
   const genders = await getGenders()
@@ -90,6 +91,9 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
   return (
     <>
+      <Head>
+        <title>Search - Shoes Shop</title>
+      </Head>
       <HeaderLoggedIn
         pages={['Home', 'Bag', 'Add Product']}
         links={['/', '/bag', '/add-product']}

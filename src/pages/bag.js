@@ -7,6 +7,7 @@ import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import { Divider, Grid, Stack, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
 import { reducePrice } from 'helpers/reducePrice'
+import Head from 'next/head'
 
 const pages = ['Home', 'Add Product', 'Search']
 const links = ['/home', '/add-product', '/search-results']
@@ -55,6 +56,9 @@ const Bag = () => {
 
   return (
     <>
+      <Head>
+        <title>Bag - Shoes Shop</title>
+      </Head>
       <HeaderLoggedIn pages={pages} links={links} burger={true} cart={true} />
 
       <Grid container p={2}>
