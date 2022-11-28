@@ -2,6 +2,7 @@ import { Toaster } from 'react-hot-toast'
 import { ThemeProvider } from '@mui/material'
 import { theme } from '@styles/theme'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Head from 'next/head'
 import { SessionProvider } from 'next-auth/react'
 
 import { UserProvider } from '../context/UserContext'
@@ -15,15 +16,20 @@ export default function App({
   const queryClient = new QueryClient()
 
   return (
-    <SessionProvider session={session} refetchOnWindowFocus={true}>
-      <ThemeProvider theme={theme}>
-        <QueryClientProvider client={queryClient}>
-          <UserProvider>
-            <Toaster />
-            <Component {...pageProps} />
-          </UserProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
-    </SessionProvider>
+    <>
+      <Head>
+        <title>Shoes shop</title>
+      </Head>
+      <SessionProvider session={session} refetchOnWindowFocus={true}>
+        <ThemeProvider theme={theme}>
+          <QueryClientProvider client={queryClient}>
+            <UserProvider>
+              <Toaster />
+              <Component {...pageProps} />
+            </UserProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
+      </SessionProvider>
+    </>
   )
 }

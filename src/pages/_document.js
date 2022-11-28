@@ -1,13 +1,29 @@
-
 import { Head, Html, Main, NextScript } from 'next/document'
 
-export default function Document () {
+export default function Document() {
   return (
-    <Html>
+    <Html lang="en">
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta lang="en" />
+
+        <meta
+          name="description"
+          content="Check out the best shoes available in the market at a very affordable price."
+          key="desc"
+        />
       </Head>
       <body>
         <Main />

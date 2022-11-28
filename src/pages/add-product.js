@@ -15,6 +15,7 @@ import { getColors } from 'helpers/products/getColors'
 import { getGenders } from 'helpers/products/getGenders'
 import { getSizes } from 'helpers/products/getSizes'
 import useAddProductForm from 'hooks/useAddProductForm'
+import Head from 'next/head'
 import { signOut } from 'next-auth/react'
 
 export const getStaticProps = async () => {
@@ -61,6 +62,9 @@ export default function AddProduct({
 
   return (
     <>
+      <Head>
+        <title>Add - Shoes Shop</title>
+      </Head>
       <HeaderLoggedIn
         pages={['Home', 'Search', 'Bag']}
         burger={true}
