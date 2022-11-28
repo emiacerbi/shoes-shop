@@ -25,19 +25,25 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      brands: brands.data.map(data => data.attributes.name),
-      genders: genders.data.map(data => data.attributes.name),
-      sizes: sizes.data.map(data => `EUR-${data.attributes.value}`)
+      brands: brands.data.map((data) => data.attributes.name),
+      genders: genders.data.map((data) => data.attributes.name),
+      sizes: sizes.data.map((data) => `EUR-${data.attributes.value}`)
     }
   }
 }
 
-export default function AddProduct ({ brands, genders, sizes }) {
-  const { inputInfo, setInputInfo, handleInputChange, handleSubmit } = useAddProductForm()
+export default function AddProduct({ brands, genders, sizes }) {
+  const { inputInfo, setInputInfo, handleInputChange, handleSubmit } =
+    useAddProductForm()
 
   console.log(inputInfo)
 
   const theme = useTheme()
+
+  const handleLogout = () => {
+    localStorage.removeItem('shoes')
+    signOut()
+  }
 
   return (
     <>
@@ -47,12 +53,13 @@ export default function AddProduct ({ brands, genders, sizes }) {
         links={['/home', '/search-results', '/bag']}
       />
       <Box component="main" sx={{ display: 'flex' }}>
-
-        <Box sx={{ display: { xs: 'none', sm: 'block' }, flexDirection: 'column' }}>
+        <Box
+          sx={{ display: { xs: 'none', sm: 'block' }, flexDirection: 'column' }}
+        >
           <ProfileInfoSideBar />
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }} >
-            <ShoppingBagIcon sx={{ color: '#6E7278' }}/>
-            <BarItem name="My Orders"/>
+          <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
+            <ShoppingBagIcon sx={{ color: '#6E7278' }} />
+            <BarItem name="My Orders" />
           </Box>
           <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
             <ListAltIcon sx={{ color: '#6E7278' }} />
@@ -62,13 +69,21 @@ export default function AddProduct ({ brands, genders, sizes }) {
             <ChatIcon sx={{ color: '#6E7278' }} />
             <BarItem name="Newsletters" />
           </Box>
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}>
+          <Box
+            sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}
+          >
             <Button
-              onClick={() => signOut()}
-              sx={{ textTransform: 'none', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              onClick={handleLogout}
+              sx={{
+                textTransform: 'none',
+                padding: '0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
             >
-              <LogoutIcon sx={{ color: '#6E7278' }}/>
-              <BarItem name="Log out"/>
+              <LogoutIcon sx={{ color: '#6E7278' }} />
+              <BarItem name="Log out" />
             </Button>
           </Box>
         </Box>
@@ -81,22 +96,48 @@ export default function AddProduct ({ brands, genders, sizes }) {
             p: { xs: '20px', sm: '55px' }
           }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'row', flex: '1', mb: '15px' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              flex: '1',
+              mb: '15px'
+            }}
+          >
             <Box sx={{ flex: '1', maxWidth: 890 }}>
-              <Typography variant="h1" sx={{ [theme.breakpoints.down('md')]: { fontSize: '30px' } }}>Add Product</Typography>
+              <Typography
+                variant="h1"
+                sx={{ [theme.breakpoints.down('md')]: { fontSize: '30px' } }}
+              >
+                Add Product
+              </Typography>
             </Box>
-            <Box sx={{ display: { xs: 'none', lg: 'flex' }, height: 40, width: 323, gap: '19px', flex: '1', justifyContent: 'flex-end' }}>
+            <Box
+              sx={{
+                display: { xs: 'none', lg: 'flex' },
+                height: 40,
+                width: 323,
+                gap: '19px',
+                flex: '1',
+                justifyContent: 'flex-end'
+              }}
+            >
               <PrimaryButton maxWidth="152px">Schedule</PrimaryButton>
-              <SecondaryButton onClick={handleSubmit} form='addProduct' maxWidth="152px">Save</SecondaryButton>
+              <SecondaryButton
+                onClick={handleSubmit}
+                form="addProduct"
+                maxWidth="152px"
+              >
+                Save
+              </SecondaryButton>
             </Box>
           </Box>
-          <Typography variant="p" sx={{ maxWidth: '900px' }} >
-                Lorem ipsum, or lipsum as it is sometimes known, is dummy text
-                used in laying out print, graphic or web designs. The passage
-                is attributed to an unknown typesetter in the 15th century who
-                is thought to have scrambled parts of Ciceros De Finibus
-                Bonorum et Malorum for use in a type specimen book. It usually
-                begins with:
+          <Typography variant="p" sx={{ maxWidth: '900px' }}>
+            Lorem ipsum, or lipsum as it is sometimes known, is dummy text used
+            in laying out print, graphic or web designs. The passage is
+            attributed to an unknown typesetter in the 15th century who is
+            thought to have scrambled parts of Ciceros De Finibus Bonorum et
+            Malorum for use in a type specimen book. It usually begins with:
           </Typography>
           <Box
             sx={{
@@ -105,8 +146,15 @@ export default function AddProduct ({ brands, genders, sizes }) {
               justifyContent: 'space-between'
             }}
           >
-            <AddProductForm id='addProduct' brands={brands} genders={genders} sizes={sizes} setInputInfo={setInputInfo} handleInputChange={handleInputChange}/>
-            <ProductImageStore/>
+            <AddProductForm
+              id="addProduct"
+              brands={brands}
+              genders={genders}
+              sizes={sizes}
+              setInputInfo={setInputInfo}
+              handleInputChange={handleInputChange}
+            />
+            <ProductImageStore handleInputChange={handleInputChange} />
           </Box>
         </Box>
       </Box>

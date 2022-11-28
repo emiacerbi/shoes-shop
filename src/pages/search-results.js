@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import CheckBox from '@components/CheckBox/CheckBox'
 import FilterTitle from '@components/FilterTitle/FilterTitle'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
@@ -7,18 +7,20 @@ import SeparationLine from '@components/SeparationLine/SeparationLine'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import { Box, Grid, InputBase, Typography } from '@mui/material'
 import { theme } from '@styles/theme'
+import { useQuery } from '@tanstack/react-query'
 import { getBrands } from 'helpers/products/getBrands'
 import { getColors } from 'helpers/products/getColors'
 import { getGenders } from 'helpers/products/getGenders'
+import { getProducts } from 'helpers/products/getProducts'
 import { getSizes } from 'helpers/products/getSizes'
+import { useRouter } from 'next/router'
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 export const getStaticProps = async () => {
   const genders = await getGenders()
-
   const brands = await getBrands()
-
   const colors = await getColors()
-
   const sizes = await getSizes()
 
   return {
@@ -40,8 +42,104 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
   const [filterColor, setFilterColor] = useState(true) // State to show/hide Color filters
   const [filterSize, setFilterSize] = useState(true) // State to show/hide Color filters
 
+  const [filtersArray, setFiltersArray] = useState([])
+  const router = useRouter()
+
+  const baseQuery = {
+    filters: {
+      userID: {
+        id: {
+          $notNull: true
+        }
+      },
+      teamName: {
+        $eq: 'ea-team'
+      }
+    },
+    populate: '*',
+    pagination: {
+      page: 1,
+      pageSize: 100
+    }
+  }
+
+  const [queryObj, setQueryObj] = useState(baseQuery)
+
+  const { data } = useQuery({
+    queryKey: ['products', queryObj],
+    queryFn: () => {
+      return getProducts(`?${qs.stringify(queryObj)}`)
+    }
+  })
+
+  const qs = require('qs')
+
+  console.log(data)
+
   const [opacity, setOpacity] = useState('')
   const [screenWidth, setScreenWidth] = useState(0)
+
+  // const handleValue = (e) => {
+  //   const checked = e.target.checked
+  //   const name = e.target.name
+
+  //   if (checked) {
+  //     setInputInfo({
+  //       ...inputInfo,
+  //       [name]: !inputInfo.name
+  //     })
+  //   }
+  // }
+
+  console.log(router)
+
+  const handleFilters = (e, key, value) => {
+    const checked = e.target.checked
+
+    if (checked) {
+      const newFilters = [...filtersArray, value]
+      setFiltersArray(newFilters)
+
+      const newQueryObj = {
+        ...queryObj,
+        filters: {
+          ...queryObj.filters,
+          [key]: {
+            name: {
+              $in: newFilters
+            }
+          }
+        }
+      }
+
+      setQueryObj(newQueryObj)
+
+      router.push({
+        pathname: router.pathname,
+        query: qs.stringify(newQueryObj)
+      })
+    }
+
+    if (!checked) {
+      const newFilters = filtersArray.filter((item) => item !== value)
+      setFiltersArray(newFilters)
+
+      const newQueryObj = {
+        ...queryObj
+      }
+
+      console.log({ newQueryObj })
+
+      delete newQueryObj.filters[key]
+
+      setQueryObj(newQueryObj)
+
+      router.push({
+        pathname: router.pathname,
+        query: qs.stringify(newQueryObj)
+      })
+    }
+  }
 
   useEffect(() => {
     window.addEventListener('resize', () => {
@@ -107,8 +205,8 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               heigth: 'auto',
               display: { xs: 'none', sm: 'flex' },
               flexDirection: 'column',
-              ml: '40px',
-              mr: '40px'
+              mx: '40px',
+              mt: '20px'
             }}
           >
             <Typography
@@ -120,7 +218,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             >
               Shoes/Air Force 1
             </Typography>
-            <Typography {...theme.typography.h1}>Air Force 1 (137)</Typography>
+            <Typography variant="h1">Air Force 1 (137)</Typography>
             <SeparationLine width={'200px'} />
 
             {/* FILTER BLOCK */}
@@ -130,7 +228,12 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               {filterGender && (
                 <>
                   {' '}
-                  <CheckBox label={genders} />{' '}
+                  <CheckBox
+                    label={genders}
+                    name="gender"
+                    handleFilters={handleFilters}
+                    // setQueryState={setQueryState}
+                  />{' '}
                 </>
               )}
 
@@ -183,8 +286,8 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             <SeparationLine width={'200px'} />
 
             {/* Price */}
-            <FilterTitle filterName={'Price'} handlePrice={handlePrice} />
-            <SeparationLine width={'200px'} />
+            {/* <FilterTitle filterName={'Price'} handlePrice={handlePrice} />
+            <SeparationLine width={'200px'} /> */}
 
             {/* Color */}
             <FilterTitle filterName={'Color'} handleColor={handleColor} />
@@ -280,7 +383,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                         }
                       }}
                       type="text"
-                      onChange={handleInput}
+                      // onChange={handleInput}
                       value={search}
                       placeholder="Search"
                     />
@@ -322,12 +425,13 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
         <Box
           sx={{
             mt: '20px',
-            [theme.breakpoints.down('sm')]: { opacity: `${opacity}` }
+            [theme.breakpoints.down('sm')]: { opacity: `${opacity}` },
+            width: '100%'
           }}
         >
           <Box
             sx={{
-              paddingInline: { xs: '1rem', lg: '3.5rem' },
+              paddingInline: { xs: '1rem', md: '3.5rem' },
 
               [theme.breakpoints.up('sm')]: {
                 mt: '68px',
@@ -431,12 +535,13 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
           </Box>
           <Grid
             container
-            spacing={2}
             sx={{
               my: '20px',
-              justifyContent: 'center',
-              paddingInline: { xs: 0, lg: '3.5rem' }
+              justifyContent: { xs: 'center', md: 'space-between' },
+              paddingInline: { xs: '1rem', md: '3.5rem' },
+              gap: '2rem'
             }}
+            columns={{ xs: 6, md: 11, lg: 14 }}
           >
             <ProductCard
               image={'/airmax-270.png'}
@@ -450,42 +555,16 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               productPrice="140"
               productDescription="Men's Shoes"
             />
-            <ProductCard
-              image={'/air-force.png'}
-              productTitle="Nike Air Force 1 07 SE"
-              productPrice="140"
-              productDescription="Women's Shoes"
-            />
-            <ProductCard
-              image={'/airmax-270.png'}
-              productTitle="Nike Air Max 270"
-              productPrice="140"
-              productDescription="Women's Shoes"
-            />
-            <ProductCard
-              image={'/airmax-90.png'}
-              productTitle="Nike AirMax 90"
-              productPrice="140"
-              productDescription="Men's Shoes"
-            />
-            <ProductCard
-              image={'/air-force.png'}
-              productTitle="Nike Air Force 1 07 SE"
-              productPrice="140"
-              productDescription="Women's Shoes"
-            />
-            <ProductCard
-              image={'/airmax-270.png'}
-              productTitle="Nike Air Max 270"
-              productPrice="140"
-              productDescription="Women's Shoes"
-            />
-            <ProductCard
-              image={'/airmax-90.png'}
-              productTitle="Nike AirMax 90"
-              productPrice="140"
-              productDescription="Men's Shoes"
-            />
+
+            {data?.data.map(({ id, attributes }) => (
+              <ProductCard
+                key={id}
+                image={BASE_URL + attributes.images.data[0].attributes.url}
+                productTitle="Nike AirMax 90"
+                productPrice="140"
+                productDescription="Men's Shoes"
+              />
+            ))}
           </Grid>
         </Box>
       </Box>

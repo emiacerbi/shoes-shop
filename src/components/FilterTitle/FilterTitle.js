@@ -1,9 +1,24 @@
 import { Box, Typography } from '@mui/material'
 
-function FilterTitle ({ filterName, handleGender, handleKids, handleBrand, handlePrice, handleColor, handleSize }) {
+function FilterTitle({
+  filterName,
+  handleGender,
+  handleKids,
+  handleBrand,
+  handlePrice,
+  handleColor,
+  handleSize
+}) {
   return (
     <Box display={'flex'} sx={{ width: 'auto', alignItems: 'end', mb: '20px' }}>
-      <Typography sx={{ fontWeight: 500, fontSize: '16px', lineHeight: '19px', mt: '28px' }}>
+      <Typography
+        sx={{
+          fontWeight: 500,
+          fontSize: '16px',
+          lineHeight: '19px',
+          mt: '28px'
+        }}
+      >
         {filterName}
       </Typography>
       <Box
@@ -17,7 +32,7 @@ function FilterTitle ({ filterName, handleGender, handleKids, handleBrand, handl
           filterName === 'Price' && handlePrice()
           filterName === 'Color' && handleColor()
           filterName === 'Size' && handleSize()
-        } }
+        }}
         sx={{
           marginLeft: 'auto',
           width: '8px',
@@ -25,7 +40,7 @@ function FilterTitle ({ filterName, handleGender, handleKids, handleBrand, handl
           marginRight: '20px',
           transition: 'all 0.5s ease',
           '&:hover': {
-            transform: 'rotate(180deg)',
+            // transform: 'rotate(180deg)',
             cursor: 'pointer'
           }
         }}
