@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import CheckBox from '@components/CheckBox/CheckBox'
+import CustomFilter from '@components/CustomFilter/CustomFilter'
 import FilterTitle from '@components/FilterTitle/FilterTitle'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import ProductCard from '@components/ProductCard/ProductCard'
@@ -8,6 +9,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import { Box, Grid, InputBase, Typography } from '@mui/material'
 import { theme } from '@styles/theme'
 import { useQuery } from '@tanstack/react-query'
+import { baseQuery } from 'constants/variables'
 import { getBrands } from 'helpers/products/getBrands'
 import { getColors } from 'helpers/products/getColors'
 import { getGenders } from 'helpers/products/getGenders'
@@ -36,32 +38,9 @@ export const getStaticProps = async () => {
 export default function SearchResults({ genders, brands, colors, sizes }) {
   // Filters
   const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
-  const [filterGender, setFilterGender] = useState(true) // State to show/hide Gender filters
-  const [filterBrand, setFilterBrand] = useState(true) // State to show/hide Brand filters
-  const [filterPrice, setFilterPrice] = useState(true) // State to show/hide Price filters
-  const [filterColor, setFilterColor] = useState(true) // State to show/hide Color filters
-  const [filterSize, setFilterSize] = useState(true) // State to show/hide Color filters
 
   const [filtersArray, setFiltersArray] = useState([])
   const router = useRouter()
-
-  const baseQuery = {
-    filters: {
-      userID: {
-        id: {
-          $notNull: true
-        }
-      },
-      teamName: {
-        $eq: 'ea-team'
-      }
-    },
-    populate: '*',
-    pagination: {
-      page: 1,
-      pageSize: 100
-    }
-  }
 
   const [queryObj, setQueryObj] = useState(baseQuery)
 
@@ -78,18 +57,6 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
   const [opacity, setOpacity] = useState('')
   const [screenWidth, setScreenWidth] = useState(0)
-
-  // const handleValue = (e) => {
-  //   const checked = e.target.checked
-  //   const name = e.target.name
-
-  //   if (checked) {
-  //     setInputInfo({
-  //       ...inputInfo,
-  //       [name]: !inputInfo.name
-  //     })
-  //   }
-  // }
 
   console.log(router)
 
@@ -153,26 +120,6 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
     ;(screenWidth <= 599) & (showFilters === true) && setOpacity('100%')
   }
 
-  function handleGender() {
-    return setFilterGender(!filterGender)
-  }
-
-  function handleBrand() {
-    return setFilterBrand(!filterBrand)
-  }
-
-  function handlePrice() {
-    return setFilterPrice(!filterPrice)
-  }
-
-  function handleColor() {
-    return setFilterColor(!filterColor)
-  }
-
-  function handleSize() {
-    return setFilterSize(!filterSize)
-  }
-
   // Filter data
   const [search, setSearch] = useState('')
 
@@ -224,89 +171,42 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             {/* FILTER BLOCK */}
             <Box sx={{ maxWidth: '200px' }}>
               {/* Gender */}
-              <FilterTitle filterName={'Gender'} handleGender={handleGender} />
-              {filterGender && (
-                <>
-                  {' '}
-                  <CheckBox
-                    label={genders}
-                    name="gender"
-                    handleFilters={handleFilters}
-                    // setQueryState={setQueryState}
-                  />{' '}
-                </>
-              )}
+              <CustomFilter
+                filterName={'Gender'}
+                handleFilters={handleFilters}
+                category={genders}
+              />
 
               <SeparationLine width={'200px'} />
 
               {/* Brand */}
-              <FilterTitle filterName={'Brand'} handleBrand={handleBrand} />
-              {filterBrand && (
-                <>
-                  <Box
-                    sx={{ display: 'flex', alignItems: 'center', mb: '35px' }}
-                  >
-                    <SearchOutlinedIcon
-                      sx={{
-                        color: '#494949',
-                        position: 'absolute',
-                        ml: '16px',
-                        width: '18px',
-                        height: '18px'
-                      }}
-                    />
-                    <InputBase
-                      sx={{
-                        [theme.breakpoints.up('sm')]: {
-                          border: '1px solid #494949',
-                          borderRadius: '42px',
-                          width: '260px',
-                          height: '33px',
-                          paddingLeft: '40px',
-                          input: {
-                            '&::placeholder': {
-                              fontSize: '1.25rem',
-                              color: '#494949'
-                            }
-                          }
-                        }
-                      }}
-                      type="text"
-                      onChange={handleInput}
-                      value={search}
-                      placeholder="Search"
-                    />
-                  </Box>
-
-                  <CheckBox label={brand} />
-                </>
-              )}
+              <></>
+              <CustomFilter
+                filterName={'Brand'}
+                handleFilters={handleFilters}
+                category={brands}
+                isBrand={true}
+                handleInput={handleInput}
+              />
             </Box>
 
             <SeparationLine width={'200px'} />
 
-            {/* Price */}
-            {/* <FilterTitle filterName={'Price'} handlePrice={handlePrice} />
-            <SeparationLine width={'200px'} /> */}
-
             {/* Color */}
-            <FilterTitle filterName={'Color'} handleColor={handleColor} />
-            {filterColor && (
-              <>
-                {' '}
-                <CheckBox label={colors} />{' '}
-              </>
-            )}
+            <CustomFilter
+              filterName={'Color'}
+              handleFilters={handleFilters}
+              category={colors}
+            />
+
             <SeparationLine width={'200px'} />
 
             {/* Size */}
-            <FilterTitle filterName={'Size'} handleSize={handleSize} />
-            {filterSize && (
-              <>
-                {' '}
-                <CheckBox label={sizes} />{' '}
-              </>
-            )}
+            <CustomFilter
+              filterName={'Size'}
+              handleFilters={handleFilters}
+              category={sizes}
+            />
           </Box>
         )}
 
@@ -341,82 +241,72 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               </Typography>
 
               {/* Gender */}
-              <FilterTitle filterName={'Gender'} handleGender={handleGender} />
-              {filterGender && (
-                <>
-                  {' '}
-                  <CheckBox label={genders} />{' '}
-                </>
-              )}
+              <FilterTitle filterName={'Gender'} />
+              <>
+                {' '}
+                <CheckBox label={genders} />{' '}
+              </>
               <SeparationLine />
 
               {/* Brand */}
-              <FilterTitle filterName={'Brand'} handleBrand={handleBrand} />
-              {filterBrand && (
-                <>
-                  <Box
-                    sx={{ display: 'flex', alignItems: 'center', mb: '35px' }}
-                  >
-                    <SearchOutlinedIcon
-                      sx={{
-                        color: '#494949',
-                        position: 'absolute',
-                        ml: '16px',
-                        width: '18px',
-                        height: '18px'
-                      }}
-                    />
-                    <InputBase
-                      sx={{
-                        [theme.breakpoints.down('sm')]: {
-                          border: '1px solid #494949',
-                          borderRadius: '42px',
-                          width: '260px',
-                          height: '33px',
-                          paddingLeft: '40px',
-                          input: {
-                            '&::placeholder': {
-                              fontSize: '1.25rem',
-                              color: '#494949'
-                            }
+              <FilterTitle filterName={'Brand'} />
+              <>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: '35px' }}>
+                  <SearchOutlinedIcon
+                    sx={{
+                      color: '#494949',
+                      position: 'absolute',
+                      ml: '16px',
+                      width: '18px',
+                      height: '18px'
+                    }}
+                  />
+                  <InputBase
+                    sx={{
+                      [theme.breakpoints.down('sm')]: {
+                        border: '1px solid #494949',
+                        borderRadius: '42px',
+                        width: '260px',
+                        height: '33px',
+                        paddingLeft: '40px',
+                        input: {
+                          '&::placeholder': {
+                            fontSize: '1.25rem',
+                            color: '#494949'
                           }
                         }
-                      }}
-                      type="text"
-                      // onChange={handleInput}
-                      value={search}
-                      placeholder="Search"
-                    />
-                  </Box>
+                      }
+                    }}
+                    type="text"
+                    // onChange={handleInput}
+                    value={search}
+                    placeholder="Search"
+                  />
+                </Box>
 
-                  <CheckBox label={brand} />
-                </>
-              )}
+                <CheckBox label={brand} />
+              </>
 
               <SeparationLine />
 
               {/* Price */}
-              <FilterTitle filterName={'Price'} handlePrice={handlePrice} />
+              <FilterTitle filterName={'Price'} />
               <SeparationLine />
 
               {/* Color */}
-              <FilterTitle filterName={'Color'} handleColor={handleColor} />
-              {filterColor && (
-                <>
-                  {' '}
-                  <CheckBox label={colors} />{' '}
-                </>
-              )}
+              <FilterTitle filterName={'Color'} />
+              <>
+                {' '}
+                <CheckBox label={colors} />{' '}
+              </>
               <SeparationLine />
 
               {/* Size */}
-              <FilterTitle filterName={'Size'} handleSize={handleSize} />
-              {filterSize && (
-                <>
-                  {' '}
-                  <CheckBox label={sizes} />{' '}
-                </>
-              )}
+              <FilterTitle filterName={'Size'} />
+              <>
+                {' '}
+                <CheckBox label={sizes} />{' '}
+              </>
             </Box>
           </Box>
         )}
@@ -537,9 +427,9 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             container
             sx={{
               my: '20px',
-              justifyContent: { xs: 'center', md: 'space-between' },
+              justifyContent: { xs: 'center', md: 'start' },
               paddingInline: { xs: '1rem', md: '3.5rem' },
-              gap: '2rem'
+              gap: '4.25rem'
             }}
             columns={{ xs: 6, md: 11, lg: 14 }}
           >
