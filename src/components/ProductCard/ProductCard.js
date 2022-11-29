@@ -18,7 +18,11 @@ export default function ProductCard({
       item
       xs={5}
       lg={3}
-      sx={{ position: 'relative', width: { xs: 150, sm: 320 } }}
+      sx={{
+        position: 'relative',
+        width: { xs: 150, md: 320 },
+        maxWidth: { xs: 120, md: 320 }
+      }}
     >
       <Box
         sx={{

@@ -38,7 +38,6 @@ function CustomFilter({
             marginLeft: 'auto',
             width: '8px',
             height: '16px',
-            marginRight: '20px',
             transition: 'all 0.5s ease',
             '&:hover': {
               transform: 'rotate(180deg)',
@@ -49,12 +48,20 @@ function CustomFilter({
       </Box>
 
       {isBrand && (
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: '35px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            mb: '35px',
+            gap: '.5rem',
+            border: '1px solid lightgray',
+            px: '.5rem',
+            borderRadius: '2rem'
+          }}
+        >
           <SearchOutlinedIcon
             sx={{
               color: '#494949',
-              position: 'absolute',
-              ml: '16px',
               width: '18px',
               height: '18px'
             }}
@@ -62,11 +69,9 @@ function CustomFilter({
           <InputBase
             sx={{
               [theme.breakpoints.up('sm')]: {
-                border: '1px solid #494949',
                 borderRadius: '42px',
                 width: '260px',
                 height: '33px',
-                paddingLeft: '40px',
                 input: {
                   '&::placeholder': {
                     fontSize: '1.25rem',
@@ -87,7 +92,7 @@ function CustomFilter({
           <CheckBox
             key={category}
             label={category}
-            name={category}
+            filterName={filterName}
             handleFilters={handleFilters}
           />
         </Box>

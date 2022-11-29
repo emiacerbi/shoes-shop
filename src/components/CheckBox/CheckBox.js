@@ -1,6 +1,6 @@
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 
-function CheckBox({ label, name, handleFilters }) {
+function CheckBox({ label, handleFilters, filterName }) {
   return (
     <>
       <FormGroup aria-label="position">
@@ -11,7 +11,9 @@ function CheckBox({ label, name, handleFilters }) {
             label={data}
             control={
               <Checkbox
-                onClick={(e) => handleFilters(e, name, data)}
+                onClick={(e) =>
+                  handleFilters(e, filterName.toLowerCase(), data)
+                }
                 value={toString().toLowerCase()}
               />
             }
