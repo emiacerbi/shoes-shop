@@ -6,7 +6,6 @@ import SeparationLine from '@components/SeparationLine/SeparationLine'
 import { Box, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/system'
 import { useQuery } from '@tanstack/react-query'
-import { baseQuery } from 'constants/baseQueryConfig'
 import { getBrands } from 'helpers/products/getBrands'
 import { getColors } from 'helpers/products/getColors'
 import { getGenders } from 'helpers/products/getGenders'
@@ -16,6 +15,24 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+
+const BASE_QUERY = {
+  filters: {
+    userID: {
+      id: {
+        $notNull: true
+      }
+    },
+    teamName: {
+      $eq: 'ea-team'
+    }
+  },
+  populate: '*',
+  pagination: {
+    page: 1,
+    pageSize: 100
+  }
+}
 
 export const getStaticProps = async () => {
   const genders = await getGenders()
@@ -42,7 +59,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
   const [filtersArray, setFiltersArray] = useState([])
   const router = useRouter()
 
-  const [queryObj, setQueryObj] = useState(baseQuery)
+  const [queryObj, setQueryObj] = useState(BASE_QUERY)
 
   const { data } = useQuery({
     queryKey: ['products', queryObj],
