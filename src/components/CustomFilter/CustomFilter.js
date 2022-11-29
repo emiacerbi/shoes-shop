@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import CheckBox from '@components/CheckBox/CheckBox'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import { Box, InputBase, Typography, useTheme } from '@mui/material'
+import { Box, InputBase, Typography } from '@mui/material'
 
 function CustomFilter({
   filterName,
@@ -11,7 +11,6 @@ function CustomFilter({
   handleInput
 }) {
   const [isFilterVisible, setIsFilterVisible] = useState(false)
-  const theme = useTheme()
 
   return (
     <Box>
@@ -38,11 +37,9 @@ function CustomFilter({
             marginLeft: 'auto',
             width: '8px',
             height: '16px',
-            transition: 'all 0.5s ease',
-            '&:hover': {
-              transform: 'rotate(180deg)',
-              cursor: 'pointer'
-            }
+            transition: 'transform .2s ease',
+            transform: isFilterVisible ? 'rotate(-90deg)' : 'rotate(0)',
+            cursor: 'pointer'
           }}
         />
       </Box>
@@ -68,17 +65,8 @@ function CustomFilter({
           />
           <InputBase
             sx={{
-              [theme.breakpoints.up('sm')]: {
-                borderRadius: '42px',
-                width: '260px',
-                height: '33px',
-                input: {
-                  '&::placeholder': {
-                    fontSize: '1.25rem',
-                    color: '#494949'
-                  }
-                }
-              }
+              borderRadius: '42px',
+              width: '260px'
             }}
             type="text"
             onChange={handleInput}
