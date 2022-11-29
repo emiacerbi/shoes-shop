@@ -4,7 +4,7 @@ import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import ProductCard from '@components/ProductCard/ProductCard'
 import SeparationLine from '@components/SeparationLine/SeparationLine'
 import { Box, Grid, Typography } from '@mui/material'
-import { theme } from '@styles/theme'
+import { useTheme } from '@mui/system'
 import { useQuery } from '@tanstack/react-query'
 import { baseQuery } from 'constants/variables'
 import { getBrands } from 'helpers/products/getBrands'
@@ -36,6 +36,8 @@ export const getStaticProps = async () => {
 export default function SearchResults({ genders, brands, colors, sizes }) {
   // Filters
   const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
+
+  const theme = useTheme()
 
   const [filtersArray, setFiltersArray] = useState([])
   const router = useRouter()
@@ -141,7 +143,15 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
         opacity={opacity}
       />
 
-      <Box display={{ xs: 'block', sm: 'flex' }}>
+      <Box
+        display={{
+          xs: 'block',
+          sm: 'flex'
+        }}
+        sx={{
+          width: '100%'
+        }}
+      >
         {/* DESKTOP FILTERS */}
         {showFilters && (
           <Box
@@ -349,9 +359,9 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             container
             sx={{
               my: '20px',
-              justifyContent: { xs: 'center', md: 'start' },
+              justifyContent: { xs: 'center', md: 'space-between' },
               paddingInline: { xs: '1rem', md: '3.5rem' },
-              gap: '4.25rem'
+              gap: '3rem'
             }}
             columns={{ xs: 6, md: 11, lg: 14 }}
           >
