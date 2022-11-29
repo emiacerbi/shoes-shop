@@ -146,48 +146,41 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
         {showFilters && (
           <Box
             sx={{
-              width: '200px',
+              minWidth: '320px',
               heigth: 'auto',
               display: { xs: 'none', sm: 'flex' },
-              flexDirection: 'column',
-              mx: '40px',
-              mt: '20px'
+              flexDirection: 'column'
             }}
           >
-            <Typography
-              sx={{
-                fontWeight: 300,
-                fontSize: '15px',
-                lineHeight: '18px'
-              }}
-            >
-              Shoes/Air Force 1
-            </Typography>
-            <Typography variant="h1">Air Force 1 (137)</Typography>
-            <SeparationLine width={'200px'} />
-
-            {/* FILTER BLOCK */}
-            <Box sx={{ maxWidth: '200px' }}>
-              {/* Gender */}
-              <CustomFilter
-                filterName={'Gender'}
-                handleFilters={handleFilters}
-                category={genders}
-              />
-
-              <SeparationLine width={'200px'} />
-
-              {/* Brand */}
-              <CustomFilter
-                filterName={'Brand'}
-                handleFilters={handleFilters}
-                category={brands}
-                isBrand={true}
-                // handleInput={handleInput}
-              />
+            <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
+              <Typography variant="p" sx={{ fontWeight: '300' }}>
+                Shoes/Air Force 1
+              </Typography>
+              <Typography variant="h3">Air Force 1 (137)</Typography>
             </Box>
 
-            <SeparationLine width={'200px'} />
+            <SeparationLine />
+
+            {/* FILTER BLOCK */}
+            {/* Gender */}
+            <CustomFilter
+              filterName={'Gender'}
+              handleFilters={handleFilters}
+              category={genders}
+            />
+
+            <SeparationLine />
+
+            {/* Brand */}
+            <CustomFilter
+              filterName={'Brand'}
+              handleFilters={handleFilters}
+              category={brands}
+              isBrand={true}
+              // handleInput={handleInput}
+            />
+
+            <SeparationLine />
 
             {/* Color */}
             <CustomFilter
@@ -196,7 +189,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               category={colors}
             />
 
-            <SeparationLine width={'200px'} />
+            <SeparationLine />
 
             {/* Size */}
             <CustomFilter
@@ -221,8 +214,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               top: 0,
               position: 'absolute',
               zIndex: 100,
-              background: 'white',
-              px: '2rem'
+              background: 'white'
             }}
           >
             <Box sx={{ maxWidth: '320px' }}>
@@ -230,7 +222,8 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                 sx={{
                   display: 'flex',
                   justifyContent: 'end',
-                  mt: '25px'
+                  mt: '25px',
+                  px: '2.5rem'
                 }}
                 onClick={showFiltersBlock}
               >
@@ -299,36 +292,11 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               }
             }}
           >
-            <Typography
-              sx={{
-                fontWeight: 500,
-                [theme.breakpoints.up('sm')]: {
-                  fontSize: '45px',
-                  lineHeight: '53px'
-                },
-                [theme.breakpoints.down('sm')]: {
-                  fontSize: '30px',
-                  lineHeight: '35px'
-                }
-              }}
-            >
-              {' '}
-              Search Results
-            </Typography>
+            <Typography variant="h1">Search Results</Typography>
 
             {screenWidth < 599 && <SeparationLine />}
 
-            <Typography
-              sx={{
-                mt: '8px',
-                fontWeight: 300,
-                fontSize: '15px',
-                lineHeight: '18px',
-                [theme.breakpoints.up('sm')]: {
-                  display: 'none'
-                }
-              }}
-            >
+            <Typography sx={{ display: { sm: 'none' } }}>
               Shoes/Air Force 1
             </Typography>
             <Box
@@ -338,14 +306,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                 justifyContent: 'space-between '
               }}
             >
-              <Typography
-                {...theme.typography.h6}
-                sx={{
-                  [theme.breakpoints.up('sm')]: {
-                    display: 'none'
-                  }
-                }}
-              >
+              <Typography variant="h1" sx={{ display: { sm: 'none' } }}>
                 Air Force 1 (137)
               </Typography>
               <Box sx={{ display: 'flex' }}>

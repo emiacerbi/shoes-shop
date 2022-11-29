@@ -20,13 +20,9 @@ import { signOut } from 'next-auth/react'
 
 export const getStaticProps = async () => {
   const brands = await getBrands()
-
   const genders = await getGenders()
-
   const sizes = await getSizes()
-
   const categories = await getCategories()
-
   const colors = await getColors()
 
   return {

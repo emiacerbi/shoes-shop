@@ -13,18 +13,28 @@ function CustomFilter({
   const [isFilterVisible, setIsFilterVisible] = useState(false)
 
   return (
-    <Box>
+    <Box
+      sx={{
+        px: '2.5rem',
+        py: '1.75rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.25rem'
+      }}
+    >
       <Box
-        display={'flex'}
-        sx={{ width: 'auto', alignItems: 'end', mb: '20px', cursor: 'pointer' }}
+        sx={{
+          alignItems: 'center',
+          cursor: 'pointer',
+          display: 'flex'
+        }}
         onClick={() => setIsFilterVisible(!isFilterVisible)}
       >
         <Typography
           sx={{
             fontWeight: 500,
             fontSize: '16px',
-            lineHeight: '19px',
-            mt: '28px'
+            lineHeight: '19px'
           }}
         >
           {filterName}
@@ -49,7 +59,6 @@ function CustomFilter({
           sx={{
             display: 'flex',
             alignItems: 'center',
-            mb: '35px',
             gap: '.5rem',
             border: '1px solid lightgray',
             px: '.5rem',
@@ -70,20 +79,17 @@ function CustomFilter({
             }}
             type="text"
             onChange={handleInput}
-            // value={search}
             placeholder="Search"
           />
         </Box>
       )}
       {isFilterVisible && (
-        <Box>
-          <CheckBox
-            key={category}
-            label={category}
-            filterName={filterName}
-            handleFilters={handleFilters}
-          />
-        </Box>
+        <CheckBox
+          key={category}
+          label={category}
+          filterName={filterName}
+          handleFilters={handleFilters}
+        />
       )}
     </Box>
   )
