@@ -7,6 +7,7 @@ import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import { Divider, Grid, Stack, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
 import { reducePrice } from 'helpers/reducePrice'
+import Head from 'next/head'
 
 const pages = ['Home', 'Add Product', 'Search']
 const links = ['/home', '/add-product', '/search-results']
@@ -55,6 +56,9 @@ const Bag = () => {
 
   return (
     <>
+      <Head>
+        <title>Bag - Shoes Shop</title>
+      </Head>
       <HeaderLoggedIn pages={pages} links={links} burger={true} cart={true} />
 
       <Grid container p={2}>
@@ -143,7 +147,9 @@ const Bag = () => {
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography variant="body2">Shipping</Typography>
-                  <Typography variant="body2">$20</Typography>
+                  <Typography variant="body2">
+                    {shoes.length === 0 ? '$0' : '$20'}
+                  </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography variant="body2">Tax</Typography>
@@ -160,7 +166,9 @@ const Bag = () => {
                   }}
                 >
                   <Typography variant="body2">Total</Typography>
-                  <Typography variant="body2">${subTotal + 20}</Typography>
+                  <Typography variant="body2">
+                    {shoes.length === 0 ? '$0' : `$ ${parseInt(subTotal) + 20}`}
+                  </Typography>
                 </Box>
 
                 <Divider sx={{ marginBlock: '1rem' }} />

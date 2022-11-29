@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast'
 import PhotoCameraBackIcon from '@mui/icons-material/PhotoCameraBack'
 import {
   Box,
@@ -9,12 +10,21 @@ import {
 } from '@mui/material'
 import Image from 'next/image'
 
-export default function ProductImageStore({ handleInputChange }) {
+const images = [
+  { id: 1, src: '/airmax-90.png', imgID: 52 },
+  { id: 2, src: '/air-force.png', imgID: 51 },
+  { id: 3, src: '/air-zoom-pegasus.png', imgID: 54 },
+  { id: 4, src: '/airmax-270.png', imgID: 53 },
+  { id: 5, src: '/shoes.png', imgID: 55 }
+]
+
+export default function ProductImageStore({
+  handleInputImg,
+  handlePremadeImg
+}) {
   return (
     <>
-      <Container
-        sx={{ pt: '40px', ml: '8rem', display: { xs: 'none', lg: 'block' } }}
-      >
+      <Container sx={{ ml: '8rem', display: { xs: 'none', lg: 'block' } }}>
         <Typography
           variant="h3"
           sx={{ fontSize: '15px !important', color: '#494949', mb: '1.2rem' }}
@@ -49,11 +59,11 @@ export default function ProductImageStore({ handleInputChange }) {
               />
             </FormLabel>
             <Input
-              onChange={handleInputChange}
+              onChange={handleInputImg}
               form="addProduct"
               id="srcImg"
-              type="file"
               name="img"
+              type="file"
               sx={{ display: 'none' }}
             ></Input>
             <Typography variant="p" align="center">
@@ -61,60 +71,20 @@ export default function ProductImageStore({ handleInputChange }) {
               <Link href="//www.google.com">click here to browse</Link>
             </Typography>
           </Box>
-          <Image
-            src="/airmax-270.png"
-            width={320}
-            height={380}
-            alt="productImg"
-          />
-          <Image
-            src="/airmax-270.png"
-            width={320}
-            height={380}
-            alt="productImg"
-          />
-          <Image
-            src="/airmax-270.png"
-            width={320}
-            height={380}
-            alt="productImg"
-          />
-          <Image
-            src="/airmax-270.png"
-            width={320}
-            height={380}
-            alt="productImg"
-          />
-          <Image
-            src="/airmax-270.png"
-            width={320}
-            height={380}
-            alt="productImg"
-          />
-          <Image
-            src="/airmax-270.png"
-            width={320}
-            height={380}
-            alt="productImg"
-          />
-          <Image
-            src="/airmax-270.png"
-            width={320}
-            height={380}
-            alt="productImg"
-          />
-          <Image
-            src="/airmax-270.png"
-            width={320}
-            height={380}
-            alt="productImg"
-          />
-          <Image
-            src="/airmax-270.png"
-            width={320}
-            height={380}
-            alt="productImg"
-          />
+          {images.map((image) => (
+            <Image
+              alt="productImg"
+              key={image.id}
+              src={image.src}
+              width={320}
+              height={380}
+              onClick={() => {
+                handlePremadeImg(image.imgID)
+                toast.success('Image selected!')
+              }}
+              style={{ cursor: 'pointer' }}
+            />
+          ))}
         </Box>
       </Container>
     </>

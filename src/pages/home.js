@@ -14,6 +14,8 @@ import Link from 'next/link'
 import { getToken } from 'next-auth/jwt'
 import { signOut } from 'next-auth/react'
 
+const baseURL = 'https://shoes-shop-strapi.herokuapp.com'
+
 export async function getServerSideProps(context) {
   const qs = require('qs')
 
@@ -143,10 +145,11 @@ export default function Home({ products }) {
                 display: 'flex',
                 flexWrap: 'wrap',
                 flex: '50%',
-                gap: '4rem',
+                gap: '2rem',
                 [theme.breakpoints.down('sm')]: {
                   overflow: 'auto',
-                  maxHeight: 400
+                  maxHeight: 400,
+                  justifyContent: 'center'
                 }
               }}
             >
@@ -177,7 +180,9 @@ export default function Home({ products }) {
                   key={id}
                   productTitle={attributes.name}
                   productDescription={attributes.description}
-                  image={attributes.images[0] || '/shoes.png'}
+                  image={`${
+                    baseURL + attributes.images.data[0].attributes.url
+                  }`}
                   productPrice={attributes.price}
                   id={id}
                 />

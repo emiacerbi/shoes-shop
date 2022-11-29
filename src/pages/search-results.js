@@ -12,6 +12,7 @@ import { getColors } from 'helpers/products/getColors'
 import { getGenders } from 'helpers/products/getGenders'
 import { getProducts } from 'helpers/products/getProducts'
 import { getSizes } from 'helpers/products/getSizes'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
@@ -129,6 +130,9 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
   return (
     <>
+      <Head>
+        <title>Search - Shoes Shop</title>
+      </Head>
       <HeaderLoggedIn
         pages={['Home', 'Bag', 'Add Product']}
         links={['/', '/bag', '/add-product']}

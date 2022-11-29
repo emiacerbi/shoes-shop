@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import AddItemToCart from '@components/AddItemToCartButton/AddItemToCart'
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
@@ -12,6 +13,7 @@ export default function ProductCard({
   id
 }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [imgSrc, setImgSrc] = useState(image)
 
   return (
     <Grid
@@ -31,7 +33,13 @@ export default function ProductCard({
           height: { xs: '178px', sm: '380px' }
         }}
       >
-        <Image src={image} layout="fill" alt="product" objectFit="cover" />
+        <Image
+          src={imgSrc}
+          layout="fill"
+          alt="product"
+          objectFit="cover"
+          onError={() => setImgSrc('/shoes.png')}
+        />
       </Box>
 
       {/* Modal button */}
@@ -50,28 +58,14 @@ export default function ProductCard({
         }}
         onClick={() => setIsModalVisible(!isModalVisible)}
       >
-        <Box
+        <MoreHorizIcon
+          fontSize="large"
           sx={{
-            width: '5px',
-            height: '5px',
-            background: 'black',
-            borderRadius: '50%'
-          }}
-        />
-        <Box
-          sx={{
-            width: '5px',
-            height: '5px',
-            background: 'black',
-            borderRadius: '50%'
-          }}
-        />
-        <Box
-          sx={{
-            width: '5px',
-            height: '5px',
-            background: 'black',
-            borderRadius: '50%'
+            '&:hover': {
+              transform: 'scale(1.2)',
+              color: 'primary.main',
+              transition: 'transform 300ms'
+            }
           }}
         />
       </Box>
@@ -81,7 +75,8 @@ export default function ProductCard({
           sx={{
             position: 'absolute',
             top: '2rem',
-            right: '.5rem'
+            right: '.5rem',
+            pointerEvents: 'inherit'
           }}
         >
           <AddItemToCart

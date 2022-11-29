@@ -2,7 +2,6 @@ import AddProductForm from '@components/AddProductForm/AddProductForm'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
-import ProductImageStore from '@components/ProductImageStore/ProductImageStore'
 import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import ProfileInfoSideBar from '@components/SideBarProfileInfo/SideBarProfileInfo'
 import ChatIcon from '@mui/icons-material/Chat'
@@ -11,9 +10,12 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
 import { Box, Button, Typography, useTheme } from '@mui/material'
 import { getBrands } from 'helpers/products/getBrands'
+import { getCategories } from 'helpers/products/getCategories'
+import { getColors } from 'helpers/products/getColors'
 import { getGenders } from 'helpers/products/getGenders'
 import { getSizes } from 'helpers/products/getSizes'
 import useAddProductForm from 'hooks/useAddProductForm'
+import Head from 'next/head'
 import { signOut } from 'next-auth/react'
 
 export const getStaticProps = async () => {
@@ -23,18 +25,36 @@ export const getStaticProps = async () => {
 
   const sizes = await getSizes()
 
+  const categories = await getCategories()
+
+  const colors = await getColors()
+
   return {
     props: {
       brands: brands.data.map((data) => data.attributes.name),
       genders: genders.data.map((data) => data.attributes.name),
-      sizes: sizes.data.map((data) => `EUR-${data.attributes.value}`)
+      sizes: sizes.data.map((data) => data.attributes.value),
+      categories: categories.data.map((data) => data.attributes.name),
+      colors: colors.data.map((data) => data.attributes.name)
     }
   }
 }
 
-export default function AddProduct({ brands, genders, sizes }) {
-  const { inputInfo, setInputInfo, handleInputChange, handleSubmit } =
-    useAddProductForm()
+export default function AddProduct({
+  brands,
+  genders,
+  sizes,
+  categories,
+  colors
+}) {
+  const {
+    inputInfo,
+    setInputInfo,
+    handleInputChange,
+    handleSubmit,
+    handleInputImg,
+    handlePremadeImg
+  } = useAddProductForm()
 
   console.log(inputInfo)
 
@@ -47,6 +67,9 @@ export default function AddProduct({ brands, genders, sizes }) {
 
   return (
     <>
+      <Head>
+        <title>Add - Shoes Shop</title>
+      </Head>
       <HeaderLoggedIn
         pages={['Home', 'Search', 'Bag']}
         burger={true}
@@ -139,23 +162,19 @@ export default function AddProduct({ brands, genders, sizes }) {
             thought to have scrambled parts of Ciceros De Finibus Bonorum et
             Malorum for use in a type specimen book. It usually begins with:
           </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between'
-            }}
-          >
-            <AddProductForm
-              id="addProduct"
-              brands={brands}
-              genders={genders}
-              sizes={sizes}
-              setInputInfo={setInputInfo}
-              handleInputChange={handleInputChange}
-            />
-            <ProductImageStore handleInputChange={handleInputChange} />
-          </Box>
+
+          <AddProductForm
+            id="addProduct"
+            brands={brands}
+            genders={genders}
+            sizes={sizes}
+            categories={categories}
+            colors={colors}
+            setInputInfo={setInputInfo}
+            handleInputChange={handleInputChange}
+            handleInputImg={handleInputImg}
+            handlePremadeImg={handlePremadeImg}
+          />
         </Box>
       </Box>
     </>
