@@ -391,6 +391,11 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                 }
               />
             ))}
+            {
+              data?.data.length === 0 && (
+                <Typography variant="p">No results found.</Typography>
+              )
+            }
           </Grid>
         </Box>
       </Box>
