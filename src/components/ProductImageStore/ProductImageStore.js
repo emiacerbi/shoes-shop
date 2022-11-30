@@ -11,11 +11,11 @@ import {
 import Image from 'next/image'
 
 const images = [
-  { id: 1, src: '/airmax-90.png', imgID: 60 },
-  { id: 2, src: '/air-force.png', imgID: 59 },
-  { id: 3, src: '/air-zoom-pegasus.png', imgID: 62 },
-  { id: 4, src: '/airmax-270.png', imgID: 61 },
-  { id: 5, src: '/shoes.png', imgID: 63 }
+  { id: 1, src: '/airmax-90.png', imgID: 68 },
+  { id: 2, src: '/air-force.png', imgID: 67 },
+  { id: 3, src: '/air-zoom-pegasus.png', imgID: 70 },
+  { id: 4, src: '/airmax-270.png', imgID: 69 },
+  { id: 5, src: '/shoes.png', imgID: 71 }
 ]
 
 export default function ProductImageStore({
