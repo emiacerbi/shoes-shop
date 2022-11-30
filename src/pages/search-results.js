@@ -317,7 +317,14 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               }
             }}
           >
-            <Typography variant="h1">Search Results</Typography>
+            <Typography
+              variant="h1"
+              sx={{
+                px: 1
+              }}
+            >
+              Search Results
+            </Typography>
 
             {screenWidth < 599 && <SeparationLine />}
 
@@ -391,11 +398,9 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                 }
               />
             ))}
-            {
-              data?.data.length === 0 && (
-                <Typography variant="p">No results found.</Typography>
-              )
-            }
+            {data?.data.length === 0 && (
+              <Typography variant="p">No results found.</Typography>
+            )}
           </Grid>
         </Box>
       </Box>
