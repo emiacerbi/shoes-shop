@@ -15,8 +15,6 @@ function HeaderLoggedIn({
   handleInputChange = () => {}
 }) {
   const [searchInput, setSearchInput] = useState(false) // Hook to show/hide the search input
-  // const [value, setValue] = useState('') // Value to handle search input
-
   const theme = useTheme()
 
   const handleSearchInput = () => {
@@ -163,8 +161,10 @@ function HeaderLoggedIn({
                 sx={{
                   border: '1px solid #494949',
                   borderRadius: '42px',
-                  width: '200px',
+                  minWidth: { xs: 70, sm: 150 },
                   height: '30px',
+                  paddingLeft: '8px',
+
                   input: {
                     '&::placeholder': {
                       fontSize: '1rem',
@@ -174,8 +174,6 @@ function HeaderLoggedIn({
                 }}
                 type="text"
                 placeholder="Search"
-                // value={value}
-                // onChange={(e) => setValue(e.target.value)}
                 onChange={(e) => {
                   handleInputChange(e)
                 }}
@@ -192,8 +190,7 @@ function HeaderLoggedIn({
                     padding: 0
                   }}
                 >
-                  {' '}
-                  OK{' '}
+                  OK
                 </Button>
               </form>
             </>
