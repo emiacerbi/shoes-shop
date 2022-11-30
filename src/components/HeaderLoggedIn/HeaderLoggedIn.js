@@ -15,7 +15,7 @@ function HeaderLoggedIn({
   handleInputChange = () => {}
 }) {
   const [searchInput, setSearchInput] = useState(false) // Hook to show/hide the search input
-  const [value, setValue] = useState('') // Value to handle search input
+  // const [value, setValue] = useState('') // Value to handle search input
 
   const theme = useTheme()
 
@@ -174,10 +174,13 @@ function HeaderLoggedIn({
                 }}
                 type="text"
                 placeholder="Search"
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
+                // value={value}
+                // onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => {
+                  handleInputChange(e)
+                }}
               />
-              <form onSubmit={(e) => console.log(value) || e.preventDefault()}>
+              <form onSubmit={(e) => e.preventDefault()}>
                 <Button
                   type="submit"
                   variant="contained"
