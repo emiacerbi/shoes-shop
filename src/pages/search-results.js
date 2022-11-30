@@ -12,7 +12,6 @@ import { getGenders } from 'helpers/products/getGenders'
 import { getProducts } from 'helpers/products/getProducts'
 import { getSizes } from 'helpers/products/getSizes'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -57,7 +56,6 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
   const theme = useTheme()
 
   const [filtersArray, setFiltersArray] = useState([])
-  const router = useRouter()
 
   const [queryObj, setQueryObj] = useState(BASE_QUERY)
 
@@ -73,11 +71,32 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
   const [opacity, setOpacity] = useState('')
   const [screenWidth, setScreenWidth] = useState(0)
 
+  console.log(data)
   const handleFilters = (e, key, value) => {
     const checked = e.target.checked
 
     if (checked) {
       const newFilters = [...filtersArray, value]
+      setFiltersArray(newFilters)
+      console.log(newFilters)
+
+      const newQueryObj = {
+        ...queryObj,
+        filters: {
+          ...queryObj.filters,
+          [key]: {
+            name: {
+              $in: newFilters
+            }
+          }
+        }
+      }
+
+      setQueryObj(newQueryObj)
+    }
+
+    if (!checked) {
+      const newFilters = filtersArray.filter((item) => item !== value)
       setFiltersArray(newFilters)
 
       const newQueryObj = {
@@ -86,36 +105,15 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
           ...queryObj.filters,
           [key]: {
             name: {
-              $in: value
+              $in: newFilters
             }
           }
         }
       }
 
-      setQueryObj(newQueryObj)
-
-      router.push({
-        pathname: router.pathname,
-        query: qs.stringify(newQueryObj)
-      })
-    }
-
-    if (!checked) {
-      const newFilters = filtersArray.filter((item) => item !== value)
-      setFiltersArray(newFilters)
-
-      const newQueryObj = {
-        ...queryObj
-      }
-
       delete newQueryObj.filters[key]
 
       setQueryObj(newQueryObj)
-
-      router.push({
-        pathname: router.pathname,
-        query: qs.stringify(newQueryObj)
-      })
     }
   }
 
@@ -130,22 +128,6 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
     ;(screenWidth <= 599) & (showFilters === false) && setOpacity('65%')
     ;(screenWidth <= 599) & (showFilters === true) && setOpacity('100%')
   }
-
-  // Filter data
-  // const [search, setSearch] = useState('')
-
-  // const handleInput = (e) => {
-  //   setSearch(e.target.value)
-  // }
-
-  // const brand = !search
-  //   ? brands
-  //   : brands.filter((brand) =>
-  //       brand.toLowerCase().includes(search.toLocaleLowerCase())
-  //     )
-
-  console.log({ data })
-  console.log({ queryObj })
 
   return (
     <>
@@ -382,26 +364,15 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             }}
             columns={{ xs: 6, md: 11, lg: 14 }}
           >
-            <ProductCard
-              image={'/airmax-270.png'}
-              productTitle="Nike Air Max 270"
-              productPrice="140"
-              productDescription="Women's Shoes"
-            />
-            <ProductCard
-              image={'/airmax-90.png'}
-              productTitle="Nike AirMax 90"
-              productPrice="140"
-              productDescription="Men's Shoes"
-            />
-
             {data?.data.map(({ id, attributes }) => (
               <ProductCard
                 key={id}
                 image={BASE_URL + attributes.images.data[0].attributes.url}
-                productTitle="Nike AirMax 90"
-                productPrice="140"
-                productDescription="Men's Shoes"
+                productTitle={attributes.name}
+                productPrice={attributes.price}
+                productDescription={
+                  attributes.gender.data.attributes.name + ' shoes.'
+                }
               />
             ))}
           </Grid>
