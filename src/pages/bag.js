@@ -152,8 +152,21 @@ const Bag = () => {
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant="body2">Tax</Typography>
-                  <Typography variant="body2">$0</Typography>
+                  <Typography variant="body2">
+                    Tax{' '}
+                    <Typography
+                      component="span"
+                      sx={{ color: 'text.secondary' }}
+                      variant="body2"
+                    >
+                      (1.4%)
+                    </Typography>
+                  </Typography>
+                  <Typography variant="body2">
+                    {subTotal === 0
+                      ? '$0'
+                      : `$${(subTotal * 0.014).toFixed(2)}`}
+                  </Typography>
                 </Box>
 
                 <Divider sx={{ marginBlock: '1rem' }} />
@@ -167,7 +180,13 @@ const Bag = () => {
                 >
                   <Typography variant="body2">Total</Typography>
                   <Typography variant="body2">
-                    {subTotal === 0 ? '$0' : `$ ${parseInt(subTotal) + 20}`}
+                    {subTotal === 0
+                      ? '$0'
+                      : `$ ${
+                          parseInt(subTotal) +
+                          20 +
+                          subTotal * (0.014)
+                        }`}
                   </Typography>
                 </Box>
 
