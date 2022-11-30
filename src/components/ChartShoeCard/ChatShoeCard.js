@@ -88,10 +88,7 @@ const ChartShoeCard = ({
         sx={{ display: 'flex', flexDirection: 'column' }}
       >
         <Typography variant="h3">{name}</Typography>
-        <Typography variant="subtitle1">
-          {/* {gender} {"'"}s Shoes */}
-          {description}
-        </Typography>
+        <Typography variant="subtitle1">{description}</Typography>
 
         <Box sx={{ marginTop: '.1rem' }} />
         <Typography
@@ -101,25 +98,39 @@ const ChartShoeCard = ({
           In stock
         </Typography>
 
-        <Box sx={{ marginTop: 'auto', minWidth: 120 }}>
+        <Box
+          sx={{
+            marginTop: 'auto',
+            minWidth: 120,
+            display: 'flex',
+            alignItems: 'flex-end'
+          }}
+        >
+          <Button
+            variant="outlined"
+            onClick={handleSubstraction}
+            disabled={disabled}
+            sx={{ mx: 1, height: '80%', width: '30%', maxWidth: '50px' }}
+          >
+            -
+          </Button>
           <TextField
             inputProps={{ inputMode: 'text', pattern: '[0-9]*' }}
             value={quantity}
             onChange={handleChange}
             label="Quantity"
             variant="standard"
+            sx={{
+              width: '100%',
+              maxWidth: '100px'
+            }}
           />
-          <Button sx={{ ml: '10px' }} variant="outlined" onClick={handleSum}>
-            +
-          </Button>
-
           <Button
+            sx={{ mx: 1, height: '80%', width: '30%', maxWidth: '50px' }}
             variant="outlined"
-            onClick={handleSubstraction}
-            disabled={disabled}
-            sx={{ margin: '10px' }}
+            onClick={handleSum}
           >
-            -
+            +
           </Button>
         </Box>
       </Grid>
