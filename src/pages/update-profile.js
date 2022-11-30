@@ -92,21 +92,6 @@ export default function UpdateProfile() {
                 <AccountCircleOutlinedIcon sx={{ color: '#6E7278' }} />
                 <BarItem name="My Profile" />
               </Box>
-
-              <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-                <DashboardCustomizeOutlinedIcon sx={{ color: '#6E7278' }} />
-                <BarItem name="Preferences" />
-              </Box>
-
-              <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-                <GppGoodOutlinedIcon sx={{ color: '#6E7278' }} />
-                <BarItem name="Security" />
-              </Box>
-
-              <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-                <AccountBalanceWalletOutlinedIcon sx={{ color: '#6E7278' }} />
-                <BarItem name="My Wallet" />
-              </Box>
               <Box
                 onClick={() => signOut()}
                 sx={{
