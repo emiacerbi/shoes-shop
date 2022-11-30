@@ -71,7 +71,20 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
   const [opacity, setOpacity] = useState('')
   const [screenWidth, setScreenWidth] = useState(0)
 
-  console.log(data)
+  const handleSearchInput = (e) => {
+    const value = e.target.value
+
+    setQueryObj({
+      ...queryObj,
+      filters: {
+        ...queryObj.filters,
+        name: {
+          $containsi: value
+        }
+      }
+    })
+  }
+
   const handleFilters = (e, key, value) => {
     const checked = e.target.checked
 
@@ -186,7 +199,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               handleFilters={handleFilters}
               category={brands}
               isBrand={true}
-              // handleInput={handleInput}
+              handleInput={handleSearchInput}
             />
 
             <SeparationLine />
@@ -371,7 +384,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                 productTitle={attributes.name}
                 productPrice={attributes.price}
                 productDescription={
-                  attributes.gender.data.attributes.name + '\'s shoes.'
+                  attributes.gender.data.attributes.name + "'s shoes."
                 }
               />
             ))}
