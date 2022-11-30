@@ -76,18 +76,6 @@ export default function AddProduct({
           sx={{ display: { xs: 'none', sm: 'block' }, flexDirection: 'column' }}
         >
           <ProfileInfoSideBar />
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-            <ShoppingBagIcon sx={{ color: '#6E7278' }} />
-            <BarItem name="My Orders" />
-          </Box>
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-            <ListAltIcon sx={{ color: '#6E7278' }} />
-            <BarItem name="Wish List" num={4} />
-          </Box>
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-            <ChatIcon sx={{ color: '#6E7278' }} />
-            <BarItem name="Newsletters" />
-          </Box>
           <Box
             sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}
           >
