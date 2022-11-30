@@ -371,7 +371,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                 productTitle={attributes.name}
                 productPrice={attributes.price}
                 productDescription={
-                  attributes.gender.data.attributes.name + ' shoes.'
+                  attributes.gender.data.attributes.name + '\'s shoes.'
                 }
               />
             ))}
