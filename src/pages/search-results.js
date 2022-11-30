@@ -72,8 +72,11 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
   const [screenWidth, setScreenWidth] = useState(0)
 
   const handleSearchInput = (e) => {
-    const value = e.target.value
+    let value = e.target.value
 
+    if (value.length < 3) {
+      value = '' // if the value is less than 3 characters, we don't want to search
+    }
     setQueryObj({
       ...queryObj,
       filters: {
