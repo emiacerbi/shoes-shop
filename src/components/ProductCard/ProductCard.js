@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import AddItemToCart from '@components/AddItemToCartButton/AddItemToCart'
+import DeleteProductButton from '@components/DeleteProductButton/DeleteProductButton'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
@@ -10,7 +11,9 @@ export default function ProductCard({
   productDescription,
   productPrice,
   image,
-  id
+  id,
+  isFromUser = false,
+  refreshData
 }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [imgSrc, setImgSrc] = useState(image)
@@ -43,32 +46,35 @@ export default function ProductCard({
       </Box>
 
       {/* Modal button */}
-      <Box
-        sx={{
-          position: 'absolute',
-          width: '25px',
-          height: '25px',
-          top: 5,
-          right: 10,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '.25rem',
-          cursor: 'pointer'
-        }}
-        onClick={() => setIsModalVisible(!isModalVisible)}
-      >
-        <MoreHorizIcon
-          fontSize="large"
+
+      {isFromUser && (
+        <Box
           sx={{
-            '&:hover': {
-              transform: 'scale(1.2)',
-              color: 'primary.main',
-              transition: 'transform 300ms'
-            }
+            position: 'absolute',
+            width: '25px',
+            height: '25px',
+            top: 5,
+            right: 10,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '.25rem',
+            cursor: 'pointer'
           }}
-        />
-      </Box>
+          onClick={() => setIsModalVisible(!isModalVisible)}
+        >
+          <MoreHorizIcon
+            fontSize="large"
+            sx={{
+              '&:hover': {
+                transform: 'scale(1.2)',
+                color: 'primary.main',
+                transition: 'transform 300ms'
+              }
+            }}
+          />
+        </Box>
+      )}
 
       {isModalVisible && (
         <Box
@@ -76,7 +82,10 @@ export default function ProductCard({
             position: 'absolute',
             top: '2rem',
             right: '.5rem',
-            pointerEvents: 'inherit'
+            pointerEvents: 'inherit',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '.5rem'
           }}
         >
           <AddItemToCart
@@ -88,6 +97,8 @@ export default function ProductCard({
               id
             }}
           />
+
+          <DeleteProductButton id={id} refreshData={refreshData} />
         </Box>
       )}
       <Box

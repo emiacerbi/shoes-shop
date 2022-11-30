@@ -46,6 +46,7 @@ export default function AddItemToCart({ product }) {
   return (
     <Button
       variant="contained"
+      size="small"
       sx={{
         display: 'flex',
         alignItems: 'center',
@@ -53,7 +54,7 @@ export default function AddItemToCart({ product }) {
         textTransform: 'none',
         color: 'white',
         gap: '.25rem',
-        width: '180px',
+        width: '130px',
         height: '40px'
       }}
       onClick={addProduct}
