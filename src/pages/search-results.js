@@ -156,6 +156,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
         cart={true}
         burger={true}
         opacity={opacity}
+        handleInputChange={handleSearchInput}
       />
 
       <Box
