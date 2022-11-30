@@ -20,13 +20,9 @@ import { signOut } from 'next-auth/react'
 
 export const getStaticProps = async () => {
   const brands = await getBrands()
-
   const genders = await getGenders()
-
   const sizes = await getSizes()
-
   const categories = await getCategories()
-
   const colors = await getColors()
 
   return {
@@ -60,6 +56,11 @@ export default function AddProduct({
 
   const theme = useTheme()
 
+  const handleLogout = () => {
+    localStorage.removeItem('shoes')
+    signOut()
+  }
+
   return (
     <>
       <Head>
@@ -91,7 +92,7 @@ export default function AddProduct({
             sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}
           >
             <Button
-              onClick={() => signOut()}
+              onClick={handleLogout}
               sx={{
                 textTransform: 'none',
                 padding: '0',

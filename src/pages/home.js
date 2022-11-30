@@ -153,28 +153,9 @@ export default function Home({ products }) {
                 }
               }}
             >
-              <ProductCard
-                image={'/airmax-270.png'}
-                productTitle="Nike AirMax 90"
-                productPrice="140"
-                productDescription="Men's Shoes"
-                id={1}
-              />
-              <ProductCard
-                image={'/shoes.png'}
-                productTitle="Nike AirMax 270"
-                productPrice="160"
-                productDescription="Women's Shoes"
-                id={2}
-              />
-              <ProductCard
-                image={'/air-force.png'}
-                productTitle="Nike Air Force 1 '07 SE"
-                productPrice="110"
-                productDescription="Women's Shoes"
-                id={3}
-              />
-
+              {products.length === 0 && (
+                <Typography variant="main">No shoes available yet</Typography>
+              )}
               {products.map(({ id, attributes }) => (
                 <ProductCard
                   key={id}
