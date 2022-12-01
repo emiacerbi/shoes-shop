@@ -14,7 +14,6 @@ function CheckBox({ label, handleFilters, filterName }) {
                 onClick={(e) =>
                   handleFilters(e, filterName.toLowerCase(), data)
                 }
-                value={toString().toLowerCase()}
               />
             }
           />

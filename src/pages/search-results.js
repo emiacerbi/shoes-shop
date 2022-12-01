@@ -57,7 +57,12 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
   const theme = useTheme()
 
-  const [filtersArray, setFiltersArray] = useState([])
+  const [filtersObj, setFiltersObj] = useState({
+    color: [],
+    gender: [],
+    brand: [],
+    size: []
+  })
 
   const [queryObj, setQueryObj] = useState(BASE_QUERY)
 
@@ -92,53 +97,83 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
   const handleFilters = (e, key, value) => {
     const checked = e.target.checked
-    console.log('filters array')
-    console.log(filtersArray)
 
     if (checked) {
-      const newFilters = [...filtersArray, value]
-      console.log(newFilters)
-      setFiltersArray(newFilters)
-      const newQueryObj = {
-        ...queryObj,
-        filters: {
-          ...queryObj.filters,
-          [key]: {
-            name: {
-              $in: newFilters
+      const newFilters = { ...filtersObj }
+      newFilters[key].push(value)
+
+      setFiltersObj(newFilters)
+
+      if (key !== 'size') {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              name: {
+                $in: newFilters[key]
+              }
             }
           }
         }
+        setQueryObj(newQueryObj)
+      } else {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              value: {
+                $in: newFilters[key]
+              }
+            }
+          }
+        }
+        setQueryObj(newQueryObj)
       }
-
-      setQueryObj(newQueryObj)
     }
 
     if (!checked) {
-      const newFilters = filtersArray.filter((item) => item !== value)
-      setFiltersArray(newFilters)
-      console.log('filtro borrado')
-      console.log(newFilters)
+      const newFilters = { ...filtersObj }
+      const relevantFilters = newFilters[key].filter((item) => item !== value)
+      newFilters[key] = relevantFilters
 
-      const newQueryObj = {
-        ...queryObj,
-        filters: {
-          ...queryObj.filters,
-          [key]: {
-            name: {
-              $in: newFilters
+      setFiltersObj(newFilters)
+
+      if (key !== 'size') {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              name: {
+                $in: newFilters[key]
+              }
             }
           }
         }
+        setQueryObj(newQueryObj)
+      } else {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              value: {
+                $in: newFilters[key]
+              }
+            }
+          }
+        }
+        setQueryObj(newQueryObj)
       }
-
-      setQueryObj(newQueryObj)
     }
   }
 
   console.log('queryObj', queryObj.filters)
-
   console.log('data', data)
+  console.log('filterObj', { ...filtersObj })
+
   useEffect(() => {
     window.addEventListener('resize', () => {
       setScreenWidth(window.innerWidth)
