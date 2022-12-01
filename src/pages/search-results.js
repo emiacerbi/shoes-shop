@@ -94,6 +94,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
     const checked = e.target.checked
     console.log('filters array')
     console.log(filtersArray)
+
     if (checked) {
       const newFilters = [...filtersArray, value]
       console.log(newFilters)
@@ -116,6 +117,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
     if (!checked) {
       const newFilters = filtersArray.filter((item) => item !== value)
       setFiltersArray(newFilters)
+      console.log('filtro borrado')
       console.log(newFilters)
 
       const newQueryObj = {
@@ -130,12 +132,13 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
         }
       }
 
-      delete newQueryObj.filters[key]
-
       setQueryObj(newQueryObj)
     }
   }
 
+  console.log('queryObj', queryObj.filters)
+
+  console.log('data', data)
   useEffect(() => {
     window.addEventListener('resize', () => {
       setScreenWidth(window.innerWidth)
