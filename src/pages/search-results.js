@@ -3,6 +3,7 @@ import CustomFilter from '@components/CustomFilter/CustomFilter'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import Loading from '@components/Loading/Loading'
 import ProductCard from '@components/ProductCard/ProductCard'
+import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import SeparationLine from '@components/SeparationLine/SeparationLine'
 import { Box, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/system'
@@ -92,12 +93,8 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
   const handleFilters = (e, key, value) => {
     const checked = e.target.checked
 
-    console.log(key)
-
     if (checked) {
       const newFilters = [...filtersArray, value]
-      setFiltersArray(newFilters)
-      console.log(newFilters)
 
       const newQueryObj = {
         ...queryObj,
@@ -174,6 +171,16 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
         {/* DESKTOP FILTERS */}
         {showFilters && (
           <Box
+            component="form"
+            onReset={(e) => {
+              console.log('reset')
+              const elemChildren = e.target.children
+              for (let i = 0; i < elemChildren.length; i++) {
+                const child = elemChildren[i]
+                console.log()
+              }
+              setQueryObj(BASE_QUERY)
+            }}
             sx={{
               minWidth: '320px',
               heigth: 'auto',
@@ -190,10 +197,16 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
             <SeparationLine />
 
+            <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
+              <SecondaryButton type="reset">CLEAR ALL FILTERS</SecondaryButton>
+            </Box>
+
+            <SeparationLine />
+
             {/* FILTER BLOCK */}
             {/* Gender */}
             <CustomFilter
-              filterName={'Gender'}
+              filterName="Gender"
               handleFilters={handleFilters}
               category={genders}
             />
@@ -202,7 +215,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
             {/* Brand */}
             <CustomFilter
-              filterName={'Brand'}
+              filterName="Brand"
               handleFilters={handleFilters}
               category={brands}
               isBrand={true}
@@ -213,7 +226,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
             {/* Color */}
             <CustomFilter
-              filterName={'Color'}
+              filterName="Color"
               handleFilters={handleFilters}
               category={colors}
             />
@@ -222,7 +235,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
             {/* Size */}
             <CustomFilter
-              filterName={'Size'}
+              filterName="Size"
               handleFilters={handleFilters}
               category={sizes}
             />
@@ -251,7 +264,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                 sx={{
                   display: 'flex',
                   justifyContent: 'end',
-                  mt: '25px',
+                  my: '25px',
                   px: '2.5rem'
                 }}
                 onClick={showFiltersBlock}
@@ -259,6 +272,19 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                 X
               </Typography>
 
+              <SeparationLine
+                sx={{
+                  mt: 2
+                }}
+              />
+
+              <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
+                <SecondaryButton type="reset">
+                  CLEAR ALL FILTERS
+                </SecondaryButton>
+              </Box>
+
+              <SeparationLine />
               {/* Gender */}
               <CustomFilter
                 filterName={'Gender'}
