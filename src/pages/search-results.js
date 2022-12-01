@@ -92,10 +92,12 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
   const handleFilters = (e, key, value) => {
     const checked = e.target.checked
-
+    console.log('filters array')
+    console.log(filtersArray)
     if (checked) {
       const newFilters = [...filtersArray, value]
-
+      console.log(newFilters)
+      setFiltersArray(newFilters)
       const newQueryObj = {
         ...queryObj,
         filters: {
@@ -114,6 +116,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
     if (!checked) {
       const newFilters = filtersArray.filter((item) => item !== value)
       setFiltersArray(newFilters)
+      console.log(newFilters)
 
       const newQueryObj = {
         ...queryObj,
