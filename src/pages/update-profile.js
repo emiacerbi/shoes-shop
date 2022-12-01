@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Form from '@components/Form/Form'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
@@ -14,14 +14,6 @@ import { theme } from '../styles/theme'
 
 export default function UpdateProfile() {
   const [settings, setSettings] = useState(true)
-  const [pages, setPages] = useState([])
-  const [links, setLinks] = useState([])
-  console.log(pages)
-
-  useEffect(() => {
-    setPages(['Home', 'Bag', 'Add Product', 'Search'])
-    setLinks(['/home', '/bag', '/add-product', '/search-results'])
-  }, [])
 
   function handleSettings() {
     return setSettings(!settings)
@@ -32,7 +24,12 @@ export default function UpdateProfile() {
       <Head>
         <title>Profile - Shoes Shop</title>
       </Head>
-      <HeaderLoggedIn pages={pages} links={links} cart={true} burger={true} />
+      <HeaderLoggedIn
+        pages={['Home', 'Bag', 'Add Product', 'Search']}
+        links={['/home', '/bag', '/add-product', '/search-results']}
+        cart={true}
+        burger={true}
+      />
       <Box sx={{ display: 'flex', alignItems: 'baseline', mt: 4 }}>
         <Box
           sx={{
