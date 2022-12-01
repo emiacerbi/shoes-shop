@@ -42,8 +42,6 @@ export const getServerSideProps = async (context) => {
   const colors = await getColors()
   const sizes = await getSizes()
 
-  console.log(context.query)
-
   return {
     props: {
       brands: brands.data.map((brand) => brand.attributes.name),
@@ -89,20 +87,14 @@ export default function SearchResults({
     },
     onSettled: () => {
       setIsLoading(false)
-    },
-    enabled: !!router
+    }
   })
-
-  useEffect(() => {
-    console.log('router', !!router)
-  }, [router])
 
   const [opacity, setOpacity] = useState('')
   const [screenWidth, setScreenWidth] = useState(0)
 
   const handleSearchInput = (e) => {
     e.preventDefault()
-    console.log('search input')
     const value = e.target.searchinput.value
 
     const newQueryObj = {
@@ -208,10 +200,6 @@ export default function SearchResults({
       }
     }
   }
-
-  // console.log('queryObj', queryObj.filters)
-  // console.log('data', data)
-  // console.log('filterObj', { ...filtersObj })
 
   useEffect(() => {
     window.addEventListener('resize', () => {
