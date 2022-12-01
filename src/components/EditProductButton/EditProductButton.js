@@ -76,8 +76,6 @@ const EditProductButton = ({ id, product, refreshData }) => {
     }
   }
 
-  console.log({ inputInfo })
-
   return (
     <div>
       <Button

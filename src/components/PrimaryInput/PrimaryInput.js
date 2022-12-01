@@ -21,9 +21,11 @@ const PrimaryInput = ({
     >
       <Typography variant="p" sx={{ fontWeight: '500' }}>
         {label}{' '}
-        <Box component="span" sx={{ color: 'primary.main' }}>
-          *
-        </Box>
+        {isRequired && (
+          <Box component="span" sx={{ color: 'primary.main' }}>
+            *
+          </Box>
+        )}
       </Typography>
       <OutlinedInput
         placeholder={placeholder}
