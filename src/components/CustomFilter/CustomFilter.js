@@ -13,10 +13,6 @@ function CustomFilter({
 }) {
   const [isFilterVisible, setIsFilterVisible] = useState(false)
 
-  const [brandFilters, setBrandFilters] = useState('')
-  // const visibleCheckbox = 
-  console.log(brandFilters)
-
   return (
     <Box
       sx={{
@@ -85,9 +81,7 @@ function CustomFilter({
                 width: '260px'
               }}
               type="text"
-              value={brandFilters}
               placeholder="Search"
-              onChange={(e) => setBrandFilters(e.target.value)}
             />
           </Box>
         </Box>
