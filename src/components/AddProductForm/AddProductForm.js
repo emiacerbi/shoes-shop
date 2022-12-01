@@ -12,103 +12,104 @@ const AddProductForm = ({
   sizes,
   categories,
   colors,
-  id,
   handleInputChange,
-  handleSubmit,
   handleInputImg,
-  handlePremadeImg
+  inputInfo
 }) => {
   return (
-    <form
-      style={{
+    <Box
+      sx={{
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         paddingBlock: '2.5rem',
-        gap: '1.5rem',
-        width: '100%'
+        width: '100%',
+        gap: '5rem'
       }}
-      id={id}
-      onSubmit={handleSubmit}
     >
-      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-        <Box sx={{ width: { lg: '436px' } }}>
-          <PrimaryInput
-            isRequired={true}
-            label="Product Name"
-            placeholder="Nike Air Max 90"
-            name="productName"
-            onChange={handleInputChange}
-            type="text"
-          />
-          <SelectInput
-            isRequired={true}
-            label="Category"
-            placeholder="Sport"
-            name="category"
-            onChange={handleInputChange}
-            inputValues={categories}
-          />
-          <Box sx={{ display: 'flex', gap: '5%' }}>
-            <SelectInput
-              isRequired={true}
-              onChange={handleInputChange}
-              label="Gender"
-              name="gender"
-              inputValues={genders}
-            ></SelectInput>
-            <SelectInput
-              isRequired={true}
-              onChange={handleInputChange}
-              label="Brand"
-              name="brand"
-              inputValues={brands}
-            ></SelectInput>
-          </Box>
-          <SelectInput
-            isRequired={true}
-            label="Color"
-            placeholder="Sport"
-            name="color"
-            onChange={handleInputChange}
-            inputValues={colors}
-          />
-          <TextArea
-            placeholder="Do not exceed 300 characters"
-            label="Description"
-            rows={7}
-            onChange={handleInputChange}
-          />
-          <SelectInput
-            isRequired={true}
-            onChange={handleInputChange}
-            label="Sizes"
-            name={'size'}
-            inputValues={sizes}
-          ></SelectInput>
-          <Box
-            sx={{
-              display: { xs: 'flex', lg: 'none' },
-              flexDirection: 'column',
-              gap: '1rem'
-            }}
-          >
-            <PrimaryInput
-              required
-              label="Product Image"
-              placeholder="Nike Air Max 90"
-              name="img"
-              onChange={handleInputImg}
-              type="file"
-            />
-            <PrimaryButton>Save</PrimaryButton>
-          </Box>
-        </Box>
-        <ProductImageStore
-          handleInputImg={handleInputImg}
-          handlePremadeImg={handlePremadeImg}
+      <Box
+        sx={{
+          width: '100%',
+          maxWidth: '436px',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <PrimaryInput
+          isRequired={true}
+          label="Product Name"
+          placeholder="Nike Air Max 90"
+          name="productName"
+          onChange={handleInputChange}
+          type="text"
         />
+        <SelectInput
+          isRequired={true}
+          label="Category"
+          placeholder="Sport"
+          name="category"
+          onChange={handleInputChange}
+          inputValues={categories}
+        />
+        <Box sx={{ display: 'flex', gap: '5%' }}>
+          <SelectInput
+            isRequired={true}
+            onChange={handleInputChange}
+            label="Gender"
+            name="gender"
+            inputValues={genders}
+          />
+          <SelectInput
+            isRequired={true}
+            onChange={handleInputChange}
+            label="Brand"
+            name="brand"
+            inputValues={brands}
+          />
+        </Box>
+        <SelectInput
+          isRequired={true}
+          label="Color"
+          placeholder="Sport"
+          name="color"
+          onChange={handleInputChange}
+          inputValues={colors}
+        />
+        <TextArea
+          placeholder="Do not exceed 300 characters"
+          label="Description"
+          rows={7}
+          onChange={handleInputChange}
+        />
+        <SelectInput
+          isRequired={true}
+          onChange={handleInputChange}
+          label="Sizes"
+          name={'size'}
+          inputValues={sizes}
+        />
+        <Box
+          sx={{
+            display: { xs: 'flex', lg: 'none' },
+            flexDirection: 'column',
+            gap: '1rem'
+          }}
+        >
+          <PrimaryInput
+            required
+            label="Product Image"
+            placeholder="Nike Air Max 90"
+            name="img"
+            onChange={handleInputImg}
+            type="file"
+          />
+          <PrimaryButton>Save</PrimaryButton>
+        </Box>
       </Box>
-    </form>
+      <ProductImageStore
+        handleInputImg={handleInputImg}
+        inputInfo={inputInfo}
+      />
+    </Box>
   )
 }
 

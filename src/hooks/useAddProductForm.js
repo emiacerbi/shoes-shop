@@ -11,13 +11,13 @@ const useAddProductForm = () => {
 
   const [inputInfo, setInputInfo] = useState({
     productName: '',
-    category: '',
-    gender: '',
-    brand: '',
+    category: 1,
+    gender: 1,
+    brand: 1,
     description: '',
-    size: '',
+    size: 1,
     img: '',
-    color: ''
+    color: 1
   })
 
   const handleInputChange = (e) => {
@@ -28,13 +28,6 @@ const useAddProductForm = () => {
     setInputInfo({
       ...inputInfo,
       [name]: value
-    })
-  }
-
-  const handlePremadeImg = (img) => {
-    setInputInfo({
-      ...inputInfo,
-      img
     })
   }
 
@@ -60,29 +53,27 @@ const useAddProductForm = () => {
 
     e.preventDefault()
 
-    if (typeof img === 'number') {
-      toast.promise(
-        postProduct({
-          name: productName,
-          images: [img],
-          categories: [category],
-          description,
-          brand,
-          color,
-          size,
-          gender,
-          price: 150,
-          userID
-        }),
-        {
-          loading: 'Saving...',
-          success: 'Product added succesfully!',
-          error: 'Could not save. Try again later, please.'
-        }
-      )
-
-      return
-    }
+    // if (typeof img === 'number') {
+    //   toast.promise(
+    //     postProduct({
+    //       name: productName,
+    //       images: [img],
+    //       categories: [category],
+    //       description,
+    //       brand,
+    //       color,
+    //       size,
+    //       gender,
+    //       price: 150,
+    //       userID
+    //     }),
+    //     {
+    //       loading: 'Saving...',
+    //       success: 'Product added succesfully!',
+    //       error: 'Could not save. Try again later, please.'
+    //     }
+    //   )
+    // }
 
     toast.promise(
       postFiles({ img }).then((data) => {
@@ -106,6 +97,8 @@ const useAddProductForm = () => {
         error: 'Could not save. Try again later, please.'
       }
     )
+
+    e.target.reset()
   }
 
   return {
@@ -113,8 +106,7 @@ const useAddProductForm = () => {
     setInputInfo,
     handleInputChange,
     handleSubmit,
-    handleInputImg,
-    handlePremadeImg
+    handleInputImg
   }
 }
 
