@@ -174,11 +174,6 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             component="form"
             onReset={(e) => {
               console.log('reset')
-              const elemChildren = e.target.children
-              for (let i = 0; i < elemChildren.length; i++) {
-                const child = elemChildren[i]
-                console.log()
-              }
               setQueryObj(BASE_QUERY)
             }}
             sx={{
