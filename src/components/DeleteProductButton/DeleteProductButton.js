@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Button, CircularProgress } from '@mui/material'
 import { useMutation } from '@tanstack/react-query'
 import { deleteProduct } from 'helpers/products/deleteProduct'
 
@@ -27,7 +27,11 @@ const DeleteProductButton = ({ id, refreshData }) => {
       }}
       onClick={() => mutation.mutate(id)}
     >
-      {mutation.isLoading ? 'Loading' : 'Delete product'}
+      {mutation.isLoading ? (
+        <CircularProgress size={28} color="action" />
+      ) : (
+        'Delete product'
+      )}
     </Button>
   )
 }
