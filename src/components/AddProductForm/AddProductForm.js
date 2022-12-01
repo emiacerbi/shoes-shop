@@ -33,7 +33,7 @@ const AddProductForm = ({
       <Box sx={{ display: 'flex', flexDirection: 'row' }}>
         <Box sx={{ width: { lg: '436px' } }}>
           <PrimaryInput
-            required
+            isRequired={true}
             label="Product Name"
             placeholder="Nike Air Max 90"
             name="productName"
@@ -41,7 +41,7 @@ const AddProductForm = ({
             type="text"
           />
           <SelectInput
-            required
+            isRequired={true}
             label="Category"
             placeholder="Sport"
             name="category"
@@ -50,14 +50,14 @@ const AddProductForm = ({
           />
           <Box sx={{ display: 'flex', gap: '5%' }}>
             <SelectInput
-              required
+              isRequired={true}
               onChange={handleInputChange}
               label="Gender"
               name="gender"
               inputValues={genders}
             ></SelectInput>
             <SelectInput
-              required
+              isRequired={true}
               onChange={handleInputChange}
               label="Brand"
               name="brand"
@@ -65,7 +65,7 @@ const AddProductForm = ({
             ></SelectInput>
           </Box>
           <SelectInput
-            required
+            isRequired={true}
             label="Color"
             placeholder="Sport"
             name="color"
@@ -79,7 +79,7 @@ const AddProductForm = ({
             onChange={handleInputChange}
           />
           <SelectInput
-            required
+            isRequired={true}
             onChange={handleInputChange}
             label="Sizes"
             name={'size'}

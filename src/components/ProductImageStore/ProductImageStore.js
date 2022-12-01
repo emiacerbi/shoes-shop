@@ -65,7 +65,7 @@ export default function ProductImageStore({
               name="img"
               type="file"
               sx={{ display: 'none' }}
-            ></Input>
+            />
             <Typography variant="p" align="center">
               Drop your image here, or select{' '}
               <Link href="//www.google.com">click here to browse</Link>

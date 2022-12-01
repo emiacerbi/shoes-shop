@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import CustomFilter from '@components/CustomFilter/CustomFilter'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
+import Loading from '@components/Loading/Loading'
 import ProductCard from '@components/ProductCard/ProductCard'
 import SeparationLine from '@components/SeparationLine/SeparationLine'
-import { Box, CircularProgress, Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/system'
 import { useQuery } from '@tanstack/react-query'
 import { getBrands } from 'helpers/products/getBrands'
@@ -398,18 +399,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               <Typography variant="main">No results found.</Typography>
             )}
 
-            {isLoading && (
-              <Box
-                sx={{
-                  width: '100%',
-                  height: '20rem',
-                  display: 'grid',
-                  placeContent: 'center'
-                }}
-              >
-                <CircularProgress size={50} color="primary" />
-              </Box>
-            )}
+            {isLoading && <Loading />}
           </Grid>
         </Box>
       </Box>
