@@ -3,10 +3,7 @@ import Form from '@components/Form/Form'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
 import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
-import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
-import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined'
-import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Avatar, Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
@@ -91,21 +88,6 @@ export default function UpdateProfile() {
               <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
                 <AccountCircleOutlinedIcon sx={{ color: '#6E7278' }} />
                 <BarItem name="My Profile" />
-              </Box>
-
-              <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-                <DashboardCustomizeOutlinedIcon sx={{ color: '#6E7278' }} />
-                <BarItem name="Preferences" />
-              </Box>
-
-              <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-                <GppGoodOutlinedIcon sx={{ color: '#6E7278' }} />
-                <BarItem name="Security" />
-              </Box>
-
-              <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-                <AccountBalanceWalletOutlinedIcon sx={{ color: '#6E7278' }} />
-                <BarItem name="My Wallet" />
               </Box>
               <Box
                 onClick={() => signOut()}

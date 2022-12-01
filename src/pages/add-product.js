@@ -4,10 +4,7 @@ import BarItem from '@components/NavBarItem/NavBarItem'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import ProfileInfoSideBar from '@components/SideBarProfileInfo/SideBarProfileInfo'
-import ChatIcon from '@mui/icons-material/Chat'
-import ListAltIcon from '@mui/icons-material/ListAlt'
 import LogoutIcon from '@mui/icons-material/Logout'
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
 import { Box, Button, Typography, useTheme } from '@mui/material'
 import { getBrands } from 'helpers/products/getBrands'
 import { getCategories } from 'helpers/products/getCategories'
@@ -76,18 +73,6 @@ export default function AddProduct({
           sx={{ display: { xs: 'none', sm: 'block' }, flexDirection: 'column' }}
         >
           <ProfileInfoSideBar />
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-            <ShoppingBagIcon sx={{ color: '#6E7278' }} />
-            <BarItem name="My Orders" />
-          </Box>
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-            <ListAltIcon sx={{ color: '#6E7278' }} />
-            <BarItem name="Wish List" num={4} />
-          </Box>
-          <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-            <ChatIcon sx={{ color: '#6E7278' }} />
-            <BarItem name="Newsletters" />
-          </Box>
           <Box
             sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}
           >
