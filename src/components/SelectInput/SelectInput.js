@@ -1,11 +1,4 @@
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography
-} from '@mui/material'
+import { Box, FormControl, MenuItem, Select, Typography } from '@mui/material'
 const SelectInput = ({ inputValues, name, onChange, label }) => {
   return (
     <Box
@@ -23,16 +16,20 @@ const SelectInput = ({ inputValues, name, onChange, label }) => {
           *
         </Box>
       </Typography>
-      <FormControl fullWidth>
-        <InputLabel id={`select-input-${name}`}>{label}</InputLabel>
+      <FormControl fullWidth size="small">
         <Select
           labelId={`select-input-${name}`}
           id="select"
-          label={label}
           name={name}
           onChange={onChange}
-          defaultValue=""
+          defaultValue={1}
           required
+          sx={{
+            width: '100%',
+            fontFamily: "'Work Sans', sans-serif",
+            borderRadius: '8px',
+            padding: '0'
+          }}
         >
           {inputValues.map((value, i) => (
             <MenuItem key={i} value={i + 1}>

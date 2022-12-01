@@ -17,6 +17,8 @@ const EditProductButton = ({ id, product, refreshData }) => {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+  const [isImageLoading, setIsImageLoading] = useState(false)
+
   const mutation = useMutation({
     mutationFn: updateProduct,
     onSuccess: () => {
@@ -30,6 +32,7 @@ const EditProductButton = ({ id, product, refreshData }) => {
     onSuccess: () => {
       refreshData()
       toast.success('Product edited succesfully')
+      setIsImageLoading(false)
     }
   })
 
@@ -47,13 +50,21 @@ const EditProductButton = ({ id, product, refreshData }) => {
 
   const { inputInfo, handleInputChange, handleInputImg } = useAddProductForm()
 
+  console.log(inputInfo)
+
   // Different submit from the useAddProductForm hook since we need put method instead of post
   const handleSubmit = async (e) => {
     const { productName, productDescription, img, productPrice } = inputInfo
 
     e.preventDefault()
 
+    if (!productName && !productDescription && !img) {
+      toast.error('Please add at least one field')
+      return
+    }
+
     if (img) {
+      setIsImageLoading(true)
       postFiles({ img }).then((data) => {
         const IMAGE_ID = data[0].id
         mutationWithImage.mutate({
@@ -135,7 +146,7 @@ const EditProductButton = ({ id, product, refreshData }) => {
               type="file"
             />
             <PrimaryButton>
-              {mutation.isLoading || mutationWithImage.isLoading ? (
+              {mutation.isLoading || isImageLoading ? (
                 <CircularProgress size={28} color="action" />
               ) : (
                 'Edit product'

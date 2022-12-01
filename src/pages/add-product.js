@@ -44,9 +44,8 @@ export default function AddProduct({
     inputInfo,
     setInputInfo,
     handleInputChange,
-    handleSubmit,
     handleInputImg,
-    handlePremadeImg
+    handleSubmit
   } = useAddProductForm()
 
   console.log(inputInfo)
@@ -97,65 +96,67 @@ export default function AddProduct({
             display: 'flex',
             flex: '1',
             flexDirection: 'column',
-            p: { xs: '20px', sm: '55px' }
+            p: { xs: '20px', sm: '55px' },
+            width: '100%'
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              flex: '1',
-              mb: '15px'
-            }}
-          >
-            <Box sx={{ flex: '1', maxWidth: 890 }}>
-              <Typography
-                variant="h1"
-                sx={{ [theme.breakpoints.down('md')]: { fontSize: '30px' } }}
-              >
-                Add Product
-              </Typography>
-            </Box>
+          <form onSubmit={handleSubmit}>
             <Box
               sx={{
-                display: { xs: 'none', lg: 'flex' },
-                height: 40,
-                width: 323,
-                gap: '19px',
+                display: 'flex',
+                flexDirection: 'row',
                 flex: '1',
-                justifyContent: 'flex-end'
+                mb: '15px',
+                alignItems: 'center'
               }}
             >
-              <PrimaryButton maxWidth="152px">Schedule</PrimaryButton>
-              <SecondaryButton
-                onClick={handleSubmit}
-                form="addProduct"
-                maxWidth="152px"
+              <Box sx={{ flex: '1', maxWidth: 890 }}>
+                <Typography
+                  variant="h1"
+                  sx={{ [theme.breakpoints.down('md')]: { fontSize: '30px' } }}
+                >
+                  Add Product
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: { xs: 'none', lg: 'flex' },
+                  height: 40,
+                  width: 323,
+                  gap: '19px',
+                  flex: '1',
+                  justifyContent: 'flex-end'
+                }}
               >
-                Save
-              </SecondaryButton>
+                <PrimaryButton maxWidth="152px">Save</PrimaryButton>
+                <SecondaryButton form="addProduct" maxWidth="152px">
+                  Schedule
+                </SecondaryButton>
+              </Box>
             </Box>
-          </Box>
-          <Typography variant="p" sx={{ maxWidth: '900px' }}>
-            Lorem ipsum, or lipsum as it is sometimes known, is dummy text used
-            in laying out print, graphic or web designs. The passage is
-            attributed to an unknown typesetter in the 15th century who is
-            thought to have scrambled parts of Ciceros De Finibus Bonorum et
-            Malorum for use in a type specimen book. It usually begins with:
-          </Typography>
+            <Box sx={{ maxWidth: '900px' }}>
+              <Typography variant="p">
+                Lorem ipsum, or lipsum as it is sometimes known, is dummy text
+                used in laying out print, graphic or web designs. The passage is
+                attributed to an unknown typesetter in the 15th century who is
+                thought to have scrambled parts of Ciceros De Finibus Bonorum et
+                Malorum for use in a type specimen book. It usually begins with:
+              </Typography>
+            </Box>
 
-          <AddProductForm
-            id="addProduct"
-            brands={brands}
-            genders={genders}
-            sizes={sizes}
-            categories={categories}
-            colors={colors}
-            setInputInfo={setInputInfo}
-            handleInputChange={handleInputChange}
-            handleInputImg={handleInputImg}
-            handlePremadeImg={handlePremadeImg}
-          />
+            <AddProductForm
+              id="addProduct"
+              brands={brands}
+              genders={genders}
+              sizes={sizes}
+              categories={categories}
+              colors={colors}
+              setInputInfo={setInputInfo}
+              handleInputChange={handleInputChange}
+              handleInputImg={handleInputImg}
+              inputInfo={inputInfo}
+            />
+          </form>
         </Box>
       </Box>
     </>
