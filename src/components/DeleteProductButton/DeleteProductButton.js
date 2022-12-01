@@ -23,7 +23,7 @@ const DeleteProductButton = ({ id, refreshData }) => {
         color: 'white',
         gap: '.25rem',
         width: '130px',
-        height: '40px'
+        height: '35px'
       }}
       onClick={() => mutation.mutate(id)}
     >

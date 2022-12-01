@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import AddItemToCart from '@components/AddItemToCartButton/AddItemToCart'
 import DeleteProductButton from '@components/DeleteProductButton/DeleteProductButton'
+import EditProductButton from '@components/EditProductButton/EditProductButton'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
@@ -99,6 +100,17 @@ export default function ProductCard({
           />
 
           <DeleteProductButton id={id} refreshData={refreshData} />
+
+          <EditProductButton
+            id={id}
+            product={{
+              name: productTitle,
+              price: productPrice,
+              description: productDescription,
+              img: image
+            }}
+            refreshData={refreshData}
+          />
         </Box>
       )}
       <Box

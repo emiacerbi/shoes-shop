@@ -1,6 +1,14 @@
 import { Box, InputLabel, OutlinedInput, Typography } from '@mui/material'
 
-const PrimaryInput = ({ label, placeholder, onChange, name, type, list }) => {
+const PrimaryInput = ({
+  label,
+  placeholder,
+  onChange,
+  name,
+  type,
+  list,
+  isRequired = false
+}) => {
   return (
     <InputLabel
       sx={{
@@ -10,10 +18,12 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type, list }) => {
         width: '100%',
         maxWidth: '436px'
       }}
-
     >
-      <Typography variant='p' sx={{ fontWeight: '500' }} >
-        {label} <Box component='span' sx={{ color: 'primary.main' }}>*</Box>
+      <Typography variant="p" sx={{ fontWeight: '500' }}>
+        {label}{' '}
+        <Box component="span" sx={{ color: 'primary.main' }}>
+          *
+        </Box>
       </Typography>
       <OutlinedInput
         placeholder={placeholder}
@@ -21,8 +31,8 @@ const PrimaryInput = ({ label, placeholder, onChange, name, type, list }) => {
         name={name}
         type={type}
         inputProps={{ list }}
-        required
-        size='small'
+        required={isRequired}
+        size="small"
         sx={{
           width: '100%',
           fontFamily: "'Work Sans', sans-serif",
