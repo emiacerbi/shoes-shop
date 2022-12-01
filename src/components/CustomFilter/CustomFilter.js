@@ -8,10 +8,14 @@ function CustomFilter({
   category,
   handleFilters,
   isBrand,
-  handleInput,
+  handleSearchInput,
   isCheckboxDisabled
 }) {
   const [isFilterVisible, setIsFilterVisible] = useState(false)
+
+  const [brandFilters, setBrandFilters] = useState('')
+  // const visibleCheckbox = 
+  console.log(brandFilters)
 
   return (
     <Box
@@ -73,15 +77,19 @@ function CustomFilter({
               height: '18px'
             }}
           />
-          <InputBase
-            sx={{
-              borderRadius: '42px',
-              width: '260px'
-            }}
-            type="text"
-            onChange={handleInput}
-            placeholder="Search"
-          />
+          <Box>
+            <InputBase
+              name="searchinput"
+              sx={{
+                borderRadius: '42px',
+                width: '260px'
+              }}
+              type="text"
+              value={brandFilters}
+              placeholder="Search"
+              onChange={(e) => setBrandFilters(e.target.value)}
+            />
+          </Box>
         </Box>
       )}
       {isFilterVisible && (

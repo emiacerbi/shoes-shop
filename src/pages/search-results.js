@@ -36,23 +36,32 @@ const BASE_QUERY = {
   }
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async (context) => {
   const genders = await getGenders()
   const brands = await getBrands()
   const colors = await getColors()
   const sizes = await getSizes()
+
+  console.log(context.query)
 
   return {
     props: {
       brands: brands.data.map((brand) => brand.attributes.name),
       genders: genders.data.map((gender) => gender.attributes.name),
       colors: colors.data.map((color) => color.attributes.name),
-      sizes: sizes.data.map((size) => size.attributes.value)
+      sizes: sizes.data.map((size) => size.attributes.value),
+      queryParams: context.query
     }
   }
 }
 
-export default function SearchResults({ genders, brands, colors, sizes }) {
+export default function SearchResults({
+  genders,
+  brands,
+  colors,
+  sizes,
+  queryParams
+}) {
   const router = useRouter()
   // Filters
   const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
@@ -66,39 +75,37 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
     size: []
   })
 
+  const qs = require('qs')
   const [queryObj, setQueryObj] = useState(BASE_QUERY)
   const [isLoading, setIsLoading] = useState(false)
 
   const { data } = useQuery({
     queryKey: ['products', router],
     queryFn: () => {
-      const isEmpty = Object.keys(router.query).length === 0
+      const isEmpty = Object.keys(queryParams).length === 0
       return getProducts(
-        `?${qs.stringify(!isEmpty ? router.query : BASE_QUERY)}`
+        `?${qs.stringify(!isEmpty ? queryParams : BASE_QUERY)}`
       )
     },
     onSettled: () => {
       setIsLoading(false)
-    }
-    // enabled: !!router.query
+    },
+    enabled: !!router
   })
 
-  const qs = require('qs')
+  useEffect(() => {
+    console.log('router', !!router)
+  }, [router])
 
   const [opacity, setOpacity] = useState('')
   const [screenWidth, setScreenWidth] = useState(0)
 
-  useEffect(() => {
-    console.log('router query', qs.stringify(router.query))
-  }, [router])
-
   const handleSearchInput = (e) => {
-    let value = e.target.value
+    e.preventDefault()
+    console.log('search input')
+    const value = e.target.searchinput.value
 
-    if (value.length < 3) {
-      value = '' // if the value is less than 3 characters, we don't want to search
-    }
-    setQueryObj({
+    const newQueryObj = {
       ...queryObj,
       filters: {
         ...queryObj.filters,
@@ -106,6 +113,11 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
           $containsi: value
         }
       }
+    }
+    setQueryObj(newQueryObj)
+    router.replace({
+      pathname: '/search-results',
+      query: qs.stringify(newQueryObj)
     })
   }
 
@@ -197,9 +209,9 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
     }
   }
 
-  console.log('queryObj', queryObj.filters)
-  console.log('data', data)
-  console.log('filterObj', { ...filtersObj })
+  // console.log('queryObj', queryObj.filters)
+  // console.log('data', data)
+  // console.log('filterObj', { ...filtersObj })
 
   useEffect(() => {
     window.addEventListener('resize', () => {
@@ -224,7 +236,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
         cart={true}
         burger={true}
         opacity={opacity}
-        handleInputChange={handleSearchInput}
+        handleInputSubmit={handleSearchInput}
       />
 
       <Box
@@ -240,11 +252,6 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
         {showFilters && (
           <Box
             component="form"
-            disabled={true}
-            onReset={(e) => {
-              console.log('reset')
-              setQueryObj(BASE_QUERY)
-            }}
             sx={{
               minWidth: '320px',
               heigth: 'auto',
@@ -260,7 +267,13 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             </Box>
             <SeparationLine />
             <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
-              <SecondaryButton type="reset">CLEAR ALL FILTERS</SecondaryButton>
+              <SecondaryButton
+                onClick={() => {
+                  router.push('/search-results').then(() => router.reload())
+                }}
+              >
+                CLEAR ALL FILTERS
+              </SecondaryButton>
             </Box>
             <SeparationLine />
             {/* FILTER BLOCK */}
@@ -279,7 +292,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               handleFilters={handleFilters}
               category={brands}
               isBrand={true}
-              handleInput={handleSearchInput}
+              handleSearchInput={handleSearchInput}
             />
             <SeparationLine />
             {/* Color */}
@@ -337,7 +350,12 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               />
 
               <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
-                <SecondaryButton type="reset">
+                <SecondaryButton
+                  onClick={() => {
+                    router.push('/search-results')
+                    setQueryObj(BASE_QUERY)
+                  }}
+                >
                   CLEAR ALL FILTERS
                 </SecondaryButton>
               </Box>
@@ -360,7 +378,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                 handleFilters={handleFilters}
                 category={brands}
                 isBrand={true}
-                // handleInput={handleInput}
+                handleInput={handleSearchInput}
               />
 
               <SeparationLine />
@@ -473,14 +491,14 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             columns={{ xs: 6, md: 11, lg: 14 }}
           >
             {!isLoading &&
-              data?.data.map(({ id, attributes }) => (
+              data?.data?.map(({ id, attributes }) => (
                 <ProductCard
                   key={id}
-                  image={BASE_URL + attributes.images.data[0].attributes.url}
+                  image={BASE_URL + attributes.images?.data[0].attributes.url}
                   productTitle={attributes.name}
                   productPrice={attributes.price}
                   productDescription={
-                    attributes.gender.data.attributes.name + "'s shoes."
+                    attributes.gender?.data?.attributes?.name + "'s shoes."
                   }
                 />
               ))}

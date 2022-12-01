@@ -12,7 +12,7 @@ function HeaderLoggedIn({
   links,
   cart,
   burger,
-  handleInputChange = () => {}
+  handleInputSubmit = () => {}
 }) {
   const [searchInput, setSearchInput] = useState(false) // Hook to show/hide the search input
   const theme = useTheme()
@@ -92,29 +92,29 @@ function HeaderLoggedIn({
               left: 20
             }}
           />
-          <InputBase
-            sx={{
-              [theme.breakpoints.up('sm')]: {
-                border: '1px solid #494949',
-                borderRadius: '42px',
-                width: '100%',
-                height: '48px',
-                ml: '5px',
-                paddingLeft: '40px',
-                input: {
-                  '&::placeholder': {
-                    fontSize: '1.25rem',
-                    color: '#494949'
+          <Box component="form" onSubmit={handleInputSubmit}>
+            <InputBase
+              name="searchinput"
+              sx={{
+                [theme.breakpoints.up('sm')]: {
+                  border: '1px solid #494949',
+                  borderRadius: '42px',
+                  width: '100%',
+                  height: '48px',
+                  ml: '5px',
+                  paddingLeft: '40px',
+                  input: {
+                    '&::placeholder': {
+                      fontSize: '1.25rem',
+                      color: '#494949'
+                    }
                   }
                 }
-              }
-            }}
-            type="text"
-            placeholder="Search"
-            onChange={(e) => {
-              handleInputChange(e)
-            }}
-          />
+              }}
+              type="text"
+              placeholder="Search"
+            />
+          </Box>
         </Box>
         {cart && (
           <Box sx={{ marginLeft: '1rem' }}>
@@ -174,9 +174,6 @@ function HeaderLoggedIn({
                 }}
                 type="text"
                 placeholder="Search"
-                onChange={(e) => {
-                  handleInputChange(e)
-                }}
               />
               <form onSubmit={(e) => e.preventDefault()}>
                 <Button
