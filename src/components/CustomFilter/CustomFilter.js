@@ -8,7 +8,8 @@ function CustomFilter({
   category,
   handleFilters,
   isBrand,
-  handleInput
+  handleInput,
+  isCheckboxDisabled
 }) {
   const [isFilterVisible, setIsFilterVisible] = useState(false)
 
@@ -85,6 +86,7 @@ function CustomFilter({
       )}
       {isFilterVisible && (
         <CheckBox
+          isDisabled={isCheckboxDisabled}
           key={category}
           label={category}
           filterName={filterName}

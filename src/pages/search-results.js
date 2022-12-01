@@ -14,6 +14,7 @@ import { getGenders } from 'helpers/products/getGenders'
 import { getProducts } from 'helpers/products/getProducts'
 import { getSizes } from 'helpers/products/getSizes'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -52,6 +53,7 @@ export const getStaticProps = async () => {
 }
 
 export default function SearchResults({ genders, brands, colors, sizes }) {
+  const router = useRouter()
   // Filters
   const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
 
@@ -65,18 +67,30 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
   })
 
   const [queryObj, setQueryObj] = useState(BASE_QUERY)
+  const [isLoading, setIsLoading] = useState(false)
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['products', queryObj],
+  const { data } = useQuery({
+    queryKey: ['products', router],
     queryFn: () => {
-      return getProducts(`?${qs.stringify(queryObj)}`)
+      const isEmpty = Object.keys(router.query).length === 0
+      return getProducts(
+        `?${qs.stringify(!isEmpty ? router.query : BASE_QUERY)}`
+      )
+    },
+    onSettled: () => {
+      setIsLoading(false)
     }
+    // enabled: !!router.query
   })
 
   const qs = require('qs')
 
   const [opacity, setOpacity] = useState('')
   const [screenWidth, setScreenWidth] = useState(0)
+
+  useEffect(() => {
+    console.log('router query', qs.stringify(router.query))
+  }, [router])
 
   const handleSearchInput = (e) => {
     let value = e.target.value
@@ -96,6 +110,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
   }
 
   const handleFilters = (e, key, value) => {
+    setIsLoading(true)
     const checked = e.target.checked
 
     if (checked) {
@@ -116,6 +131,9 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             }
           }
         }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
         setQueryObj(newQueryObj)
       } else {
         const newQueryObj = {
@@ -129,6 +147,9 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             }
           }
         }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
         setQueryObj(newQueryObj)
       }
     }
@@ -152,6 +173,9 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             }
           }
         }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
         setQueryObj(newQueryObj)
       } else {
         const newQueryObj = {
@@ -165,6 +189,9 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             }
           }
         }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
         setQueryObj(newQueryObj)
       }
     }
@@ -213,6 +240,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
         {showFilters && (
           <Box
             component="form"
+            disabled={true}
             onReset={(e) => {
               console.log('reset')
               setQueryObj(BASE_QUERY)
@@ -230,47 +258,41 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               </Typography>
               <Typography variant="h3">Air Force 1 (137)</Typography>
             </Box>
-
             <SeparationLine />
-
             <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
               <SecondaryButton type="reset">CLEAR ALL FILTERS</SecondaryButton>
             </Box>
-
             <SeparationLine />
-
             {/* FILTER BLOCK */}
             {/* Gender */}
             <CustomFilter
+              isCheckboxDisabled={isLoading}
               filterName="Gender"
               handleFilters={handleFilters}
               category={genders}
             />
-
             <SeparationLine />
-
             {/* Brand */}
             <CustomFilter
+              isCheckboxDisabled={isLoading}
               filterName="Brand"
               handleFilters={handleFilters}
               category={brands}
               isBrand={true}
               handleInput={handleSearchInput}
             />
-
             <SeparationLine />
-
             {/* Color */}
             <CustomFilter
+              isCheckboxDisabled={isLoading}
               filterName="Color"
               handleFilters={handleFilters}
               category={colors}
             />
-
             <SeparationLine />
-
             {/* Size */}
             <CustomFilter
+              isCheckboxDisabled={isLoading}
               filterName="Size"
               handleFilters={handleFilters}
               category={sizes}
@@ -323,6 +345,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               <SeparationLine />
               {/* Gender */}
               <CustomFilter
+                isCheckboxDisabled={isLoading}
                 filterName={'Gender'}
                 handleFilters={handleFilters}
                 category={genders}
@@ -332,6 +355,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
               {/* Brand */}
               <CustomFilter
+                isCheckboxDisabled={isLoading}
                 filterName={'Brand'}
                 handleFilters={handleFilters}
                 category={brands}
@@ -343,6 +367,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
               {/* Color */}
               <CustomFilter
+                isCheckboxDisabled={isLoading}
                 filterName={'Color'}
                 handleFilters={handleFilters}
                 category={colors}
@@ -352,6 +377,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
               {/* Size */}
               <CustomFilter
+                isCheckboxDisabled={isLoading}
                 filterName={'Size'}
                 handleFilters={handleFilters}
                 category={sizes}
@@ -446,18 +472,19 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             }}
             columns={{ xs: 6, md: 11, lg: 14 }}
           >
-            {data?.data.map(({ id, attributes }) => (
-              <ProductCard
-                key={id}
-                image={BASE_URL + attributes.images.data[0].attributes.url}
-                productTitle={attributes.name}
-                productPrice={attributes.price}
-                productDescription={
-                  attributes.gender.data.attributes.name + "'s shoes."
-                }
-              />
-            ))}
-            {data?.data.length === 0 && (
+            {!isLoading &&
+              data?.data.map(({ id, attributes }) => (
+                <ProductCard
+                  key={id}
+                  image={BASE_URL + attributes.images.data[0].attributes.url}
+                  productTitle={attributes.name}
+                  productPrice={attributes.price}
+                  productDescription={
+                    attributes.gender.data.attributes.name + "'s shoes."
+                  }
+                />
+              ))}
+            {!isLoading && data?.data.length === 0 && (
               <Typography variant="main">No results found.</Typography>
             )}
 
