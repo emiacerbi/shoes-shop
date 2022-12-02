@@ -4,11 +4,6 @@ import { postFiles } from 'helpers/products/postFiles'
 import { updateUserAvatar } from 'helpers/user-auth/updateUserAvatar'
 
 const useUpdateAvatarPhotoForm = () => {
-  // const context = useContext(UserContext)
-
-  // const userName = context?.user.userInfo?.username
-  // const userEmail = context?.user.userInfo?.email
-
   const [inputInfo, setInputInfo] = useState({
     username: '',
     email: '',
