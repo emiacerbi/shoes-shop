@@ -7,7 +7,6 @@ import { updateUserAvatar } from 'helpers/user-auth/updateUserAvatar'
 const useUpdateAvatarPhotoForm = () => {
   const context = useContext(UserContext)
 
-  const userID = context?.user.userInfo?.id
   const userName = context?.user.userInfo?.username
   const userEmail = context?.user.userInfo?.email
 
@@ -15,8 +14,7 @@ const useUpdateAvatarPhotoForm = () => {
     username: userName,
     email: userEmail,
     password: '',
-    img: '',
-    userid: userID
+    img: ''
   })
 
   const handleInputChange = (e) => {
@@ -39,13 +37,12 @@ const useUpdateAvatarPhotoForm = () => {
   }
 
   const handleSubmit = async (e) => {
-    const { username, email, password, img, userid } = inputInfo
+    const { username, email, password, img } = inputInfo
     e.preventDefault()
     toast.promise(
       postFiles({ img }).then((data) => {
         const IMAGE_ID = data[0].id
-        console.log(userid)
-        updateUserAvatar({ userid, username, email, password, IMAGE_ID })
+        updateUserAvatar({ username, email, password, avatar: IMAGE_ID })
       }),
       {
         loading: 'Saving...',

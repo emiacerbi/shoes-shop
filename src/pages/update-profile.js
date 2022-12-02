@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import ChangePhotoButton from '@components/ChangePhotoButton/ChangePhotoButton'
 import Form from '@components/Form/Form'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
@@ -8,11 +8,14 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Avatar, Button, Input, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import { UserContext } from 'context/UserContext'
 import useUpdateProfileForm from 'hooks/useUpdateProfileForm'
 import Head from 'next/head'
 import { signOut } from 'next-auth/react'
 
 import { theme } from '../styles/theme'
+
+const baseURL = 'https://shoes-shop-strapi.herokuapp.com'
 
 export default function UpdateProfile() {
   const [settings, setSettings] = useState(true)
@@ -20,6 +23,13 @@ export default function UpdateProfile() {
   function handleSettings() {
     return setSettings(!settings)
   }
+
+  const context = useContext(UserContext)
+
+  const userID = context?.user.userInfo?.id
+  const userAvatar = context?.user.userInfo.avatar.url
+
+  localStorage.setItem('id', JSON.stringify(userID))
 
   return (
     <>
@@ -141,7 +151,10 @@ export default function UpdateProfile() {
               ml: '10px'
             }}
           >
-            <Avatar src="/profile_img.png" sx={{ width: 100, height: 100 }} />
+            <Avatar
+              src={`${baseURL + userAvatar}`}
+              sx={{ width: 100, height: 100 }}
+            />
             <Box
               sx={{
                 ml: '50px',
