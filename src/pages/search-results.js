@@ -115,6 +115,47 @@ export default function SearchResults({
     setQueryObj(newQueryObj)
   }
 
+  useEffect(() => {
+    // check router query to set filters obj
+    const newFiltersObj = {
+      ...filtersObj
+    }
+
+    // iterate over the query object and check if brands items are in the query
+    brands.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.brand.includes(element)) {
+        newFiltersObj.brand.push(element)
+      }
+    })
+
+    // iterate over the query object and check if colors items are in the query
+    colors.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.color.includes(element)) {
+        newFiltersObj.color.push(element)
+      }
+    })
+
+    // iterate over the query object and check if sizes items are in the query
+    sizes.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.size.includes(element)) {
+        newFiltersObj.size.push(element)
+      }
+    })
+
+    // iterate over the query object and check if genders items are in the query
+    genders.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.gender.includes(element)) {
+        newFiltersObj.gender.push(element)
+      }
+    })
+
+    setFiltersObj(newFiltersObj)
+  }, [])
+
   const handleFilters = (e, key, value) => {
     setIsLoading(true)
     const checked = e.target.checked
@@ -270,8 +311,8 @@ export default function SearchResults({
             {/* FILTER BLOCK */}
             {/* Gender */}
             <CustomFilter
-                filters={router.query}
-                isCheckboxDisabled={isLoading}
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
               filterName="Gender"
               handleFilters={handleFilters}
               category={genders}
@@ -279,8 +320,8 @@ export default function SearchResults({
             <SeparationLine />
             {/* Brand */}
             <CustomFilter
-                filters={router.query}
-                isCheckboxDisabled={isLoading}
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
               filterName="Brand"
               handleFilters={handleFilters}
               category={brands}
@@ -290,8 +331,8 @@ export default function SearchResults({
             <SeparationLine />
             {/* Color */}
             <CustomFilter
-                filters={router.query}
-                isCheckboxDisabled={isLoading}
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
               filterName="Color"
               handleFilters={handleFilters}
               category={colors}
@@ -299,8 +340,8 @@ export default function SearchResults({
             <SeparationLine />
             {/* Size */}
             <CustomFilter
-                filters={router.query}
-                isCheckboxDisabled={isLoading}
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
               filterName="Size"
               handleFilters={handleFilters}
               category={sizes}
