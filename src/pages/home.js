@@ -25,6 +25,7 @@ export async function getServerSideProps(context) {
   const token = await getToken(context)
 
   const userRes = await getUserInfo(token.accessToken)
+  const userData = userRes.data
   const userId = userRes.data.id
 
   const query = qs.stringify(
@@ -52,12 +53,13 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      products
+      products,
+      userData
     }
   }
 }
 
-export default function Home({ products }) {
+export default function Home({ products, userData }) {
   const theme = useTheme()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
@@ -101,7 +103,7 @@ export default function Home({ products }) {
             }
           }}
         >
-          <ProfileInfoSideBar />
+          <ProfileInfoSideBar userData={userData} />
           <Link href="/update-profile">
             <Box
               sx={{
@@ -137,7 +139,7 @@ export default function Home({ products }) {
             <Image src="/bgHomeImg.png" alt="panelImage" layout="fill"></Image>
           </Box>
           <Box sx={{ width: '100%', p: '20px' }}>
-            <SubHeader />
+            <SubHeader userData={userData} />
             <Box
               sx={{
                 display: 'flex',

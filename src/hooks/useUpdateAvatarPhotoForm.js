@@ -8,7 +8,8 @@ const useUpdateAvatarPhotoForm = () => {
     username: '',
     email: '',
     password: '',
-    img: ''
+    img: '',
+    id: ''
   })
 
   console.log(inputInfo)
@@ -33,12 +34,12 @@ const useUpdateAvatarPhotoForm = () => {
   }
 
   const handleSubmit = async (e) => {
-    const { username, email, password, img } = inputInfo
+    const { username, email, password, img, id } = inputInfo
     e.preventDefault()
     toast.promise(
       postFiles({ img }).then((data) => {
         const IMAGE_ID = data[0].id
-        updateUserAvatar({ username, email, password, avatar: IMAGE_ID })
+        updateUserAvatar({ id, username, email, password, avatar: IMAGE_ID })
       }),
       {
         loading: 'Saving...',

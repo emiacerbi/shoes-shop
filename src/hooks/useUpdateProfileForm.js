@@ -9,7 +9,8 @@ const useUpdateProfileForm = () => {
     password: '',
     firstName: '',
     lastName: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    id: ''
   })
 
   const handleInputChange = (e) => {
@@ -24,7 +25,7 @@ const useUpdateProfileForm = () => {
   }
 
   const handleSubmit = async (e) => {
-    const { username, email, password, firstName, lastName, phoneNumber } =
+    const { username, email, password, firstName, lastName, phoneNumber, id } =
       inputInfo
 
     e.preventDefault()
@@ -34,9 +35,10 @@ const useUpdateProfileForm = () => {
         username,
         email,
         password,
+        phoneNumber,
         firstName,
         lastName,
-        phoneNumber
+        id
       }),
       {
         loading: 'Saving...',

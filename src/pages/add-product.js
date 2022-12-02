@@ -2,7 +2,6 @@ import AddProductForm from '@components/AddProductForm/AddProductForm'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
-import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import ProfileInfoSideBar from '@components/SideBarProfileInfo/SideBarProfileInfo'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Box, Button, Typography, useTheme } from '@mui/material'
@@ -129,9 +128,6 @@ export default function AddProduct({
                 }}
               >
                 <PrimaryButton maxWidth="152px">Save</PrimaryButton>
-                <SecondaryButton form="addProduct" maxWidth="152px">
-                  Schedule
-                </SecondaryButton>
               </Box>
             </Box>
             <Box sx={{ maxWidth: '900px' }}>

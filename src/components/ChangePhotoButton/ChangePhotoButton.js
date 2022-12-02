@@ -22,7 +22,8 @@ const ChangePhotoButton = ({ userData }) => {
     setInputInfo({
       ...inputInfo,
       username: userData.username,
-      email: userData.email
+      email: userData.email,
+      id: userData.id
     })
   }, [])
 
