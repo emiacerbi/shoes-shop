@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ChangePhotoButton from '@components/ChangePhotoButton/ChangePhotoButton'
 import Form from '@components/Form/Form'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
@@ -43,7 +43,8 @@ export default function UpdateProfile({ userData }) {
   function handleSettings() {
     return setSettings(!settings)
   }
-  const { handleInputChange, handleSubmit } = useUpdateProfileForm()
+  const { handleInputChange, handleSubmit, inputInfo, setInputInfo } =
+    useUpdateProfileForm()
 
   const modalStyle = {
     position: 'absolute',
@@ -55,8 +56,19 @@ export default function UpdateProfile({ userData }) {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    display: 'flex',
+    flexDirection: 'column',
     gap: '1rem'
   }
+
+  useEffect(() => {
+    setInputInfo({
+      ...inputInfo,
+      username: userData.username,
+      email: userData.email,
+      id: userData.id
+    })
+  }, [])
 
   return (
     <>

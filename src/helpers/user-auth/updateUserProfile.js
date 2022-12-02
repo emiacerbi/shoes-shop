@@ -6,7 +6,8 @@ export const updateUserProfile = async ({
   password,
   phoneNumber,
   firstName,
-  lastName
+  lastName,
+  id
 }) => {
   const FormData = require('form-data')
   const data = new FormData()
@@ -16,8 +17,6 @@ export const updateUserProfile = async ({
   data.append('firstName', firstName)
   data.append('phoneNumber', phoneNumber)
   data.append('lastName', lastName)
-
-  const id = localStorage.getItem('id')
 
   const response = await axiosInstance.put(`/api/users/${id}`, data, {
     headers: {
