@@ -270,7 +270,8 @@ export default function SearchResults({
             {/* FILTER BLOCK */}
             {/* Gender */}
             <CustomFilter
-              isCheckboxDisabled={isLoading}
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
               filterName="Gender"
               handleFilters={handleFilters}
               category={genders}
@@ -278,7 +279,8 @@ export default function SearchResults({
             <SeparationLine />
             {/* Brand */}
             <CustomFilter
-              isCheckboxDisabled={isLoading}
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
               filterName="Brand"
               handleFilters={handleFilters}
               category={brands}
@@ -288,7 +290,8 @@ export default function SearchResults({
             <SeparationLine />
             {/* Color */}
             <CustomFilter
-              isCheckboxDisabled={isLoading}
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
               filterName="Color"
               handleFilters={handleFilters}
               category={colors}
@@ -296,7 +299,8 @@ export default function SearchResults({
             <SeparationLine />
             {/* Size */}
             <CustomFilter
-              isCheckboxDisabled={isLoading}
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
               filterName="Size"
               handleFilters={handleFilters}
               category={sizes}
@@ -353,6 +357,7 @@ export default function SearchResults({
               <SeparationLine />
               {/* Gender */}
               <CustomFilter
+                filters={router.query}
                 isCheckboxDisabled={isLoading}
                 filterName={'Gender'}
                 handleFilters={handleFilters}
@@ -363,6 +368,7 @@ export default function SearchResults({
 
               {/* Brand */}
               <CustomFilter
+                filters={router.query}
                 isCheckboxDisabled={isLoading}
                 filterName={'Brand'}
                 handleFilters={handleFilters}
@@ -375,6 +381,7 @@ export default function SearchResults({
 
               {/* Color */}
               <CustomFilter
+                filters={router.query}
                 isCheckboxDisabled={isLoading}
                 filterName={'Color'}
                 handleFilters={handleFilters}
@@ -385,6 +392,7 @@ export default function SearchResults({
 
               {/* Size */}
               <CustomFilter
+                filters={router.query}
                 isCheckboxDisabled={isLoading}
                 filterName={'Size'}
                 handleFilters={handleFilters}
