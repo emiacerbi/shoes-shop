@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import CheckBox from '@components/CheckBox/CheckBox'
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import { Box, InputBase, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 function CustomFilter({
   filterName,
