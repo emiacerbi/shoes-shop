@@ -343,8 +343,7 @@ export default function SearchResults({
               <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
                 <SecondaryButton
                   onClick={() => {
-                    router.push('/search-results')
-                    setQueryObj(BASE_QUERY)
+                    router.push('/search-results').then(() => router.reload())
                   }}
                 >
                   CLEAR ALL FILTERS
