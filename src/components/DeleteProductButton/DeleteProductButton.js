@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Button, CircularProgress } from '@mui/material'
 import { useMutation } from '@tanstack/react-query'
@@ -7,7 +8,7 @@ const DeleteProductButton = ({ id, refreshData, matches }) => {
   const mutation = useMutation({
     mutationFn: deleteProduct,
     onSuccess: (res) => {
-      console.log(res)
+      toast.success('Product deleted')
       refreshData()
     }
   })

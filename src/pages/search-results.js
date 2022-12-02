@@ -263,7 +263,7 @@ export default function SearchResults({
       </Head>
       <HeaderLoggedIn
         pages={['Home', 'Bag', 'Add Product']}
-        links={['/', '/bag', '/add-product']}
+        links={['/home', '/bag', '/add-product']}
         cart={true}
         burger={true}
         opacity={opacity}

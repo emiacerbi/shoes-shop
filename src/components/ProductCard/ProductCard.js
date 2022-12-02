@@ -24,19 +24,20 @@ export default function ProductCard({
   return (
     <Grid
       item
-      xs={5}
-      lg={3}
+      // xs={5}
+      // lg={3}
       sx={{
         position: 'relative',
-        maxWidth: { xs: '150px', sm: '300px' },
+        width: { xs: '150px', sm: '300px' },
+        maxWidth: '300px',
         height: { xs: '178px', sm: '380px' }
       }}
     >
       <Box
         sx={{
           position: 'relative',
-          width: '100%',
-          maxWidth: { xs: '150px', sm: '300px' },
+          maxWidth: '300px',
+          width: { xs: '150px', sm: '300px' },
           height: { xs: '178px', sm: '380px' }
         }}
       >

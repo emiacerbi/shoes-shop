@@ -127,7 +127,10 @@ export default function Home({ products, userData }) {
             </BarItem>
           </Box>
         </Box>
-        <Box component="main" sx={{ m: { xs: 0, sm: '20px' }, width: '100%' }}>
+        <Box
+          component="main"
+          sx={{ m: { xs: 0, sm: '20px' }, width: '100%', pb: 8 }}
+        >
           <Box
             sx={{
               width: '100%',
@@ -193,7 +196,7 @@ export default function Home({ products, userData }) {
               sx={{
                 display: { xs: 'flex', md: 'none' },
                 justifyContent: 'center',
-                mt: '2rem'
+                mt: '5rem'
               }}
             >
               <PrimaryButton maxWidth="152px">
