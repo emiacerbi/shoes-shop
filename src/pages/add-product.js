@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import AddProductForm from '@components/AddProductForm/AddProductForm'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
@@ -5,6 +6,7 @@ import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import ProfileInfoSideBar from '@components/SideBarProfileInfo/SideBarProfileInfo'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Box, Button, Typography, useTheme } from '@mui/material'
+import { UserContext } from 'context/UserContext'
 import { getBrands } from 'helpers/products/getBrands'
 import { getCategories } from 'helpers/products/getCategories'
 import { getColors } from 'helpers/products/getColors'
@@ -56,6 +58,10 @@ export default function AddProduct({
     signOut()
   }
 
+  const context = useContext(UserContext)
+
+  console.log(context.user)
+
   return (
     <>
       <Head>
@@ -70,7 +76,7 @@ export default function AddProduct({
         <Box
           sx={{ display: { xs: 'none', sm: 'block' }, flexDirection: 'column' }}
         >
-          <ProfileInfoSideBar />
+          <ProfileInfoSideBar userData={context?.user.userInfo} />
           <Box
             sx={{ display: 'flex', mt: '30px', ml: '46px', cursor: 'pointer' }}
           >

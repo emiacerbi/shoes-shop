@@ -27,13 +27,16 @@ export default function ProductCard({
       xs={5}
       lg={3}
       sx={{
-        position: 'relative'
+        position: 'relative',
+        maxWidth: { xs: '150px', sm: '300px' },
+        height: { xs: '178px', sm: '380px' }
       }}
     >
       <Box
         sx={{
           position: 'relative',
-          width: { xs: '150px', sm: '300px' },
+          width: '100%',
+          maxWidth: { xs: '150px', sm: '300px' },
           height: { xs: '178px', sm: '380px' }
         }}
       >

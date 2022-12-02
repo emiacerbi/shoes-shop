@@ -525,7 +525,8 @@ export default function SearchResults({
               my: '20px',
               justifyContent: { xs: 'center', md: 'start' },
               paddingInline: { xs: '1rem', md: '3.5rem' },
-              gap: '3rem'
+              gap: '3rem',
+              rowGap: '5rem'
             }}
             columns={{ xs: 6, md: 11, lg: 14 }}
           >

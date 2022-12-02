@@ -7,7 +7,6 @@ const baseURL = 'https://shoes-shop-strapi.herokuapp.com'
 export default function ProfileInfoSideBar({ userData }) {
   const context = useContext(UserContext)
 
-  console.log(userData)
   return (
     <Box
       sx={{
