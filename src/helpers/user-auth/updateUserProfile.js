@@ -1,22 +1,29 @@
 import axiosInstance from '../../axios/axiosInstance'
 
-export const updateUserAvatar = async ({
+export const updateUserProfile = async ({
   username,
   email,
   password,
-  avatar
+  phoneNumber,
+  firstName,
+  lastName
 }) => {
   const FormData = require('form-data')
   const data = new FormData()
   data.append('username', username)
   data.append('email', email)
   data.append('password', password)
-  data.append('avatar', avatar)
+  data.append('firstName', firstName)
+  data.append('phoneNumber', phoneNumber)
+  data.append('lastName', lastName)
+
   const id = localStorage.getItem('id')
+
   const response = await axiosInstance.put(`/api/users/${id}`, data, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
   })
+  console.log(response.data)
   return response.data
 }
