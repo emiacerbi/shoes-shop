@@ -55,7 +55,7 @@ function CustomFilter({
         />
       </Box>
 
-      {isBrand && (
+      {/* {isBrand && (
         <Box
           sx={{
             display: 'flex',
@@ -73,19 +73,23 @@ function CustomFilter({
               height: '18px'
             }}
           />
-          <Box>
+          <Box
+            component="form"
+            onSubmit={handleSearchInput}
+          >
             <InputBase
-              name="searchinput"
+              name="searchinput2"
               sx={{
                 borderRadius: '42px',
                 width: '260px'
               }}
               type="text"
               placeholder="Search"
+              disabled={isCheckboxDisabled}
             />
           </Box>
         </Box>
-      )}
+      )} */}
       {isFilterVisible && (
         <CheckBox
           isDisabled={isCheckboxDisabled}

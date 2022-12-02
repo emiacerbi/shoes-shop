@@ -368,7 +368,7 @@ export default function SearchResults({
                 handleFilters={handleFilters}
                 category={brands}
                 isBrand={true}
-                handleInput={handleSearchInput}
+                handleSearchInput={handleSearchInput}
               />
 
               <SeparationLine />
