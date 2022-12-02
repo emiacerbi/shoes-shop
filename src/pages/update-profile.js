@@ -1,12 +1,14 @@
 import { useState } from 'react'
+import ChangePhotoButton from '@components/ChangePhotoButton/ChangePhotoButton'
 import Form from '@components/Form/Form'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
 import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
-import { Avatar, Button, Typography } from '@mui/material'
+import { Avatar, Button, Input, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import useUpdateProfileForm from 'hooks/useUpdateProfileForm'
 import Head from 'next/head'
 import { signOut } from 'next-auth/react'
 
@@ -147,20 +149,7 @@ export default function UpdateProfile() {
                 display: 'grid'
               }}
             >
-              <Button
-                variant="outlined"
-                sx={{
-                  color: '#FE645E',
-                  fontFamily: 'Work Sans',
-                  fontSize: '11px',
-                  width: '120px',
-                  borderRadius: '6px',
-                  height: '35px',
-                  mb: '16px'
-                }}
-              >
-                Change photo
-              </Button>
+              <ChangePhotoButton />
               <Button
                 sx={{
                   color: '#FFFFFF',
@@ -208,19 +197,26 @@ export default function UpdateProfile() {
               marginTop: '20px'
             }}
           >
-            <PrimaryInput label="Name" placeholder={'Jane'}></PrimaryInput>
+            {/* <PrimaryInput
+              label="Name"
+              placeholder={'Jane'}
+              onChange={handleInputChange}
+            ></PrimaryInput>
             <PrimaryInput
               label="Surname"
               placeholder={'Meldrum'}
+              onChange={handleInputChange}
             ></PrimaryInput>
             <PrimaryInput
               label="Email"
               placeholder={'example@mail.com'}
+              onChange={handleInputChange}
             ></PrimaryInput>
             <PrimaryInput
               label="Phone Number"
               placeholder={'(949) 354-2574)'}
-            ></PrimaryInput>
+              onChange={handleInputChange}
+            ></PrimaryInput> */}
           </Form>
         </Box>
       </Box>
