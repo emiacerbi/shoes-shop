@@ -3,7 +3,7 @@ import AddItemToCart from '@components/AddItemToCartButton/AddItemToCart'
 import DeleteProductButton from '@components/DeleteProductButton/DeleteProductButton'
 import EditProductButton from '@components/EditProductButton/EditProductButton'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
-import { Grid, Typography } from '@mui/material'
+import { Grid, Typography, useMediaQuery } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
 
@@ -19,21 +19,21 @@ export default function ProductCard({
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [imgSrc, setImgSrc] = useState(image)
 
+  const matches = useMediaQuery('(min-width:600px)')
+
   return (
     <Grid
       item
       xs={5}
       lg={3}
       sx={{
-        position: 'relative',
-        width: { xs: 150, md: 320 },
-        maxWidth: { xs: 120, md: 320 }
+        position: 'relative'
       }}
     >
       <Box
         sx={{
           position: 'relative',
-          minWidth: '150px',
+          width: { xs: '150px', sm: '300px' },
           height: { xs: '178px', sm: '380px' }
         }}
       >
@@ -54,8 +54,8 @@ export default function ProductCard({
             position: 'absolute',
             width: '25px',
             height: '25px',
-            top: 5,
-            right: 10,
+            top: { xs: 2, md: 2 },
+            right: { xs: 10, md: 10 },
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -81,8 +81,8 @@ export default function ProductCard({
         <Box
           sx={{
             position: 'absolute',
-            top: '2rem',
-            right: '.5rem',
+            top: { xs: 30, md: 20 },
+            right: { xs: 8, md: '.5rem' },
             pointerEvents: 'inherit',
             display: 'flex',
             flexDirection: 'column',
@@ -97,9 +97,14 @@ export default function ProductCard({
               img: image,
               id
             }}
+            matches={matches}
           />
 
-          <DeleteProductButton id={id} refreshData={refreshData} />
+          <DeleteProductButton
+            id={id}
+            refreshData={refreshData}
+            matches={matches}
+          />
 
           <EditProductButton
             id={id}
@@ -110,6 +115,7 @@ export default function ProductCard({
               img: image
             }}
             refreshData={refreshData}
+            matches={matches}
           />
         </Box>
       )}
