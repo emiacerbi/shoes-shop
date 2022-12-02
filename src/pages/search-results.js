@@ -3,6 +3,7 @@ import CustomFilter from '@components/CustomFilter/CustomFilter'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import Loading from '@components/Loading/Loading'
 import ProductCard from '@components/ProductCard/ProductCard'
+import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import SeparationLine from '@components/SeparationLine/SeparationLine'
 import { Box, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/system'
@@ -13,6 +14,7 @@ import { getGenders } from 'helpers/products/getGenders'
 import { getProducts } from 'helpers/products/getProducts'
 import { getSizes } from 'helpers/products/getSizes'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -34,7 +36,7 @@ const BASE_QUERY = {
   }
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async (context) => {
   const genders = await getGenders()
   const brands = await getBrands()
   const colors = await getColors()
@@ -45,40 +47,58 @@ export const getStaticProps = async () => {
       brands: brands.data.map((brand) => brand.attributes.name),
       genders: genders.data.map((gender) => gender.attributes.name),
       colors: colors.data.map((color) => color.attributes.name),
-      sizes: sizes.data.map((size) => size.attributes.value)
+      sizes: sizes.data.map((size) => size.attributes.value),
+      queryParams: context.query
     }
   }
 }
 
-export default function SearchResults({ genders, brands, colors, sizes }) {
+export default function SearchResults({
+  genders,
+  brands,
+  colors,
+  sizes,
+  queryParams
+}) {
+  const router = useRouter()
   // Filters
   const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
 
   const theme = useTheme()
 
-  const [filtersArray, setFiltersArray] = useState([])
-
-  const [queryObj, setQueryObj] = useState(BASE_QUERY)
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['products', queryObj],
-    queryFn: () => {
-      return getProducts(`?${qs.stringify(queryObj)}`)
-    }
+  const [filtersObj, setFiltersObj] = useState({
+    color: [],
+    gender: [],
+    brand: [],
+    size: []
   })
 
   const qs = require('qs')
+  const [queryObj, setQueryObj] = useState(BASE_QUERY)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const { data } = useQuery({
+    queryKey: ['products', router],
+    queryFn: () => {
+      const isEmpty = Object.keys(queryParams).length === 0
+      return getProducts(
+        `?${qs.stringify(!isEmpty ? queryParams : BASE_QUERY)}`
+      )
+    },
+    onSettled: () => {
+      setIsLoading(false)
+    }
+  })
 
   const [opacity, setOpacity] = useState('')
   const [screenWidth, setScreenWidth] = useState(0)
 
   const handleSearchInput = (e) => {
-    let value = e.target.value
+    setIsLoading(true)
+    e.preventDefault()
+    const value = e.target.searchinput.value
 
-    if (value.length < 3) {
-      value = '' // if the value is less than 3 characters, we don't want to search
-    }
-    setQueryObj({
+    const newQueryObj = {
       ...queryObj,
       filters: {
         ...queryObj.filters,
@@ -86,53 +106,141 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
           $containsi: value
         }
       }
+    }
+
+    router.replace({
+      pathname: '/search-results',
+      query: qs.stringify(newQueryObj)
     })
+    setQueryObj(newQueryObj)
   }
 
+  useEffect(() => {
+    // check router query to set filters obj
+    const newFiltersObj = {
+      ...filtersObj
+    }
+
+    // iterate over the query object and check if brands items are in the query
+    brands.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.brand.includes(element)) {
+        newFiltersObj.brand.push(element)
+      }
+    })
+
+    // iterate over the query object and check if colors items are in the query
+    colors.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.color.includes(element)) {
+        newFiltersObj.color.push(element)
+      }
+    })
+
+    // iterate over the query object and check if sizes items are in the query
+    sizes.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.size.includes(element)) {
+        newFiltersObj.size.push(element)
+      }
+    })
+
+    // iterate over the query object and check if genders items are in the query
+    genders.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.gender.includes(element)) {
+        newFiltersObj.gender.push(element)
+      }
+    })
+
+    setFiltersObj(newFiltersObj)
+  }, [])
+
   const handleFilters = (e, key, value) => {
+    setIsLoading(true)
     const checked = e.target.checked
 
-    console.log(key)
-
     if (checked) {
-      const newFilters = [...filtersArray, value]
-      setFiltersArray(newFilters)
-      console.log(newFilters)
+      const newFilters = { ...filtersObj }
+      newFilters[key].push(value)
 
-      const newQueryObj = {
-        ...queryObj,
-        filters: {
-          ...queryObj.filters,
-          [key]: {
-            name: {
-              $in: newFilters
+      setFiltersObj(newFilters)
+
+      if (key !== 'size') {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              name: {
+                $in: newFilters[key]
+              }
             }
           }
         }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
+        setQueryObj(newQueryObj)
+      } else {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              value: {
+                $in: newFilters[key]
+              }
+            }
+          }
+        }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
+        setQueryObj(newQueryObj)
       }
-
-      setQueryObj(newQueryObj)
     }
 
     if (!checked) {
-      const newFilters = filtersArray.filter((item) => item !== value)
-      setFiltersArray(newFilters)
+      const newFilters = { ...filtersObj }
+      const relevantFilters = newFilters[key].filter((item) => item !== value)
+      newFilters[key] = relevantFilters
 
-      const newQueryObj = {
-        ...queryObj,
-        filters: {
-          ...queryObj.filters,
-          [key]: {
-            name: {
-              $in: newFilters
+      setFiltersObj(newFilters)
+
+      if (key !== 'size') {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              name: {
+                $in: newFilters[key]
+              }
             }
           }
         }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
+        setQueryObj(newQueryObj)
+      } else {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              value: {
+                $in: newFilters[key]
+              }
+            }
+          }
+        }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
+        setQueryObj(newQueryObj)
       }
-
-      delete newQueryObj.filters[key]
-
-      setQueryObj(newQueryObj)
     }
   }
 
@@ -159,7 +267,8 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
         cart={true}
         burger={true}
         opacity={opacity}
-        handleInputChange={handleSearchInput}
+        handleInputSubmit={handleSearchInput}
+        shouldSearchInputBeDisabled={isLoading}
       />
 
       <Box
@@ -174,6 +283,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
         {/* DESKTOP FILTERS */}
         {showFilters && (
           <Box
+            component="form"
             sx={{
               minWidth: '320px',
               heigth: 'auto',
@@ -187,42 +297,52 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
               </Typography>
               <Typography variant="h3">Air Force 1 (137)</Typography>
             </Box>
-
             <SeparationLine />
-
+            <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
+              <SecondaryButton
+                onClick={() => {
+                  router.push('/search-results').then(() => router.reload())
+                }}
+              >
+                CLEAR ALL FILTERS
+              </SecondaryButton>
+            </Box>
+            <SeparationLine />
             {/* FILTER BLOCK */}
             {/* Gender */}
             <CustomFilter
-              filterName={'Gender'}
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
+              filterName="Gender"
               handleFilters={handleFilters}
               category={genders}
             />
-
             <SeparationLine />
-
             {/* Brand */}
             <CustomFilter
-              filterName={'Brand'}
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
+              filterName="Brand"
               handleFilters={handleFilters}
               category={brands}
               isBrand={true}
-              handleInput={handleSearchInput}
+              handleSearchInput={handleSearchInput}
             />
-
             <SeparationLine />
-
             {/* Color */}
             <CustomFilter
-              filterName={'Color'}
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
+              filterName="Color"
               handleFilters={handleFilters}
               category={colors}
             />
-
             <SeparationLine />
-
             {/* Size */}
             <CustomFilter
-              filterName={'Size'}
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
+              filterName="Size"
               handleFilters={handleFilters}
               category={sizes}
             />
@@ -251,7 +371,7 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                 sx={{
                   display: 'flex',
                   justifyContent: 'end',
-                  mt: '25px',
+                  my: '25px',
                   px: '2.5rem'
                 }}
                 onClick={showFiltersBlock}
@@ -259,8 +379,27 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
                 X
               </Typography>
 
+              <SeparationLine
+                sx={{
+                  mt: 2
+                }}
+              />
+
+              <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
+                <SecondaryButton
+                  onClick={() => {
+                    router.push('/search-results').then(() => router.reload())
+                  }}
+                >
+                  CLEAR ALL FILTERS
+                </SecondaryButton>
+              </Box>
+
+              <SeparationLine />
               {/* Gender */}
               <CustomFilter
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
                 filterName={'Gender'}
                 handleFilters={handleFilters}
                 category={genders}
@@ -270,17 +409,21 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
               {/* Brand */}
               <CustomFilter
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
                 filterName={'Brand'}
                 handleFilters={handleFilters}
                 category={brands}
                 isBrand={true}
-                // handleInput={handleInput}
+                handleSearchInput={handleSearchInput}
               />
 
               <SeparationLine />
 
               {/* Color */}
               <CustomFilter
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
                 filterName={'Color'}
                 handleFilters={handleFilters}
                 category={colors}
@@ -290,6 +433,8 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
 
               {/* Size */}
               <CustomFilter
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
                 filterName={'Size'}
                 handleFilters={handleFilters}
                 category={sizes}
@@ -384,18 +529,19 @@ export default function SearchResults({ genders, brands, colors, sizes }) {
             }}
             columns={{ xs: 6, md: 11, lg: 14 }}
           >
-            {data?.data.map(({ id, attributes }) => (
-              <ProductCard
-                key={id}
-                image={BASE_URL + attributes.images.data[0].attributes.url}
-                productTitle={attributes.name}
-                productPrice={attributes.price}
-                productDescription={
-                  attributes.gender.data.attributes.name + "'s shoes."
-                }
-              />
-            ))}
-            {data?.data.length === 0 && (
+            {!isLoading &&
+              data?.data?.map(({ id, attributes }) => (
+                <ProductCard
+                  key={id}
+                  image={BASE_URL + attributes.images?.data[0].attributes.url}
+                  productTitle={attributes.name}
+                  productPrice={attributes.price}
+                  productDescription={
+                    attributes.gender?.data?.attributes?.name + "'s shoes."
+                  }
+                />
+              ))}
+            {!isLoading && data?.data.length === 0 && (
               <Typography variant="main">No results found.</Typography>
             )}
 

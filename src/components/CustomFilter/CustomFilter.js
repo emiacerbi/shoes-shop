@@ -1,14 +1,15 @@
 import { useState } from 'react'
 import CheckBox from '@components/CheckBox/CheckBox'
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import { Box, InputBase, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 function CustomFilter({
   filterName,
   category,
   handleFilters,
   isBrand,
-  handleInput
+  handleSearchInput,
+  isCheckboxDisabled,
+  filters
 }) {
   const [isFilterVisible, setIsFilterVisible] = useState(false)
 
@@ -54,7 +55,7 @@ function CustomFilter({
         />
       </Box>
 
-      {isBrand && (
+      {/* {isBrand && (
         <Box
           sx={{
             display: 'flex',
@@ -72,23 +73,31 @@ function CustomFilter({
               height: '18px'
             }}
           />
-          <InputBase
-            sx={{
-              borderRadius: '42px',
-              width: '260px'
-            }}
-            type="text"
-            onChange={handleInput}
-            placeholder="Search"
-          />
+          <Box
+            component="form"
+            onSubmit={handleSearchInput}
+          >
+            <InputBase
+              name="searchinput2"
+              sx={{
+                borderRadius: '42px',
+                width: '260px'
+              }}
+              type="text"
+              placeholder="Search"
+              disabled={isCheckboxDisabled}
+            />
+          </Box>
         </Box>
-      )}
+      )} */}
       {isFilterVisible && (
         <CheckBox
+          isDisabled={isCheckboxDisabled}
           key={category}
           label={category}
           filterName={filterName}
           handleFilters={handleFilters}
+          filters={filters}
         />
       )}
     </Box>
