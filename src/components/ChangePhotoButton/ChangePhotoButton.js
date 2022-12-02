@@ -1,17 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
 import { Button, Modal, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import useUpdateAvatarPhotoForm from 'hooks/useUpdateAvatarPhotoForm'
 
-const ChangePhotoButton = () => {
+const ChangePhotoButton = ({ userData }) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  const { handleInputChange, handleInputImg, handleSubmit } =
-    useUpdateAvatarPhotoForm()
+  const {
+    handleInputChange,
+    handleInputImg,
+    handleSubmit,
+    setInputInfo,
+    inputInfo
+  } = useUpdateAvatarPhotoForm()
+
+  useEffect(() => {
+    setInputInfo({
+      ...inputInfo,
+      username: userData.username,
+      email: userData.email
+    })
+  }, [])
 
   const style = {
     position: 'absolute',

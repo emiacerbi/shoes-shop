@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import ChangePhotoButton from '@components/ChangePhotoButton/ChangePhotoButton'
 import Form from '@components/Form/Form'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
@@ -9,16 +9,32 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Avatar, Button, Modal, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import { UserContext } from 'context/UserContext'
+import { getUserInfo } from 'helpers/user-auth/getUserInfo'
 import useUpdateProfileForm from 'hooks/useUpdateProfileForm'
 import Head from 'next/head'
+import { getToken } from 'next-auth/jwt'
 import { signOut } from 'next-auth/react'
 
 import { theme } from '../styles/theme'
 
-const baseURL = 'https://shoes-shop-strapi.herokuapp.com'
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
-export default function UpdateProfile() {
+export async function getServerSideProps(context) {
+  const token = await getToken(context)
+
+  const userRes = await getUserInfo(token.accessToken)
+  const userData = userRes.data
+
+  console.log(userData)
+
+  return {
+    props: {
+      userData
+    }
+  }
+}
+
+export default function UpdateProfile({ userData }) {
   const [settings, setSettings] = useState(true)
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
@@ -28,12 +44,6 @@ export default function UpdateProfile() {
     return setSettings(!settings)
   }
   const { handleInputChange, handleSubmit } = useUpdateProfileForm()
-
-  const context = useContext(UserContext)
-
-  const userData = context?.user.userInfo
-
-  localStorage.setItem('id', JSON.stringify(userData.id))
 
   const modalStyle = {
     position: 'absolute',
@@ -169,9 +179,12 @@ export default function UpdateProfile() {
             }}
           >
             <Avatar
-              src={`${baseURL + userData.avatar.url}`}
-              sx={{ width: 100, height: 100 }}
-            />
+              src={`${baseURL + userData?.avatar?.url}`}
+              sx={{ width: 100, height: 100, bgcolor: 'primary' }}
+              alt="User"
+            >
+              B
+            </Avatar>
             <Box
               sx={{
                 ml: '50px',
@@ -179,7 +192,7 @@ export default function UpdateProfile() {
                 display: 'grid'
               }}
             >
-              <ChangePhotoButton />
+              <ChangePhotoButton userData={userData} />
               <Button
                 sx={{
                   color: '#FFFFFF',
@@ -230,25 +243,25 @@ export default function UpdateProfile() {
             <PrimaryInput
               label="First Name"
               name="firstName"
-              placeholder={userData.firstName}
+              placeholder={'John'}
               onChange={handleInputChange}
             ></PrimaryInput>
             <PrimaryInput
               label="Last Name"
               name="lastName"
-              placeholder={userData.lastName}
+              placeholder={'Doe'}
               onChange={handleInputChange}
             ></PrimaryInput>
             <PrimaryInput
               label="User Name"
               name="username"
-              placeholder={userData.username}
+              placeholder={'JohnDoe95'}
               onChange={handleInputChange}
             ></PrimaryInput>
             <PrimaryInput
               label="Phone Number"
               name="phoneNumber"
-              placeholder={userData.phoneNumber}
+              placeholder={'Phone Number'}
               onChange={handleInputChange}
             ></PrimaryInput>
             <Button
