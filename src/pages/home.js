@@ -187,8 +187,14 @@ export default function Home({ products }) {
                   />
                 ))}
             </Box>
-            <Box sx={{ display: { xs: 'block', md: 'none' }, mt: '1rem' }}>
-              <PrimaryButton maxWidth="100%">
+            <Box
+              sx={{
+                display: { xs: 'flex', md: 'none' },
+                justifyContent: 'center',
+                mt: '2rem'
+              }}
+            >
+              <PrimaryButton maxWidth="152px">
                 <Link href="/add-product">Add Products</Link>
               </PrimaryButton>
             </Box>

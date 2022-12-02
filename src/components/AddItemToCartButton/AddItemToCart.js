@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 import AddShoppingCart from '@mui/icons-material/AddShoppingCart'
 import { Button, CircularProgress, Typography } from '@mui/material'
 
-export default function AddItemToCart({ product }) {
+export default function AddItemToCart({ product, matches }) {
   const [quantity, setQuantity] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -43,6 +43,32 @@ export default function AddItemToCart({ product }) {
     }, 1000)
   }
 
+  if (!matches) {
+    return (
+      <Button
+        variant="contained"
+        size="small"
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textTransform: 'none',
+          color: 'white',
+          gap: '.25rem',
+          width: '25px',
+          height: '25px'
+        }}
+        onClick={addProduct}
+      >
+        {isLoading ? (
+          <CircularProgress size={12} color="action" />
+        ) : (
+          <AddShoppingCart fontSize="small" />
+        )}
+      </Button>
+    )
+  }
+
   return (
     <Button
       variant="contained"
@@ -64,7 +90,6 @@ export default function AddItemToCart({ product }) {
       ) : (
         <>
           Add product
-          <AddShoppingCart />
           {quantity > 0 && <Typography component="p">({quantity})</Typography>}
         </>
       )}

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
+import EditIcon from '@mui/icons-material/Edit'
 import { Box, Button, CircularProgress, Modal, Typography } from '@mui/material'
 import { useMutation } from '@tanstack/react-query'
 import { postFiles } from 'helpers/products/postFiles'
@@ -12,7 +13,7 @@ import {
 
 import useAddProductForm from '../../hooks/useAddProductForm'
 
-const EditProductButton = ({ id, product, refreshData }) => {
+const EditProductButton = ({ id, product, refreshData, matches }) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -41,7 +42,7 @@ const EditProductButton = ({ id, product, refreshData }) => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: { xs: 350, md: 400 },
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -49,8 +50,6 @@ const EditProductButton = ({ id, product, refreshData }) => {
   }
 
   const { inputInfo, handleInputChange, handleInputImg } = useAddProductForm()
-
-  console.log(inputInfo)
 
   // Different submit from the useAddProductForm hook since we need put method instead of post
   const handleSubmit = async (e) => {
@@ -85,6 +84,82 @@ const EditProductButton = ({ id, product, refreshData }) => {
         productID: id
       })
     }
+  }
+
+  if (!matches) {
+    return (
+      <div>
+        <Button
+          variant="contained"
+          size="small"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textTransform: 'none',
+            color: 'white',
+            gap: '.25rem',
+            width: '25px',
+            height: '25px'
+          }}
+          onClick={handleOpen}
+        >
+          <EditIcon />
+        </Button>
+        <Modal open={open} onClose={handleClose}>
+          <Box sx={style}>
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem'
+              }}
+            >
+              <Typography id="modal-modal-title" variant="h3" component="h3">
+                Edit your product
+              </Typography>
+
+              <PrimaryInput
+                label="Name"
+                placeholder="New name (optional)"
+                name="productName"
+                onChange={handleInputChange}
+                type="text"
+              />
+              <PrimaryInput
+                label="Description"
+                placeholder="New description (optional)"
+                name="productDescription"
+                onChange={handleInputChange}
+                type="text"
+              />
+              <PrimaryInput
+                label="Product Price"
+                placeholder="New price (optional)"
+                name="productPrice"
+                onChange={handleInputChange}
+                type="text"
+              />
+              <PrimaryInput
+                label="Product Image"
+                placeholder="New image (optional)"
+                name="productImg"
+                onChange={handleInputImg}
+                type="file"
+              />
+              <PrimaryButton>
+                {mutation.isLoading || isImageLoading ? (
+                  <CircularProgress size={28} color="action" />
+                ) : (
+                  'Edit product'
+                )}
+              </PrimaryButton>
+            </form>
+          </Box>
+        </Modal>
+      </div>
+    )
   }
 
   return (
