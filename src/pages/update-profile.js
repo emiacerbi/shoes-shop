@@ -1,30 +1,61 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import ChangePhotoButton from '@components/ChangePhotoButton/ChangePhotoButton'
 import Form from '@components/Form/Form'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
+import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
-import { Avatar, Button, Typography } from '@mui/material'
+import { Avatar, Button, Modal, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import { getUserInfo } from 'helpers/user-auth/getUserInfo'
+import useUpdateProfileForm from 'hooks/useUpdateProfileForm'
 import Head from 'next/head'
+import { getToken } from 'next-auth/jwt'
 import { signOut } from 'next-auth/react'
 
 import { theme } from '../styles/theme'
 
-export default function UpdateProfile() {
-  const [settings, setSettings] = useState(true)
-  const [pages, setPages] = useState([])
-  const [links, setLinks] = useState([])
-  console.log(pages)
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
-  useEffect(() => {
-    setPages(['Home', 'Bag', 'Add Product', 'Search'])
-    setLinks(['/home', '/bag', '/add-product', '/search-results'])
-  }, [])
+export async function getServerSideProps(context) {
+  const token = await getToken(context)
+
+  const userRes = await getUserInfo(token.accessToken)
+  const userData = userRes.data
+
+  console.log(userData)
+
+  return {
+    props: {
+      userData
+    }
+  }
+}
+
+export default function UpdateProfile({ userData }) {
+  const [settings, setSettings] = useState(true)
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
   function handleSettings() {
     return setSettings(!settings)
+  }
+  const { handleInputChange, handleSubmit } = useUpdateProfileForm()
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+    gap: '1rem'
   }
 
   return (
@@ -32,7 +63,12 @@ export default function UpdateProfile() {
       <Head>
         <title>Profile - Shoes Shop</title>
       </Head>
-      <HeaderLoggedIn pages={pages} links={links} cart={true} burger={true} />
+      <HeaderLoggedIn
+        pages={['Home', 'Bag', 'Add Product', 'Search']}
+        links={['/home', '/bag', '/add-product', '/search-results']}
+        cart={true}
+        burger={true}
+      />
       <Box sx={{ display: 'flex', alignItems: 'baseline', mt: 4 }}>
         <Box
           sx={{
@@ -142,7 +178,13 @@ export default function UpdateProfile() {
               ml: '10px'
             }}
           >
-            <Avatar src="/profile_img.png" sx={{ width: 100, height: 100 }} />
+            <Avatar
+              src={`${baseURL + userData?.avatar?.url}`}
+              sx={{ width: 100, height: 100, bgcolor: 'primary' }}
+              alt="User"
+            >
+              B
+            </Avatar>
             <Box
               sx={{
                 ml: '50px',
@@ -150,20 +192,7 @@ export default function UpdateProfile() {
                 display: 'grid'
               }}
             >
-              <Button
-                variant="outlined"
-                sx={{
-                  color: '#FE645E',
-                  fontFamily: 'Work Sans',
-                  fontSize: '11px',
-                  width: '120px',
-                  borderRadius: '6px',
-                  height: '35px',
-                  mb: '16px'
-                }}
-              >
-                Change photo
-              </Button>
+              <ChangePhotoButton userData={userData} />
               <Button
                 sx={{
                   color: '#FFFFFF',
@@ -211,19 +240,65 @@ export default function UpdateProfile() {
               marginTop: '20px'
             }}
           >
-            <PrimaryInput label="Name" placeholder={'Jane'}></PrimaryInput>
             <PrimaryInput
-              label="Surname"
-              placeholder={'Meldrum'}
+              label="First Name"
+              name="firstName"
+              placeholder={'John'}
+              onChange={handleInputChange}
             ></PrimaryInput>
             <PrimaryInput
-              label="Email"
-              placeholder={'example@mail.com'}
+              label="Last Name"
+              name="lastName"
+              placeholder={'Doe'}
+              onChange={handleInputChange}
+            ></PrimaryInput>
+            <PrimaryInput
+              label="User Name"
+              name="username"
+              placeholder={'JohnDoe95'}
+              onChange={handleInputChange}
             ></PrimaryInput>
             <PrimaryInput
               label="Phone Number"
-              placeholder={'(949) 354-2574)'}
+              name="phoneNumber"
+              placeholder={'Phone Number'}
+              onChange={handleInputChange}
             ></PrimaryInput>
+            <Button
+              sx={{
+                color: 'white',
+                textTransform: 'none',
+                maxWidth: '436px',
+                fontSize: { sx: '12px', sm: '16px' },
+                width: '100%'
+              }}
+              variant="contained"
+              onClick={handleOpen}
+            >
+              Save
+            </Button>
+            <Modal open={open} onClose={handleClose}>
+              <Box sx={modalStyle}>
+                <Typography id="modal-modal-title" variant="h3" component="h3">
+                  Confirm Credentials
+                </Typography>
+                <PrimaryInput
+                  isRequired={true}
+                  label="You need to confirm your email and password"
+                  placeholder="email"
+                  name="email"
+                  onChange={handleInputChange}
+                  type="email"
+                />
+                <PrimaryInput
+                  placeholder="User password"
+                  name="password"
+                  onChange={handleInputChange}
+                  type="password"
+                />
+                <PrimaryButton onClick={handleSubmit}>Save</PrimaryButton>
+              </Box>
+            </Modal>
           </Form>
         </Box>
       </Box>
