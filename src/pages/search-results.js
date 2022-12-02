@@ -94,6 +94,7 @@ export default function SearchResults({
   const [screenWidth, setScreenWidth] = useState(0)
 
   const handleSearchInput = (e) => {
+    setIsLoading(true)
     e.preventDefault()
     const value = e.target.searchinput.value
 
@@ -106,11 +107,12 @@ export default function SearchResults({
         }
       }
     }
-    setQueryObj(newQueryObj)
+
     router.replace({
       pathname: '/search-results',
       query: qs.stringify(newQueryObj)
     })
+    setQueryObj(newQueryObj)
   }
 
   const handleFilters = (e, key, value) => {
@@ -225,6 +227,7 @@ export default function SearchResults({
         burger={true}
         opacity={opacity}
         handleInputSubmit={handleSearchInput}
+        shouldSearchInputBeDisabled={isLoading}
       />
 
       <Box

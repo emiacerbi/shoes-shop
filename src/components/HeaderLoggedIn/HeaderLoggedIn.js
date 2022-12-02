@@ -12,7 +12,8 @@ function HeaderLoggedIn({
   links,
   cart,
   burger,
-  handleInputSubmit = () => {}
+  handleInputSubmit = () => {},
+  shouldSearchInputBeDisabled = true
 }) {
   const [searchInput, setSearchInput] = useState(false) // Hook to show/hide the search input
   const theme = useTheme()
@@ -113,11 +114,12 @@ function HeaderLoggedIn({
               }}
               type="text"
               placeholder="Search"
+              disabled={shouldSearchInputBeDisabled}
             />
           </Box>
         </Box>
         {cart && (
-          <Box sx={{ marginLeft: '1rem' }}>
+          <Box sx={{ marginLeft: 0.5 }}>
             <Cart />{' '}
           </Box>
         )}
@@ -142,7 +144,7 @@ function HeaderLoggedIn({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'end',
-            gap: '1rem'
+            gap: '0.5rem'
           }}
         >
           {cart && <Cart />}
@@ -156,15 +158,22 @@ function HeaderLoggedIn({
             onClick={handleSearchInput}
           />
           {searchInput && (
-            <>
+            <Box
+              component={'form'}
+              onSubmit={handleInputSubmit}
+              sx={{
+                display: 'flex'
+              }}
+            >
               <InputBase
+                name="searchinput"
                 sx={{
                   border: '1px solid #494949',
                   borderRadius: '42px',
                   minWidth: { xs: 70, sm: 150 },
                   height: '30px',
                   paddingLeft: '8px',
-
+                  mx: 1,
                   input: {
                     '&::placeholder': {
                       fontSize: '1rem',
@@ -174,23 +183,22 @@ function HeaderLoggedIn({
                 }}
                 type="text"
                 placeholder="Search"
+                disabled={shouldSearchInputBeDisabled}
               />
-              <form onSubmit={(e) => e.preventDefault()}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  sx={{
-                    borderRadius: '10px',
-                    color: '#ffffff',
-                    minWidth: '30px',
-                    padding: 0
-                  }}
-                >
-                  OK
-                </Button>
-              </form>
-            </>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{
+                  borderRadius: '6px',
+                  color: '#ffffff',
+                  minWidth: '30px',
+                  padding: 0
+                }}
+              >
+                OK
+              </Button>
+            </Box>
           )}
           {burger && <BurgerMenu pages={pages} links={links} />}
         </Box>
