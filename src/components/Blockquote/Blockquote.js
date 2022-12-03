@@ -1,13 +1,13 @@
-import React from 'react'
-import { Typography } from '@mui/material'
+import { useState } from 'react'
+import ReactSimplyCarousel from 'react-simply-carousel'
+import Quote from '@components/Quote/Quote'
+import Wedge from '@components/Wedge/Wedge'
 import { Box, useTheme } from '@mui/system'
 import Image from 'next/image'
 
-import Star from '../Star/Star'
-import Wedge from '../Wedge/Wedge'
-
 const Blockquote = () => {
   const theme = useTheme()
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0)
 
   return (
     <Box
@@ -46,98 +46,59 @@ const Blockquote = () => {
         }}
       >
       </Box>
-      <Box
-        sx={{
-          fontSize: '20px',
-          color: '#0D0D0D',
-          maxWidth: '450px',
-          position: 'relative',
-          paddingBlock: '2rem',
-          [theme.breakpoints.up('lg')]: {
-            fontSize: '25px',
-            maxWidth: '550px'
+
+      <ReactSimplyCarousel
+        activeSlideIndex={activeSlideIndex}
+        onRequestChange={setActiveSlideIndex}
+        itemsToShow={1}
+        itemsToScroll={1}
+        containerProps={{
+          style: {
+            position: 'relative',
+            gap: '2rem'
           }
         }}
+        forwardBtnProps={{
+          style: {
+            alignSelf: 'center',
+            width: '38px',
+            height: '38px',
+            background: 'transparent',
+            borderRadius: '50%',
+            border: '2px solid white',
+            fontSize: '1.5rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            transform: 'rotate(180deg)'
+          },
+          children: <Wedge />
+        }}
+        backwardBtnProps={{
+          style: {
+            alignSelf: 'center',
+            width: '38px',
+            height: '38px',
+            background: 'transparent',
+            borderRadius: '50%',
+            border: '2px solid white',
+            fontSize: '1.5rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer'
+          },
+          children: <Wedge />
+        }}
+        speed={400}
+        easing="linear"
       >
-        <Box
-          component='button'
-          sx={{
-            width: '38px',
-            height: '38px',
-            backgroundColor: 'transparent',
-            position: 'absolute',
-            bottom: '10px',
-            right: '75px',
-            borderRadius: '50%',
-            border: '2px solid white',
-            fontSize: '1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            [theme.breakpoints.up('xl')]: {
-              top: '40px',
-              right: '-5px'
-            }
-          }}
-        >
-          <Wedge />
-        </Box>
-        <Box
-          component='button'
-          sx={{
-            width: '38px',
-            height: '38px',
-            backgroundColor: 'transparent',
-            position: 'absolute',
-            bottom: '10px',
-            right: '15px',
-            borderRadius: '50%',
-            border: '2px solid white',
-            fontSize: '1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            transform: 'rotate(180deg)',
-            zIndex: 3,
-            [theme.breakpoints.up('xl')]: {
-              top: '40px',
-              right: '-70px'
-            }
-          }}
-
-        >
-          <Wedge />
-        </Box>
-            &quot;Lorem Ipsum is a really great company because the team is passionate about the projects they produce, the people they work with, the quality of the work they do.&quot;`
-        <Typography
-          variant='p'
-          sx={{
-            marginTop: '1rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '.75rem',
-            fontWeight: '600',
-            color: '#0D0D0D',
-            zIndex: 1,
-            [theme.breakpoints.up('lg')]: {
-              fontSize: '25px'
-            }
-          }}
-        >
-      John Stone <Star /><Star /><Star /><Star /><Star />
-        </Typography>
-
-        <Typography
-          sx={{
-            color: '#797979',
-            zIndex: 1
-          }}
-        >
-      Ukraine, Chernivtsi
-        </Typography>
-      </Box>
+        <Quote author='John Stone' />
+        <Quote author='John Doe'/>
+        <Quote author='Jane Doe'/>
+        <Quote author='John Stone'/>
+      </ReactSimplyCarousel>
     </Box>
   )
 }

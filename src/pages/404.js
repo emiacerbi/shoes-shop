@@ -1,25 +1,32 @@
 import ErrorPage from '@components/ErrorPage/ErrorPage'
-import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
+import HeaderBeforeLogin from '@components/Header/Header'
 import { Box } from '@mui/material'
+import Head from 'next/head'
 
-export default function Error404 () {
+export default function Error404() {
   return (
-
-    <Box
-      sx={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
+    <>
+      <Head>
+        <title>Error 404</title>
+      </Head>
 
       <Box
         sx={{
-          display: { xs: 'none', md: 'flex' }
-        }}>
-        <HeaderLoggedIn links={['Home', 'For women', 'For men', 'Accesories', 'Sale']} pages={['Home', 'For women', 'For men', 'Accesories', 'Sale']} />
-      </Box>
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <Box
+          sx={{
+            display: { xs: 'none', md: 'flex' }
+          }}
+        >
+          <HeaderBeforeLogin />
+        </Box>
 
-      <ErrorPage/>
-    </Box>
+        <ErrorPage />
+      </Box>
+    </>
   )
 }

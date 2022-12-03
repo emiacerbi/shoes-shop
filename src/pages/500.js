@@ -1,11 +1,17 @@
 import HeaderBeforeLogin from '@components/Header/Header'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import { Box, Typography } from '@mui/material'
+import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 
-export default function Custom500 () {
+export default function Custom500() {
   return (
     <>
+      <Head>
+        <title>Error 500</title>
+      </Head>
+
       <Box
         sx={{
           display: { xs: 'none', sm: 'block' }
@@ -14,7 +20,7 @@ export default function Custom500 () {
         <HeaderBeforeLogin />
       </Box>
       <Box
-        component='main'
+        component="main"
         sx={{
           height: { xs: '100vh', sm: 'calc(100vh - 68px)' },
           display: 'flex',
@@ -27,11 +33,11 @@ export default function Custom500 () {
         }}
       >
         <Image
-          src='/500bg.png'
-          alt='500 error - background picture'
-          layout='fill'
+          src="/500bg.png"
+          alt="500 error - background picture"
+          layout="fill"
           style={{ zIndex: -1 }}
-          objectFit='cover'
+          objectFit="cover"
         />
         <Box
           sx={{
@@ -39,12 +45,12 @@ export default function Custom500 () {
             width: '100%',
             textAlign: 'center'
           }}
-          component='section'
+          component="section"
         >
-          <Typography variant='h1' sx={{ color: 'white' }}>
+          <Typography variant="h1" sx={{ color: 'white' }}>
             Oh snap!
           </Typography>
-          <Typography variant='p' sx={{ color: 'white' }}>
+          <Typography variant="p" sx={{ color: 'white' }}>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
             nonummy nibh minim veniam.
           </Typography>
@@ -55,7 +61,9 @@ export default function Custom500 () {
             maxWidth: '280px'
           }}
         >
-          <PrimaryButton>Back Home</PrimaryButton>
+          <Link href="/home">
+            <PrimaryButton>Back Home</PrimaryButton>
+          </Link>
         </Box>
       </Box>
     </>

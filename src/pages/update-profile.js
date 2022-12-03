@@ -1,36 +1,87 @@
 import { useEffect, useState } from 'react'
+import ChangePhotoButton from '@components/ChangePhotoButton/ChangePhotoButton'
 import Form from '@components/Form/Form'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import BarItem from '@components/NavBarItem/NavBarItem'
+import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
-import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
-import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined'
-import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined'
-import { Avatar, Button, Typography } from '@mui/material'
+import LogoutIcon from '@mui/icons-material/Logout'
+import { Avatar, Button, Modal, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import { getUserInfo } from 'helpers/user-auth/getUserInfo'
+import useUpdateProfileForm from 'hooks/useUpdateProfileForm'
+import Head from 'next/head'
+import { getToken } from 'next-auth/jwt'
+import { signOut } from 'next-auth/react'
 
 import { theme } from '../styles/theme'
 
-export default function UpdateProfile () {
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL
+
+export async function getServerSideProps(context) {
+  const token = await getToken(context)
+
+  const userRes = await getUserInfo(token.accessToken)
+  const userData = userRes.data
+
+  console.log(userData)
+
+  return {
+    props: {
+      userData
+    }
+  }
+}
+
+export default function UpdateProfile({ userData }) {
   const [settings, setSettings] = useState(true)
-  const [pages, setPages] = useState([])
-  const [links, setLinks] = useState([])
-  console.log(pages)
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
-  useEffect(() => {
-    setPages(['Home', 'For women', 'For Men', 'Accesories', 'Sale'])
-    setLinks(['/', '/for-women', '/for-men', '/accesories', '/sale'])
-  }, [])
-
-  function handleSettings () {
+  function handleSettings() {
     return setSettings(!settings)
   }
+  const { handleInputChange, handleSubmit, inputInfo, setInputInfo } =
+    useUpdateProfileForm()
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem'
+  }
+
+  useEffect(() => {
+    setInputInfo({
+      ...inputInfo,
+      username: userData.username,
+      email: userData.email,
+      id: userData.id
+    })
+  }, [])
 
   return (
     <>
-      <HeaderLoggedIn pages={pages} links={links} cart={true} burger={true}/>
-      <Box sx={{ display: 'flex', alignItems: 'baseline', mt: 4 }} >
+      <Head>
+        <title>Profile - Shoes Shop</title>
+      </Head>
+      <HeaderLoggedIn
+        pages={['Home', 'Bag', 'Add Product', 'Search']}
+        links={['/home', '/bag', '/add-product', '/search-results']}
+        cart={true}
+        burger={true}
+      />
+      <Box sx={{ display: 'flex', alignItems: 'baseline', mt: 4 }}>
         <Box
           sx={{
             display: { xs: 'none' },
@@ -59,97 +110,101 @@ export default function UpdateProfile () {
                 }
               }}
             />
-            <Typography sx={{
-              fontWeight: '500',
-              fontSize: '20px',
-              lineHeight: '23px',
-              ml: '80px',
-              cursor: 'pointer'
-            }}
-            > Settings </Typography>
+            <Typography
+              sx={{
+                fontWeight: '500',
+                fontSize: '20px',
+                lineHeight: '23px',
+                ml: '80px',
+                cursor: 'pointer'
+              }}
+            >
+              {' '}
+              Settings{' '}
+            </Typography>
           </Box>
           {settings && (
             <>
-              <Box sx={{
-                width: '320px',
-                color: '#EAECF0',
-                border: '1px solid',
-                mt: '40px'
-              }}
+              <Box
+                sx={{
+                  width: '320px',
+                  color: '#EAECF0',
+                  border: '1px solid',
+                  mt: '40px'
+                }}
               ></Box>
-              <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}
+              <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
+                <AccountCircleOutlinedIcon sx={{ color: '#6E7278' }} />
+                <BarItem name="My Profile" />
+              </Box>
+              <Box
+                onClick={() => signOut()}
+                sx={{
+                  display: 'flex',
+                  mt: '30px',
+                  ml: '46px',
+                  cursor: 'pointer'
+                }}
               >
-                <AccountCircleOutlinedIcon sx={{ color: '#6E7278' }}/>
-                <BarItem name="My Profile"/>
-              </Box>
-
-              <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-                <DashboardCustomizeOutlinedIcon sx={{ color: '#6E7278' }}/>
-                <BarItem name="Preferences"/>
-              </Box>
-
-              <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-                <GppGoodOutlinedIcon sx={{ color: '#6E7278' }}/>
-                <BarItem name="Security"/>
-              </Box>
-
-              <Box sx={{ display: 'flex', mt: '30px', ml: '46px' }}>
-                <AccountBalanceWalletOutlinedIcon sx={{ color: '#6E7278' }}/>
-                <BarItem name="My Wallet"/>
+                <BarItem name="Log out">
+                  {' '}
+                  <LogoutIcon sx={{ color: '#6E7278' }} />
+                </BarItem>
               </Box>
             </>
           )}
         </Box>
 
-        <Box sx={{
-          [theme.breakpoints.down('sm')]: {
-            maxWidth: '350px',
-            width: '100%',
-            ml: 'auto',
-            mr: 'auto '
-
-          },
-          [theme.breakpoints.up('sm')]: {
-            width: '400px'
-
-          }
-        }}
-        >
-          <Typography sx={{
-            color: '#000000',
-            fontFamily: 'Work Sans',
-            fontStyle: 'normal',
-            fontWeight: '500',
-            fontSize: '30px',
-            lineHeight: '35px',
-            ml: '10px'
+        <Box
+          sx={{
+            [theme.breakpoints.down('sm')]: {
+              maxWidth: '350px',
+              width: '100%',
+              ml: 'auto',
+              mr: 'auto '
+            },
+            [theme.breakpoints.up('sm')]: {
+              width: '400px'
+            }
           }}
-          > My Profile </Typography>
-          <Box sx={{
-            display: 'flex',
-            alignItems: 'center',
-            mt: 4,
-            ml: '10px'
-          }} >
-            <Avatar src="/profile_img.png" sx={{ width: 100, height: 100 }}/>
-            <Box sx={{
-              ml: '50px',
-              height: '80px',
-              display: 'grid'
-            }} >
-              <Button variant="outlined"
-                sx={{
-                  color: '#FE645E',
-                  fontFamily: 'Work Sans',
-                  fontSize: '11px',
-                  width: '120px',
-                  borderRadius: '6px',
-                  height: '35px',
-                  mb: '16px'
-                }}
-              >
-                Change photo
-              </Button>
+        >
+          <Typography
+            sx={{
+              color: '#000000',
+              fontFamily: 'Work Sans',
+              fontStyle: 'normal',
+              fontWeight: '500',
+              fontSize: '30px',
+              lineHeight: '35px',
+              ml: '10px'
+            }}
+          >
+            {' '}
+            My Profile{' '}
+          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              mt: 4,
+              ml: '10px'
+            }}
+          >
+            <Avatar
+              src={`${baseURL + userData?.avatar?.url}`}
+              sx={{ width: 100, height: 100, bgcolor: 'primary' }}
+              alt="User"
+            >
+              B
+            </Avatar>
+            <Box
+              sx={{
+                ml: '50px',
+                height: '80px',
+                display: 'grid'
+              }}
+            >
+              <ChangePhotoButton userData={userData} />
               <Button
                 sx={{
                   color: '#FFFFFF',
@@ -160,7 +215,7 @@ export default function UpdateProfile () {
                   height: '30px',
                   boxShadow: 'none'
                 }}
-                variant='contained'
+                variant="contained"
               >
                 Delete
               </Button>
@@ -197,10 +252,65 @@ export default function UpdateProfile () {
               marginTop: '20px'
             }}
           >
-            <PrimaryInput label='Name' placeholder={'Jane'} ></PrimaryInput>
-            <PrimaryInput label='Surname'placeholder={'Meldrum'}></PrimaryInput>
-            <PrimaryInput label= "Email" placeholder={'example@mail.com'}></PrimaryInput>
-            <PrimaryInput label='Phone Number' placeholder={'(949) 354-2574)'}></PrimaryInput>
+            <PrimaryInput
+              label="First Name"
+              name="firstName"
+              placeholder={'John'}
+              onChange={handleInputChange}
+            ></PrimaryInput>
+            <PrimaryInput
+              label="Last Name"
+              name="lastName"
+              placeholder={'Doe'}
+              onChange={handleInputChange}
+            ></PrimaryInput>
+            <PrimaryInput
+              label="User Name"
+              name="username"
+              placeholder={'JohnDoe95'}
+              onChange={handleInputChange}
+            ></PrimaryInput>
+            <PrimaryInput
+              label="Phone Number"
+              name="phoneNumber"
+              placeholder={'Phone Number'}
+              onChange={handleInputChange}
+            ></PrimaryInput>
+            <Button
+              sx={{
+                color: 'white',
+                textTransform: 'none',
+                maxWidth: '436px',
+                fontSize: { sx: '12px', sm: '16px' },
+                width: '100%'
+              }}
+              variant="contained"
+              onClick={handleOpen}
+            >
+              Save
+            </Button>
+            <Modal open={open} onClose={handleClose}>
+              <Box sx={modalStyle}>
+                <Typography id="modal-modal-title" variant="h3" component="h3">
+                  Confirm Credentials
+                </Typography>
+                <PrimaryInput
+                  isRequired={true}
+                  label="You need to confirm your email and password"
+                  placeholder="email"
+                  name="email"
+                  onChange={handleInputChange}
+                  type="email"
+                />
+                <PrimaryInput
+                  placeholder="User password"
+                  name="password"
+                  onChange={handleInputChange}
+                  type="password"
+                />
+                <PrimaryButton onClick={handleSubmit}>Save</PrimaryButton>
+              </Box>
+            </Modal>
           </Form>
         </Box>
       </Box>

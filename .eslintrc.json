@@ -1,11 +1,13 @@
 {
   "extends": ["next/core-web-vitals", "standard"],
-  "plugins": ["react", "simple-import-sort"], 
+  "plugins": ["react", "simple-import-sort"],
   "rules": {
-    "indent": ["error", 2],
+    "indent": "off",
     "@next/next/no-img-element": "off",
     "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error"
+    "simple-import-sort/exports": "error",
+    "space-before-function-paren": "off",
+    "multiline-ternary": "off"
   },
 
   "overrides": [
@@ -35,5 +37,4 @@
       }
     }
   ]
-
 }

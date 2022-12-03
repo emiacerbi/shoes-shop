@@ -3,9 +3,9 @@ import { Button } from '@mui/material'
 const PrimaryButton = ({ children, onClick, maxWidth = '436px' }) => {
   return (
     <Button
-      type='submit'
+      type="submit"
       onClick={onClick}
-      variant='contained'
+      variant="contained"
       sx={{
         color: 'white',
         textTransform: 'none',

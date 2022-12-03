@@ -1,123 +1,173 @@
 import { useState } from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { Divider, FormControl, Grid, MenuItem, Select, Stack, Typography, useTheme } from '@mui/material'
+import {
+  Button,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+  useTheme
+} from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
 
-const ChartShoeCard = ({ img, alt, name, price, gender }) => {
+const ChartShoeCard = ({
+  img,
+  alt,
+  name,
+  price,
+  deleteShoe,
+  id,
+  changeQuantity,
+  description,
+  initialQuantity
+}) => {
   const theme = useTheme()
 
-  const [size, setSize] = useState('')
-
+  const [quantity, setQuantity] = useState(initialQuantity)
+  const [disabled, setDisabled] = useState(false)
   const handleChange = (event) => {
-    setSize(event.target.value)
+    let value = event.target.value
+    const valueLength = value.length
+
+    if (valueLength && value.match(/[0-9]/g).length === valueLength) {
+      // if all digits are numbers
+      const aux = parseInt(event.target.value)
+      setQuantity(aux)
+      changeQuantity(id, aux)
+    }
+
+    if (valueLength === 0) {
+      setQuantity(valueLength)
+      value = quantity
+      changeQuantity(id, valueLength)
+    }
+  }
+
+  const handleSum = () => {
+    quantity < 0 ? setDisabled(true) : setDisabled(false)
+    setQuantity(quantity + 1)
+    changeQuantity(id, quantity + 1)
+  }
+
+  const handleSubstraction = () => {
+    quantity === 1 ? setDisabled(true) : setDisabled(false)
+    setQuantity(quantity - 1)
+    changeQuantity(id, quantity - 1)
   }
 
   return (
-
-    <Grid container
-    >
+    <Grid container>
       <Grid
-        item xs={4} sm={3}
+        item
+        xs={4}
+        sm={3}
         sx={{
           display: 'flex',
-          height: '100px',
-          [theme.breakpoints.up('sm')]: {
-            height: '200px'
-          }
+          height: { xs: '100px', sm: '200px' }
         }}
       >
-        <Box sx={{
-          minWidth: '105px',
-          width: '90%',
-          position: 'relative',
-          [theme.breakpoints.up('sm')]: {
-            height: '100%'
-          }
-        }}>
-          <Image src={img} alt={alt} layout='fill' objectFit="cover" priority />
+        <Box
+          sx={{
+            minWidth: '105px',
+            width: '90%',
+            position: 'relative',
+            [theme.breakpoints.up('sm')]: {
+              height: '100%'
+            }
+          }}
+        >
+          <Image src={img} alt={alt} layout="fill" objectFit="cover" priority />
         </Box>
       </Grid>
 
-      <Grid item xs={5} sm={6}
+      <Grid
+        item
+        xs={5}
+        sm={6}
         sx={{ display: 'flex', flexDirection: 'column' }}
       >
-        <Typography variant='h3'>{name}</Typography>
-        <Typography variant='subtitle1'>{gender} {'\''}s Shoes</Typography>
+        <Typography variant="h3">{name}</Typography>
+        <Typography variant="subtitle1">{description}</Typography>
 
         <Box sx={{ marginTop: '.1rem' }} />
-        <Typography sx={{
-          display: 'none',
-          [theme.breakpoints.up('sm')]: {
-            display: 'block'
-          }
-        }} variant='main'>In stock</Typography>
+        <Typography
+          sx={{ display: { xs: 'none', sm: 'block' } }}
+          variant="main"
+        >
+          In stock
+        </Typography>
 
-        <Box sx={{ marginTop: 'auto' }}>
-          <FormControl size='small' sx={{ m: 0, minWidth: 120 }}>
-            <Select
-              value={size}
-              onChange={handleChange}
-              displayEmpty
-              inputProps={{ 'aria-label': 'Without label' }}
-              sx={{ height: '25px', minWidth: 120, fontSize: '12px', boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
-
-            >
-              <MenuItem value="">
-                Quantity
-              </MenuItem>
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-              <MenuItem value={4}>4</MenuItem>
-              <MenuItem value={5}>5</MenuItem>
-              <MenuItem value={6}>6</MenuItem>
-              <MenuItem value={7}>7</MenuItem>
-            </Select>
-          </FormControl>
+        <Box
+          sx={{
+            marginTop: 'auto',
+            minWidth: 120,
+            display: 'flex',
+            alignItems: 'flex-end'
+          }}
+        >
+          <Button
+            variant="outlined"
+            onClick={handleSubstraction}
+            disabled={disabled}
+            sx={{ mx: 1, height: '80%', width: '30%', maxWidth: '50px' }}
+          >
+            -
+          </Button>
+          <TextField
+            inputProps={{ inputMode: 'text', pattern: '[0-9]*' }}
+            value={quantity}
+            onChange={handleChange}
+            label="Quantity"
+            variant="standard"
+            sx={{
+              width: '100%',
+              maxWidth: '100px'
+            }}
+          />
+          <Button
+            sx={{ mx: 1, height: '80%', width: '30%', maxWidth: '50px' }}
+            variant="outlined"
+            onClick={handleSum}
+          >
+            +
+          </Button>
         </Box>
       </Grid>
 
       <Grid
         item
         xs={3}
-        sx={{ display: 'flex', flexDirection: 'column', pb: '.25rem', alignItems: 'flex-end' }}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-end'
+        }}
       >
-        <Typography variant='h3'>{price}</Typography>
+        <Typography variant="h3">${price}</Typography>
         <Stack
           sx={{
             marginTop: 'auto',
-            flexDirection: 'column',
-            gap: '.25rem',
-            [theme.breakpoints.up('md')]: {
-              flexDirection: 'row',
-              gap: '1rem'
-            }
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: { xs: '.25rem', md: '1rem' }
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: '.25rem', opacity: '.5' }}>
-            <FavoriteBorderIcon color='common' fontSize='small' />
-            <Typography variant='p'>Save</Typography>
-          </Box>
-          <Divider
-            orientation='vertical'
+          <Box
             sx={{
-              display: 'none',
-              [theme.breakpoints.up('md')]: {
-                display: 'block'
-              }
+              display: 'flex',
+              alignItems: 'center',
+              gap: '.25rem',
+              opacity: '.5',
+              cursor: 'pointer'
             }}
-
-          />
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: '.25rem', opacity: '.5' }}>
-            <DeleteOutlineIcon color='common' fontSize='small' />
-            <Typography variant='p'>Delete</Typography>
+            onClick={() => deleteShoe(id)}
+          >
+            <DeleteOutlineIcon color="common" fontSize="small" />
+            <Typography variant="p">Delete</Typography>
           </Box>
         </Stack>
       </Grid>
-
     </Grid>
-
   )
 }
 

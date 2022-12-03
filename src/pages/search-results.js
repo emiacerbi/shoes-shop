@@ -1,49 +1,248 @@
-import React, { useEffect, useState } from 'react'
-import CheckBox from '@components/CheckBox/CheckBox'
-import CheckBoxBrand from '@components/CheckBoxBrand/CheckBoxBrand'
-import CheckBoxSizes from '@components/CheckBoxSizes/CheckBoxSizes'
-import FilterTitle from '@components/FilterTitle/FilterTitle'
+import { useEffect, useState } from 'react'
+import CustomFilter from '@components/CustomFilter/CustomFilter'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
+import Loading from '@components/Loading/Loading'
 import ProductCard from '@components/ProductCard/ProductCard'
+import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import SeparationLine from '@components/SeparationLine/SeparationLine'
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import { Box, InputBase, Typography } from '@mui/material'
-import { theme } from '@styles/theme'
+import { Box, Grid, Typography } from '@mui/material'
+import { useTheme } from '@mui/system'
+import { useQuery } from '@tanstack/react-query'
 import { getBrands } from 'helpers/products/getBrands'
 import { getColors } from 'helpers/products/getColors'
 import { getGenders } from 'helpers/products/getGenders'
+import { getProducts } from 'helpers/products/getProducts'
 import { getSizes } from 'helpers/products/getSizes'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-export const getStaticProps = async () => {
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+
+const BASE_QUERY = {
+  filters: {
+    userID: {
+      id: {
+        $notNull: true
+      }
+    },
+    teamName: {
+      $eq: 'ea-team'
+    }
+  },
+  populate: '*',
+  pagination: {
+    page: 1,
+    pageSize: 100
+  }
+}
+
+export const getServerSideProps = async (context) => {
   const genders = await getGenders()
-
   const brands = await getBrands()
-
   const colors = await getColors()
-
   const sizes = await getSizes()
 
   return {
     props: {
-      brands,
-      genders,
-      colors,
-      sizes
+      brands: brands.data.map((brand) => brand.attributes.name),
+      genders: genders.data.map((gender) => gender.attributes.name),
+      colors: colors.data.map((color) => color.attributes.name),
+      sizes: sizes.data.map((size) => size.attributes.value),
+      queryParams: context.query
     }
   }
 }
 
-export default function SearchResults ({ genders, brands, colors, sizes }) {
+export default function SearchResults({
+  genders,
+  brands,
+  colors,
+  sizes,
+  queryParams
+}) {
+  const router = useRouter()
   // Filters
   const [showFilters, setShowFilters] = useState(false) // State to show/hide the side filters
-  const [filterGender, setFilterGender] = useState(true) // State to show/hide Gender filters
-  const [filterBrand, setFilterBrand] = useState(true) // State to show/hide Brand filters
-  const [filterPrice, setFilterPrice] = useState(true) // State to show/hide Price filters
-  const [filterColor, setFilterColor] = useState(true) // State to show/hide Color filters
-  const [filterSize, setFilterSize] = useState(true) // State to show/hide Color filters
+
+  const theme = useTheme()
+
+  const [filtersObj, setFiltersObj] = useState({
+    color: [],
+    gender: [],
+    brand: [],
+    size: []
+  })
+
+  const qs = require('qs')
+  const [queryObj, setQueryObj] = useState(BASE_QUERY)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const { data } = useQuery({
+    queryKey: ['products', router],
+    queryFn: () => {
+      const isEmpty = Object.keys(queryParams).length === 0
+      return getProducts(
+        `?${qs.stringify(!isEmpty ? queryParams : BASE_QUERY)}`
+      )
+    },
+    onSettled: () => {
+      setIsLoading(false)
+    }
+  })
 
   const [opacity, setOpacity] = useState('')
   const [screenWidth, setScreenWidth] = useState(0)
+
+  const handleSearchInput = (e) => {
+    setIsLoading(true)
+    e.preventDefault()
+    const value = e.target.searchinput.value
+
+    const newQueryObj = {
+      ...queryObj,
+      filters: {
+        ...queryObj.filters,
+        name: {
+          $containsi: value
+        }
+      }
+    }
+
+    router.replace({
+      pathname: '/search-results',
+      query: qs.stringify(newQueryObj)
+    })
+    setQueryObj(newQueryObj)
+  }
+
+  useEffect(() => {
+    // check router query to set filters obj
+    const newFiltersObj = {
+      ...filtersObj
+    }
+
+    // iterate over the query object and check if brands items are in the query
+    brands.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.brand.includes(element)) {
+        newFiltersObj.brand.push(element)
+      }
+    })
+
+    // iterate over the query object and check if colors items are in the query
+    colors.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.color.includes(element)) {
+        newFiltersObj.color.push(element)
+      }
+    })
+
+    // iterate over the query object and check if sizes items are in the query
+    sizes.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.size.includes(element)) {
+        newFiltersObj.size.push(element)
+      }
+    })
+
+    // iterate over the query object and check if genders items are in the query
+    genders.forEach((element) => {
+      const query = JSON.stringify(router.query)
+      if (query.includes(element) && !newFiltersObj.gender.includes(element)) {
+        newFiltersObj.gender.push(element)
+      }
+    })
+
+    setFiltersObj(newFiltersObj)
+  }, [])
+
+  const handleFilters = (e, key, value) => {
+    setIsLoading(true)
+    const checked = e.target.checked
+
+    if (checked) {
+      const newFilters = { ...filtersObj }
+      newFilters[key].push(value)
+
+      setFiltersObj(newFilters)
+
+      if (key !== 'size') {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              name: {
+                $in: newFilters[key]
+              }
+            }
+          }
+        }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
+        setQueryObj(newQueryObj)
+      } else {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              value: {
+                $in: newFilters[key]
+              }
+            }
+          }
+        }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
+        setQueryObj(newQueryObj)
+      }
+    }
+
+    if (!checked) {
+      const newFilters = { ...filtersObj }
+      const relevantFilters = newFilters[key].filter((item) => item !== value)
+      newFilters[key] = relevantFilters
+
+      setFiltersObj(newFilters)
+
+      if (key !== 'size') {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              name: {
+                $in: newFilters[key]
+              }
+            }
+          }
+        }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
+        setQueryObj(newQueryObj)
+      } else {
+        const newQueryObj = {
+          ...queryObj,
+          filters: {
+            ...queryObj.filters,
+            [key]: {
+              value: {
+                $in: newFilters[key]
+              }
+            }
+          }
+        }
+        router.replace({
+          query: qs.stringify(newQueryObj)
+        })
+        setQueryObj(newQueryObj)
+      }
+    }
+  }
 
   useEffect(() => {
     window.addEventListener('resize', () => {
@@ -52,311 +251,303 @@ export default function SearchResults ({ genders, brands, colors, sizes }) {
   })
 
   const showFiltersBlock = () => {
-    if (screenWidth > 599 & (showFilters === false || showFilters === true)) {
-      setOpacity('100%')
-    } else if (screenWidth < 599 & showFilters === false) {
-      setOpacity('65%')
-    } else if (screenWidth < 599 & showFilters === true) {
-      setOpacity('100%')
-    }
     setShowFilters(!showFilters)
+    ;(screenWidth <= 599) & (showFilters === false) && setOpacity('65%')
+    ;(screenWidth <= 599) & (showFilters === true) && setOpacity('100%')
   }
-
-  function handleGender () {
-    return setFilterGender(!filterGender)
-  }
-
-  function handleBrand () {
-    return setFilterBrand(!filterBrand)
-  }
-
-  function handlePrice () {
-    return setFilterPrice(!filterPrice)
-  }
-
-  function handleColor () {
-    return setFilterColor(!filterColor)
-  }
-
-  function handleSize () {
-    return setFilterSize(!filterSize)
-  }
-
-  // Filter data
-  const [search, setSearch] = useState('')
-
-  const handleInput = (e) => {
-    setSearch(e.target.value)
-  }
-
-  const results = !search
-    ? brands.data
-    : brands.data.filter(brand => brand.attributes.name.toLowerCase().includes(search.toLocaleLowerCase()))
 
   return (
     <>
+      <Head>
+        <title>Search - Shoes Shop</title>
+      </Head>
       <HeaderLoggedIn
-        pages={['Home', 'For women', 'For Men', 'Accesories', 'Sale']}
-        links={['/', '/for-women', '/for-men', '/accesories', '/sale']}
-        cart={true} burger={true} opacity={opacity}/>
-      <Box display={{ xs: 'block', sm: 'flex' }} sx={{ maxWidth: '1920px', mt: 'auto', width: 'auto' }}>
+        pages={['Home', 'Bag', 'Add Product']}
+        links={['/home', '/bag', '/add-product']}
+        cart={true}
+        burger={true}
+        opacity={opacity}
+        handleInputSubmit={handleSearchInput}
+        shouldSearchInputBeDisabled={isLoading}
+      />
 
+      <Box
+        display={{
+          xs: 'block',
+          sm: 'flex'
+        }}
+        sx={{
+          width: '100%'
+        }}
+      >
         {/* DESKTOP FILTERS */}
-        {showFilters &&
-        <Box sx={{ width: '200px', heigth: 'auto', display: { xs: 'none', sm: 'flex' }, flexDirection: 'column', ml: '40px', mr: '40px' }}>
-          <Typography
+        {showFilters && (
+          <Box
+            component="form"
             sx={{
-              fontWeight: 300,
-              fontSize: '15px',
-              lineHeight: '18px'
+              minWidth: '320px',
+              heigth: 'auto',
+              display: { xs: 'none', sm: 'flex' },
+              flexDirection: 'column'
             }}
           >
-            Shoes/Air Force 1
-          </Typography>
-          <Typography {...theme.typography.h1}>
-            Air Force 1 (137)
-          </Typography>
-          <SeparationLine width={'200px'}/>
-
-          {/* FILTER BLOCK */}
-          <Box sx={{ maxWidth: '200px' }}>
+            <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
+              <Typography variant="p" sx={{ fontWeight: '300' }}>
+                Shoes/Air Force 1
+              </Typography>
+              <Typography variant="h3">Air Force 1 (137)</Typography>
+            </Box>
+            <SeparationLine />
+            <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
+              <SecondaryButton
+                onClick={() => {
+                  router.push('/search-results').then(() => router.reload())
+                }}
+              >
+                CLEAR ALL FILTERS
+              </SecondaryButton>
+            </Box>
+            <SeparationLine />
+            {/* FILTER BLOCK */}
             {/* Gender */}
-            <FilterTitle filterName={'Gender'} handleGender={handleGender}/>
-            {filterGender && <> <CheckBox label={genders}/> </>}
-
-            <SeparationLine width={'200px'}/>
-
+            <CustomFilter
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
+              filterName="Gender"
+              handleFilters={handleFilters}
+              category={genders}
+            />
+            <SeparationLine />
             {/* Brand */}
-            <FilterTitle filterName={'Brand'} handleBrand={handleBrand}/>
-            {filterBrand &&
-            <>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: '35px' }}>
-                <SearchOutlinedIcon
-                  sx={{
-                    color: '#494949',
-                    position: 'absolute',
-                    ml: '16px',
-                    width: '18px',
-                    height: '18px'
-                  }} />
-                <InputBase
-                  sx={{
-                    [theme.breakpoints.up('sm')]: {
-                      border: '1px solid #494949',
-                      borderRadius: '42px',
-                      width: '260px',
-                      height: '33px',
-                      paddingLeft: '40px',
-                      input: {
-                        '&::placeholder': {
-                          fontSize: '1.25rem',
-                          color: '#494949'
-                        }
-                      }
-                    }
-                  }}
-                  type="text"
-                  onChange={handleInput}
-                  value={search}
-                  placeholder='Search' />
-              </Box>
-
-              <CheckBoxBrand label={results} />
-            </>}
+            <CustomFilter
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
+              filterName="Brand"
+              handleFilters={handleFilters}
+              category={brands}
+              isBrand={true}
+              handleSearchInput={handleSearchInput}
+            />
+            <SeparationLine />
+            {/* Color */}
+            <CustomFilter
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
+              filterName="Color"
+              handleFilters={handleFilters}
+              category={colors}
+            />
+            <SeparationLine />
+            {/* Size */}
+            <CustomFilter
+              filters={router.query}
+              isCheckboxDisabled={isLoading}
+              filterName="Size"
+              handleFilters={handleFilters}
+              category={sizes}
+            />
           </Box>
-
-          <SeparationLine width={'200px'}/>
-
-          {/* Price */}
-          <FilterTitle filterName={'Price'} handlePrice={handlePrice}/>
-          <SeparationLine width={'200px'}/>
-
-          {/* Color */}
-          <FilterTitle filterName={'Color'} handleColor={handleColor}/>
-          {filterColor && <> <CheckBox label={colors}/> </>}
-          <SeparationLine width={'200px'}/>
-
-          {/* Size */}
-          <FilterTitle filterName={'Size'} handleSize={handleSize}/>
-          {filterSize && <> <CheckBoxSizes label={sizes}/> </>}
-
-        </Box> }
+        )}
 
         {/* MOBILE FILTERS */}
         {/* FILTER BLOCK */}
-        {showFilters &&
-        <Box
-          sx={{
-            maxWidth: '320px',
-            width: 'auto',
-            display: { xs: 'flex', sm: 'none' },
-            flexDirection: 'column',
-            right: 0,
-            top: 0,
-            position: 'absolute',
-            zIndex: 100,
-            background: 'white'
-          }}>
+        {showFilters && (
+          <Box
+            sx={{
+              maxWidth: '320px',
+              minHeight: '100vh',
+              width: 'auto',
+              display: { xs: 'flex', sm: 'none' },
+              flexDirection: 'column',
+              right: 0,
+              top: 0,
+              position: 'absolute',
+              zIndex: 100,
+              background: 'white'
+            }}
+          >
+            <Box sx={{ maxWidth: '320px' }}>
+              <Typography
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'end',
+                  my: '25px',
+                  px: '2.5rem'
+                }}
+                onClick={showFiltersBlock}
+              >
+                X
+              </Typography>
 
-          <Box sx={{ maxWidth: '320px', ml: '15px' }}>
-            <Typography sx={{ display: 'flex', justifyContent: 'end', mt: '25px', mr: '20px' }}
-              onClick={showFiltersBlock}> X </Typography>
+              <SeparationLine
+                sx={{
+                  mt: 2
+                }}
+              />
 
-            {/* Gender */}
-            <FilterTitle filterName={'Gender'} handleGender={handleGender}/>
-            {filterGender && <> <CheckBox label={genders}/> </>}
-            <SeparationLine/>
-
-            {/* Brand */}
-            <FilterTitle filterName={'Brand'} handleBrand={handleBrand}/>
-            {filterBrand &&
-            <>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: '35px' }}>
-                <SearchOutlinedIcon
-                  sx={{
-                    color: '#494949',
-                    position: 'absolute',
-                    ml: '16px',
-                    width: '18px',
-                    height: '18px'
-                  }} />
-                <InputBase
-                  sx={{
-                    [theme.breakpoints.down('sm')]: {
-                      border: '1px solid #494949',
-                      borderRadius: '42px',
-                      width: '260px',
-                      height: '33px',
-                      paddingLeft: '40px',
-                      input: {
-                        '&::placeholder': {
-                          fontSize: '1.25rem',
-                          color: '#494949'
-                        }
-                      }
-                    }
+              <Box sx={{ py: '1.75rem', px: '2.5rem' }}>
+                <SecondaryButton
+                  onClick={() => {
+                    router.push('/search-results').then(() => router.reload())
                   }}
-                  type="text"
-                  onChange={handleInput}
-                  value={search}
-                  placeholder='Search' />
+                >
+                  CLEAR ALL FILTERS
+                </SecondaryButton>
               </Box>
 
-              <CheckBoxBrand label={results} />
-            </>}
+              <SeparationLine />
+              {/* Gender */}
+              <CustomFilter
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
+                filterName={'Gender'}
+                handleFilters={handleFilters}
+                category={genders}
+              />
 
-            <SeparationLine/>
+              <SeparationLine />
 
-            {/* Price */}
-            <FilterTitle filterName={'Price'} handlePrice={handlePrice}/>
-            <SeparationLine/>
+              {/* Brand */}
+              <CustomFilter
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
+                filterName={'Brand'}
+                handleFilters={handleFilters}
+                category={brands}
+                isBrand={true}
+                handleSearchInput={handleSearchInput}
+              />
 
-            {/* Color */}
-            <FilterTitle filterName={'Color'} handleColor={handleColor}/>
-            {filterColor && <> <CheckBox label={colors}/> </>}
-            <SeparationLine/>
+              <SeparationLine />
 
-            {/* Size */}
-            <FilterTitle filterName={'Size'} handleSize={handleSize}/>
-            {filterSize && <> <CheckBoxSizes label={sizes}/> </>}
+              {/* Color */}
+              <CustomFilter
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
+                filterName={'Color'}
+                handleFilters={handleFilters}
+                category={colors}
+              />
 
+              <SeparationLine />
+
+              {/* Size */}
+              <CustomFilter
+                filters={router.query}
+                isCheckboxDisabled={isLoading}
+                filterName={'Size'}
+                handleFilters={handleFilters}
+                category={sizes}
+              />
+            </Box>
           </Box>
-        </Box> }
+        )}
 
         {/* CONTAINER ZAPATILLAS */}
-        <Box sx={{ m: '20px', width: 'auto', opacity: `${opacity}` }}>
-          <Box sx={{
-            [theme.breakpoints.up('sm')]: {
-              mt: '68px',
-              display: 'flex',
-              justifyContent: 'space-between'
-            },
-            [theme.breakpoints.down('sm')]: {
-              width: 'auto',
-              mt: 'auto'
-            }
-          }}>
-            <Typography sx={{
-              fontWeight: 500,
+        <Box
+          sx={{
+            mt: '20px',
+            [theme.breakpoints.down('sm')]: { opacity: `${opacity}` },
+            width: '100%'
+          }}
+        >
+          <Box
+            sx={{
+              paddingInline: { xs: '1rem', md: '3.5rem' },
+
               [theme.breakpoints.up('sm')]: {
-                fontSize: '45px',
-                lineHeight: '53px'
+                mt: '68px',
+                display: 'flex',
+                justifyContent: 'space-between'
               },
               [theme.breakpoints.down('sm')]: {
-                fontSize: '30px',
-                lineHeight: '35px'
+                width: 'auto',
+                mt: 'auto'
               }
-            }}> Search Results
+            }}
+          >
+            <Typography variant="h1">Search Results</Typography>
+
+            {screenWidth < 599 && <SeparationLine />}
+
+            <Typography sx={{ display: { sm: 'none' } }}>
+              Shoes/Air Force 1
             </Typography>
-
-            {screenWidth < 599 && <SeparationLine/>}
-
-            <Typography
+            <Box
               sx={{
-                [theme.breakpoints.down('sm')]: {
-                  mt: '8px',
-                  fontWeight: 300,
-                  fontSize: '15px',
-                  lineHeight: '18px'
-                },
-                [theme.breakpoints.up('sm')]: {
-                  display: 'none'
-                }
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between '
               }}
             >
-            Shoes/Air Force 1
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between ' }}>
-              <Typography {...theme.typography.h6}
-                sx={{
-                  [theme.breakpoints.up('sm')]: {
-                    display: 'none'
-                  }
-                }}
-              >
-            Air Force 1 (137)
+              <Typography variant="h1" sx={{ display: { sm: 'none' } }}>
+                Air Force 1 (137)
               </Typography>
               <Box sx={{ display: 'flex' }}>
-                {showFilters
-                  ? <Typography sx={{
-                    [theme.breakpoints.down('sm')]: {
-                      display: 'none'
-                    },
-                    fontWeight: 400,
-                    fontSize: '24px',
-                    lineHeight: '28px',
-                    mr: '6px'
-                  }}>
-              Hide Filters
+                {showFilters ? (
+                  <Typography
+                    sx={{
+                      display: { xs: 'none', md: 'block' },
+                      fontWeight: 400,
+                      fontSize: '24px',
+                      lineHeight: '28px',
+                      mr: '6px'
+                    }}
+                  >
+                    Hide Filters
                   </Typography>
-                  : <Typography sx={{
-                    fontWeight: 400,
-                    fontSize: '24px',
-                    lineHeight: '28px',
-                    mr: '6px'
-                  }}>
-              Filters
-                  </Typography>}
+                ) : (
+                  <Typography
+                    sx={{
+                      fontWeight: 400,
+                      fontSize: '24px',
+                      lineHeight: '28px',
+                      mr: '6px'
+                    }}
+                  >
+                    Filters
+                  </Typography>
+                )}
 
                 {/* FILTER-REMOVE ICON */}
                 <Box
                   onClick={showFiltersBlock}
                   component="img"
                   src="/filter-remove.png"
-                  sx={{ width: '24px', height: '24px', cursor: 'pointer' }}/>
+                  sx={{ width: '24px', height: '24px', cursor: 'pointer' }}
+                />
               </Box>
             </Box>
           </Box>
-          <Box sx={{ mt: '20px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-            <ProductCard image={'/airmax-270.png'} productTitle="Nike AirMax 90" productPrice="140" productDescription="Men's Shoes"/>
-          </Box>
+          <Grid
+            container
+            sx={{
+              my: '20px',
+              justifyContent: { xs: 'center', md: 'start' },
+              paddingInline: { xs: '1rem', md: '3.5rem' },
+              gap: '3rem',
+              rowGap: '5rem'
+            }}
+            columns={{ xs: 6, md: 11, lg: 14 }}
+          >
+            {!isLoading &&
+              data?.data?.map(({ id, attributes }) => (
+                <ProductCard
+                  key={id}
+                  image={BASE_URL + attributes.images?.data[0].attributes.url}
+                  productTitle={attributes.name}
+                  productPrice={attributes.price}
+                  productDescription={
+                    attributes.gender?.data?.attributes?.name + "'s shoes."
+                  }
+                />
+              ))}
+            {!isLoading && data?.data.length === 0 && (
+              <Typography variant="main">No results found.</Typography>
+            )}
+
+            {isLoading && <Loading />}
+          </Grid>
         </Box>
       </Box>
     </>

@@ -1,25 +1,67 @@
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import ChartShoeCard from '@components/ChartShoeCard/ChatShoeCard'
 import HeaderLoggedIn from '@components/HeaderLoggedIn/HeaderLoggedIn'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import SecondaryButton from '@components/SecondaryButton/SecondaryButton'
 import { Divider, Grid, Stack, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
+import { reducePrice } from 'helpers/reducePrice'
+import Head from 'next/head'
 
-const pages = ['Home', 'For women', 'For men', 'Accesories', 'Sale']
-const links = ['/home', '/for-women', 'for-men', 'accesories', 'sale']
+const pages = ['Home', 'Add Product', 'Search']
+const links = ['/home', '/add-product', '/search-results']
 
 const Bag = () => {
+  const [shoes, setShoes] = useState([])
+
+  useEffect(() => {
+    if (localStorage.getItem('shoes')) {
+      setShoes(JSON.parse(localStorage.getItem('shoes')))
+    }
+  }, [])
+
+  useEffect(() => {
+    setSubTotal(reducePrice(shoes))
+  }, [shoes])
+
   const theme = useTheme()
+  const [subTotal, setSubTotal] = useState(reducePrice(shoes))
+
+  const deleteShoe = (id) => {
+    const newShoes = shoes.filter((shoe) => shoe.id !== id)
+    setShoes(newShoes)
+    localStorage.setItem('shoes', JSON.stringify(newShoes))
+    setSubTotal(reducePrice(newShoes))
+  }
+
+  const changeQuantity = (id, quantity) => {
+    const newShoes = shoes.map((shoe) =>
+      shoe.id === id ? { ...shoe, quantity } : shoe
+    )
+    setShoes(newShoes)
+    localStorage.setItem('shoes', JSON.stringify(newShoes))
+    setSubTotal(reducePrice(newShoes))
+  }
+
+  const handleClick = () => {
+    if (shoes.length === 0) {
+      toast.error('Please add some items first!')
+      return
+    }
+    localStorage.removeItem('shoes')
+    setShoes([])
+    toast.success('Thank you for your purchase!')
+  }
 
   return (
     <>
+      <Head>
+        <title>Bag - Shoes Shop</title>
+      </Head>
       <HeaderLoggedIn pages={pages} links={links} burger={true} cart={true} />
 
-      <Grid
-        container
-        p={2}
-      >
-
+      <Grid container p={2}>
         <Box
           py={8}
           sx={{
@@ -32,32 +74,41 @@ const Bag = () => {
             }
           }}
         >
-
           {/* Left container */}
           <Box sx={{ width: '100%', maxWidth: '963px' }}>
-            <Typography variant='h1'>Chart</Typography>
+            <Typography variant="h1">Chart</Typography>
 
             {/* Cards */}
-            <Grid item xs={12} mt={5} sx={{ marginInline: 'auto' }} >
+            <Grid item xs={12} mt={5} sx={{ marginInline: 'auto' }}>
               <Stack spacing={3} mb={3}>
-                <ChartShoeCard name='Nike Air Max 270' price='$160' gender='Women' img='/airmax-270.png' />
-                <ChartShoeCard name='Nike Air Max 90' price='$140' gender='Men' img='/airmax-90.png' />
-                <ChartShoeCard name={'Nike Air Force 1 07 SE'} price='$160' gender='Women' img='/air-force.png' />
+                {shoes.map((shoe) => (
+                  <ChartShoeCard
+                    key={shoe.id}
+                    id={shoe.id}
+                    name={shoe.name}
+                    changeQuantity={changeQuantity}
+                    deleteShoe={deleteShoe}
+                    price={shoe.price}
+                    description={shoe.description}
+                    img={shoe.img}
+                    initialQuantity={shoe.quantity}
+                  />
+                ))}
+
+                {shoes.length === 0 && (
+                  <Typography variant="main">No shoes in the cart</Typography>
+                )}
               </Stack>
 
-              <Box sx={{
-                maxWidth: '432px',
-                marginInline: 'auto',
-                marginTop: '3rem',
-
-                [theme.breakpoints.up('md')]: {
-                  display: 'none'
-                }
-              }}
+              <Box
+                sx={{
+                  maxWidth: '432px',
+                  marginInline: 'auto',
+                  marginTop: '3rem',
+                  display: { xs: 'block', md: 'none' }
+                }}
               >
-                <PrimaryButton>
-                  Go to checkout
-                </PrimaryButton>
+                <PrimaryButton>Go to checkout</PrimaryButton>
               </Box>
             </Grid>
           </Box>
@@ -68,59 +119,87 @@ const Bag = () => {
               marginLeft: 'auto'
             }}
           >
-
             <Box
               sx={{
                 width: '399px',
                 marginInline: 'auto',
                 textAlign: 'left',
-                display: 'none',
-                [theme.breakpoints.up('md')]: {
-                  display: 'block'
-                }
+                display: { xs: 'none', md: 'block' }
               }}
             >
-              <Typography variant='h1'>Summary</Typography>
+              <Typography variant="h1">Summary</Typography>
 
               <Box sx={{ marginTop: '3rem' }} />
 
-              <Typography variant='p'>Do you have a promocode?</Typography>
+              <Typography variant="p">Do you have a promocode?</Typography>
 
-              <Box sx={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-
+              <Box
+                sx={{
+                  marginTop: '1rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '.5rem'
+                }}
+              >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant='body2'>Subtotal</Typography>
-                  <Typography variant='body2'>$410</Typography>
+                  <Typography variant="body2">Subtotal</Typography>
+                  <Typography variant="body2">${subTotal}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant='body2'>Shipping</Typography>
-                  <Typography variant='body2'>$20</Typography>
+                  <Typography variant="body2">Shipping</Typography>
+                  <Typography variant="body2">
+                    {subTotal === 0 ? '$0' : '$20'}
+                  </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant='body2'>Tax</Typography>
-                  <Typography variant='body2'>$0</Typography>
+                  <Typography variant="body2">
+                    Tax{' '}
+                    <Typography
+                      component="span"
+                      sx={{ color: 'text.secondary' }}
+                      variant="body2"
+                    >
+                      (1.4%)
+                    </Typography>
+                  </Typography>
+                  <Typography variant="body2">
+                    {subTotal === 0
+                      ? '$0'
+                      : `$${(subTotal * 0.014).toFixed(2)}`}
+                  </Typography>
                 </Box>
 
                 <Divider sx={{ marginBlock: '1rem' }} />
 
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant='body2'>Total</Typography>
-                  <Typography variant='body2'>$430</Typography>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    fontWeight: '500'
+                  }}
+                >
+                  <Typography variant="body2">Total</Typography>
+                  <Typography variant="body2">
+                    {subTotal === 0
+                      ? '$0'
+                      : `$ ${
+                          parseInt(subTotal) +
+                          20 +
+                          subTotal * (0.014)
+                        }`}
+                  </Typography>
                 </Box>
 
                 <Divider sx={{ marginBlock: '1rem' }} />
 
                 <SecondaryButton>PayPal</SecondaryButton>
-                <PrimaryButton>Checkout</PrimaryButton>
+                <PrimaryButton onClick={handleClick}>Checkout</PrimaryButton>
               </Box>
             </Box>
           </Box>
         </Box>
-
       </Grid>
-
     </>
-
   )
 }
 

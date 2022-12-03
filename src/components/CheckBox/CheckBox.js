@@ -1,18 +1,46 @@
+import { useEffect, useState } from 'react'
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
+import { useRouter } from 'next/router'
 
-function CheckBox ({ label }) {
+function CheckBox({ label, handleFilters, filterName, isDisabled = false }) {
+  // console.log('filters', filters)
+  // console.log('filterName', filterName)
+  // console.log('label', label)
+  const [isChecked, setIsChecked] = useState(Array(label.length).fill(false))
+  const router = useRouter()
+
+  useEffect(() => {
+    const checkedAux = label.map(
+      (item) => !!JSON.stringify(router.query).includes(item)
+    )
+    setIsChecked(checkedAux)
+  }, [router.query])
+
   return (
     <>
-      <FormGroup aria-label="position" column >
-        {
-          label.data.map(data => (
-            <>
-              <FormControlLabel
-                label={data.attributes.name}
-                control={<Checkbox/>}/>
-            </>
-          ))
-        }
+      <FormGroup aria-label="position">
+        {label.map((data, index) => {
+          return (
+            <FormControlLabel
+              key={data}
+              name={data.toString().toLowerCase()}
+              label={data}
+              control={
+                <Checkbox
+                  onClick={(e) => {
+                    handleFilters(e, filterName.toLowerCase(), data)
+                    const aux = [...isChecked]
+                    aux[index] = !aux[index]
+                    setIsChecked(aux)
+                  }}
+                  disabled={isDisabled}
+                  checked={isChecked[index]}
+                  value={isChecked[index]}
+                />
+              }
+            />
+          )
+        })}
       </FormGroup>
     </>
   )

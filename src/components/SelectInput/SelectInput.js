@@ -1,23 +1,41 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, Typography, useTheme } from '@mui/material'
+import { Box, FormControl, MenuItem, Select, Typography } from '@mui/material'
 const SelectInput = ({ inputValues, name, onChange, label }) => {
-  const theme = useTheme()
   return (
-
-    <Box sx={{ width: '100%', display: 'flex', gap: '.5rem', flexDirection: 'column' }}>
-      <Typography variant='p' sx={{ fontWeight: '500' }} >
-        {label}  <Box component='span' sx={{ color: theme.palette.primary.main }}>*</Box></Typography>
-      <FormControl fullWidth>
-        <InputLabel id={`select-input-${name}`}>{label}</InputLabel>
+    <Box
+      sx={{
+        width: '100%',
+        display: 'flex',
+        gap: '.5rem',
+        py: '.5rem',
+        flexDirection: 'column'
+      }}
+    >
+      <Typography variant="p" sx={{ fontWeight: '500' }}>
+        {label}{' '}
+        <Box component="span" sx={{ color: 'primary.main' }}>
+          *
+        </Box>
+      </Typography>
+      <FormControl fullWidth size="small">
         <Select
           labelId={`select-input-${name}`}
           id="select"
-          label={label}
           name={name}
           onChange={onChange}
-          defaultValue=''
+          defaultValue={1}
           required
+          sx={{
+            width: '100%',
+            fontFamily: "'Work Sans', sans-serif",
+            borderRadius: '8px',
+            padding: '0'
+          }}
         >
-          {inputValues.map((value, i) => <MenuItem key={i} value={value}>{value}</MenuItem>)}
+          {inputValues.map((value, i) => (
+            <MenuItem key={i} value={i + 1}>
+              {value}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Box>

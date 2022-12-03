@@ -35,7 +35,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-QUESTIONS.md
+
 
 # prettier config
 .prettierignore
+
+# personal tasks list
+tasks.md
+QUESTIONS.md
