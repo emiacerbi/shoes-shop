@@ -9,6 +9,8 @@ import SubHeader from '@components/SubHeader/SubHeader'
 import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Box, Typography, useTheme } from '@mui/material'
+import { BASE_URL } from 'constants/ConstantDeclaration'
+import { getQueryById } from 'helpers/getQueryById'
 import { getProducts } from 'helpers/products/getProducts'
 import { getUserInfo } from 'helpers/user-auth/getUserInfo'
 import Image from 'next/image'
@@ -17,36 +19,14 @@ import { useRouter } from 'next/router'
 import { getToken } from 'next-auth/jwt'
 import { signOut } from 'next-auth/react'
 
-const baseURL = 'https://shoes-shop-strapi.herokuapp.com'
-
 export async function getServerSideProps(context) {
-  const qs = require('qs')
-
   const token = await getToken(context)
 
   const userRes = await getUserInfo(token.accessToken)
   const userData = userRes.data
   const userId = userRes.data.id
 
-  const query = qs.stringify(
-    {
-      populate: '*',
-      pagination: {
-        page: 1,
-        pageSize: 100
-      },
-      filters: {
-        userID: {
-          id: {
-            $eq: userId
-          }
-        }
-      }
-    },
-    {
-      encodeValuesOnly: true // prettify URL
-    }
-  )
+  const query = getQueryById(userId)
 
   const res = await getProducts(`?${query}`)
   const products = res.data
@@ -183,7 +163,7 @@ export default function Home({ products, userData }) {
                     productTitle={attributes.name}
                     productDescription={attributes.description}
                     image={`${
-                      baseURL + attributes.images.data[0].attributes.url
+                      BASE_URL + attributes.images.data[0].attributes.url
                     }`}
                     productPrice={attributes.price}
                     id={id}
