@@ -1,6 +1,10 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+import { BASE_URL } from 'constants/ConstantDeclaration'
 
-export async function fetchWrapper (endpoint, { body, ...customConfig } = {}, token = '') {
+export async function fetchWrapper(
+  endpoint,
+  { body, ...customConfig } = {},
+  token = ''
+) {
   const headers = { 'Content-Type': 'application/json' }
 
   if (token) {

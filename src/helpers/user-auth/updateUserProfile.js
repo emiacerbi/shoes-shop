@@ -23,6 +23,5 @@ export const updateUserProfile = async ({
       'Content-Type': 'multipart/form-data'
     }
   })
-  console.log(response.data)
   return response.data
 }

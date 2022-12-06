@@ -3,9 +3,6 @@ import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 import { useRouter } from 'next/router'
 
 function CheckBox({ label, handleFilters, filterName, isDisabled = false }) {
-  // console.log('filters', filters)
-  // console.log('filterName', filterName)
-  // console.log('label', label)
   const [isChecked, setIsChecked] = useState(Array(label.length).fill(false))
   const router = useRouter()
 

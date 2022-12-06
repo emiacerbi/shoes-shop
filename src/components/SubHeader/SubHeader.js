@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 import { Avatar, Box, Skeleton, Typography, useTheme } from '@mui/material'
+import { BASE_URL } from 'constants/ConstantDeclaration'
 import { UserContext } from 'context/UserContext'
-
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
 export default function SubHeader({ userData }) {
   const theme = useTheme()
@@ -26,7 +25,7 @@ export default function SubHeader({ userData }) {
       }}
     >
       <Avatar
-        src={`${baseURL + userData?.avatar?.url}`}
+        src={`${BASE_URL + userData?.avatar?.url}`}
         sx={{
           width: { xs: 60, sm: 120 },
           height: { xs: 60, sm: 120 },

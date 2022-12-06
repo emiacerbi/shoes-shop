@@ -49,8 +49,6 @@ export default function AddProduct({
     handleSubmit
   } = useAddProductForm()
 
-  console.log(inputInfo)
-
   const theme = useTheme()
 
   const handleLogout = () => {
@@ -59,8 +57,6 @@ export default function AddProduct({
   }
 
   const context = useContext(UserContext)
-
-  console.log(context.user)
 
   return (
     <>

@@ -9,6 +9,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Avatar, Button, Modal, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import { BASE_URL } from 'constants/ConstantDeclaration'
 import { getUserInfo } from 'helpers/user-auth/getUserInfo'
 import useUpdateProfileForm from 'hooks/useUpdateProfileForm'
 import Head from 'next/head'
@@ -17,15 +18,11 @@ import { signOut } from 'next-auth/react'
 
 import { theme } from '../styles/theme'
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL
-
 export async function getServerSideProps(context) {
   const token = await getToken(context)
 
   const userRes = await getUserInfo(token.accessToken)
   const userData = userRes.data
-
-  console.log(userData)
 
   return {
     props: {
@@ -191,7 +188,7 @@ export default function UpdateProfile({ userData }) {
             }}
           >
             <Avatar
-              src={`${baseURL + userData?.avatar?.url}`}
+              src={`${BASE_URL + userData?.avatar?.url}`}
               sx={{ width: 100, height: 100, bgcolor: 'primary' }}
               alt="User"
             >

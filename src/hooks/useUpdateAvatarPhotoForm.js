@@ -12,8 +12,6 @@ const useUpdateAvatarPhotoForm = () => {
     id: ''
   })
 
-  console.log(inputInfo)
-
   const handleInputChange = (e) => {
     const focus = e.target
     const value = focus.value
