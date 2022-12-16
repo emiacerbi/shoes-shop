@@ -1,25 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Blockquote from '@components/Blockquote/Blockquote'
 import Form from '@components/Form/Form'
 import HeaderBeforeLogin from '@components/Header/Header'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
 import PrimaryInput from '@components/PrimaryInput/PrimaryInput'
 import SignUpOverlay from '@components/SignUpOverlay/SignUpOverlay'
-import { Box, Button, Checkbox, CircularProgress, InputLabel, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  Button,
+  Checkbox,
+  CircularProgress,
+  InputLabel,
+  Typography,
+  useMediaQuery,
+  useTheme
+} from '@mui/material'
 import useSignUpForm from 'hooks/useSignUpForm'
 import Link from 'next/link'
 
 const SignUp = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(true)
-  const [mobileWidth, setMobileWidth] = useState()
-
+  const matches = useMediaQuery('(min-width:500px)')
   const theme = useTheme()
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setMobileWidth(window.innerWidth)
-    }
-  }, [mobileWidth])
 
   const { handleSubmit, handleInputChange, isPasswordIncorrect, mutation } =
     useSignUpForm()
@@ -56,35 +58,35 @@ const SignUp = () => {
             paddingBlock: '2rem'
           }}
         >
-          <Typography variant='h1'>Create an account</Typography>
-          <Typography variant='p'>
+          <Typography variant="h1">Create an account</Typography>
+          <Typography variant="p">
             Create an account to get an easy access to your dream shopping
           </Typography>
           <Form onSubmit={handleSubmit}>
             <PrimaryInput
-              label='Name'
-              placeholder='Hayman Andres'
-              name='name'
+              label="Name"
+              placeholder="Hayman Andres"
+              name="name"
               onChange={handleInputChange}
-              type='text'
+              type="text"
             />
             <PrimaryInput
-              label='Email'
-              placeholder='example@gmail.com'
-              name='email'
+              label="Email"
+              placeholder="example@gmail.com"
+              name="email"
               onChange={handleInputChange}
-              type='email'
+              type="email"
             />
             <PrimaryInput
-              label='Password'
-              placeholder='at least 8 characters'
-              name='password'
+              label="Password"
+              placeholder="at least 8 characters"
+              name="password"
               onChange={handleInputChange}
-              type='password'
+              type="password"
             />
             {isPasswordIncorrect && (
               <Typography
-                variant='p'
+                variant="p"
                 sx={{
                   color: theme.palette.primary.main,
                   marginTop: '-15px',
@@ -95,11 +97,11 @@ const SignUp = () => {
               </Typography>
             )}
             <PrimaryInput
-              label='Repeat password'
-              placeholder='at least 8 characters'
-              name='repeatedPassword'
+              label="Repeat password"
+              placeholder="at least 8 characters"
+              name="repeatedPassword"
               onChange={handleInputChange}
-              type='password'
+              type="password"
             />
             <InputLabel
               sx={{
@@ -117,21 +119,23 @@ const SignUp = () => {
               Remember me
             </InputLabel>
             <PrimaryButton>
-              {mutation.isLoading
-                ? (<CircularProgress size={28} color='action' />)
-                : ('Sign up')}
+              {mutation.isLoading ? (
+                <CircularProgress size={28} color="action" />
+              ) : (
+                'Sign up'
+              )}
             </PrimaryButton>
             <Typography
-              variant='p'
+              variant="p"
               sx={{
                 textAlign: 'center',
                 fontWeight: '500'
               }}
             >
               Already have an account?
-              <Link href='/'>
+              <Link href="/">
                 <Button
-                  variant='text'
+                  variant="text"
                   sx={{
                     textTransform: 'none',
                     fontSize: '15px'
@@ -148,7 +152,7 @@ const SignUp = () => {
       {/* Right container */}
       <Blockquote />
 
-      {isOverlayVisible && mobileWidth < 380 && (
+      {isOverlayVisible && !matches && (
         <SignUpOverlay setIsOverlayVisible={setIsOverlayVisible} />
       )}
     </Box>
