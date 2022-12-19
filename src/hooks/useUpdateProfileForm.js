@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { updateUserProfile } from 'helpers/user-auth/updateUserProfile'
+import { useRouter } from 'next/router'
 
 const useUpdateProfileForm = () => {
+  const router = useRouter()
   const [inputInfo, setInputInfo] = useState({
     username: '',
     email: '',
@@ -30,22 +32,24 @@ const useUpdateProfileForm = () => {
 
     e.preventDefault()
 
-    toast.promise(
-      updateUserProfile({
-        username,
-        email,
-        password,
-        phoneNumber,
-        firstName,
-        lastName,
-        id
-      }),
-      {
-        loading: 'Saving...',
-        success: 'Avatar photo changed succesfully!',
-        error: 'Could not save. Try again later, please.'
-      }
-    )
+    toast
+      .promise(
+        updateUserProfile({
+          username,
+          email,
+          password,
+          phoneNumber,
+          firstName,
+          lastName,
+          id
+        }),
+        {
+          loading: 'Saving...',
+          success: 'Profile data changed succesfully!',
+          error: 'Could not save. Try again later, please.'
+        }
+      )
+      .then(() => router.reload())
   }
 
   return {

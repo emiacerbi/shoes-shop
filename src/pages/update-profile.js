@@ -254,25 +254,25 @@ export default function UpdateProfile({ userData }) {
               name="firstName"
               placeholder={'John'}
               onChange={handleInputChange}
-            ></PrimaryInput>
+            />
             <PrimaryInput
               label="Last Name"
               name="lastName"
               placeholder={'Doe'}
               onChange={handleInputChange}
-            ></PrimaryInput>
+            />
             <PrimaryInput
               label="User Name"
               name="username"
               placeholder={'JohnDoe95'}
               onChange={handleInputChange}
-            ></PrimaryInput>
+            />
             <PrimaryInput
               label="Phone Number"
               name="phoneNumber"
               placeholder={'Phone Number'}
               onChange={handleInputChange}
-            ></PrimaryInput>
+            />
             <Button
               sx={{
                 color: 'white',
