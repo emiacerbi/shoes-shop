@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Form from '@components/Form/Form'
 import HeaderBeforeLogin from '@components/Header/Header'
 import PrimaryButton from '@components/PrimaryButton/PrimaryButton'
@@ -10,6 +10,7 @@ import {
   CircularProgress,
   InputLabel,
   Typography,
+  useMediaQuery,
   useTheme
 } from '@mui/material'
 import { Box } from '@mui/system'
@@ -19,14 +20,8 @@ import Link from 'next/link'
 
 const SignIn = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(true)
-  const [mobileWidth, setMobileWidth] = useState()
   const theme = useTheme()
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setMobileWidth(window.innerWidth)
-    }
-  }, [])
+  const matches = useMediaQuery('(min-width:500px)')
 
   const { handleInputChange, handleSubmit, isLoading } = useSignInForm()
 
@@ -174,7 +169,7 @@ const SignIn = () => {
           objectFit="cover"
         />
       </Box>
-      {isOverlayVisible && mobileWidth < 500 && (
+      {isOverlayVisible && !matches < 500 && (
         <SignInOverlay setIsOverlayVisible={setIsOverlayVisible} />
       )}
     </Box>

@@ -8,6 +8,7 @@ import SeparationLine from '@components/SeparationLine/SeparationLine'
 import { Box, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/system'
 import { useQuery } from '@tanstack/react-query'
+import { BASE_URL, DEFAULT_QUERY } from 'constants/ConstantDeclaration'
 import { getBrands } from 'helpers/products/getBrands'
 import { getColors } from 'helpers/products/getColors'
 import { getGenders } from 'helpers/products/getGenders'
@@ -15,26 +16,6 @@ import { getProducts } from 'helpers/products/getProducts'
 import { getSizes } from 'helpers/products/getSizes'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-
-const BASE_QUERY = {
-  filters: {
-    userID: {
-      id: {
-        $notNull: true
-      }
-    },
-    teamName: {
-      $eq: 'ea-team'
-    }
-  },
-  populate: '*',
-  pagination: {
-    page: 1,
-    pageSize: 100
-  }
-}
 
 export const getServerSideProps = async (context) => {
   const genders = await getGenders()
@@ -74,7 +55,7 @@ export default function SearchResults({
   })
 
   const qs = require('qs')
-  const [queryObj, setQueryObj] = useState(BASE_QUERY)
+  const [queryObj, setQueryObj] = useState(DEFAULT_QUERY)
   const [isLoading, setIsLoading] = useState(false)
 
   const { data } = useQuery({
@@ -82,7 +63,7 @@ export default function SearchResults({
     queryFn: () => {
       const isEmpty = Object.keys(queryParams).length === 0
       return getProducts(
-        `?${qs.stringify(!isEmpty ? queryParams : BASE_QUERY)}`
+        `?${qs.stringify(!isEmpty ? queryParams : DEFAULT_QUERY)}`
       )
     },
     onSettled: () => {

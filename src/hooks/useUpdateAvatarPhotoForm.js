@@ -2,8 +2,11 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { postFiles } from 'helpers/products/postFiles'
 import { updateUserAvatar } from 'helpers/user-auth/updateUserAvatar'
+import { useRouter } from 'next/router'
 
 const useUpdateAvatarPhotoForm = () => {
+  const router = useRouter()
+
   const [inputInfo, setInputInfo] = useState({
     username: '',
     email: '',
@@ -11,8 +14,6 @@ const useUpdateAvatarPhotoForm = () => {
     img: '',
     id: ''
   })
-
-  console.log(inputInfo)
 
   const handleInputChange = (e) => {
     const focus = e.target
@@ -36,17 +37,19 @@ const useUpdateAvatarPhotoForm = () => {
   const handleSubmit = async (e) => {
     const { username, email, password, img, id } = inputInfo
     e.preventDefault()
-    toast.promise(
-      postFiles({ img }).then((data) => {
-        const IMAGE_ID = data[0].id
-        updateUserAvatar({ id, username, email, password, avatar: IMAGE_ID })
-      }),
-      {
-        loading: 'Saving...',
-        success: 'Avatar photo changed succesfully!',
-        error: 'Could not save. Try again later, please.'
-      }
-    )
+    toast
+      .promise(
+        postFiles({ img }).then((data) => {
+          const IMAGE_ID = data[0].id
+          updateUserAvatar({ id, username, email, password, avatar: IMAGE_ID })
+        }),
+        {
+          loading: 'Saving...',
+          success: 'Avatar photo changed succesfully!',
+          error: 'Could not save. Try again later, please.'
+        }
+      )
+      .then(() => router.reload())
   }
 
   return {
